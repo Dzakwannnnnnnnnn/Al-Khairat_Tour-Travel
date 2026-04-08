@@ -32,28 +32,40 @@ function initScrollAnimations() {
     });
 }
 
-// Hide loading screen when page is fully loaded
-window.addEventListener('load', function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-        }, 500);
-    }
-});
-
-// Also hide loading screen on DOM ready (for faster perceived load)
+// Loader Logic: Play cinematic entrance only once per session
 document.addEventListener('DOMContentLoaded', function() {
     const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
-        // Start fading out after 1 second minimum
-        setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-        }, 1000);
-    }
-    
+
     // Initialize scroll animations
     initScrollAnimations();
+    
+    if (!loadingScreen) return;
+
+    if (sessionStorage.getItem('alKhairatPreloaderShown')) {
+        // Skip splash screen immediately on refresh/subs-sequent loads
+        loadingScreen.style.display = 'none';
+    } else {
+        // Enforce cinematic wait time on first load
+        const minLoadTime = 3500; 
+        const startTime = Date.now();
+
+        function hidePreloader() {
+            if (loadingScreen.classList.contains('preloader-done')) return;
+            loadingScreen.classList.add('preloader-done');
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                sessionStorage.setItem('alKhairatPreloaderShown', 'true');
+            }, 2000); // Wait for CSS transition (2s)
+        }
+
+        window.addEventListener('load', function() {
+            const elapsedTime = Date.now() - startTime;
+            const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+            setTimeout(hidePreloader, remainingTime);
+        });
+
+        setTimeout(hidePreloader, 8000); 
+    }
     
     // Mobile Menu Toggle
     // Hero Slideshow Functionality
@@ -128,39 +140,50 @@ document.addEventListener('DOMContentLoaded', function() {
         heroSection.addEventListener('mouseleave', () => startAutoplay());
     }
     
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-        // Toggle menu on button click
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('active');
-            
-            // Animate hamburger icon
-            const spans = mobileMenuBtn.querySelectorAll('span');
-            if (mobileMenu.classList.contains('active')) {
-                spans[0].style.transform = 'translateY(0.5rem) rotate(45deg)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'translateY(-0.5rem) rotate(-45deg)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
+    // Header Scroll Effect
+    const mainHeader = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            mainHeader.classList.add('scrolled');
+        } else {
+            mainHeader.classList.remove('scrolled');
+        }
+    });
+
+    // Floating Dock Active State with Intersection Observer
+    const dockItems = document.querySelectorAll('.dock-item[data-section]');
+    const sections = Array.from(dockItems).map(item => document.getElementById(item.dataset.section)).filter(Boolean);
+
+    const dockObserverOptions = {
+        root: null,
+        rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of screen
+        threshold: 0
+    };
+
+    const dockObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.id;
+                dockItems.forEach(item => {
+                    if (item.dataset.section === sectionId) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
             }
         });
-        
-        // Close menu when clicking on links
-        const mobileMenuItems = mobileMenu.querySelectorAll('.mobile-menu-item');
-        mobileMenuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            });
+    }, dockObserverOptions);
+
+    sections.forEach(section => dockObserver.observe(section));
+
+    // Manual click override for dock items
+    dockItems.forEach(item => {
+        item.addEventListener('click', function() {
+            dockItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
         });
-    }
+    });
     
     // FAQ Accordion Functionality
     const faqButtons = document.querySelectorAll('section#faq button');

@@ -12,6 +12,14 @@
     --font-sans: 'Poppins', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     
+    /* Global Theme Variables */
+    --color-bg: #FBF8F3;
+    --color-text: #2C2416;
+    --color-surface: #FFFFFF;
+    --color-border: rgba(44, 36, 22, 0.1);
+    --color-glass: rgba(255, 255, 255, 0.7);
+    --color-footer: #2C2416;
+
     /* Al-Khairat Custom Colors - Based on Logo Gradient */
     --color-red: #D63031;
     --color-orange-bright: #E8956A;
@@ -24,21 +32,36 @@
     --color-brown: #5D4E45;
 }
 
+/* Night Mode Overrides */
+.dark {
+    --color-bg: #121212;
+    --color-text: #E0D7C6;
+    --color-surface: #1E1E1E;
+    --color-border: rgba(224, 215, 198, 0.1);
+    --color-glass: rgba(30, 30, 30, 0.7);
+    --color-footer: #0A0A0A;
+    --color-cream: #121212;
+}
+
 /* Custom Utility Classes */
 .font-serif {
     font-family: 'Playfair Display', serif;
 }
 
 .bg-cream {
-    background-color: #FBF8F3;
+    background-color: var(--color-bg);
 }
 
 .bg-charcoal {
-    background-color: #2C2416;
+    background-color: var(--color-charcoal);
 }
 
 .text-charcoal {
-    color: #2C2416;
+    color: var(--color-text);
+}
+
+.bg-footer {
+    background-color: var(--color-footer);
 }
 
 .text-gold {
@@ -95,7 +118,7 @@
     top: -1rem;
     transform: translateX(-50%);
     font-size: 1.5rem;
-    background-color: #FBF8F3;
+    background-color: var(--color-bg);
     padding: 0 1rem;
 }
 
@@ -133,17 +156,17 @@ html {
 /* Typography - Responsive */
 .text-display {
     @apply text-3xl md:text-5xl lg:text-6xl font-serif font-bold;
-    color: #2C2416;
+    color: var(--color-text);
 }
 
 .text-heading {
     @apply text-2xl md:text-3xl lg:text-4xl font-serif font-bold;
-    color: #2C2416;
+    color: var(--color-text);
 }
 
 .text-subheading {
     @apply text-lg md:text-xl lg:text-2xl font-serif;
-    color: #2C2416;
+    color: var(--color-text);
 }
 
 /* Section padding */
@@ -211,8 +234,27 @@ html {
     }
 }
 
-#loading-screen.hidden {
-    @apply opacity-0 pointer-events-none;
+/* Cinematic Preloader Animation */
+@keyframes loadingLine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+#loading-screen {
+    /* Keep it fixed so it behaves as an overlay */
+    transition: opacity 1.5s cubic-bezier(0.5, 0, 0.2, 1), visibility 1.5s;
+}
+
+#loading-screen.preloader-done {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+#loading-screen.preloader-done .loader-content {
+    transform: scale(1.05);
+    opacity: 0;
+    transition: all 1.5s cubic-bezier(0.5, 0, 0.2, 1);
 }
 
 /* Scroll Animation Keyframes */
@@ -336,3 +378,97 @@ html {
 .mobile-menu-item {
     @apply block px-6 py-4 border-b border-orange/10 text-charcoal hover:bg-orange hover:text-white transition;
 }
+
+/* Floating Bottom Dock Styles */
+.dock-container {
+    @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center;
+    width: max-content;
+    max-width: 95vw;
+}
+
+.dock-wrapper {
+    @apply backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] 
+           px-4 py-2 rounded-2xl flex items-end gap-1 md:gap-2 transition-all duration-500 ease-out;
+    background-color: var(--color-glass);
+    border: 1px solid var(--color-border);
+}
+
+.dock-divider {
+    @apply w-[1px] h-8 mx-1 md:mx-2 self-center transition-colors duration-300;
+    background-color: var(--color-border);
+    opacity: 0.5;
+}
+
+.dock-item {
+    @apply relative flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-300;
+}
+
+.dock-item:hover {
+    @apply bg-orange/10 -translate-y-1;
+}
+
+.dock-icon {
+    @apply w-6 h-6 md:w-8 md:h-8 transition-all duration-300 group-hover:scale-110;
+    color: var(--color-text);
+    opacity: 0.8;
+}
+
+.dock-label {
+    @apply text-[9px] md:text-[11px] font-bold mt-1 transition-colors duration-300;
+    color: var(--color-text);
+    opacity: 0.7;
+}
+
+.dock-active-dot {
+    @apply w-1 h-1 rounded-full bg-orange mt-0.5 opacity-0 transition-all duration-300 scale-0;
+}
+
+.dock-item.active .dock-label, .dock-item.active .dock-icon {
+    @apply text-orange opacity-100;
+}
+
+.dock-item.active .dock-active-dot {
+    @apply opacity-100 scale-100;
+}
+
+/* Improved Top Header */
+.minimal-header {
+    @apply fixed top-0 w-full z-[40] px-6 py-4 flex justify-between items-center transition-all duration-500 ease-in-out;
+}
+
+.minimal-header.scrolled {
+    @apply py-1 px-8;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+.minimal-header img {
+    @apply transition-all duration-500 ease-in-out h-32 md:h-48;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+}
+
+.minimal-header.scrolled img {
+    @apply h-20 md:h-24;
+}
+
+/* Special Styling for Login in Dock */
+.dock-item-login {
+    @apply border ml-2 rounded-2xl px-3 transition-all duration-500;
+    background-color: rgba(224, 120, 86, 0.1);
+    border-color: rgba(224, 120, 86, 0.2);
+}
+
+.dock-item-login .dock-icon {
+    @apply text-orange;
+    opacity: 1;
+}
+
+.dock-item-login:hover {
+    @apply bg-orange text-white transform scale-105 shadow-[0_4px_15px_rgba(255,107,0,0.3)];
+}
+
+.dock-item-login:hover .dock-icon, .dock-item-login:hover .dock-label {
+    @apply text-white opacity-100;
+}
+

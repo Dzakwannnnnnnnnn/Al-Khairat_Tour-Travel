@@ -6,93 +6,122 @@
     <title>Al-Khairat - Perjalanan Penuh Kehangatan</title>
     
     @vite(['resources/css/app.css'])
+
+    <!-- Theme Detection Script -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
-<body class="bg-cream font-sans text-charcoal">
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="fixed inset-0 bg-gradient-to-br from-cream via-white to-cream flex flex-col items-center justify-center z-[9999] opacity-100 transition-opacity duration-500">
-        <div class="relative w-32 h-32 md:w-40 md:h-40">
-            <!-- Rotating stars container -->
-            <div class="stars-container absolute inset-0 flex items-center justify-center">
-                <div class="star star-1 absolute">✨</div>
-                <div class="star star-2 absolute">✨</div>
-                <div class="star star-3 absolute">✨</div>
-                <div class="star star-4 absolute">✨</div>
-                <div class="star star-5 absolute">✨</div>
-                <div class="star star-6 absolute">✨</div>
-                <div class="star star-7 absolute">✨</div>
-                <div class="star star-8 absolute">✨</div>
+<body class="bg-bg font-sans text-text transition-colors duration-500">
+    <!-- Elegant Cinematic Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-bg flex flex-col items-center justify-center z-[9999] opacity-100">
+        <div class="loader-content flex flex-col items-center">
+            <!-- Center logo -->
+            <div class="flex flex-col items-center mb-6 animate-[fadeUp_1.5s_ease-out]">
+                <img src="{{ asset('images/logo.jpg') }}" class="h-44 md:h-64 object-contain drop-shadow-[0_0_30px_rgba(255,165,0,0.3)]" style="animation: pulse-star 4s ease-in-out infinite;" alt="Al-Khairat Tour Travel Logo">
             </div>
             
-            <!-- Center logo -->
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="text-6xl md:text-7xl opacity-90">🌴</div>
+            <!-- Loading text -->
+            <div class="overflow-hidden">
+                <p class="text-gold/80 font-sans text-xs md:text-sm tracking-[0.3em] font-light uppercase animate-[slideUp_1s_ease-out_0.3s_both]">
+                    Perjalanan Penuh Kehangatan
+                </p>
             </div>
-        </div>
-        
-        <!-- Loading text -->
-        <p class="mt-8 md:mt-12 text-charcoal font-serif text-lg md:text-xl font-bold text-center">
-            <span class="inline-block animate-pulse">Mempersiapkan Perjalanan Spiritual Anda</span>
-        </p>
-        <div class="mt-4 flex justify-center space-x-1">
-            <span class="w-2 h-2 bg-orange rounded-full animate-bounce" style="animation-delay: 0s"></span>
-            <span class="w-2 h-2 bg-orange rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
-            <span class="w-2 h-2 bg-orange rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+            
+            <!-- Elegant Loading Line -->
+            <div class="w-48 h-[1px] bg-charcoal/5 mt-10 relative overflow-hidden animate-[fadeUp_1s_ease-out_0.6s_both]">
+                <div class="absolute inset-0 bg-gradient-sunset w-full rounded-full" style="animation: loadingLine 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></div>
+            </div>
         </div>
     </div>
     
     <!-- Navigation Header -->
-    <nav class="bg-cream sticky top-0 z-50 border-b border-orange/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 md:h-20">
-                <!-- Logo -->
-                <div class="flex items-center space-x-2 md:space-x-3 group cursor-pointer">
-                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-sunset flex items-center justify-center text-lg md:text-xl group-hover:shadow-lg transition transform group-hover:scale-110">
-                        🌴
-                    </div>
-                    <div class="font-serif text-xl md:text-2xl font-bold text-gradient-sunset">Al-Khairat</div>
-                </div>
-                
-                <!-- Navigation Menu - Desktop -->
-                <div class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="#keunggulan" class="text-charcoal hover:text-sunset-orange transition font-medium text-sm lg:text-base">Keunggulan</a>
-                    <a href="#paket" class="text-charcoal hover:text-sunset-orange transition font-medium text-sm lg:text-base">Paket</a>
-                    <a href="#testimoni" class="text-charcoal hover:text-sunset-orange transition font-medium text-sm lg:text-base">Testimoni</a>
-                    <a href="#faq" class="text-charcoal hover:text-sunset-orange transition font-medium text-sm lg:text-base">FAQ</a>
-                </div>
-                
-                <!-- WhatsApp Button - Desktop -->
-                <a href="https://wa.me/62" target="_blank" class="hidden md:flex btn-primary items-center space-x-2 text-sm lg:text-base px-4 lg:px-8 py-2 lg:py-3">
-                    <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-9.746 9.798c0 2.734.732 5.41 2.124 7.738l-2.257 6.545 6.783-2.223c2.226 1.185 4.74 1.81 7.387 1.81h.006c5.397 0 9.81-4.395 10.007-9.803.002-.493-.071-1.205-.071-1.205 0-5.46-4.438-9.86-9.9-9.86z"/>
-                    </svg>
-                    <span>Hubungi</span>
-                </a>
-                
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="md:hidden flex flex-col space-y-1.5 w-8 h-8 items-center justify-center">
-                    <span class="w-6 h-0.5 bg-charcoal block transition-all duration-300 origin-center"></span>
-                    <span class="w-6 h-0.5 bg-charcoal block transition-all duration-300 origin-center"></span>
-                    <span class="w-6 h-0.5 bg-charcoal block transition-all duration-300 origin-center"></span>
-                </button>
-                
-                <!-- Mobile WhatsApp Button -->
-                <a href="https://wa.me/62" target="_blank" class="md:hidden btn-primary flex items-center space-x-1 text-xs px-3 py-2">
-                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-9.746 9.798c0 2.734.732 5.41 2.124 7.738l-2.257 6.545 6.783-2.223c2.226 1.185 4.74 1.81 7.387 1.81h.006c5.397 0 9.81-4.395 10.007-9.803.002-.493-.071-1.205-.071-1.205 0-5.46-4.438-9.86-9.9-9.86z"/>
-                    </svg>
-                    <span>WA</span>
-                </a>
-            </div>
+    <!-- Minimal Top Header (Logo Only) -->
+    <header class="minimal-header" id="main-header">
+        <div class="flex items-center group cursor-pointer">
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.jpg') }}" class="object-contain group-hover:scale-105 transition transform duration-500" alt="Al-Khairat Logo">
+            </a>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu md:hidden">
-            <a href="#keunggulan" class="mobile-menu-item">Keunggulan</a>
-            <a href="#paket" class="mobile-menu-item">Paket</a>
-            <a href="#testimoni" class="mobile-menu-item">Testimoni</a>
-            <a href="#faq" class="mobile-menu-item">FAQ</a>
+    </header>
+
+    <!-- Floating Navigation Dock -->
+    <div class="dock-container">
+        <div class="dock-wrapper">
+            <!-- Beranda -->
+            <a href="#hero-slideshow" class="dock-item group active" data-section="hero-slideshow">
+                <span class="dock-label">Home</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Keunggulan -->
+            <a href="#keunggulan" class="dock-item group" data-section="keunggulan">
+                <span class="dock-label">Layanan</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-7.714 2.143L11 21l-2.286-6.857L1 12l7.714-2.143L11 3z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Paket -->
+            <a href="#paket" class="dock-item group" data-section="paket">
+                <span class="dock-label">Paket</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Testimoni -->
+            <a href="#testimoni" class="dock-item group" data-section="testimoni">
+                <span class="dock-label">Ulasan</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Galeri -->
+            <a href="{{ route('gallery') }}" class="dock-item group">
+                <span class="dock-label">Video</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Divider -->
+            <div class="dock-divider"></div>
+
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="dock-item group" id="theme-toggle">
+                <span class="dock-label" id="theme-label">Malam</span>
+                <svg id="moon-icon" class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                <svg id="sun-icon" class="dock-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </button>
+
+            <!-- Login -->
+            <a href="{{ route('login') }}" class="dock-item dock-item-login group">
+                <span class="dock-label">Masuk</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
         </div>
-    </nav>
+    </div>
 
     <!-- Hero Section with Slideshow -->
     <section id="hero-slideshow" class="relative w-full h-screen min-h-screen overflow-hidden">
@@ -105,7 +134,7 @@
         </div>
         
         <!-- Dark Overlay -->
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
+        <div class="absolute inset-0 bg-black/40 dark:bg-black/70 z-10 transition-colors duration-700"></div>
         
         <!-- Content Overlay -->
         <div class="absolute inset-0 flex items-center justify-center z-20">
@@ -120,12 +149,12 @@
                 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105">
+                    <a href="{{ route('register') }}" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Daftar Sekarang
-                    </button>
-                    <button class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105">
+                    </a>
+                    <a href="#paket" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Lihat Paket
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -151,54 +180,115 @@
         </button>
     </section>
 
+    <!-- About Us Section with PPIU Integration -->
+    <section id="about" class="section-py bg-bg relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-animate" data-animation="fade-right">
+                    <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur border border-orange/10 px-3 py-1 rounded-full text-sm font-semibold text-orange mb-4">
+                        <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+                        <span>Tentang Perusahaan</span>
+                    </div>
+                    <h2 class="text-heading mb-4 text-text">Siapa <span class="text-gradient-sunset">Al-Khairat?</span></h2>
+                    <p class="text-text/80 mb-6 leading-relaxed">
+                        Sejak didirikan, Al-Khairat Tour & Travel berkomitmen untuk menjadi pendamping spiritual terbaik Anda menuju Baitullah. Kami tidak sekadar menawarkan perjalanan, melainkan membimbing pengalaman spiritual yang dilayani dengan ketulusan hati.
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center space-x-3 text-text font-semibold border-b border-border pb-3">
+                            <span class="text-2xl">🥇</span> Angka Keberangkatan Tinggi (Ribuan Jamaah)
+                        </div>
+                        <div class="flex items-center space-x-3 text-text font-semibold border-b border-border pb-3">
+                            <span class="text-2xl">👨‍🏫</span> Pembimbing (Muthawwif) Profesional Bersertifikat
+                        </div>
+                        <div class="flex items-center space-x-3 text-text font-semibold pb-3">
+                            <span class="text-2xl">🤝</span> Transparansi Fasilitas dan Akad Perjalanan
+                        </div>
+                    </div>
+                    
+                    <!-- Integrasi Izin Resmi PPIU -->
+                    <div class="bg-surface border-l-4 border-green-500 p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
+                        <div class="flex items-start justify-between flex-wrap gap-4">
+                            <div>
+                                <h4 class="font-bold text-text text-lg flex items-center space-x-2">
+                                    <span>Berizin Resmi Kemenag</span>
+                                    <svg class="text-green-500 w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </h4>
+                                <p class="text-xs text-text/70 mb-3 mt-1">Kami terdaftar sebagai Penyelenggara Perjalanan Ibadah Umrah (PPIU) resmi untuk menjamin keamanan jamaah.</p>
+                                <a href="https://simpu.kemenag.go.id" target="_blank" class="inline-flex items-center space-x-2 text-sm text-green-600 dark:text-green-400 font-bold hover:text-green-800 dark:hover:text-green-300 transition group">
+                                    <span>Verifikasi via Siskohat Kemenag</span>
+                                    <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12H9m12 0l-3-3m3 3l-3 3M3 12a9 9 0 0118.001 0"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative scroll-animate flex justify-center" data-animation="fade-left">
+                    <div class="w-full max-w-[350px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl relative z-10 border-4 border-white dark:border-surface transition-colors duration-500 bg-black">
+                        <video 
+                            autoplay 
+                            muted 
+                            loop 
+                            playsinline 
+                            class="w-full h-full object-cover">
+                            <source src="{{ asset('assets/videos/about-us.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-sunset rounded-full filter blur-3xl opacity-30 z-0"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Divider with Palm -->
     <div class="divider-palm"></div>
 
     <!-- Section Keunggulan -->
-    <section id="keunggulan" class="section-py bg-white">
+    <section id="keunggulan" class="section-py bg-bg transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Keunggulan Kami</h2>
-                <p class="text-sm md:text-base lg:text-lg text-brown max-w-2xl mx-auto px-2">
+                <p class="text-sm md:text-base lg:text-lg text-text/70 max-w-2xl mx-auto px-2">
                     Kami berkomitmen memberikan pengalaman umroh terbaik dengan layanan terdepan
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
                 <!-- Feature 1 -->
-                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-cream to-white border-2 border-orange/20 hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="0">
+                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-surface border-2 border-border hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="0">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-sunset flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl group-hover:shadow-lg group-hover:scale-110 transition flex-shrink-0">
                         ✈️
                     </div>
-                    <h3 class="text-lg md:text-xl font-serif font-bold text-charcoal mb-2 md:mb-3">Pesawat Tanpa Transit</h3>
-                    <p class="text-brown text-xs md:text-sm">Terbang langsung ke Jeddah tanpa perjalanan yang menguras energi</p>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2 md:mb-3">Pesawat Tanpa Transit</h3>
+                    <p class="text-text/70 text-xs md:text-sm">Terbang langsung ke Jeddah tanpa perjalanan yang menguras energi</p>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-cream to-white border-2 border-orange/20 hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="100">
+                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-surface border-2 border-border hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="100">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-sunset flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl group-hover:shadow-lg group-hover:scale-110 transition flex-shrink-0">
                         🏨
                     </div>
-                    <h3 class="text-lg md:text-xl font-serif font-bold text-charcoal mb-2 md:mb-3">Hotel Dekat Masjid</h3>
-                    <p class="text-brown text-xs md:text-sm">Lokasi strategis berjarak hanya 5-10 menit dari Masjidil Haram</p>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2 md:mb-3">Hotel Dekat Masjid</h3>
+                    <p class="text-text/70 text-xs md:text-sm">Lokasi strategis berjarak hanya 5-10 menit dari Masjidil Haram</p>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-cream to-white border-2 border-orange/20 hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="200">
+                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-surface border-2 border-border hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="200">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-sunset flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl group-hover:shadow-lg group-hover:scale-110 transition flex-shrink-0">
                         👨‍🍳
                     </div>
-                    <h3 class="text-lg md:text-xl font-serif font-bold text-charcoal mb-2 md:mb-3">Makanan Berkualitas</h3>
-                    <p class="text-brown text-xs md:text-sm">Menu makanan sehat dan halal yang lezat setiap hari</p>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2 md:mb-3">Makanan Berkualitas</h3>
+                    <p class="text-text/70 text-xs md:text-sm">Menu makanan sehat dan halal yang lezat setiap hari</p>
                 </div>
 
                 <!-- Feature 4 -->
-                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-gradient-to-br from-cream to-white border-2 border-orange/20 hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="300">
+                <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-surface border-2 border-border hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="300">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-sunset flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl group-hover:shadow-lg group-hover:scale-110 transition flex-shrink-0">
                         📱
                     </div>
-                    <h3 class="text-lg md:text-xl font-serif font-bold text-charcoal mb-2 md:mb-3">Guide Berpengalaman</h3>
-                    <p class="text-brown text-xs md:text-sm">Tim profesional siap membantu Anda 24 jam non-stop</p>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2 md:mb-3">Guide Berpengalaman</h3>
+                    <p class="text-text/70 text-xs md:text-sm">Tim profesional siap membantu Anda 24 jam non-stop</p>
                 </div>
             </div>
         </div>
@@ -218,110 +308,61 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                <!-- Paket 1 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate" data-animation="slide-up" data-delay="0">
-                    <div class="h-24 md:h-32 bg-gradient-sunset"></div>
-                    <div class="p-5 md:p-8">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">PAKET STANDAR</h3>
-                        <p class="text-brown text-xs md:text-sm mb-4 md:mb-6">Umroh 9 Hari</p>
-                        <p class="text-2xl md:text-4xl font-bold text-orange mb-4 md:mb-6">
-                            Hubungi
-                            <span class="text-base md:text-lg block text-brown mt-1 md:mt-2">untuk harga spesial</span>
-                        </p>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8">
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Penerbangan dari Jakarta</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Hotel bintang 4 dekat Masjid</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Visa dan asuransi</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Makan 3x sehari</span>
-                            </li>
-                        </ul>
-                        <button class="w-full btn-secondary text-xs md:text-base py-2 md:py-3">
-                            Hubungi Via WhatsApp
-                        </button>
-                    </div>
-                </div>
+                @forelse($products as $product)
+                    <!-- Dynamic Live Seat Package -->
+                    <div class="bg-surface rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate relative border {{ $product->status == 'featured' ? 'border-orange' : 'border-transparent' }}" data-animation="slide-up">
+                        <!-- LIVE SEAT WIDGET -->
+                        <div class="absolute top-4 left-4 z-20 bg-red-600 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center space-x-2 border border-red-400">
+                            <span class="relative flex h-2.5 w-2.5">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+                            </span>
+                            <span>SISA {{ max(0, $product->stock) }} KURSI LIVE!</span>
+                        </div>
+                        
+                        @if($product->status == 'featured')
+                        <div class="absolute top-4 right-4 z-20 bg-gradient-sunset text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+                            TERPOPULER
+                        </div>
+                        @endif
 
-                <!-- Paket 2 - Highlighted -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl transform md:scale-105 overflow-hidden border-2 border-orange relative hover:shadow-2xl md:hover:shadow-2xl transition md:transition scroll-animate" data-animation="scale-up" data-delay="100">
-                    <div class="absolute top-3 right-3 md:top-4 md:right-4 bg-gradient-sunset text-white px-3 md:px-4 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-semibold">
-                        TERPOPULER
+                        <div class="h-32 md:h-40 relative">
+                            @if($product->image)
+                                <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-cover filter brightness-90">
+                            @else
+                                <div class="w-full h-full bg-gradient-sunset"></div>
+                            @endif
+                        </div>
+                        <div class="p-5 md:p-8 flex flex-col justify-between h-full">
+                            <div>
+                                <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">{{ strtoupper($product->name) }}</h3>
+                                <p class="text-brown text-xs md:text-sm mb-4">Umroh {{ $product->duration }}</p>
+                                <p class="text-2xl md:text-3xl font-bold text-orange mb-6 text-brand">
+                                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                                </p>
+                                
+                                <ul class="space-y-3 mb-8">
+                                    @if(is_array($product->features))
+                                        @foreach(array_slice($product->features, 0, 4) as $feature)
+                                        <li class="flex items-start text-brown text-sm">
+                                            <span class="text-orange mr-2">✓</span>
+                                            <span class="leading-tight">{{ $feature }}</span>
+                                        </li>
+                                        @endforeach
+                                    @endif
+                                </ul>
+                            </div>
+                            
+                            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Al-Khairat,%20saya%20tertarik%20dengan%20{{ urlencode($product->name) }}%20berhubung%20kuota%20sisa%20{{ max(0, $product->stock) }}%20kursi." target="_blank" class="mt-4 block w-full text-center {{ $product->status == 'featured' ? 'btn-primary' : 'btn-secondary' }} text-sm py-3 rounded-xl shadow hover:shadow-lg transition">
+                                Pesan Sekarang - Sisa {{ max(0, $product->stock) }}!
+                            </a>
+                        </div>
                     </div>
-                    <div class="h-24 md:h-32 bg-gradient-sunset"></div>
-                    <div class="p-5 md:p-8">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">PAKET PREMIUM</h3>
-                        <p class="text-brown text-xs md:text-sm mb-4 md:mb-6">Umroh 14 Hari</p>
-                        <p class="text-2xl md:text-4xl font-bold text-orange mb-4 md:mb-6">
-                            Hubungi
-                            <span class="text-base md:text-lg block text-brown mt-1 md:mt-2">untuk harga spesial</span>
-                        </p>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8">
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Pesawat premium tanpa transit</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Hotel bintang 5 luxury</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Visa, asuransi + tour tambahan</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Private guide berbahasa Indonesia</span>
-                            </li>
-                        </ul>
-                        <button class="w-full btn-primary text-xs md:text-base py-2 md:py-3">
-                            Daftar Premium
-                        </button>
+                @empty
+                    <div class="col-span-full text-center py-10 bg-white rounded-xl shadow">
+                        <p class="text-brown">Belum ada paket umroh yang tersedia saat ini.</p>
                     </div>
-                </div>
-
-                <!-- Paket 3 -->
-                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate" data-animation="slide-up" data-delay="200">
-                    <div class="h-24 md:h-32 bg-gradient-sunset"></div>
-                    <div class="p-5 md:p-8">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">PAKET EKONOMIS</h3>
-                        <p class="text-brown text-xs md:text-sm mb-4 md:mb-6">Umroh 7 Hari</p>
-                        <p class="text-2xl md:text-4xl font-bold text-orange mb-4 md:mb-6">
-                            Hubungi
-                            <span class="text-base md:text-lg block text-brown mt-1 md:mt-2">untuk harga spesial</span>
-                        </p>
-                        <ul class="space-y-2 md:space-y-3 mb-6 md:mb-8">
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Penerbangan dengan transit</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Hotel bintang 3-4</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Visa dan asuransi</span>
-                            </li>
-                            <li class="flex items-center space-x-2 text-brown text-sm md:text-base">
-                                <span class="text-orange text-lg md:text-xl flex-shrink-0">✓</span>
-                                <span>Makan dan guide</span>
-                            </li>
-                        </ul>
-                        <button class="w-full btn-secondary text-xs md:text-base py-2 md:py-3">
-                            Hubungi Via WhatsApp
-                        </button>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -330,7 +371,7 @@
     <div class="divider-palm"></div>
 
     <!-- Section Testimonial -->
-    <section id="testimoni" class="section-py bg-white">
+    <section id="testimoni" class="section-py bg-bg transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Testimonial Jemaat Kami</h2>
@@ -339,70 +380,124 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-cream rounded-lg md:rounded-xl p-4 md:p-6 lg:p-8 border-l-4 border-orange hover:shadow-lg transition scroll-animate" data-animation="slide-up" data-delay="0">
+            @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-8 max-w-3xl mx-auto text-center" role="alert">
+                <span class="block sm:inline font-medium">✨ {{ session('success') }}</span>
+            </div>
+            @endif
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-16">
+                @forelse($testimonials as $index => $t)
+                <!-- Dynamic Testimonial -->
+                <div class="bg-surface rounded-lg md:rounded-xl p-4 md:p-6 lg:p-8 border-l-4 border-orange hover:shadow-lg transition scroll-animate" data-animation="slide-up" data-delay="{{ $index * 100 }}">
                     <div class="flex items-center space-x-1 mb-3 md:mb-4">
+                        @for($i = 0; $i < $t->rating; $i++)
                         <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
+                        @endfor
                     </div>
-                    <p class="text-brown mb-4 md:mb-6 italic text-xs md:text-sm">
-                        "Pengalaman umroh yang luar biasa! Pelayanan Al-Khairat sangat profesional dan penuh kehangatan. Tim guide mereka membuat perjalanan kami menjadi lebih bermakna."
+                    <p class="text-text/70 mb-4 md:mb-6 italic text-xs md:text-sm line-clamp-4" title="{{ $t->message }}">
+                        "{{ $t->message }}"
                     </p>
                     <div class="flex items-center space-x-2 md:space-x-3">
-                        <img src="https://ui-avatars.com/api/?name=Budi+Santoso" alt="Budi" class="w-10 h-10 md:w-12 md:h-12 rounded-full">
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-sunset flex items-center justify-center text-white font-bold text-lg">{{ strtoupper(substr($t->name, 0, 1)) }}</div>
                         <div>
-                            <p class="font-semibold text-charcoal text-sm md:text-base">Budi Santoso</p>
-                            <p class="text-xs md:text-sm text-brown">Jakarta</p>
+                            <p class="font-semibold text-text text-sm md:text-base">{{ $t->name }}</p>
+                            @if($t->product)
+                            <p class="text-xs md:text-sm text-orange font-medium">{{ $t->product->name }}</p>
+                            @endif
                         </div>
                     </div>
                 </div>
-
-                <!-- Testimonial 2 -->
-                <div class="bg-cream rounded-lg md:rounded-xl p-4 md:p-6 lg:p-8 border-l-4 border-orange hover:shadow-lg transition scroll-animate" data-animation="slide-up" data-delay="100">
-                    <div class="flex items-center space-x-1 mb-3 md:mb-4">
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                    </div>
-                    <p class="text-brown mb-4 md:mb-6 italic text-xs md:text-sm">
-                        "Dari penerbangan hingga hotel, semuanya berjalan sempurna. Suasana kehangatan yang dijanjikan benar-benar kami rasakan. Terima kasih Al-Khairat!"
-                    </p>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <img src="https://ui-avatars.com/api/?name=Siti+Nurhaliza" alt="Siti" class="w-10 h-10 md:w-12 md:h-12 rounded-full">
-                        <div>
-                            <p class="font-semibold text-charcoal text-sm md:text-base">Siti Nurhaliza</p>
-                            <p class="text-xs md:text-sm text-brown">Surabaya</p>
-                        </div>
-                    </div>
+                @empty
+                <div class="col-span-1 md:col-span-3 text-center text-gray-500 py-8">
+                    Belum ada testimoni yang ditampilkan.
                 </div>
+                @endforelse
+            </div>
 
-                <!-- Testimonial 3 -->
-                <div class="bg-cream rounded-lg md:rounded-xl p-4 md:p-6 lg:p-8 border-l-4 border-orange hover:shadow-lg transition scroll-animate" data-animation="slide-up" data-delay="200">
-                    <div class="flex items-center space-x-1 mb-3 md:mb-4">
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
-                        <span class="text-lg md:text-2xl">⭐</span>
+            <!-- Form Submit Testimoni / Tulis Ulasan / Galeri Video -->
+            <div class="text-center mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button onclick="toggleTestimoniModal(true)" class="bg-surface text-orange border-2 border-orange font-semibold text-sm md:text-base px-6 md:px-10 py-3 rounded-xl hover:bg-orange hover:text-white shadow hover:shadow-lg transition transform hover:-translate-y-1 w-full sm:w-auto">
+                    Tulis Ulasan Anda
+                </button>
+                <a href="{{ route('gallery') }}" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 hover:shadow-lg transition transform hover:-translate-y-1 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Lihat Galeri Video Makkah
+                </a>
+            </div>
+
+            <!-- Modal Form Submit Testimoni -->
+            <div id="testimoniFormModal" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden flex-col items-center justify-center p-4">
+                <div class="bg-surface rounded-2xl p-6 md:p-8 shadow-2xl border border-border w-full max-w-3xl relative max-h-[90vh] overflow-y-auto animate-[slide-up_0.3s_ease-out]" onclick="event.stopPropagation()">
+                    <!-- Close button -->
+                    <button onclick="toggleTestimoniModal(false)" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition text-2xl font-bold bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm">&times;</button>
+                    
+                    <div class="text-center mb-6 mt-2">
+                        <h3 class="text-2xl font-serif font-bold text-charcoal mb-2">Bagikan Pengalaman Anda</h3>
+                        <p class="text-brown text-sm">Masukan Anda sangat berarti bagi kami untuk terus meningkatkan pelayanan.</p>
                     </div>
-                    <p class="text-brown mb-4 md:mb-6 italic text-xs md:text-sm">
-                        "Pelayanan yang tulus dan jujur. Harga sesuai dengan kualitas, tidak ada biaya tersembunyi. Saya merekomendasikan Al-Khairat untuk semua teman-teman saya."
-                    </p>
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <img src="https://ui-avatars.com/api/?name=Ahmad+Wijaya" alt="Ahmad" class="w-10 h-10 md:w-12 md:h-12 rounded-full">
-                        <div>
-                            <p class="font-semibold text-charcoal text-sm md:text-base">Ahmad Wijaya</p>
-                            <p class="text-xs md:text-sm text-brown">Bandung</p>
+                    
+                    <form action="{{ route('testimonials.public') }}" method="POST" class="space-y-4">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-text mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
+                                <input type="text" name="name" required class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-text mb-1">Paket Umroh (Opsional)</label>
+                                <select name="product_id" class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
+                                    <option value="" class="bg-surface">-- Tidak Memilih --</option>
+                                    @foreach($products as $p)
+                                    <option value="{{ $p->id }}" class="bg-surface">{{ $p->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-text mb-1">Rating Kepuasan <span class="text-red-500">*</span></label>
+                            <select name="rating" required class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
+                                <option value="5" class="bg-surface">⭐⭐⭐⭐⭐ (5/5) - Sangat Memuaskan</option>
+                                <option value="4" class="bg-surface">⭐⭐⭐⭐ (4/5) - Memuaskan</option>
+                                <option value="3" class="bg-surface">⭐⭐⭐ (3/5) - Biasa Saja</option>
+                                <option value="2" class="bg-surface">⭐⭐ (2/5) - Kurang Memuaskan</option>
+                                <option value="1" class="bg-surface">⭐ (1/5) - Mengecewakan</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-text mb-1">Cerita Pendek Anda <span class="text-red-500">*</span></label>
+                            <textarea name="message" rows="3" required class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition" placeholder="Bagaimana kesan dan masukan Anda selama berangkat bersama Al-Khairat?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary font-bold text-base py-3.5 hover:shadow-lg transition transform hover:-translate-y-1">
+                            Kirim Ulasan Sekarang
+                        </button>
+                        <p class="text-xs text-center text-text/50 mt-2">Ulasan Anda akan dimoderasi terlebih dahulu sebelum tampil di halaman depan.</p>
+                    </form>
                 </div>
             </div>
+            
+            <script>
+                function toggleTestimoniModal(show) {
+                    const m = document.getElementById('testimoniFormModal');
+                    if (show) {
+                        m.classList.remove('hidden');
+                        m.classList.add('flex');
+                    } else {
+                        m.classList.add('hidden');
+                        m.classList.remove('flex');
+                    }
+                }
+
+                // Close modal when clicking outside
+                document.getElementById('testimoniFormModal').addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        toggleTestimoniModal(false);
+                    }
+                });
+            </script>
         </div>
     </section>
 
@@ -410,56 +505,56 @@
     <div class="divider-palm"></div>
 
     <!-- FAQ Section -->
-    <section id="faq" class="section-py bg-cream">
+    <section id="faq" class="section-py bg-cream transition-colors duration-500">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Pertanyaan yang Sering Diajukan</h2>
-                <p class="text-sm md:text-base lg:text-lg text-brown px-2">
+                <p class="text-sm md:text-base lg:text-lg text-text/70 px-2">
                     Temukan jawaban atas pertanyaan umum tentang paket umroh kami
                 </p>
             </div>
 
             <div class="space-y-3 md:space-y-4">
                 <!-- FAQ 1 -->
-                <div class="bg-white rounded-lg md:rounded-lg border-2 border-orange/20 hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="0">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-cream transition">
-                        <span class="font-serif font-bold text-charcoal text-sm md:text-lg">Berapa biaya yang diperlukan?</span>
+                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="0">
+                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                        <span class="font-serif font-bold text-text text-sm md:text-lg">Berapa biaya yang diperlukan?</span>
                         <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-brown text-xs md:text-base border-t border-orange/20">
+                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
                         Biaya umroh tergantung pada paket yang Anda pilih. Hubungi kami untuk penawaran terbaik sesuai dengan budget Anda.
                     </div>
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="bg-white rounded-lg md:rounded-lg border-2 border-orange/20 hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="100">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-cream transition">
-                        <span class="font-serif font-bold text-charcoal text-sm md:text-lg">Apakah visa sudah termasuk?</span>
+                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="100">
+                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                        <span class="font-serif font-bold text-text text-sm md:text-lg">Apakah visa sudah termasuk?</span>
                         <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-brown text-xs md:text-base border-t border-orange/20">
+                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
                         Ya, semua paket kami sudah termasuk biaya visa dan asuransi perjalanan.
                     </div>
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="bg-white rounded-lg md:rounded-lg border-2 border-orange/20 hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="200">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-cream transition">
-                        <span class="font-serif font-bold text-charcoal text-sm md:text-lg">Berapa orang minimal untuk keberangkatan?</span>
+                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="200">
+                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                        <span class="font-serif font-bold text-text text-sm md:text-lg">Berapa orang minimal untuk keberangkatan?</span>
                         <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-brown text-xs md:text-base border-t border-orange/20">
+                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
                         Tidak ada minimal peserta. Kami berangkat setiap bulan dengan jadwal terjadwal.
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="bg-white rounded-lg md:rounded-lg border-2 border-orange/20 hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="300">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-cream transition">
-                        <span class="font-serif font-bold text-charcoal text-sm md:text-lg">Apakah ada asuransi kesehatan?</span>
+                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="300">
+                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                        <span class="font-serif font-bold text-text text-sm md:text-lg">Apakah ada asuransi kesehatan?</span>
                         <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-brown text-xs md:text-base border-t border-orange/20">
+                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
                         Ya, semua peserta mendapatkan asuransi kesehatan perjalanan yang komprehensif.
                     </div>
                 </div>
@@ -474,21 +569,20 @@
             <p class="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-white/90 px-2">
                 Jangan tunda lagi, daftar sekarang dan rasakan kehangatan dalam setiap langkah perjalanan spiritual Anda.
             </p>
-            <a href="https://wa.me/62" target="_blank" class="inline-block bg-white text-sunset-orange px-6 md:px-10 py-2 md:py-4 rounded-lg font-bold text-sm md:text-base lg:text-lg hover:bg-cream transition transform hover:-translate-y-1">
+            <a href="https://wa.me/62" target="_blank" class="inline-block bg-surface text-orange px-6 md:px-10 py-2 md:py-4 rounded-lg font-bold text-sm md:text-base lg:text-lg hover:bg-bg transition transform hover:-translate-y-1">
                 Hubungi Kami Sekarang
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-charcoal text-white py-12 md:py-16">
+    <footer class="bg-footer text-white py-12 md:py-16 transition-all duration-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 lg:gap-12 mb-8 md:mb-12">
                 <!-- About -->
                 <div>
-                    <div class="flex items-center space-x-2 mb-3 md:mb-4">
-                        <span class="text-xl md:text-2xl">🌴</span>
-                        <div class="font-serif text-lg md:text-xl font-bold">Al-Khairat</div>
+                    <div class="mb-5 bg-surface rounded-xl inline-block p-4 shadow-xl transform -rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="{{ asset('images/logo.jpg') }}" class="h-20 md:h-28 object-contain" alt="Al-Khairat Tour Travel">
                     </div>
                     <p class="text-white/70 text-xs md:text-sm">
                         Perjalanan penuh kehangatan, pelayanan secerah mentari.
@@ -550,5 +644,35 @@
     </footer>
 
     @vite(['resources/js/app.js'])
+
+    <!-- Theme Control Logic -->
+    <script>
+        function updateThemeUI(isDark) {
+            const themeLabel = document.getElementById('theme-label');
+            const moonIcon = document.getElementById('moon-icon');
+            const sunIcon = document.getElementById('sun-icon');
+            
+            if (isDark) {
+                themeLabel.textContent = 'Siang';
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            } else {
+                themeLabel.textContent = 'Malam';
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeUI(isDark);
+        }
+
+        // Initialize UI based on current theme
+        document.addEventListener('DOMContentLoaded', () => {
+            updateThemeUI(document.documentElement.classList.contains('dark'));
+        });
+    </script>
 </body>
 </html>
