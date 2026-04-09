@@ -40,14 +40,8 @@
     </div>
     
     <!-- Navigation Header -->
-    <!-- Minimal Top Header (Logo Only) -->
-    <header class="minimal-header" id="main-header">
-        <div class="flex items-center group cursor-pointer">
-            <a href="{{ route('home') }}">
-                <img src="{{ asset('images/logo.jpg') }}" class="object-contain group-hover:scale-105 transition transform duration-500" alt="Al-Khairat Logo">
-            </a>
-        </div>
-    </header>
+    <x-navbar />
+
 
     <!-- Floating Navigation Dock -->
     <div class="dock-container">
@@ -57,6 +51,15 @@
                 <span class="dock-label">Home</span>
                 <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Tentang Kami -->
+            <a href="#about" class="dock-item group" data-section="about">
+                <span class="dock-label">Tentang Kami</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
                 <div class="dock-active-dot"></div>
             </a>
@@ -89,10 +92,19 @@
             </a>
 
             <!-- Galeri -->
-            <a href="{{ route('gallery') }}" class="dock-item group">
+            <a href="{{ route('gallery') }}" class="dock-item group" data-section="gallery">
                 <span class="dock-label">Video</span>
                 <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
+            <!-- Kontak -->
+            <a href="#contact" class="dock-item group" data-section="contact">
+                <span class="dock-label">Kontak</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                 </svg>
                 <div class="dock-active-dot"></div>
             </a>
@@ -112,15 +124,81 @@
                 <div class="dock-active-dot"></div>
             </button>
 
+            <!-- Voice Search Login -->
+            <button onclick="openVoiceSearch()" class="dock-item group" id="voice-search-trigger">
+                <span class="dock-label">Suara</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </button>
+
+            <!-- Manual Search -->
+            <button onclick="toggleSearch()" class="dock-item group" id="search-trigger">
+                <span class="dock-label">Cari</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </button>
+
             <!-- Login -->
-            <a href="{{ route('login') }}" class="dock-item dock-item-login group">
-                <span class="dock-label">Masuk</span>
+            <a href="{{ route('login') }}" class="dock-item group">
+                <span class="dock-label">Masuk/Login</span>
                 <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
                 <div class="dock-active-dot"></div>
             </a>
         </div>
+    </div>
+
+    <!-- Premium Search Overlay -->
+    <div id="search-overlay" class="fixed inset-0 z-[1000] bg-bg/95 backdrop-blur-2xl opacity-0 invisible transition-all duration-500 flex flex-col items-center justify-start pt-32 px-4">
+        <button onclick="toggleSearch()" class="absolute top-8 right-8 text-text/50 hover:text-orange transition-all p-2 rounded-full hover:bg-orange/10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <div class="w-full max-w-3xl space-y-8 animate-fade-in">
+            <div class="text-center space-y-2">
+                <h2 class="text-4xl font-serif font-bold text-text">Apa yang Anda <span class="text-gradient-sunset">Cari?</span></h2>
+                <p class="text-text/60">Cari paket umroh, artikel, atau informasi lainnya.</p>
+            </div>
+
+            <div class="relative group">
+                <div class="absolute inset-y-0 left-6 flex items-center pointer-events-none">
+                    <svg class="w-8 h-8 text-orange/50 group-focus-within:text-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" id="search-input" 
+                    class="w-full bg-surface/50 border-2 border-border focus:border-orange rounded-[2.5rem] py-6 pl-20 pr-32 text-2xl text-text outline-none transition-all shadow-2xl focus:ring-8 focus:ring-orange/5"
+                    placeholder="Ketik kata kunci di sini...">
+                
+                <button onclick="toggleSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-gradient-sunset text-white h-[80%] px-8 rounded-full font-bold shadow-lg hover:shadow-orange/20 hover:scale-105 transition-all flex items-center gap-2">
+                    <span>Cari</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Quick Suggestions -->
+            <div class="flex flex-wrap justify-center gap-3 pt-4">
+                <span class="text-sm text-text/40 w-full text-center mb-2">Saran Pencarian:</span>
+                <button onclick="fillSearch('Umroh Reguler')" class="px-6 py-2 rounded-full bg-surface border border-border hover:border-orange hover:text-orange transition-all text-sm font-medium shadow-sm">Umroh Reguler</button>
+                <button onclick="fillSearch('Paket Ramadhan')" class="px-6 py-2 rounded-full bg-surface border border-border hover:border-orange hover:text-orange transition-all text-sm font-medium shadow-sm">Paket Ramadhan</button>
+                <button onclick="fillSearch('Haji Plus')" class="px-6 py-2 rounded-full bg-surface border border-border hover:border-orange hover:text-orange transition-all text-sm font-medium shadow-sm">Haji Plus</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Search Alert Popup (Toast) -->
+    <div id="search-alert" class="fixed top-10 left-1/2 -translate-x-1/2 z-[2000] bg-red-600/90 backdrop-blur-md text-white px-8 py-4 rounded-2xl shadow-2xl transition-all duration-500 opacity-0 invisible translate-y-[-20px] flex items-center gap-3">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <span id="search-alert-message" class="font-bold tracking-wide">Keyword tidak ditemukan!</span>
     </div>
 
     <!-- Hero Section with Slideshow -->
@@ -307,10 +385,10 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="product-grid">
                 @forelse($products as $product)
                     <!-- Dynamic Live Seat Package -->
-                    <div class="bg-surface rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate relative border {{ $product->status == 'featured' ? 'border-orange' : 'border-transparent' }}" data-animation="slide-up">
+                    <div class="product-card bg-surface rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate relative border {{ $product->status == 'featured' ? 'border-orange' : 'border-transparent' }}" data-animation="slide-up" data-name="{{ strtolower($product->name) }}">
                         <!-- LIVE SEAT WIDGET -->
                         <div class="absolute top-4 left-4 z-20 bg-red-600 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center space-x-2 border border-red-400">
                             <span class="relative flex h-2.5 w-2.5">
@@ -333,8 +411,8 @@
                                 <div class="w-full h-full bg-gradient-sunset"></div>
                             @endif
                         </div>
-                        <div class="p-5 md:p-8 flex flex-col justify-between h-full">
-                            <div>
+                        <div class="p-5 md:p-8 flex flex-col flex-grow">
+                            <div class="flex-grow">
                                 <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">{{ strtoupper($product->name) }}</h3>
                                 <p class="text-brown text-xs md:text-sm mb-4">Umroh {{ $product->duration }}</p>
                                 <p class="text-2xl md:text-3xl font-bold text-orange mb-6 text-brand">
@@ -353,9 +431,27 @@
                                 </ul>
                             </div>
                             
-                            <a href="https://wa.me/6281234567890?text=Halo%20Admin%20Al-Khairat,%20saya%20tertarik%20dengan%20{{ urlencode($product->name) }}%20berhubung%20kuota%20sisa%20{{ max(0, $product->stock) }}%20kursi." target="_blank" class="mt-4 block w-full text-center {{ $product->status == 'featured' ? 'btn-primary' : 'btn-secondary' }} text-sm py-3 rounded-xl shadow hover:shadow-lg transition">
-                                Pesan Sekarang - Sisa {{ max(0, $product->stock) }}!
-                            </a>
+                            <div class="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border/50">
+                                <button onclick="openProductDetail({{ $product->id }})" class="flex-1 text-center bg-white border-2 border-orange text-orange font-bold text-xs py-3 rounded-xl hover:bg-orange/5 transition">
+                                    Lihat Detail
+                                </button>
+                                <a href="https://wa.me/{{ $product->guide_phone ?? $whatsapp }}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20konsultasi%20mengenai%20paket%20{{ urlencode($product->name) }}." target="_blank" class="flex-1 text-center {{ $product->status == 'featured' ? 'bg-gradient-sunset shadow-lg shadow-orange/20' : 'bg-charcoal' }} text-white font-bold text-xs py-3 rounded-xl hover:scale-105 transition flex items-center justify-center gap-1">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                                    Konsultasi
+                                </a>
+                            </div>
+
+                            <!-- Hidden Data for Modal -->
+                            <div id="product-data-{{ $product->id }}" class="hidden" 
+                                 data-name="{{ $product->name }}"
+                                 data-price="Rp {{ number_format($product->price, 0, ',', '.') }}"
+                                 data-duration="{{ $product->duration }}"
+                                 data-category="{{ $product->category }}"
+                                 data-description="{{ $product->description ?? 'Tidak ada deskripsi tersedia.' }}"
+                                 data-features="{{ json_encode($product->features) }}"
+                                 data-image="{{ $product->image ? asset('storage/'.$product->image) : '' }}"
+                                 data-guide-phone="{{ $product->guide_phone }}">
+                            </div>
                         </div>
                     </div>
                 @empty
@@ -363,6 +459,14 @@
                         <p class="text-brown">Belum ada paket umroh yang tersedia saat ini.</p>
                     </div>
                 @endforelse
+            </div>
+            
+            <!-- No Search Results Message -->
+            <div id="no-results" class="hidden text-center py-20 bg-surface rounded-2xl shadow-lg border-2 border-dashed border-border mt-8">
+                <div class="text-6xl mb-4">🔍</div>
+                <h3 class="text-2xl font-serif font-bold text-text mb-2">Maaf, Paket Tidak Ditemukan</h3>
+                <p class="text-text/60">Coba gunakan kata kunci lain seperti "Umroh" atau "Ramadhan".</p>
+                <button onclick="fillSearch(''); filterProducts('');" class="mt-6 text-orange font-bold hover:underline">Lihat Semua Paket</button>
             </div>
         </div>
     </section>
@@ -562,18 +666,120 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section-py bg-gradient-sunset text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-heading mb-3 md:mb-4 text-white">Wujudkan Impian Umroh Anda</h2>
-            <p class="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-white/90 px-2">
-                Jangan tunda lagi, daftar sekarang dan rasakan kehangatan dalam setiap langkah perjalanan spiritual Anda.
-            </p>
-            <a href="https://wa.me/62" target="_blank" class="inline-block bg-surface text-orange px-6 md:px-10 py-2 md:py-4 rounded-lg font-bold text-sm md:text-base lg:text-lg hover:bg-bg transition transform hover:-translate-y-1">
-                Hubungi Kami Sekarang
-            </a>
+    <x-contact-section />
+
+    <!-- Product Detail Modal -->
+    <div id="product-detail-modal" class="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-surface w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl animate-[slide-up_0.4s_ease-out] relative max-h-[90vh] flex flex-col md:flex-row">
+            <!-- Close Button -->
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-50 bg-charcoal/10 hover:bg-orange/20 text-charcoal hover:text-orange rounded-full p-2 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Image Side -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto relative">
+                <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute bottom-6 left-6 text-white">
+                    <span id="detail-category" class="bg-orange px-3 py-1 rounded-full text-xs font-bold uppercase mb-2 inline-block"></span>
+                    <h3 id="detail-name" class="text-3xl font-serif font-bold leading-tight"></h3>
+                </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class="w-full md:w-1/2 p-6 md:p-10 overflow-y-auto bg-surface">
+                <div class="mb-8">
+                    <p class="text-orange text-3xl font-bold mb-1" id="detail-price"></p>
+                    <p class="text-text/60 text-sm font-medium" id="detail-duration"></p>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-lg font-bold text-text mb-2">Deskripsi Paket</h4>
+                        <p id="detail-description" class="text-text/70 text-sm leading-relaxed"></p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold text-text mb-3">Apa yang Anda Dapatkan?</h4>
+                        <ul id="detail-features" class="grid grid-cols-1 gap-2">
+                            <!-- Features will be injected here -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row gap-4">
+                    <button onclick="openBookingModal()" class="flex-1 text-center bg-orange text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-orange-bright hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Daftar Sekarang
+                    </button>
+                    <a id="detail-wa-link" href="" target="_blank" class="flex-1 text-center bg-charcoal text-white font-bold py-4 rounded-2xl shadow-lg hover:bg-black hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                        Tanya Jadwal
+                    </a>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+
+    <!-- Booking Form Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-surface w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl animate-[scaleUp_0.4s_ease-out] relative">
+            <button onclick="closeBookingModal()" class="absolute top-6 right-6 z-50 bg-charcoal/10 hover:bg-orange/20 text-charcoal hover:text-orange rounded-full p-2 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="p-8 md:p-12 overflow-y-auto max-h-[90vh]">
+                <div class="text-center mb-8">
+                    <h3 class="text-3xl font-serif font-bold text-charcoal mb-2">Form Pendaftaran</h3>
+                    <p class="text-brown text-sm">Silakan lengkapi data diri Anda untuk pendaftaran paket <span id="booking-target-name" class="font-bold text-orange"></span></p>
+                </div>
+
+                <form action="{{ route('bookings.public') }}" method="POST" class="space-y-5">
+                    @csrf
+                    <input type="hidden" name="product_id" id="booking-product-id">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Nama Lengkap (Sesuai Paspor/KTP)</label>
+                        <input type="text" name="full_name" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Contoh: Farrel Azam">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">NIK KTP (16 Digit)</label>
+                            <input type="text" name="nik" required maxlength="16" value="{{ Auth::user()->nik ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="327xxxxxxxxxxxxx">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Jumlah Kursi</label>
+                            <input type="number" name="booking_seat" required min="1" value="1" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Tempat Lahir</label>
+                            <input type="text" name="birth_place" required value="{{ Auth::user()->birth_place ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jakarta">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Tanggal Lahir</label>
+                            <input type="date" name="birth_date" required value="{{ Auth::user()->birth_date ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Alamat Lengkap</label>
+                        <textarea name="address" required rows="3" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jl. Mawar No. 123, Jakarta Baru">{{ Auth::user()->address ?? '' }}</textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-sunset text-white font-bold py-5 rounded-2xl shadow-xl hover:shadow-orange/30 hover:-translate-y-1 transition duration-300 transform active:scale-95">
+                        Selesaikan Pendaftaran
+                    </button>
+                    
+                    <p class="text-center text-[10px] text-brown/60 pt-4 px-8 leading-relaxed italic">
+                        * Dengan mendaftar, Anda menyetujui syarat dan ketentuan layanan Al-Khairat Tour Travel. Data Anda dijamin kerahasiaannya.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-footer text-white py-12 md:py-16 transition-all duration-700">
@@ -647,6 +853,18 @@
 
     <!-- Theme Control Logic -->
     <script>
+        const isLoggedIn = @json(Auth::check());
+
+        window.addEventListener('DOMContentLoaded', () => {
+            @if(session('open_booking'))
+                const productId = "{{ session('open_booking') }}";
+                setTimeout(() => {
+                    openProductDetail(productId);
+                    setTimeout(() => openBookingModal(), 500);
+                }, 1000);
+            @endif
+        });
+
         function updateThemeUI(isDark) {
             const themeLabel = document.getElementById('theme-label');
             const moonIcon = document.getElementById('moon-icon');
@@ -673,6 +891,308 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateThemeUI(document.documentElement.classList.contains('dark'));
         });
+
+        // Voice Search Overlay Logic
+        function openVoiceSearch() {
+            const overlay = document.getElementById('voice-overlay');
+            overlay.classList.remove('invisible', 'opacity-0');
+            startSpeechRecognition();
+        }
+
+        function closeVoiceSearch() {
+            const overlay = document.getElementById('voice-overlay');
+            overlay.classList.add('invisible', 'opacity-0');
+            if (window.currentRecognition) {
+                window.currentRecognition.stop();
+            }
+        }
+
+        function startSpeechRecognition() {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                alert("Browser Anda tidak mendukung pencarian suara.");
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            window.currentRecognition = recognition;
+
+            recognition.lang = 'id-ID';
+            recognition.interimResults = false;
+
+            recognition.onstart = () => {
+                document.getElementById('voice-mic-container').classList.add('scale-110');
+                document.getElementById('voice-pulse-1').classList.remove('opacity-0');
+                document.getElementById('voice-pulse-2').classList.remove('opacity-0');
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript.toLowerCase().trim();
+                document.getElementById('voice-status').innerText = `"${transcript}"`;
+                
+                // Intelligent Mapping Logic
+                setTimeout(() => {
+                    const cleanText = transcript.replace(/[.,?]/g, '');
+
+                    if (cleanText.includes('paket umroh') || cleanText === 'umroh') {
+                        closeVoiceSearch();
+                        document.getElementById('paket').scrollIntoView({ behavior: 'smooth' });
+                    } else if (cleanText.includes('info alkhairat') || cleanText === 'keamanan' || cleanText === 'info') {
+                        closeVoiceSearch();
+                        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                    } else if (cleanText === 'testi' || cleanText === 'ulasan' || cleanText === 'comment') {
+                        closeVoiceSearch();
+                        document.getElementById('testimoni').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        // No keyword match - return to home (close overlay)
+                        document.getElementById('voice-status').innerText = "Perintah tidak dikenali, kembali ke Beranda...";
+                        setTimeout(() => {
+                            closeVoiceSearch();
+                            // Reset status for next time
+                            setTimeout(() => {
+                                document.getElementById('voice-status').innerText = "Ada yang bisa kami bantu?";
+                            }, 500);
+                        }, 1500);
+                    }
+                }, 800);
+            };
+
+            recognition.onerror = (event) => {
+                console.error(event.error);
+                closeVoiceSearch();
+            };
+
+            recognition.onend = () => {
+                document.getElementById('voice-mic-container').classList.remove('scale-110');
+                document.getElementById('voice-pulse-1').classList.add('opacity-0');
+                document.getElementById('voice-pulse-2').classList.add('opacity-0');
+            };
+
+            recognition.start();
+        }
+        // --- Search Overlay Logic ---
+        function openProductDetail(id) {
+            const data = document.getElementById(`product-data-${id}`);
+            const modal = document.getElementById('product-detail-modal');
+            
+            // Populate Modal
+            document.getElementById('detail-image').src = data.dataset.image || 'https://via.placeholder.com/800x600?text=Al-Khairat';
+            document.getElementById('detail-name').innerText = data.dataset.name;
+            document.getElementById('detail-category').innerText = data.dataset.category;
+            document.getElementById('detail-price').innerText = data.dataset.price;
+            document.getElementById('detail-duration').innerText = `Paket Perjalanan ${data.dataset.duration}`;
+            document.getElementById('detail-description').innerText = data.dataset.description;
+            
+            setActivePackageMarker(id);
+            
+            // Populate Features
+            const features = JSON.parse(data.dataset.features);
+            const featuresList = document.getElementById('detail-features');
+            featuresList.innerHTML = '';
+            features.forEach(f => {
+                const li = document.createElement('li');
+                li.className = 'flex items-center gap-2 text-text/70 text-sm';
+                li.innerHTML = `<span class="text-orange text-lg">✓</span> <span>${f}</span>`;
+                featuresList.appendChild(li);
+            });
+
+            // Update WA Link
+            const guidePhone = data.dataset.guidePhone;
+            const fallbackPhone = '{{ $whatsapp }}';
+            const targetPhone = guidePhone && guidePhone !== '' ? guidePhone : fallbackPhone;
+            
+            document.getElementById('detail-wa-link').href = `https://wa.me/${targetPhone}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20paket%20${encodeURIComponent(data.dataset.name)}.`;
+
+            // Show Modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductDetail() {
+            document.getElementById('product-detail-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // --- Booking Modal Logic ---
+        function openBookingModal() {
+            const data = document.querySelector('[data-active-detail="true"]');
+            const productId = data ? data.id.split('-').pop() : '';
+
+            if (!isLoggedIn) {
+                window.location.href = `{{ route('register') }}?intended_product=${productId}`;
+                return;
+            }
+
+            const detailModal = document.getElementById('product-detail-modal');
+            const bookingModal = document.getElementById('booking-modal');
+            
+            if (data) {
+                document.getElementById('booking-product-id').value = productId;
+                document.getElementById('booking-target-name').innerText = data.dataset.name;
+            }
+
+            // Cross-fade effect: hide detail, show booking
+            detailModal.classList.add('hidden');
+            bookingModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Global Modal Event Listeners
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProductDetail();
+                closeBookingModal();
+                closeVoiceSearch();
+                // Close search overlay if not visible? No, search has its own logic.
+            }
+        });
+
+        // Close on Backdrop Click
+        window.addEventListener('click', (e) => {
+            const detailModal = document.getElementById('product-detail-modal');
+            const bookingModal = document.getElementById('booking-modal');
+            if (e.target === detailModal) closeProductDetail();
+            if (e.target === bookingModal) closeBookingModal();
+        });
+
+        // Update active marker for logic
+        function setActivePackageMarker(id) {
+            document.querySelectorAll('[id^="product-data-"]').forEach(el => el.dataset.activeDetail = 'false');
+            document.getElementById(`product-data-${id}`).dataset.activeDetail = 'true';
+        }
+
+        function toggleSearch() {
+            const overlay = document.getElementById('search-overlay');
+            const input = document.getElementById('search-input');
+            
+            if (overlay.classList.contains('invisible')) {
+                overlay.classList.remove('invisible', 'opacity-0');
+                overlay.classList.add('visible', 'opacity-100');
+                setTimeout(() => input.focus(), 300);
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                overlay.classList.remove('visible', 'opacity-100');
+                overlay.classList.add('invisible', 'opacity-0');
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        function fillSearch(text) {
+            const input = document.getElementById('search-input');
+            input.value = text;
+            input.focus();
+            filterProducts(text);
+        }
+
+        // Live Filtering Logic
+        function filterProducts(keyword, isManual = false) {
+            const cards = document.querySelectorAll('.product-card');
+            const noResults = document.getElementById('no-results');
+            const term = keyword.toLowerCase().trim();
+            let hasResults = false;
+
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name.includes(term)) {
+                    card.classList.remove('hidden');
+                    hasResults = true;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            if (!hasResults && term !== '') {
+                noResults.classList.remove('hidden');
+                if (isManual) {
+                    showSearchAlert(`Pencarian untuk "${keyword}" tidak ditemukan`);
+                }
+            } else {
+                noResults.classList.add('hidden');
+            }
+            
+            // Auto-scroll to results if searching
+            if (term !== '') {
+                document.getElementById('paket').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function showSearchAlert(message) {
+            const alert = document.getElementById('search-alert');
+            const msgSpan = document.getElementById('search-alert-message');
+            msgSpan.innerText = message;
+            
+            alert.classList.remove('invisible', 'opacity-0');
+            alert.classList.add('visible', 'opacity-100');
+            alert.style.transform = 'translateX(-50%) translateY(0)';
+            
+            setTimeout(() => {
+                alert.classList.remove('visible', 'opacity-100');
+                alert.classList.add('invisible', 'opacity-0');
+                alert.style.transform = 'translateX(-50%) translateY(-20px)';
+            }, 3000);
+        }
+
+        // Add event listener for real-time typing and Enter key
+        document.getElementById('search-input').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const keyword = e.target.value;
+                filterProducts(keyword, true); // True means manual search
+                toggleSearch(); // Close the overlay
+            }
+        });
+
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            filterProducts(e.target.value);
+        });
+
+        // Handle Escape Key and Search Shortcuts
+        document.addEventListener('keydown', (e) => {
+            const searchOverlay = document.getElementById('search-overlay');
+            if (e.key === 'Escape' && !searchOverlay.classList.contains('invisible')) {
+                toggleSearch();
+            }
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'k')) {
+                if (searchOverlay.classList.contains('invisible')) {
+                    e.preventDefault();
+                    toggleSearch();
+                }
+            }
+        });
+
+        // Expose functions globally
+        window.toggleSearch = toggleSearch;
+        window.fillSearch = fillSearch;
     </script>
+
+    <!-- Voice Search Overlay -->
+    <div id="voice-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center opacity-0 invisible transition-all duration-500">
+        <button onclick="closeVoiceSearch()" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        
+        <div class="relative flex flex-col items-center">
+            <div id="voice-mic-container" class="w-32 h-32 md:w-48 md:h-48 bg-indigo-600 rounded-full flex items-center justify-center text-white shadow-[0_0_50px_rgba(79,70,229,0.5)] transition-all duration-500">
+                <svg class="w-16 h-16 md:w-24 md:h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                </svg>
+            </div>
+            
+            <!-- Pulse ripple effects -->
+            <div id="voice-pulse-1" class="absolute inset-0 bg-indigo-500 rounded-full -z-10 animate-ping opacity-0"></div>
+            <div id="voice-pulse-2" class="absolute inset-0 bg-indigo-500 rounded-full -z-10 animate-ping delay-700 opacity-0"></div>
+            
+            <h2 id="voice-status" class="mt-12 text-2xl md:text-3xl font-bold text-white tracking-wide text-center px-4">Ada yang bisa kami bantu?</h2>
+            <p class="mt-4 text-white/60 text-sm md:text-base tracking-[0.2em] uppercase font-light">Kami Mendengarkan...</p>
+        </div>
+    </div>
+
 </body>
 </html>

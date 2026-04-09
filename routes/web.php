@@ -12,7 +12,8 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\SettingController;
-
+use App\Http\Controllers\ContactController;
+use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Product;
 
@@ -21,13 +22,21 @@ use App\Models\Product;
 // ========================================
 Route::get('/', function () {
     $testimonials = Testimonial::with('product')->where('status', 'published')->latest()->take(6)->get();
-    $products = Product::all();
-    return view('welcome', compact('testimonials', 'products'));
+    $products = Product::where('status', 'active')->get();
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    return view('welcome', compact('testimonials', 'products', 'whatsapp'));
 })->name('home');
 
 Route::view('/galeri-video', 'gallery')->name('gallery');
 
 Route::post('/testimoni-public', [TestimonialController::class, 'publicStore'])->name('testimonials.public');
+Route::get('/testimoni-public', fn() => redirect()->route('home'));
+
+Route::post('/contact-send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/contact-send', fn() => redirect()->route('home'));
+
+Route::post('/paket-daftar', [BookingController::class, 'publicStore'])->name('bookings.public');
+Route::get('/paket-daftar', fn() => redirect()->route('home'));
 
 // ========================================
 // AUTH ROUTES (Guest Only)

@@ -19,6 +19,7 @@ class Product extends Model
         'stock',
         'status',
         'image',
+        'guide_phone',
     ];
 
     protected function casts(): array

@@ -5,18 +5,19 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Manasik Digital</h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola panduan umrah, haji, artikel, dan daftar perlengkapan.</p>
+                <h2 class="text-2xl font-bold text-slate-800">Manasik Digital</h2>
+                <p class="text-sm text-slate-500 mt-1">Kelola panduan umrah, haji, artikel, dan daftar perlengkapan.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addGuideModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addGuideModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah Panduan</span>
         </button>
+
     </div>
 
     <!-- Alert -->
@@ -62,7 +63,8 @@
                         </td>
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditGuide({{ $guide->id }}, '{{ addslashes($guide->title) }}', '{{ $guide->category }}', '{{ addslashes($guide->content) }}', '{{ $guide->video_url }}', '{{ $guide->status }}')"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-3 text-sm font-medium">Edit</button>
+                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+
                             <form method="POST" action="{{ route('guides.destroy', $guide) }}" class="inline" onsubmit="return confirm('Hapus panduan ini?')">
                                 @csrf
                                 @method('DELETE')
@@ -166,8 +168,9 @@
             </div>
             
             <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editGuideModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editGuideModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Perubahan</button>
+
             </div>
         </form>
     </div>

@@ -8,30 +8,32 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    @include('components.header')
-    
-    <!-- Mobile Sidebar Overlay -->
-    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden" onclick="toggleSidebar()"></div>
-    
+<body class="bg-bg text-text selection:bg-orange/30 font-sans antialiased">
     <!-- Main Container -->
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen relative">
         <!-- Sidebar -->
         @include('components.sidebar')
         
         <!-- Main Content -->
-        <main class="flex-1 ml-0 md:ml-64">
+        <main class="flex-1 transition-all duration-300 ml-0 md:ml-72 lg:ml-80">
+            <!-- Dashboard Header -->
+            @include('components.header')
+
             <!-- Navigation Breadcrumb -->
-            @include('components.breadcrumb')
+            <div class="px-4">
+                @include('components.breadcrumb')
+            </div>
+
             
             <!-- Content Area -->
-            <div class="p-4 md:p-6">
+            <div class="p-6 md:p-8 lg:p-10 max-w-7xl mx-auto">
                 <!-- Flash Messages -->
                 @include('components.alert')
                 
                 <!-- Page Content -->
-                @yield('content')
+                <div class="animate-[fadeUp_0.8s_ease-out]">
+                    @yield('content')
+                </div>
             </div>
         </main>
     </div>

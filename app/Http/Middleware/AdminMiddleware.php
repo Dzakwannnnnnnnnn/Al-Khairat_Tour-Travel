@@ -17,6 +17,7 @@ class AdminMiddleware
             return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
+        // Dashboard access check (Admin only)
         if (!auth()->user()->isAdmin()) {
             return redirect()->route('home')->with('error', 'Anda tidak memiliki akses ke halaman admin.');
         }

@@ -5,18 +5,19 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Manajemen Pemesanan (Bookings)</h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola pendaftaran jamaah ke paket umrah yang tersedia.</p>
+                <h2 class="text-2xl font-bold text-slate-800">Manajemen Pemesanan (Bookings)</h2>
+                <p class="text-sm text-slate-500 mt-1">Kelola pendaftaran jamaah ke paket umrah yang tersedia.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Buat Pemesanan Baru</span>
         </button>
+
     </div>
 
     <!-- Alert -->
@@ -59,8 +60,9 @@
                     @forelse($bookings as $booking)
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 align-top">
-                            <span class="font-mono text-sm font-bold text-indigo-600">{{ $booking->booking_code }}</span>
+                            <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $booking->booking_code }}</span>
                         </td>
+
                         <td class="px-6 py-4 align-top">
                             <p class="font-semibold text-gray-900">{{ $booking->user->name ?? 'User Terhapus' }}</p>
                             <p class="text-xs text-gray-500">{{ $booking->user->email ?? '' }}</p>
@@ -98,7 +100,8 @@
                         </td>
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditBooking({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->product_id }}', '{{ $booking->status }}', '{{ addslashes($booking->notes) }}')"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-3 text-sm font-medium">Edit</button>
+                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+
                             <form method="POST" action="{{ route('bookings.destroy', $booking) }}" class="inline" onsubmit="return confirm('Hapus pemesanan ini secara permanen?')">
                                 @csrf
                                 @method('DELETE')
@@ -223,8 +226,9 @@
             </div>
             
             <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Perubahan</button>
+
             </div>
         </form>
     </div>

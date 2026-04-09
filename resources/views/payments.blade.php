@@ -5,18 +5,19 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Manajemen Tabungan & Pembayaran</h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola transaksi pembayaran, cicilan tabungan, dan verifikasi mutasi.</p>
+                <h2 class="text-2xl font-bold text-slate-800">Manajemen Tabungan & Pembayaran</h2>
+                <p class="text-sm text-slate-500 mt-1">Kelola transaksi pembayaran, cicilan tabungan, dan verifikasi mutasi.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Catat Pembayaran</span>
         </button>
+
     </div>
 
     <!-- Alert -->
@@ -59,9 +60,10 @@
                     @forelse($payments as $payment)
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 align-top">
-                            <span class="font-mono text-sm font-bold text-indigo-600">{{ $payment->booking->booking_code ?? 'TIDAK VALID' }}</span>
-                            <p class="text-sm font-semibold text-gray-800">{{ $payment->booking->user->name ?? 'User Terhapus' }}</p>
+                            <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $payment->booking->booking_code ?? 'TIDAK VALID' }}</span>
+                            <p class="text-sm font-semibold text-slate-700">{{ $payment->booking->user->name ?? 'User Terhapus' }}</p>
                         </td>
+
                         <td class="px-6 py-4 align-top text-right">
                             <p class="text-sm font-bold text-gray-900">Rp {{ number_format($payment->amount, 0, ',', '.') }}</p>
                         </td>
@@ -100,7 +102,8 @@
                         </td>
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-3 text-sm font-medium">Edit</button>
+                                    class="text-orange hover:text-gold mr-3 text-sm font-medium uppercase tracking-widest">Edit</button>
+
                             <form method="POST" action="{{ route('payments.destroy', $payment) }}" class="inline" onsubmit="return confirm('Hapus histori pembayaran ini?')">
                                 @csrf
                                 @method('DELETE')
@@ -181,8 +184,9 @@
             </div>
             
             <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('addPaymentModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Payment</button>
+                <button type="button" onclick="document.getElementById('addPaymentModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Payment</button>
+
             </div>
         </form>
     </div>

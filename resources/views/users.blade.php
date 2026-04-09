@@ -11,21 +11,27 @@
                 <h1 class="text-3xl font-bold text-gray-900">Manajemen Users</h1>
                 <p class="text-gray-600 mt-2">Kelola semua user sistem</p>
             </div>
-            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition flex items-center space-x-2">
+            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="bg-charcoal text-white px-6 py-2 rounded-lg hover:bg-orange transition flex items-center space-x-2 shadow-lg shadow-orange/10">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span>Tambah User</span>
+                <span class="font-bold uppercase tracking-widest text-xs">Tambah User</span>
             </button>
+
         </div>
 
-        <!-- Search -->
-        <div class="mb-6">
+        <div class="mb-8">
             <form method="GET" action="{{ route('users.index') }}">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari berdasarkan nama atau email..."
-                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <div class="relative group">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari berdasarkan nama atau email..."
+                        class="w-full border border-slate-200 rounded-[1.2rem] px-6 py-3.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-white shadow-sm transition-all">
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 group-hover:text-orange transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
             </form>
         </div>
+
 
         <!-- Users Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -54,19 +60,20 @@
                         <span class="text-sm text-gray-900">{{ $user->created_at->format('d M Y') }}</span>
                     </div>
                 </div>
-                <div class="flex space-x-2 border-t pt-3">
+                <div class="flex space-x-2 border-t border-slate-100 pt-4">
                     <button onclick="openEditUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ $user->email }}', '{{ $user->role }}')"
-                        class="flex-1 text-indigo-600 hover:text-indigo-900 font-medium text-sm text-center">Edit</button>
+                        class="flex-1 text-orange hover:text-gold font-black text-[10px] uppercase tracking-widest text-center transition-colors">Edit Profile</button>
                     @if($user->id !== auth()->id())
                     <form method="POST" action="{{ route('users.destroy', $user) }}" class="flex-1" onsubmit="return confirm('Yakin hapus user ini?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="w-full text-red-600 hover:text-red-900 font-medium text-sm">Hapus</button>
+                        <button type="submit" class="w-full text-red-500 hover:text-red-700 font-bold text-[10px] uppercase tracking-widest transition-colors">Terminate</button>
                     </form>
                     @else
-                    <span class="flex-1 text-gray-400 text-sm text-center">(Anda)</span>
+                    <span class="flex-1 text-slate-300 text-[10px] uppercase tracking-widest text-center font-bold">(Current Admin)</span>
                     @endif
                 </div>
+
             </div>
             @empty
             <div class="col-span-full text-center py-12">
@@ -150,10 +157,11 @@
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                <div class="flex space-x-3 pt-2">
-                    <button type="button" onclick="document.getElementById('editUserModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Update</button>
+                <div class="flex space-x-3 pt-4 border-t border-slate-100">
+                    <button type="button" onclick="document.getElementById('editUserModal').classList.add('hidden')" class="flex-1 px-4 py-2.5 border border-slate-200 text-slate-500 rounded-xl hover:bg-slate-50 transition font-bold uppercase tracking-widest text-[10px]">Batal</button>
+                    <button type="submit" class="flex-1 px-4 py-2.5 bg-charcoal text-white rounded-xl hover:bg-orange transition font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-orange/10">Simpan Perubahan</button>
                 </div>
+
             </form>
         </div>
     </div>

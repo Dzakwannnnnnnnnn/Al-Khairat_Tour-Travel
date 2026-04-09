@@ -85,8 +85,8 @@
 }
 
 /* Gradient Utility - Based on Logo Colors */
-.gradient-sunset {
-    background: linear-gradient(135deg, #E07856 0%, #F39547 100%);
+.bg-gradient-sunset, .gradient-sunset {
+    background: linear-gradient(135deg, #E07856 0%, #F39547 100%) !important;
 }
 
 .gradient-sunset-hover:hover {
@@ -342,6 +342,15 @@ html {
     animation: scaleUp 0.5s ease-out forwards;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
 /* Hero Slideshow Styles */
 .hero-slideshow {
     @apply absolute inset-0 w-full h-full;
@@ -381,26 +390,28 @@ html {
 
 /* Floating Bottom Dock Styles */
 .dock-container {
-    @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center;
-    width: max-content;
-    max-width: 95vw;
+    @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center justify-center pointer-events-none;
+    width: 100%;
+    padding: 0 1rem;
 }
 
 .dock-wrapper {
     @apply backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] 
-           px-4 py-2 rounded-2xl flex items-end gap-1 md:gap-2 transition-all duration-500 ease-out;
+           px-3 py-2 md:px-6 md:py-3 rounded-2xl flex items-end gap-1 sm:gap-3 md:gap-5 transition-all duration-500 ease-out pointer-events-auto;
     background-color: var(--color-glass);
     border: 1px solid var(--color-border);
+    max-width: 100%;
+    overflow: visible;
 }
 
 .dock-divider {
-    @apply w-[1px] h-8 mx-1 md:mx-2 self-center transition-colors duration-300;
+    @apply w-[1px] h-6 md:h-8 mx-0.5 md:mx-4 self-center transition-colors duration-300;
     background-color: var(--color-border);
     opacity: 0.5;
 }
 
 .dock-item {
-    @apply relative flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-300;
+    @apply relative flex flex-col items-center justify-center p-1 md:p-3 rounded-xl transition-all duration-300;
 }
 
 .dock-item:hover {
@@ -408,15 +419,27 @@ html {
 }
 
 .dock-icon {
-    @apply w-6 h-6 md:w-8 md:h-8 transition-all duration-300 group-hover:scale-110;
+    @apply w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 transition-all duration-300 group-hover:scale-110;
     color: var(--color-text);
     opacity: 0.8;
 }
 
 .dock-label {
-    @apply text-[9px] md:text-[11px] font-bold mt-1 transition-colors duration-300;
+    @apply text-[7px] md:text-[10px] font-bold mt-1 transition-colors duration-300 tracking-tight md:tracking-wide uppercase;
     color: var(--color-text);
     opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+    .dock-label {
+        display: none;
+    }
+    .dock-wrapper {
+        @apply gap-2 px-3 py-2 rounded-xl;
+    }
+    .dock-icon {
+        @apply w-6 h-6;
+    }
 }
 
 .dock-active-dot {
@@ -437,16 +460,22 @@ html {
 }
 
 .minimal-header.scrolled {
-    @apply py-1 px-8;
-    background: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
+    @apply py-2 px-8;
+    background-color: transparent;
 }
+
+
+.minimal-header.scrolled:hover {
+    background-color: transparent;
+}
+
 
 .minimal-header img {
     @apply transition-all duration-500 ease-in-out h-32 md:h-48;
     filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+    mix-blend-mode: multiply;
 }
+
 
 .minimal-header.scrolled img {
     @apply h-20 md:h-24;
@@ -470,5 +499,162 @@ html {
 
 .dock-item-login:hover .dock-icon, .dock-item-login:hover .dock-label {
     @apply text-white opacity-100;
+}
+
+/* Voice Search Premium Styles */
+#global-voice-search-btn.is-listening {
+    @apply text-red-500 bg-red-50;
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+@keyframes pulse-indigo {
+    0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(79, 70, 229, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+    }
+}
+
+.pulse-indigo {
+    animation: pulse-indigo 2s infinite;
+}
+
+/* Sidebar & Dashboard Brand Styles */
+.sidebar-link {
+    @apply flex items-center gap-4 px-6 py-4 rounded-2xl text-slate-500 hover:bg-orange/5 hover:text-orange transition-all duration-300;
+}
+
+.sidebar-link.active {
+    @apply bg-orange/10 text-orange font-bold border border-orange/20 shadow-sm;
+}
+
+.glass-dashboard {
+    @apply bg-white border border-slate-200 shadow-xl backdrop-blur-none;
+}
+
+.dashboard-card {
+    @apply bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:border-orange/20 transition-all duration-500;
+}
+
+.dashboard-stat-icon {
+    @apply w-12 h-12 rounded-2xl bg-orange/10 flex items-center justify-center mb-4 transition-all duration-500;
+}
+
+.btn-dashboard {
+    @apply px-6 py-2.5 rounded-xl font-bold transition-all duration-300 text-sm;
+}
+
+.btn-dashboard-primary {
+    @apply bg-orange text-white hover:bg-orange-bright shadow-lg shadow-orange/20 hover:-translate-y-1;
+}
+
+.dashboard-scroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.dashboard-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dashboard-scroll::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full;
+}
+
+/* Premium Contact Section Styles */
+.contact-section {
+    position: relative;
+    background-color: var(--color-bg);
+}
+
+.contact-badge {
+    @apply inline-flex items-center space-x-2 bg-orange/10 border border-orange/20 px-4 py-1.5 rounded-full text-sm font-semibold text-orange mb-6;
+}
+
+.contact-glass-card {
+    @apply bg-surface/80 backdrop-blur-md shadow-sm border border-border p-6 rounded-2xl transition-all duration-500 hover:border-orange hover:-translate-y-1 hover:shadow-xl;
+}
+
+.dark .contact-glass-card {
+    @apply border-gold/30 hover:border-gold shadow-[0_0_15px_rgba(243,156,18,0.05)];
+}
+
+.contact-info-icon {
+    @apply w-12 h-12 rounded-xl bg-orange/20 flex items-center justify-center text-orange mb-4 transition-transform duration-500;
+}
+
+.contact-glass-card:hover .contact-info-icon {
+    @apply scale-110 bg-orange text-white;
+}
+
+/* Contact Form Styles */
+.form-input {
+    @apply w-full bg-surface/50 backdrop-blur-sm border border-border focus:border-orange focus:ring-2 focus:ring-orange/20 rounded-xl px-4 py-3 text-text outline-none transition-all placeholder:text-text/40;
+}
+
+.media-transition {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    position: absolute;
+    inset: 0;
+}
+
+.mode-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    position: relative;
+}
+
+/* Dark Mode Google Maps Trick */
+.dark #media-map iframe {
+    filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    transition: filter 0.7s ease;
+}
+
+#media-map iframe {
+    transition: filter 0.7s ease;
+}
+
+/* Dark Mode Gold Premium Accents */
+.dark .bg-gradient-sunset {
+    background: linear-gradient(135deg, #F39C12 0%, #D4AC0D 100%);
+    opacity: 0.2;
+}
+
+.dark .form-input:focus {
+    @apply border-gold ring-gold/20;
+}
+
+.dark .text-gradient-sunset {
+    background: linear-gradient(135deg, #F39C12 0%, #F1C40F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        background-attachment: scroll; /* Better performance on mobile */
+    }
 }
 

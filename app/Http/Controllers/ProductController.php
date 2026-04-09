@@ -51,6 +51,7 @@ class ProductController extends Controller
             'stock' => ['required', 'integer', 'min:0'],
             'status' => ['required', 'in:active,inactive'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'guide_phone' => ['nullable', 'string', 'max:20'],
         ]);
 
         $data = $request->except(['image']);
@@ -84,6 +85,7 @@ class ProductController extends Controller
             'stock' => ['required', 'integer', 'min:0'],
             'status' => ['required', 'in:active,inactive'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'guide_phone' => ['nullable', 'string', 'max:20'],
         ]);
 
         $data = $request->except(['image']);

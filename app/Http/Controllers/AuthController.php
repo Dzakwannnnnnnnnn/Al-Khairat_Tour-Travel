@@ -12,8 +12,11 @@ class AuthController extends Controller
     /**
      * Show login form.
      */
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
+        if ($request->has('intended_product')) {
+            session(['intended_product' => $request->intended_product]);
+        }
         return view('auth.login');
     }
 
@@ -34,6 +37,11 @@ class AuthController extends Controller
                 return redirect()->intended(route('dashboard'))->with('success', 'Login berhasil! Selamat datang kembali.');
             }
 
+            if (session()->has('intended_product')) {
+                $productId = session()->pull('intended_product');
+                return redirect()->route('home')->with(['success' => 'Login berhasil!', 'open_booking' => $productId]);
+            }
+
             return redirect()->route('home')->with('success', 'Login berhasil! Selamat datang kembali.');
         }
 
@@ -45,8 +53,11 @@ class AuthController extends Controller
     /**
      * Show register form.
      */
-    public function showRegisterForm()
+    public function showRegisterForm(Request $request)
     {
+        if ($request->has('intended_product')) {
+            session(['intended_product' => $request->intended_product]);
+        }
         return view('auth.register');
     }
 
@@ -69,6 +80,11 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
+
+        if (session()->has('intended_product')) {
+            $productId = session()->pull('intended_product');
+            return redirect()->route('home')->with(['success' => 'Registrasi berhasil!', 'open_booking' => $productId]);
+        }
 
         return redirect()->route('home')->with('success', 'Registrasi berhasil! Selamat datang di Al-Khairat.');
     }

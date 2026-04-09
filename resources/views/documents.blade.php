@@ -5,18 +5,19 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Manajemen Pemberkasan Jamaah</h2>
-                <p class="text-sm text-gray-500 mt-1">Upload dan verifikasi Paspor, KTP, Visa, atau dokumen syarat lainnya.</p>
+                <h2 class="text-2xl font-bold text-slate-800">Manajemen Pemberkasan Jamaah</h2>
+                <p class="text-sm text-slate-500 mt-1">Upload dan verifikasi Paspor, KTP, Visa, atau dokumen syarat lainnya.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addDocumentModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addDocumentModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
             <span>Upload Dokumen Baru</span>
         </button>
+
     </div>
 
     <!-- Alert -->
@@ -58,9 +59,10 @@
                     @forelse($documents as $doc)
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 align-top">
-                            <span class="font-mono text-sm font-bold text-indigo-600">{{ $doc->booking->booking_code ?? 'TIDAK VALID' }}</span>
-                            <p class="text-sm font-semibold text-gray-800">{{ $doc->booking->user->name ?? 'User Terhapus' }}</p>
+                            <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $doc->booking->booking_code ?? 'TIDAK VALID' }}</span>
+                            <p class="text-sm font-semibold text-slate-700">{{ $doc->booking->user->name ?? 'User Terhapus' }}</p>
                         </td>
+
                         <td class="px-6 py-4 align-top">
                             <p class="text-sm font-bold text-gray-900 uppercase">{{ str_replace('_', ' ', $doc->document_type) }}</p>
                             @if($doc->file_path)
@@ -93,7 +95,8 @@
                         </td>
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditDocument({{ $doc->id }}, '{{ $doc->booking_id }}', '{{ $doc->document_type }}', '{{ $doc->status }}', '{{ addslashes($doc->notes) }}')"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-3 text-sm font-medium">Review</button>
+                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Review</button>
+
                             <form method="POST" action="{{ route('documents.destroy', $doc) }}" class="inline" onsubmit="return confirm('Hapus berkas ini?')">
                                 @csrf
                                 @method('DELETE')
@@ -239,8 +242,9 @@
             </div>
             
             <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editDocumentModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Evaluasi</button>
+                <button type="button" onclick="document.getElementById('editDocumentModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Evaluasi</button>
+
             </div>
         </form>
     </div>

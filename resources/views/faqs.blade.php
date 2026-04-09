@@ -5,18 +5,19 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-gray-900">Pertanyaan Sering Diajukan (FAQ)</h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola daftar resolusi pertanyaan calon jamaah.</p>
+                <h2 class="text-2xl font-bold text-slate-800">Pertanyaan Sering Diajukan (FAQ)</h2>
+                <p class="text-sm text-slate-500 mt-1">Kelola daftar resolusi pertanyaan calon jamaah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addFaqModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addFaqModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah FAQ</span>
         </button>
+
     </div>
 
     <!-- Alert -->
@@ -50,7 +51,8 @@
                         </td>
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditFaq({{ $faq->id }}, '{{ addslashes($faq->question) }}', '{{ addslashes($faq->answer) }}', '{{ $faq->category }}')"
-                                    class="text-indigo-600 hover:text-indigo-900 mr-3 text-sm font-medium">Edit</button>
+                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+
                             <form method="POST" action="{{ route('faqs.destroy', $faq) }}" class="inline" onsubmit="return confirm('Hapus FAQ ini?')">
                                 @csrf
                                 @method('DELETE')
@@ -132,8 +134,9 @@
             </div>
             
             <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Perubahan</button>
+
             </div>
         </form>
     </div>
