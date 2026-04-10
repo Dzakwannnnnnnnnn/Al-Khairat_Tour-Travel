@@ -6,6 +6,7 @@
     <title>Al-Khairat - Perjalanan Penuh Kehangatan</title>
     
     @vite(['resources/css/app.css'])
+    @stack('styles')
 
     <!-- Theme Detection Script -->
     <script>
@@ -38,9 +39,8 @@
             </div>
         </div>
     </div>
-    
-    <!-- Navigation Header -->
-    <x-navbar />
+    <!-- Logo Header -->
+    <x-logo-header />
 
 
     <!-- Floating Navigation Dock -->
@@ -100,6 +100,15 @@
                 <div class="dock-active-dot"></div>
             </a>
 
+            <!-- Panduan -->
+            <a href="#digital-guidance" class="dock-item group" data-section="digital-guidance">
+                <span class="dock-label">Panduan</span>
+                <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+                <div class="dock-active-dot"></div>
+            </a>
+
             <!-- Kontak -->
             <a href="#contact" class="dock-item group" data-section="contact">
                 <span class="dock-label">Kontak</span>
@@ -142,7 +151,15 @@
                 <div class="dock-active-dot"></div>
             </button>
 
-            <!-- Login -->
+            @auth
+            <a href="{{ route('profile.edit') }}" class="dock-item group">
+                <span class="dock-label">{{ auth()->user()->nickname ?? 'Profil' }}</span>
+                <img src="{{ auth()->user()->avatar_url }}" 
+                     alt="Avatar" 
+                     class="dock-icon w-6 h-6 rounded-full border border-orange/20 object-cover">
+                <div class="dock-active-dot"></div>
+            </a>
+            @else
             <a href="{{ route('login') }}" class="dock-item group">
                 <span class="dock-label">Masuk/Login</span>
                 <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,6 +167,7 @@
                 </svg>
                 <div class="dock-active-dot"></div>
             </a>
+            @endauth
         </div>
     </div>
 
@@ -467,6 +485,84 @@
                 <h3 class="text-2xl font-serif font-bold text-text mb-2">Maaf, Paket Tidak Ditemukan</h3>
                 <p class="text-text/60">Coba gunakan kata kunci lain seperti "Umroh" atau "Ramadhan".</p>
                 <button onclick="fillSearch(''); filterProducts('');" class="mt-6 text-orange font-bold hover:underline">Lihat Semua Paket</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider with Palm -->
+    <div class="divider-palm"></div>
+
+    <!-- Section Digital Guidance -->
+    <section id="digital-guidance" class="section-py bg-cream relative overflow-hidden transition-colors duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10 md:mb-14 scroll-animate" data-animation="fade-up">
+                <h2 class="text-heading mb-3 md:mb-4">Eksplorasi <span class="text-gradient-sunset">Digital Al-Khairat</span></h2>
+                <p class="text-sm md:text-base lg:text-lg text-text/70 max-w-2xl mx-auto px-2">
+                    Panduan ibadah dalam genggaman Anda. Nikmati kemudahan akses manasik dan panduan digital kapan saja.
+                </p>
+            </div>
+
+            <!-- Video Container (Centred & Scaled Down) -->
+            <div class="max-w-4xl mx-auto scroll-animate" data-animation="fade-up">
+                <div class="relative group rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl bg-black border-4 border-white dark:border-surface transition-all duration-500">
+                    <video 
+                        id="manasik-video"
+                        controls
+                        playsinline 
+                        class="w-full h-auto aspect-video object-cover brightness-90 group-hover:brightness-100 transition duration-700">
+                        <source src="{{ asset('assets/videos/manasik-digital.mp4') }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- Floating Badge -->
+                    <div class="absolute top-4 left-4 md:top-6 md:left-6 z-20 bg-orange/90 backdrop-blur-md text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-[10px] md:text-xs font-bold shadow-lg flex items-center space-x-2 border border-white/20">
+                        <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white animate-pulse"></span>
+                        <span>MANASIK DIGITAL</span>
+                    </div>
+
+                     <!-- Info Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none flex flex-col justify-end p-6 md:p-10">
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-white mb-2">Panduan Manasik Al-Khairat</h3>
+                        <p class="text-white/80 text-xs md:text-sm max-w-lg">
+                            Simak panduan lengkap tata cara ibadah Umroh dan Haji secara detail untuk persiapan spiritual Anda yang maksimal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Cards (Centred & More Compact) -->
+            <div class="mt-8 md:mt-10 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 scroll-animate" data-animation="fade-up">
+                <!-- Card Panduan Tasuh -->
+                <div class="bg-surface p-5 md:p-6 rounded-2xl md:rounded-3xl border-2 border-border hover:border-orange transition-all duration-500 group relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-orange/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-orange/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-orange group-hover:text-white transition-all duration-500 relative z-10">
+                        📖
+                    </div>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2">Panduan Tasuh Digital</h3>
+                    <p class="text-text/70 text-xs md:text-sm mb-6 leading-relaxed">
+                        Akses izin ibadah dan dokumen penting lainnya dalam format digital yang praktis dan mudah dipahami.
+                    </p>
+                    <a href="#" class="inline-flex items-center space-x-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
+                        <span class="text-sm border-b border-orange/20 group-hover/link:border-orange transition-colors">Lihat Panduan</span>
+                        <svg class="w-5 h-5 p-1 bg-orange/10 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Card Konsultasi -->
+                <div class="bg-surface p-5 md:p-6 rounded-2xl md:rounded-3xl border-2 border-border hover:border-orange transition-all duration-500 group relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 w-20 h-20 bg-orange/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+                    <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-orange/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-orange group-hover:text-white transition-all duration-500 relative z-10">
+                        📲
+                    </div>
+                    <h3 class="text-lg md:text-xl font-serif font-bold text-text mb-2">Konsultasi Persiapan</h3>
+                    <p class="text-text/70 text-xs md:text-sm mb-6 leading-relaxed">
+                        Punya pertanyaan? Tim pembimbing kami siap membantu Anda melalui layanan tanya jawab digital 24/7.
+                    </p>
+                    <a href="https://wa.me/{{ $whatsapp }}" class="inline-flex items-center space-x-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
+                        <span class="text-sm border-b border-orange/20 group-hover/link:border-orange transition-colors">Hubungi Pembimbing</span>
+                        <svg class="w-5 h-5 p-1 bg-orange/10 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -940,9 +1036,12 @@
                     } else if (cleanText.includes('info alkhairat') || cleanText === 'keamanan' || cleanText === 'info') {
                         closeVoiceSearch();
                         document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-                    } else if (cleanText === 'testi' || cleanText === 'ulasan' || cleanText === 'comment') {
+                    } else if (cleanText.includes('testi') || cleanText === 'ulasan' || cleanText === 'comment') {
                         closeVoiceSearch();
                         document.getElementById('testimoni').scrollIntoView({ behavior: 'smooth' });
+                    } else if (cleanText.includes('panduan') || cleanText.includes('manasik') || cleanText === 'digital') {
+                        closeVoiceSearch();
+                        document.getElementById('digital-guidance').scrollIntoView({ behavior: 'smooth' });
                     } else {
                         // No keyword match - return to home (close overlay)
                         document.getElementById('voice-status').innerText = "Perintah tidak dikenali, kembali ke Beranda...";
@@ -1018,23 +1117,9 @@
             const data = document.querySelector('[data-active-detail="true"]');
             const productId = data ? data.id.split('-').pop() : '';
 
-            if (!isLoggedIn) {
-                window.location.href = `{{ route('register') }}?intended_product=${productId}`;
-                return;
+            if (productId) {
+                window.location.href = `/booking/${productId}`;
             }
-
-            const detailModal = document.getElementById('product-detail-modal');
-            const bookingModal = document.getElementById('booking-modal');
-            
-            if (data) {
-                document.getElementById('booking-product-id').value = productId;
-                document.getElementById('booking-target-name').innerText = data.dataset.name;
-            }
-
-            // Cross-fade effect: hide detail, show booking
-            detailModal.classList.add('hidden');
-            bookingModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
         }
 
         function closeBookingModal() {
@@ -1194,5 +1279,6 @@
         </div>
     </div>
 
+    @stack('scripts')
 </body>
 </html>

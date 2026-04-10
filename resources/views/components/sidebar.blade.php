@@ -3,15 +3,15 @@
     
     <!-- Branding Section -->
     <div class="p-8 pb-4">
-        <div class="flex items-center gap-4 group cursor-pointer">
-            <div class="w-12 h-12 rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-orange/20">
+        <a href="{{ route('dashboard') }}" class="flex items-center gap-4 group cursor-pointer lg:pr-10">
+            <div class="w-12 h-12 rounded-2xl bg-orange/10 border border-orange/20 flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-orange/20 flex-shrink-0">
                 <img src="{{ asset('images/logo.jpg') }}" class="w-8 h-8 object-contain rounded-lg" alt="Logo">
             </div>
-            <div>
-                <h1 class="font-serif font-bold text-xl tracking-tight text-charcoal group-hover:text-orange transition-colors">Al-Khairat</h1>
+            <div class="truncate">
+                <h1 class="font-serif font-bold text-xl tracking-tight text-charcoal group-hover:text-orange transition-colors truncate">Al-Khairat</h1>
                 <p class="text-[10px] uppercase tracking-[0.2em] text-orange/60 font-bold">Admin Portal</p>
             </div>
-        </div>
+        </a>
     </div>
 
 

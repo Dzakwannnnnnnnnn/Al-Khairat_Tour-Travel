@@ -20,7 +20,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nickname',
         'email',
+        'avatar',
         'password',
         'role',
         'birth_place',
@@ -28,6 +30,18 @@ class User extends Authenticatable
         'address',
         'nik',
     ];
+
+    /**
+     * Get the user's avatar URL.
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->avatar) {
+            return asset('storage/' . $this->avatar);
+        }
+
+        return "https://ui-avatars.com/api/?name=" . urlencode($this->name) . "&background=f97316&color=fff&size=200";
+    }
 
     /**
      * Check if user is admin.

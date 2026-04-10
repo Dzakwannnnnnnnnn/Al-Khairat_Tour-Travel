@@ -36,6 +36,10 @@ Route::post('/contact-send', [ContactController::class, 'send'])->name('contact.
 Route::get('/contact-send', fn() => redirect()->route('home'));
 
 Route::post('/paket-daftar', [BookingController::class, 'publicStore'])->name('bookings.public');
+Route::get('/booking/{product}', [BookingController::class, 'showBookingPage'])->name('booking.page');
+Route::get('/invoice/{groupCode}', [BookingController::class, 'showInvoice'])->name('booking.invoice');
+Route::get('/invoice/{groupCode}/pdf', [BookingController::class, 'downloadInvoicePDF'])->name('booking.invoice.pdf');
+Route::post('/invoice/{groupCode}/payment-method', [BookingController::class, 'updatePaymentMethod'])->name('booking.payment_method');
 Route::get('/paket-daftar', fn() => redirect()->route('home'));
 
 // ========================================
@@ -47,26 +51,35 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+use App\Http\Controllers\ProfileController;
+
 // ========================================
-// ADMIN ROUTES (Auth Required)
+// AUTH ROUTES (Auth Required)
 // ========================================
-Route::middleware('admin')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Data Master
-    Route::resource('users', UserController::class)->except(['show', 'create', 'edit']);
-    Route::resource('products', ProductController::class)->except(['show', 'create', 'edit']);
+    // Profile Management
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // Transactions / Jamaah
-    Route::resource('bookings', BookingController::class)->except(['create', 'edit']);
-    Route::resource('payments', PaymentController::class)->except(['create', 'edit']);
-    Route::resource('documents', DocumentController::class)->except(['create', 'edit']);
+    // Specific Admin Section
+    Route::middleware('admin')->group(function () {
+        // Data Master
+        Route::resource('users', UserController::class)->except(['show', 'create', 'edit']);
+        Route::resource('products', ProductController::class)->except(['show', 'create', 'edit']);
 
-    // Content Management
-    Route::resource('testimonials', TestimonialController::class)->except(['create', 'edit']);
-    Route::resource('guides', GuideController::class)->except(['create', 'edit']);
-    Route::resource('faqs', FaqController::class)->except(['create', 'edit']);
+        // Transactions / Jamaah
+        Route::resource('bookings', BookingController::class)->except(['create', 'edit']);
+        Route::resource('payments', PaymentController::class)->except(['create', 'edit']);
+        Route::resource('documents', DocumentController::class)->except(['create', 'edit']);
 
-    // Systems
-    Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);
+        // Content Management
+        Route::resource('testimonials', TestimonialController::class)->except(['create', 'edit']);
+        Route::resource('guides', GuideController::class)->except(['create', 'edit']);
+        Route::resource('faqs', FaqController::class)->except(['create', 'edit']);
+
+        // Systems
+        Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);
+    });
 });

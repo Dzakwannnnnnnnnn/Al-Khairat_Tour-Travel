@@ -10,6 +10,7 @@ class Booking extends Model
         'user_id',
         'product_id',
         'booking_code',
+        'group_code',
         'booking_seat',
         'total_price',
         'status',
@@ -18,6 +19,11 @@ class Booking extends Model
         'birth_date',
         'address',
         'nik',
+        'orderer_phone',
+        'orderer_email',
+        'room_variant',
+        'voucher_code',
+        'notes',
     ];
 
     public function user() {

@@ -13,6 +13,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        // Redirect non-admins to their profile
+        if (!auth()->user()->isAdmin()) {
+            return redirect()->route('profile.edit');
+        }
+
         $totalUsers = User::count();
         $totalProducts = Product::count();
         $activeProducts = Product::where('status', 'active')->count();

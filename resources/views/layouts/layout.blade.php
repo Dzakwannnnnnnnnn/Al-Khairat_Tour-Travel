@@ -7,15 +7,18 @@
     
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
+    @stack('styles')
 </head>
 <body class="bg-bg text-text selection:bg-orange/30 font-sans antialiased">
     <!-- Main Container -->
     <div class="flex min-h-screen relative">
-        <!-- Sidebar -->
-        @include('components.sidebar')
+        <!-- Sidebar (Admin Only) -->
+        @if(auth()->user()->isAdmin())
+            @include('components.sidebar')
+        @endif
         
         <!-- Main Content -->
-        <main class="flex-1 transition-all duration-300 ml-0 md:ml-72 lg:ml-80">
+        <main class="flex-1 transition-all duration-300 {{ auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
             <!-- Dashboard Header -->
             @include('components.header')
 
@@ -53,5 +56,6 @@
     
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
+    @stack('scripts')
 </body>
 </html>
