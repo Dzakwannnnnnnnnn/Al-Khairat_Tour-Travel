@@ -4,6 +4,9 @@
 @section('breadcrumb', 'Pengaturan Profil')
 
 @section('content')
+<!-- Navigation Dock -->
+@include('components.dock-navigation')
+
 <div class="max-w-4xl mx-auto">
     <!-- Profile Header Card -->
     <div class="relative overflow-hidden rounded-[2.5rem] p-8 md:p-12 gradient-sunset border border-orange/20 shadow-2xl mb-10 group">
@@ -104,6 +107,142 @@
             </div>
         </div>
     </form>
+
+    <div class="mt-12 space-y-8">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-charcoal">Riwayat Pesanan</h2>
+                <p class="text-sm text-slate-500 mt-1">Lihat semua pesanan yang sudah Anda buat, status pembayarannya, dan petunjuk tindak lanjut.</p>
+            </div>
+        </div>
+
+        @if($bookingHistories->isEmpty())
+            <div class="glass-dashboard rounded-[2.5rem] p-8 md:p-10 border border-slate-100 shadow-xl text-center">
+                <div class="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mx-auto mb-5 text-slate-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-charcoal">Belum Ada Pesanan</h3>
+                <p class="text-sm text-slate-500 mt-2">Pesanan yang Anda buat nanti akan muncul di sini beserta petunjuk invoice dan pembayarannya.</p>
+            </div>
+        @else
+            <div class="space-y-6">
+                @foreach($bookingHistories as $history)
+                    @php
+                        $statusMeta = match ($history->payment_status) {
+                            'verified' => [
+                                'badge' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
+                                'title' => 'Pembayaran Lunas',
+                                'card' => 'border-emerald-100',
+                                'accent' => 'text-emerald-600',
+                            ],
+                            'rejected' => [
+                                'badge' => 'bg-red-100 text-red-700 border-red-200',
+                                'title' => 'Pembayaran Ditolak',
+                                'card' => 'border-red-100',
+                                'accent' => 'text-red-600',
+                            ],
+                            default => [
+                                'badge' => 'bg-yellow-100 text-yellow-700 border-yellow-200',
+                                'title' => 'Menunggu Verifikasi',
+                                'card' => 'border-yellow-100',
+                                'accent' => 'text-yellow-600',
+                            ],
+                        };
+                    @endphp
+
+                    <div class="glass-dashboard rounded-[2.5rem] p-8 md:p-10 border shadow-xl {{ $statusMeta['card'] }}">
+                        <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-8">
+                            <div class="space-y-6 flex-1">
+                                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                                    <div>
+                                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                                            <span class="inline-flex items-center rounded-full border px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] {{ $statusMeta['badge'] }}">
+                                                {{ $statusMeta['title'] }}
+                                            </span>
+                                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                                                {{ $history->created_at->translatedFormat('d F Y') }}
+                                            </span>
+                                        </div>
+                                        <h3 class="text-2xl font-bold text-charcoal uppercase">{{ $history->product_name }}</h3>
+                                        <p class="text-sm text-slate-500 mt-2">Kode Referensi: <span class="font-black text-slate-700">{{ $history->reference_code }}</span></p>
+                                    </div>
+                                    <div class="rounded-3xl bg-slate-50/80 border border-slate-100 px-5 py-4 min-w-[240px]">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Total Pembayaran</p>
+                                        <p class="mt-2 text-2xl font-black text-charcoal">Rp {{ number_format($history->total_amount, 0, ',', '.') }}</p>
+                                        <p class="mt-1 text-sm text-slate-500">{{ $history->payment_method }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="rounded-3xl bg-white/80 border border-slate-100 px-5 py-4">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Kategori Paket</p>
+                                        <p class="mt-2 text-base font-bold text-charcoal">{{ $history->product_category }}</p>
+                                    </div>
+                                    <div class="rounded-3xl bg-white/80 border border-slate-100 px-5 py-4">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Durasi</p>
+                                        <p class="mt-2 text-base font-bold text-charcoal">{{ $history->duration }}</p>
+                                    </div>
+                                    <div class="rounded-3xl bg-white/80 border border-slate-100 px-5 py-4">
+                                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Jumlah Jamaah</p>
+                                        <p class="mt-2 text-base font-bold text-charcoal">{{ $history->pilgrim_count }} Orang</p>
+                                    </div>
+                                </div>
+
+                                <div class="rounded-3xl px-5 py-4 border {{ $history->payment_status === 'verified' ? 'bg-emerald-50 border-emerald-100' : ($history->payment_status === 'rejected' ? 'bg-red-50 border-red-100' : 'bg-yellow-50 border-yellow-100') }}">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] {{ $statusMeta['accent'] }}">Petunjuk Pesanan</p>
+                                    <p class="mt-2 text-sm text-slate-600 leading-relaxed">{{ $history->next_step }}</p>
+                                </div>
+                            </div>
+
+                            <div class="xl:w-[280px] space-y-4">
+                                @if($history->payment_status === 'verified' && $history->invoice_url)
+                                    <a href="{{ $history->invoice_url }}" class="w-full inline-flex items-center justify-center gap-3 bg-gradient-sunset text-white font-bold px-6 py-4 rounded-2xl hover:shadow-xl hover:shadow-orange/20 transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586A1 1 0 0113.293 3.293l4.414 4.414A1 1 0 0118 8.414V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        Lihat Invoice Lunas
+                                    </a>
+                                @elseif($history->payment_status === 'pending' && $history->invoice_url)
+                                    <a href="{{ $history->invoice_url }}" class="w-full inline-flex items-center justify-center gap-3 bg-gradient-sunset text-white font-bold px-6 py-4 rounded-2xl hover:shadow-xl hover:shadow-orange/20 transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Lihat Petunjuk Pembayaran
+                                    </a>
+                                @endif
+
+                                @if($history->payment_status === 'verified' && $history->invoice_pdf_url)
+                                    <a href="{{ $history->invoice_pdf_url }}" target="_blank" class="w-full inline-flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-charcoal font-bold px-6 py-4 rounded-2xl hover:border-orange hover:text-orange transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3h6l4 4v14H7a2 2 0 01-2-2V5a2 2 0 012-2z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 3v5h5"></path>
+                                        </svg>
+                                        Simpan PDF
+                                    </a>
+                                @endif
+
+                                @if($history->payment_status === 'rejected')
+                                    <a href="{{ route('home') }}" class="w-full inline-flex items-center justify-center gap-3 bg-white border-2 border-slate-200 text-charcoal font-bold px-6 py-4 rounded-2xl hover:border-orange hover:text-orange transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                        Kembali ke Beranda
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
 </div>
 
 @push('scripts')

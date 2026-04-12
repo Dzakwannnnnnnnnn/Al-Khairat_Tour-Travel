@@ -17,12 +17,13 @@
         }
     </script>
 </head>
+<body class="bg-bg font-sans text-text transition-colors duration-500">
     <x-logo-header />
 
-    <main class="section-py min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8">
+    <main class="section-py min-h-screen pt-36 md:pt-40 pb-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
-            <nav class="flex mb-8 text-sm md:text-base font-medium overflow-x-auto whitespace-nowrap pb-2 scroll-animate" data-animation="fade-up">
+            <nav class="flex mb-8 text-sm md:text-base font-medium overflow-x-auto whitespace-nowrap pb-2 lg:pl-44 xl:pl-52 scroll-animate" data-animation="fade-up">
                 <a href="{{ route('home') }}" class="text-text/60 hover:text-orange transition">BERANDA</a>
                 <span class="mx-3 text-text/30">/</span>
                 <span class="text-text/60 uppercase">{{ $product->name }}</span>

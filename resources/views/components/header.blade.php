@@ -1,6 +1,6 @@
 <!-- Premium Dashboard Header -->
-<header class="sticky top-0 z-30 transition-all duration-500 w-full px-4 py-4 pointer-events-none">
-    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white rounded-2xl px-6 py-3 pointer-events-auto border-slate-200 shadow-xl">
+<header class="sticky top-0 z-50 transition-all duration-500 w-full px-4 py-4">
+    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white rounded-2xl px-6 py-3 border-slate-200 shadow-xl">
         
         <!-- Left: Search Area -->
         <div class="flex items-center gap-6 flex-1 max-w-2xl">

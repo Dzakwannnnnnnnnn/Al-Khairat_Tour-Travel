@@ -212,7 +212,13 @@
             </tr>
         </table>
         <p style="font-size: 8pt; color: #777; margin-top: 15px; border-top: 1px dashed #ddd; padding-top: 10px;">
-            Lacak status pendaftaran Anda secara berkala di halaman Dashboard. Tim kami akan memverifikasi pembayaran Anda maksimal 1x24 jam setelah bukti dikirimkan.
+            @if($payment->status === 'verified')
+                Pembayaran Anda telah lunas dan dikonfirmasi oleh admin Al-Khairat Tour & Travel. Simpan dokumen ini sebagai bukti pembayaran yang sah.
+            @elseif($payment->status === 'rejected')
+                Pembayaran belum dapat diverifikasi. Silakan hubungi admin untuk konfirmasi ulang atau lakukan pembayaran kembali sesuai instruksi.
+            @else
+                Lacak status pendaftaran Anda secara berkala di halaman Dashboard. Tim kami akan memverifikasi pembayaran Anda maksimal 1x24 jam setelah bukti dikirimkan.
+            @endif
         </p>
     </div>
 

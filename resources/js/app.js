@@ -71,8 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hero Slideshow Functionality
     const heroSlides = document.querySelectorAll('.hero-slide');
     const heroDots = document.querySelectorAll('.hero-dot');
-    const heroPrevBtn = document.getElementById('hero-prev');
-    const heroNextBtn = document.getElementById('hero-next');
     let currentSlide = 0;
     let slideInterval;
     
@@ -93,11 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showSlide(currentSlide);
     }
     
-    function prevSlide() {
-        currentSlide = (currentSlide - 1 + heroSlides.length) % heroSlides.length;
-        showSlide(currentSlide);
-    }
-    
     function startAutoplay() {
         slideInterval = setInterval(nextSlide, 5000);
     }
@@ -105,21 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetAutoplay() {
         clearInterval(slideInterval);
         startAutoplay();
-    }
-    
-    // Add event listeners to navigation buttons
-    if (heroPrevBtn) {
-        heroPrevBtn.addEventListener('click', function() {
-            prevSlide();
-            resetAutoplay();
-        });
-    }
-    
-    if (heroNextBtn) {
-        heroNextBtn.addEventListener('click', function() {
-            nextSlide();
-            resetAutoplay();
-        });
     }
     
     // Add event listeners to dots

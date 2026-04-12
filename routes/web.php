@@ -16,6 +16,8 @@ use App\Http\Controllers\ContactController;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Product;
+use App\Models\Slideshow;
+use App\Models\Guide;
 
 // ========================================
 // PUBLIC ROUTES
@@ -23,11 +25,31 @@ use App\Models\Product;
 Route::get('/', function () {
     $testimonials = Testimonial::with('product')->where('status', 'published')->latest()->take(6)->get();
     $products = Product::where('status', 'active')->get();
+    $slideshows = Slideshow::where('is_active', true)->orderBy('order')->get();
     $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
-    return view('welcome', compact('testimonials', 'products', 'whatsapp'));
+    return view('welcome', compact('testimonials', 'products', 'slideshows', 'whatsapp'));
 })->name('home');
 
 Route::view('/galeri-video', 'gallery')->name('gallery');
+
+Route::get('/panduan-tasuh', function () {
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    $panduan = Guide::where('is_active', true)->get()->groupBy('category');
+    return view('panduan-tasuh', compact('whatsapp', 'panduan'));
+})->name('panduan-tasuh');
+
+Route::get('/panduan-tasuh/{category}/{guide}', function ($category, $guide) {
+    $guideData = Guide::where('category', $category)
+        ->where('slug', $guide)
+        ->where('is_active', true)
+        ->firstOrFail();
+    
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    
+    return view('panduan-tasuh-detail', compact('category', 'guide', 'guideData', 'whatsapp'));
+})->where('category', 'umrah|haji')
+  ->where('guide', 'dokumen|checklist|tata-cara|faq|doa|tips')
+  ->name('panduan-tasuh.detail');
 
 Route::post('/testimoni-public', [TestimonialController::class, 'publicStore'])->name('testimonials.public');
 Route::get('/testimoni-public', fn() => redirect()->route('home'));
@@ -52,6 +74,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SlideshowController;
 
 // ========================================
 // AUTH ROUTES (Auth Required)
@@ -77,7 +100,17 @@ Route::middleware('auth')->group(function () {
         // Content Management
         Route::resource('testimonials', TestimonialController::class)->except(['create', 'edit']);
         Route::resource('guides', GuideController::class)->except(['create', 'edit']);
+        Route::get('guides-admin', [GuideController::class, 'adminIndex'])->name('guides.admin-index');
+        Route::get('guides-admin/create', [GuideController::class, 'create'])->name('guides.create');
+        Route::post('guides-admin', [GuideController::class, 'store'])->name('guides.store');
+        Route::get('guides-admin/{guide}/edit', [GuideController::class, 'edit'])->name('guides.edit');
+        Route::put('guides-admin/{guide}', [GuideController::class, 'update'])->name('guides.update');
+        Route::delete('guides-admin/{guide}', [GuideController::class, 'destroy'])->name('guides.destroy');
+        Route::post('guides-admin/{guide}/toggle-active', [GuideController::class, 'toggleActive'])->name('guides.toggle-active');
         Route::resource('faqs', FaqController::class)->except(['create', 'edit']);
+        Route::resource('slideshow', SlideshowController::class)->except(['show']);
+        Route::post('slideshow/{slideshow}/toggle-active', [SlideshowController::class, 'toggleActive'])->name('slideshow.toggle-active');
+        Route::post('slideshow/update-order', [SlideshowController::class, 'updateOrder'])->name('slideshow.update-order');
 
         // Systems
         Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);

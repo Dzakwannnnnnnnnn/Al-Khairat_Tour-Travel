@@ -103,6 +103,9 @@
                         <td class="px-6 py-4 align-top whitespace-nowrap">
                             <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
                                     class="text-orange hover:text-gold mr-3 text-sm font-medium uppercase tracking-widest">Edit</button>
+                            @if(optional($payment->booking)->group_code)
+                            <a href="{{ route('booking.invoice', $payment->booking->group_code) }}" target="_blank" class="text-emerald-600 hover:text-emerald-700 mr-3 text-sm font-medium uppercase tracking-widest">Invoice</a>
+                            @endif
 
                             <form method="POST" action="{{ route('payments.destroy', $payment) }}" class="inline" onsubmit="return confirm('Hapus histori pembayaran ini?')">
                                 @csrf

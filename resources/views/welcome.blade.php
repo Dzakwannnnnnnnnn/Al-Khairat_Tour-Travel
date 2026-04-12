@@ -223,10 +223,15 @@
     <section id="hero-slideshow" class="relative w-full h-screen min-h-screen overflow-hidden">
         <!-- Slideshow Images -->
         <div class="hero-slideshow">
+            @forelse($slideshows as $slideshow)
+            <div class="hero-slide" style="background-image: url('{{ $slideshow->local_path ? asset('storage/' . $slideshow->local_path) : $slideshow->image_url }}');"></div>
+            @empty
+            <!-- Default fallback slides -->
             <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1564769666747-d4b842b2b4d5?w=1200&h=800&fit=crop');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&h=800&fit=crop');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop');"></div>
             <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&h=800&fit=crop');"></div>
+            @endforelse
         </div>
         
         <!-- Dark Overlay -->
@@ -235,20 +240,20 @@
         <!-- Content Overlay -->
         <div class="absolute inset-0 flex items-center justify-center z-20">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 md:mb-6 leading-tight drop-shadow-lg">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight drop-shadow-lg">
                     Perjalanan Penuh <span class="text-gold">Kehangatan</span>
                 </h1>
-                <p class="text-lg md:text-xl lg:text-2xl font-medium mb-2 md:mb-4 drop-shadow-lg">Pelayanan Secerah Mentari</p>
-                <p class="text-sm md:text-base lg:text-lg mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+                <p class="text-lg md:text-xl lg:text-2xl 2xl:text-xl font-medium mb-2 md:mb-4 drop-shadow-lg">Pelayanan Secerah Mentari</p>
+                <p class="text-sm md:text-base lg:text-lg 2xl:text-base mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                     Wujudkan impian spiritual Anda dengan layanan umroh terpercaya. Nikmati pengalaman tak terlupakan dengan memenuhi setiap kebutuhan perjalanan Anda dengan penuh kehangatan dan profesionalisme.
                 </p>
                 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('register') }}" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105 text-center">
+                    <a href="{{ route('register') }}" class="btn-primary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Daftar Sekarang
                     </a>
-                    <a href="#paket" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 md:py-4 hover:shadow-2xl transition transform hover:scale-105 text-center">
+                    <a href="#paket" class="btn-secondary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Lihat Paket
                     </a>
                 </div>
@@ -257,23 +262,15 @@
         
         <!-- Navigation Dots -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3">
-            <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
-            <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
-            <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
-            <button class="hero-dot" data-slide="3" aria-label="Slide 4"></button>
+            @php
+                $slideCount = max($slideshows->count(), 4);
+            @endphp
+            @for($i = 0; $i < $slideCount; $i++)
+            <button class="hero-dot {{ $i === 0 ? 'active' : '' }}" data-slide="{{ $i }}" aria-label="Slide {{ $i + 1 }}"></button>
+            @endfor
         </div>
         
-        <!-- Navigation Arrows -->
-        <button class="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 text-white p-3 md:p-4 rounded-full transition" id="hero-prev" aria-label="Previous slide">
-            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-        </button>
-        <button class="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 text-white p-3 md:p-4 rounded-full transition" id="hero-next" aria-label="Next slide">
-            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </button>
+
     </section>
 
     <!-- About Us Section with PPIU Integration -->
@@ -542,7 +539,7 @@
                     <p class="text-text/70 text-xs md:text-sm mb-6 leading-relaxed">
                         Akses izin ibadah dan dokumen penting lainnya dalam format digital yang praktis dan mudah dipahami.
                     </p>
-                    <a href="#" class="inline-flex items-center space-x-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
+                    <a href="{{ route('panduan-tasuh') }}" class="inline-flex items-center space-x-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
                         <span class="text-sm border-b border-orange/20 group-hover/link:border-orange transition-colors">Lihat Panduan</span>
                         <svg class="w-5 h-5 p-1 bg-orange/10 rounded-full" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </a>

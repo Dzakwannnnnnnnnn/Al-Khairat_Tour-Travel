@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,45 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = auth()->user();
-        return view('profile', compact('user'));
+        $userBookings = Booking::with('product')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->get();
+
+        $bookingHistories = $userBookings
+            ->groupBy(fn ($booking) => $booking->group_code ?: $booking->booking_code)
+            ->map(function ($groupBookings, $referenceCode) {
+                $primaryBooking = $groupBookings->sortBy('created_at')->first();
+                $payment = Payment::where('booking_id', $primaryBooking->id)->first();
+
+                $paymentStatus = $payment->status ?? 'pending';
+
+                $nextStep = match ($paymentStatus) {
+                    'verified' => 'Pembayaran sudah lunas. Simpan invoice dan tunggu info keberangkatan dari admin.',
+                    'rejected' => 'Pembayaran ditolak. Saat ini pesanan dikunci dan Anda hanya bisa kembali ke beranda.',
+                    default => 'Lihat invoice untuk mengikuti petunjuk pembayaran dan cek status verifikasi terbaru.',
+                };
+
+                return (object) [
+                    'reference_code' => $referenceCode,
+                    'group_code' => $primaryBooking->group_code,
+                    'product_name' => $primaryBooking->product->name ?? 'Paket Tidak Ditemukan',
+                    'product_category' => $primaryBooking->product->category ?? '-',
+                    'duration' => $primaryBooking->product->duration ?? '-',
+                    'created_at' => $primaryBooking->created_at,
+                    'pilgrim_count' => $groupBookings->count(),
+                    'total_amount' => $payment->amount ?? $groupBookings->sum('total_price'),
+                    'payment_method' => $payment->payment_method ?? 'Belum Memilih',
+                    'payment_status' => $paymentStatus,
+                    'invoice_url' => $primaryBooking->group_code ? route('booking.invoice', $primaryBooking->group_code) : null,
+                    'invoice_pdf_url' => $primaryBooking->group_code ? route('booking.invoice.pdf', $primaryBooking->group_code) : null,
+                    'next_step' => $nextStep,
+                ];
+            })
+            ->sortByDesc('created_at')
+            ->values();
+
+        return view('profile', compact('user', 'bookingHistories'));
     }
 
     /**

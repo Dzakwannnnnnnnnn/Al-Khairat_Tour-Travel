@@ -9,6 +9,31 @@ use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
+    protected function syncBookingStatuses(Payment $payment): void
+    {
+        $booking = $payment->booking;
+
+        if (!$booking) {
+            return;
+        }
+
+        $bookingStatus = match ($payment->status) {
+            'verified' => 'fully_paid',
+            'pending', 'rejected' => 'pending',
+            default => $booking->status,
+        };
+
+        $query = Booking::query();
+
+        if (!empty($booking->group_code)) {
+            $query->where('group_code', $booking->group_code);
+        } else {
+            $query->whereKey($booking->id);
+        }
+
+        $query->update(['status' => $bookingStatus]);
+    }
+
     public function index()
     {
         $payments = Payment::with(['booking', 'booking.user'])->latest()->paginate(10);
@@ -35,7 +60,9 @@ class PaymentController extends Controller
             $data['proof_image'] = str_replace('public/', '', $path);
         }
 
-        Payment::create($data);
+        $payment = Payment::create($data);
+        $payment->load('booking');
+        $this->syncBookingStatuses($payment);
 
         return redirect()->route('payments.index')->with('success', 'Data Pembayaran berhasil dicatat!');
     }
@@ -64,6 +91,8 @@ class PaymentController extends Controller
         }
 
         $payment->update($data);
+        $payment->load('booking');
+        $this->syncBookingStatuses($payment);
 
         return redirect()->route('payments.index')->with('success', 'Data Pembayaran berhasil diupdate!');
     }

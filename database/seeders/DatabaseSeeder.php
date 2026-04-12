@@ -81,5 +81,8 @@ class DatabaseSeeder extends Seeder
             'stock' => 10,
             'status' => 'active',
         ]);
+
+        // Seed Guides from Config
+        $this->call(GuideSeeder::class);
     }
 }

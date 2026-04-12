@@ -18,32 +18,33 @@
         @endif
         
         <!-- Main Content -->
-        <main class="flex-1 transition-all duration-300 {{ auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
-            <!-- Dashboard Header -->
-            @include('components.header')
+        <div class="flex-1 min-h-screen flex flex-col transition-all duration-300 {{ auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
+            <main class="flex-1">
+                <!-- Dashboard Header -->
+                @include('components.header')
 
-            <!-- Navigation Breadcrumb -->
-            <div class="px-4">
-                @include('components.breadcrumb')
-            </div>
-
-            
-            <!-- Content Area -->
-            <div class="p-6 md:p-8 lg:p-10 max-w-7xl mx-auto">
-                <!-- Flash Messages -->
-                @include('components.alert')
-                
-                <!-- Page Content -->
-                <div class="animate-[fadeUp_0.8s_ease-out]">
-                    @yield('content')
+                <!-- Navigation Breadcrumb -->
+                <div class="px-4">
+                    @include('components.breadcrumb')
                 </div>
-            </div>
-        </main>
+
+                <!-- Content Area -->
+                <div class="p-6 md:p-8 lg:p-10 max-w-7xl mx-auto">
+                    <!-- Flash Messages -->
+                    @include('components.alert')
+                    
+                    <!-- Page Content -->
+                    <div class="animate-[fadeUp_0.8s_ease-out]">
+                        @yield('content')
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            @include('components.footer')
+        </div>
     </div>
-    
-    <!-- Footer -->
-    @include('components.footer')
-    
+
     <!-- Sidebar Toggle Script -->
     <script>
         function toggleSidebar() {
