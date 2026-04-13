@@ -133,32 +133,47 @@
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                             @php
                                                 $basePrice = (float)$product->price;
-                                                $quadPrice = $basePrice - 1000000;
-                                                $triplePrice = $basePrice;
-                                                $doublePrice = $basePrice + 2000000;
+                                                // Quad (4 orang) = base (termurah), Triple = base + upgrade, Double (2 orang) = base + upgrade (termahal)
+                                                $quadPrice = $basePrice;
+                                                $tripleUpgrade = (float)($product->price_triple ?? 0);
+                                                $doubleUpgrade = (float)($product->price_double ?? 0);
+                                                $triplePrice = $basePrice + $tripleUpgrade;
+                                                $doublePrice = $basePrice + $doubleUpgrade;
                                             @endphp
-                                            <!-- QUAD -->
+                                            <!-- 1 Kamar Ber-4 (Termurah) -->
                                             <label class="cursor-pointer group">
                                                 <input type="radio" name="room_variant[0]" value="quad" checked class="hidden peer">
                                                 <div class="p-4 rounded-2xl border-2 border-border peer-checked:border-orange peer-checked:bg-orange/5 hover:border-orange/30 transition-all flex flex-col items-center text-center">
-                                                    <span class="text-xs font-bold text-text/40 group-hover:text-orange/60 transition uppercase mb-1">[QUAD]</span>
+                                                    <span class="text-2xl mb-1">👤👤👤👤</span>
+                                                    <span class="text-xs font-bold text-text/70 group-hover:text-orange/80 transition uppercase mb-0.5">1 Kamar Ber-4</span>
+                                                    <span class="text-[10px] text-text/40 mb-2">Paling hemat</span>
                                                     <span class="font-bold text-text text-sm md:text-base">Rp {{ number_format($quadPrice, 0, ',', '.') }},-</span>
                                                 </div>
                                             </label>
-                                            <!-- TRIPLE -->
+                                            <!-- 1 Kamar Ber-3 -->
                                             <label class="cursor-pointer group">
                                                 <input type="radio" name="room_variant[0]" value="triple" class="hidden peer">
                                                 <div class="p-4 rounded-2xl border-2 border-border peer-checked:border-orange peer-checked:bg-orange/5 hover:border-orange/30 transition-all flex flex-col items-center text-center">
-                                                    <span class="text-xs font-bold text-text/40 group-hover:text-orange/60 transition uppercase mb-1">[TRIPLE]</span>
+                                                    <span class="text-2xl mb-1">👤👤👤</span>
+                                                    <span class="text-xs font-bold text-text/70 group-hover:text-orange/80 transition uppercase mb-0.5">1 Kamar Ber-3</span>
+                                                    <span class="text-[10px] text-text/40 mb-2">Standar</span>
                                                     <span class="font-bold text-text text-sm md:text-base">Rp {{ number_format($triplePrice, 0, ',', '.') }},-</span>
+                                                    @if($tripleUpgrade > 0)
+                                                    <span class="text-[10px] text-orange font-semibold mt-1">+Rp {{ number_format($tripleUpgrade, 0, ',', '.') }}</span>
+                                                    @endif
                                                 </div>
                                             </label>
-                                            <!-- DOUBLE -->
+                                            <!-- 1 Kamar Ber-2 (Termahal) -->
                                             <label class="cursor-pointer group">
                                                 <input type="radio" name="room_variant[0]" value="double" class="hidden peer">
                                                 <div class="p-4 rounded-2xl border-2 border-border peer-checked:border-orange peer-checked:bg-orange/5 hover:border-orange/30 transition-all flex flex-col items-center text-center">
-                                                    <span class="text-xs font-bold text-text/40 group-hover:text-orange/60 transition uppercase mb-1">[DOUBLE]</span>
+                                                    <span class="text-2xl mb-1">👤👤</span>
+                                                    <span class="text-xs font-bold text-text/70 group-hover:text-orange/80 transition uppercase mb-0.5">1 Kamar Ber-2</span>
+                                                    <span class="text-[10px] text-text/40 mb-2">Lebih privat</span>
                                                     <span class="font-bold text-text text-sm md:text-base">Rp {{ number_format($doublePrice, 0, ',', '.') }},-</span>
+                                                    @if($doubleUpgrade > 0)
+                                                    <span class="text-[10px] text-orange font-semibold mt-1">+Rp {{ number_format($doubleUpgrade, 0, ',', '.') }}</span>
+                                                    @endif
                                                 </div>
                                             </label>
                                         </div>
@@ -238,6 +253,18 @@
                             </div>
 
                             <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-2xl bg-orange/10 flex items-center justify-center text-orange flex-shrink-0 text-xl">📅</div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest">Estimasi Keberangkatan</p>
+                                    @if($product->departure_date)
+                                        <p class="font-bold text-orange text-sm md:text-base">{{ $product->departure_date->translatedFormat('d F Y') }}</p>
+                                    @else
+                                        <p class="font-bold text-text/50 text-sm md:text-base italic">Jadwal segera diumumkan</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-2xl bg-orange/10 flex items-center justify-center text-orange flex-shrink-0 text-xl">🚌</div>
                                 <div>
                                     <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest">Durasi Perjalanan</p>
@@ -282,6 +309,21 @@
                             Hubungi Admin via WA
                         </a>
                     </div>
+
+                    <!-- Tour Guide Info Card -->
+                    <div class="bg-surface rounded-3xl p-6 border border-border shadow-sm scroll-animate" data-animation="slide-left">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-2xl">👨‍🏫</span>
+                            <h4 class="font-bold text-text text-sm">Konsultasi Tour Guide</h4>
+                        </div>
+                        <p class="text-text/60 text-xs leading-relaxed mb-3">
+                            Setelah pembayaran terverifikasi, Anda bisa langsung konsultasi dengan tour guide melalui halaman invoice Anda.
+                        </p>
+                        <div class="flex items-center gap-2 text-[10px] text-emerald-600 font-bold bg-emerald-50 px-3 py-2 rounded-lg border border-emerald-100">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Guide siap melayani Anda
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -292,6 +334,8 @@
     <script>
         let pilgrimCount = 1;
         const basePrice = {{ $product->price }};
+        const tripleUpgrade = {{ (float)($product->price_triple ?? 0) }};
+        const doubleUpgrade = {{ (float)($product->price_double ?? 0) }};
 
         function addPilgrim() {
             pilgrimCount++;
@@ -307,6 +351,7 @@
             newCard.querySelectorAll('input[type="radio"]').forEach(radio => {
                 radio.name = `room_variant[${pilgrimCount - 1}]`;
                 if (radio.value === 'quad') radio.checked = true;
+                else radio.checked = false;
             });
 
             // Clear input values
@@ -354,13 +399,13 @@
             seatCountInput.value = pilgrimCount;
             document.getElementById('display-seat-count').innerText = pilgrimCount;
 
-            // Simple price calculation (could be more complex if counting variants lives)
+            // Quad (4 orang) = base, Triple = +upgrade, Double (2 orang) = +upgrade (termahal)
             let totalPrice = 0;
             const variants = document.querySelectorAll('input[type="radio"]:checked');
             variants.forEach(radio => {
                 let p = basePrice;
-                if (radio.value === 'quad') p -= 1000000;
-                else if (radio.value === 'double') p += 2000000;
+                if (radio.value === 'triple') p += tripleUpgrade;
+                else if (radio.value === 'double') p += doubleUpgrade;
                 totalPrice += p;
             });
 

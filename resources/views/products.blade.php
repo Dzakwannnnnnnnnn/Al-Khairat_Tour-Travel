@@ -51,6 +51,7 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kategori</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Harga</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Durasi</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Estimasi Berangkat</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kuota</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Status</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
@@ -79,6 +80,13 @@
                         </td>
                         <td class="px-6 py-4 font-semibold text-gray-900">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                         <td class="px-6 py-4 text-gray-600">{{ $product->duration ?? '-' }}</td>
+                        <td class="px-6 py-4 text-gray-600">
+                            @if($product->departure_date)
+                                {{ $product->departure_date->translatedFormat('d M Y') }}
+                            @else
+                                <span class="text-gray-400 italic text-xs">Belum diatur</span>
+                            @endif
+                        </td>
                         <td class="px-6 py-4">
                             <span class="inline-block px-3 py-1 rounded-full text-sm
                                 {{ $product->stock > 10 ? 'bg-green-100 text-green-800' :
@@ -94,9 +102,9 @@
                         </td>
                         <td class="px-6 py-4">
                             <div class="flex flex-wrap gap-2">
-                                <button onclick="openDetailProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->image ? Storage::url($product->image) : '' }}')"
+                                <button onclick="openDetailProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->image ? Storage::url($product->image) : '' }}', '{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}', '{{ $product->price_quad }}', '{{ $product->price_triple }}', '{{ $product->price_double }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Detail</button>
-                                <button onclick="openEditProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}')"
+                                <button onclick="openEditProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}', '{{ $product->price_quad }}', '{{ $product->price_triple }}', '{{ $product->price_double }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
                                 <a href="{{ route('products.edit-rundown', $product) }}"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Rundown</a>
@@ -111,7 +119,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="8" class="px-6 py-12 text-center text-gray-500">Belum ada paket umroh.</td>
+                        <td colspan="9" class="px-6 py-12 text-center text-gray-500">Belum ada paket umroh.</td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -146,6 +154,11 @@
                         <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                     </div>
                 </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
+                    <input type="date" name="departure_date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
+                </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
@@ -160,15 +173,26 @@
                         <input type="text" name="duration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="9 Hari">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga (Rp)</label>
-                        <input type="number" name="price" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="25000000">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
+                        <input type="number" name="price" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="35000000">
+                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                        <input type="number" name="stock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="30">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
+                        <input type="number" name="price_triple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="2000000">
+                        <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
                     </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
+                        <input type="number" name="price_double" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="5000000">
+                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
+                    <input type="number" name="stock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="30">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
@@ -224,16 +248,34 @@
                             <p id="viewProductDuration"></p>
                         </div>
                         <div>
+                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Estimasi Berangkat</p>
+                            <p id="viewProductDepartureDate" class="text-orange font-semibold"></p>
+                        </div>
+                        <div>
                             <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Stok / Kuota</p>
                             <p id="viewProductStock"></p>
                         </div>
                         <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Tour Guide WA</p>
-                            <p id="viewProductGuidePhone" class="text-orange font-mono"></p>
+                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Harga Dasar (Kamar Ber-4)</p>
+                            <p id="viewProductPrice" class="text-indigo-600 font-bold"></p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <p class="font-bold text-gray-900 uppercase text-[8px] tracking-widest mb-1">Upgrade Ber-3</p>
+                                <p id="viewProductPriceTriple" class="text-xs text-gray-600 font-semibold"></p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-900 uppercase text-[8px] tracking-widest mb-1">Upgrade Ber-2</p>
+                                <p id="viewProductPriceDouble" class="text-xs text-gray-600 font-semibold"></p>
+                            </div>
                         </div>
                         <div>
                             <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Deskripsi</p>
                             <p id="viewProductDescription" class="italic"></p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Tour Guide WA</p>
+                            <p id="viewProductGuidePhone" class="text-orange font-mono"></p>
                         </div>
                         <div>
                             <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Fitur Utama</p>
@@ -272,6 +314,11 @@
                         <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
                     </div>
                 </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
+                    <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
+                </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
@@ -286,15 +333,26 @@
                         <input type="text" name="duration" id="editProductDuration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-3 gap-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga (Rp)</label>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
                         <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                        <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
+                        <input type="number" name="price_triple" id="editProductPriceTriple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="2000000">
+                        <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
                     </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
+                        <input type="number" name="price_double" id="editProductPriceDouble" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="5000000">
+                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
+                    <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
@@ -326,11 +384,14 @@
     </div>
 
     <script>
-        function openDetailProduct(id, name, category, price, duration, description, features, stock, status, guide_phone, image_url) {
+        function openDetailProduct(id, name, category, price, duration, description, features, stock, status, guide_phone, image_url, departure_date, price_quad, price_triple, price_double) {
             document.getElementById('viewProductName').innerText = name;
             document.getElementById('viewProductCategory').innerText = category;
             document.getElementById('viewProductPrice').innerText = 'Rp ' + new Intl.NumberFormat('id-ID').format(price);
+            document.getElementById('viewProductPriceTriple').innerText = price_triple && price_triple !== 'null' && price_triple !== '0' ? '+Rp ' + new Intl.NumberFormat('id-ID').format(price_triple) : 'Tidak ada upgrade';
+            document.getElementById('viewProductPriceDouble').innerText = price_double && price_double !== 'null' && price_double !== '0' ? '+Rp ' + new Intl.NumberFormat('id-ID').format(price_double) : 'Tidak ada upgrade';
             document.getElementById('viewProductDuration').innerText = duration || '-';
+            document.getElementById('viewProductDepartureDate').innerText = departure_date || 'Belum diatur';
             document.getElementById('viewProductStock').innerText = stock + ' Kursi';
             document.getElementById('viewProductDescription').innerText = description || 'Tidak ada deskripsi.';
             document.getElementById('viewProductGuidePhone').innerText = guide_phone || 'Menggunakan WA Admin Pusat';
@@ -370,12 +431,15 @@
             document.getElementById('detailProductModal').classList.remove('hidden');
         }
 
-        function openEditProduct(id, name, category, price, duration, description, features, stock, status, guide_phone) {
+        function openEditProduct(id, name, category, price, duration, description, features, stock, status, guide_phone, departure_date, price_quad, price_triple, price_double) {
             document.getElementById('editProductForm').action = '/products/' + id;
             document.getElementById('editProductName').value = name;
             document.getElementById('editProductCategory').value = category;
             document.getElementById('editProductPrice').value = price;
+            document.getElementById('editProductPriceTriple').value = price_triple && price_triple !== 'null' ? price_triple : '';
+            document.getElementById('editProductPriceDouble').value = price_double && price_double !== 'null' ? price_double : '';
             document.getElementById('editProductDuration').value = duration;
+            document.getElementById('editProductDepartureDate').value = departure_date || '';
             document.getElementById('editProductDescription').value = description;
             document.getElementById('editProductFeatures').value = features;
             document.getElementById('editProductStock').value = stock;

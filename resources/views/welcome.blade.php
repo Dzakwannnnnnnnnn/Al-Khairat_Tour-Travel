@@ -429,7 +429,14 @@
                         <div class="p-5 md:p-8 flex flex-col flex-grow">
                             <div class="flex-grow">
                                 <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">{{ strtoupper($product->name) }}</h3>
-                                <p class="text-brown text-xs md:text-sm mb-4">Umroh {{ $product->duration }}</p>
+                                <p class="text-brown text-xs md:text-sm mb-1">Umroh {{ $product->duration }}</p>
+                                @if($product->departure_date)
+                                <p class="text-xs font-semibold text-orange mb-4 flex items-center gap-1">
+                                    <span>📅</span> Berangkat: {{ $product->departure_date->translatedFormat('d F Y') }}
+                                </p>
+                                @else
+                                <p class="text-xs text-text/40 italic mb-4">📅 Jadwal segera diumumkan</p>
+                                @endif
                                 <p class="text-2xl md:text-3xl font-bold text-orange mb-6 text-brand">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </p>
@@ -461,6 +468,7 @@
                                  data-name="{{ $product->name }}"
                                  data-price="Rp {{ number_format($product->price, 0, ',', '.') }}"
                                  data-duration="{{ $product->duration }}"
+                                 data-departure-date="{{ $product->departure_date ? $product->departure_date->translatedFormat('d F Y') : '' }}"
                                  data-category="{{ $product->category }}"
                                  data-description="{{ $product->description ?? 'Tidak ada deskripsi tersedia.' }}"
                                  data-features="{{ json_encode($product->features) }}"
@@ -789,6 +797,13 @@
                 <div class="mb-8">
                     <p class="text-orange text-3xl font-bold mb-1" id="detail-price"></p>
                     <p class="text-text/60 text-sm font-medium" id="detail-duration"></p>
+                    <div id="detail-departure-container" class="mt-3 flex items-center gap-2 bg-orange/5 border border-orange/10 rounded-xl px-4 py-2.5">
+                        <span class="text-orange text-lg">📅</span>
+                        <div>
+                            <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest">Estimasi Berangkat</p>
+                            <p class="font-bold text-text text-sm" id="detail-departure-date"></p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="space-y-6">
@@ -1083,6 +1098,18 @@
             document.getElementById('detail-price').innerText = data.dataset.price;
             document.getElementById('detail-duration').innerText = `Paket Perjalanan ${data.dataset.duration}`;
             document.getElementById('detail-description').innerText = data.dataset.description;
+            
+            // Departure Date
+            const departureDate = data.dataset.departureDate;
+            const departureDateEl = document.getElementById('detail-departure-date');
+            const departureContainer = document.getElementById('detail-departure-container');
+            if (departureDate && departureDate !== '') {
+                departureDateEl.innerText = departureDate;
+                departureContainer.classList.remove('hidden');
+            } else {
+                departureDateEl.innerText = 'Jadwal segera diumumkan';
+                departureContainer.classList.remove('hidden');
+            }
             
             setActivePackageMarker(id);
             

@@ -13,7 +13,11 @@ class Product extends Model
         'name',
         'category',
         'price',
+        'price_quad',
+        'price_triple',
+        'price_double',
         'duration',
+        'departure_date',
         'description',
         'features',
         'rundown',
@@ -29,6 +33,10 @@ class Product extends Model
             'features' => 'array',
             'rundown' => 'array',
             'price' => 'decimal:2',
+            'price_quad' => 'decimal:2',
+            'price_triple' => 'decimal:2',
+            'price_double' => 'decimal:2',
+            'departure_date' => 'date',
         ];
     }
 }

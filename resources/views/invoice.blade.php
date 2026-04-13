@@ -110,6 +110,11 @@
                                 <div>
                                     <p class="font-bold text-text text-lg leading-tight uppercase">{{ $bookings->first()->product->name }}</p>
                                     <p class="text-text/60 text-sm mt-1 uppercase">{{ $bookings->first()->product->duration }} • JAKARTA (CGK)</p>
+                                    @if($product->departure_date)
+                                    <p class="text-orange text-sm mt-1 font-bold">📅 Berangkat: {{ $product->departure_date->translatedFormat('d F Y') }}</p>
+                                    @else
+                                    <p class="text-text/40 text-sm mt-1 italic">📅 Jadwal segera diumumkan</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -188,6 +193,14 @@
                                         <p class="mt-1 font-bold text-base">Jakarta (CGK)</p>
                                     </div>
                                     <div>
+                                        <p class="text-white/50 uppercase text-[10px] font-black tracking-[0.2em]">Estimasi Tgl Berangkat</p>
+                                        @if($product->departure_date)
+                                        <p class="mt-1 font-bold text-base text-orange">{{ $product->departure_date->translatedFormat('d F Y') }}</p>
+                                        @else
+                                        <p class="mt-1 font-bold text-base text-white/60 italic">Segera diumumkan</p>
+                                        @endif
+                                    </div>
+                                    <div>
                                         <p class="text-white/50 uppercase text-[10px] font-black tracking-[0.2em]">Jumlah Jamaah</p>
                                         <p class="mt-1 font-bold text-base">{{ $bookings->count() }} Orang</p>
                                     </div>
@@ -205,6 +218,57 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Tour Guide Consultation Section (Verified Only) --}}
+                    @if($payment->status === 'verified' && $guideContact)
+                    <div class="rounded-[2rem] border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 md:p-8 mt-2">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-2xl">👨‍🏫</div>
+                            <div>
+                                <h3 class="text-xl font-serif font-bold text-text">Konsultasi dengan Tour Guide</h3>
+                                <p class="text-sm text-text/60">Hubungi pembimbing Anda untuk persiapan keberangkatan</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            {{-- Guide Contact Card --}}
+                            <div class="rounded-2xl bg-white/90 border border-emerald-100 p-5">
+                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40 mb-2">Kontak Pembimbing</p>
+                                <p class="text-lg font-bold text-emerald-700 font-mono">+{{ ltrim($guideContact, '+') }}</p>
+                                <p class="text-xs text-text/50 mt-1">WhatsApp resmi tour guide paket Anda</p>
+                            </div>
+
+                            {{-- Consultation Hours Card --}}
+                            <div class="rounded-2xl bg-white/90 border border-emerald-100 p-5">
+                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40 mb-2">Jam Konsultasi</p>
+                                <p class="text-lg font-bold text-text">09:00 – 17:00 WITA</p>
+                                <p class="text-xs text-text/50 mt-1">Senin – Sabtu (diluar jam makan)</p>
+                            </div>
+                        </div>
+
+                        {{-- WA Button --}}
+                        @php
+                            $guideWaText = "Assalamu'alaikum, saya jamaah *" . $displayOrdererName . "* dengan kode booking *#" . $groupCode . "* (Paket " . $product->name . "). Saya ingin konsultasi mengenai persiapan keberangkatan. Terima kasih.";
+                        @endphp
+                        <a href="https://wa.me/{{ $guideContact }}?text={{ urlencode($guideWaText) }}" 
+                           target="_blank"
+                           class="group flex items-center justify-center gap-3 bg-emerald-600 text-white font-bold py-4 rounded-2xl hover:bg-emerald-700 hover:shadow-xl hover:shadow-emerald-600/20 hover:scale-[1.02] transition-all duration-300 mb-6">
+                            <svg class="w-6 h-6 group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                            Mulai Konsultasi via WhatsApp
+                        </a>
+
+                        {{-- Etiquette Notice --}}
+                        <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
+                            <p class="text-xs font-bold text-amber-800 uppercase tracking-widest mb-2">📋 Etika Konsultasi</p>
+                            <ul class="text-xs text-amber-900/80 space-y-1">
+                                <li>• Selalu cantumkan <strong>kode booking</strong> dan <strong>nama Anda</strong> saat menghubungi guide</li>
+                                <li>• Kirim pesan 1x lalu tunggu balasan, hindari mengirim berulang kali</li>
+                                <li>• Hubungi guide pada <strong>jam konsultasi resmi</strong> (09:00 – 17:00 WITA)</li>
+                                <li>• Untuk pertanyaan umum / administrasi, hubungi <strong>Admin pusat</strong> bukan guide</li>
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
                     @endif
 
                     <!-- Pilgrim List Table -->

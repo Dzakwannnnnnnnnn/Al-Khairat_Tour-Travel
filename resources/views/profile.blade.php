@@ -4,11 +4,9 @@
 @section('breadcrumb', 'Pengaturan Profil')
 
 @section('content')
-<!-- Navigation Dock -->
 @include('components.dock-navigation')
 
 <div class="max-w-5xl mx-auto">
-    <!-- Profile Header Card -->
     <div
         class="relative overflow-hidden rounded-[2.5rem] p-8 md:p-12 gradient-sunset border border-orange/20 shadow-2xl mb-10 group">
         <div
