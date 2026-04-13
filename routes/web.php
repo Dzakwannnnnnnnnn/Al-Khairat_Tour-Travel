@@ -59,6 +59,7 @@ Route::get('/contact-send', fn() => redirect()->route('home'));
 
 Route::post('/paket-daftar', [BookingController::class, 'publicStore'])->name('bookings.public');
 Route::get('/booking/{product}', [BookingController::class, 'showBookingPage'])->name('booking.page');
+Route::get('/products/{product}/rundown', [ProductController::class, 'showRundown'])->name('products.rundown');
 Route::get('/invoice/{groupCode}', [BookingController::class, 'showInvoice'])->name('booking.invoice');
 Route::get('/invoice/{groupCode}/pdf', [BookingController::class, 'downloadInvoicePDF'])->name('booking.invoice.pdf');
 Route::post('/invoice/{groupCode}/payment-method', [BookingController::class, 'updatePaymentMethod'])->name('booking.payment_method');
@@ -84,13 +85,16 @@ Route::middleware('auth')->group(function () {
 
     // Profile Management
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
     // Specific Admin Section
     Route::middleware('admin')->group(function () {
         // Data Master
         Route::resource('users', UserController::class)->except(['show', 'create', 'edit']);
         Route::resource('products', ProductController::class)->except(['show', 'create', 'edit']);
+        Route::get('products/{product}/rundown/edit', [ProductController::class, 'editRundown'])->name('products.edit-rundown');
+        Route::post('products/{product}/rundown/update', [ProductController::class, 'updateRundown'])->name('products.update-rundown');
 
         // Transactions / Jamaah
         Route::resource('bookings', BookingController::class)->except(['create', 'edit']);

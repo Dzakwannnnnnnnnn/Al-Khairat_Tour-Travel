@@ -45,6 +45,7 @@
             </div>
 
             <!-- Profile Dropdown -->
+            @if(auth()->check())
             <div class="relative group">
                 <button class="flex items-center gap-3 p-1 rounded-xl hover:bg-slate-50 transition-all duration-300 border border-transparent hover:border-slate-200">
                     <div class="relative">
@@ -87,6 +88,11 @@
                     </div>
                 </div>
             </div>
+            @else
+            <a href="{{ route('login') }}" class="px-4 py-2 bg-orange text-white font-semibold rounded-lg hover:bg-orange/90 transition">
+                Login
+            </a>
+            @endif
         </div>
     </div>
 </header>

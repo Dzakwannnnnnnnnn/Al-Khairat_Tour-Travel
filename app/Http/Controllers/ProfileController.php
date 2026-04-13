@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
@@ -39,6 +40,7 @@ class ProfileController extends Controller
                 return (object) [
                     'reference_code' => $referenceCode,
                     'group_code' => $primaryBooking->group_code,
+                    'product_id' => $primaryBooking->product_id,
                     'product_name' => $primaryBooking->product->name ?? 'Paket Tidak Ditemukan',
                     'product_category' => $primaryBooking->product->category ?? '-',
                     'duration' => $primaryBooking->product->duration ?? '-',
@@ -70,8 +72,6 @@ class ProfileController extends Controller
             'nickname' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
-            'current_password' => ['nullable', 'required_with:new_password'],
-            'new_password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
         $data = [
@@ -90,16 +90,30 @@ class ProfileController extends Controller
             $data['avatar'] = $path;
         }
 
-        // Handle Password Change
-        if ($request->filled('new_password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'Password saat ini salah.']);
-            }
-            $data['password'] = Hash::make($request->new_password);
-        }
-
         $user->update($data);
 
         return back()->with('success', 'Profil Anda berhasil diperbarui!');
+    }
+
+    /**
+     * Update the user's password from the profile page.
+     */
+    public function updatePassword(Request $request)
+    {
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'new_password' => ['required', 'confirmed', 'different:current_password', Password::min(8)],
+        ], [
+            'current_password.current_password' => 'Password saat ini salah.',
+            'new_password.different' => 'Password baru harus berbeda dari password saat ini.',
+        ]);
+
+        $user->update([
+            'password' => Hash::make($validated['new_password']),
+        ]);
+
+        return back()->with('success', 'Password Anda berhasil diperbarui.');
     }
 }

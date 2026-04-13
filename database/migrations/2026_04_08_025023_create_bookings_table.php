@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('booking_code')->unique();
             $table->integer('booking_seat');
             $table->decimal('total_price', 15, 2);
-            $table->enum('status', ['pending', 'paid', 'canceled'])->default('pending');
+            $table->enum('status', ['pending', 'dp_paid', 'fully_paid', 'completed', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }

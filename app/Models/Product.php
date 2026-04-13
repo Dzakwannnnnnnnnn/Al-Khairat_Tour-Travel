@@ -16,6 +16,7 @@ class Product extends Model
         'duration',
         'description',
         'features',
+        'rundown',
         'stock',
         'status',
         'image',
@@ -26,6 +27,7 @@ class Product extends Model
     {
         return [
             'features' => 'array',
+            'rundown' => 'array',
             'price' => 'decimal:2',
         ];
     }

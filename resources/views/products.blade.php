@@ -97,6 +97,8 @@
                                     class="text-blue-600 hover:text-blue-900 mr-3 text-xs font-black uppercase tracking-widest transition-colors">Detail</button>
                             <button onclick="openEditProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? implode(', ', $product->features) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}')"
                                     class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+                            <a href="{{ route('products.edit-rundown', $product) }}"
+                                class="text-purple-600 hover:text-purple-900 mr-3 text-xs font-black uppercase tracking-widest transition-colors inline-block">Rundown</a>
 
                             <form method="POST" action="{{ route('products.destroy', $product) }}" class="inline" onsubmit="return confirm('Yakin hapus paket ini?')">
                                 @csrf

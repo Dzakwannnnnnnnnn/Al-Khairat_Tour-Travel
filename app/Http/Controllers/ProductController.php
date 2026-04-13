@@ -65,6 +65,8 @@ class ProductController extends Controller
             $data['features'] = array_map('trim', explode(',', $request->features));
         }
 
+        $data['rundown'] = null; // Initialize rundown as null, will be edited separately
+
         Product::create($data);
 
         return redirect()->route('products.index')->with('success', 'Paket umroh berhasil ditambahkan!');
@@ -107,6 +109,48 @@ class ProductController extends Controller
         $product->update($data);
 
         return redirect()->route('products.index')->with('success', 'Paket umroh berhasil diperbarui!');
+    }
+
+    /**
+     * Show rundown editor for a specific product.
+     */
+    public function editRundown(Product $product)
+    {
+        return view('admin.edit-rundown', compact('product'));
+    }
+
+    /**
+     * Update the rundown for a specific product.
+     */
+    public function updateRundown(Request $request, Product $product)
+    {
+        $request->validate([
+            'rundown' => ['required', 'array', 'min:1'],
+            'rundown.*.day' => ['required', 'string', 'max:100'],
+            'rundown.*.activities' => ['required', 'string'],
+        ]);
+
+        $rundown = collect($request->rundown)->map(function ($item) {
+            return [
+                'day' => $item['day'],
+                'activities' => $item['activities'],
+            ];
+        })->toArray();
+
+        $product->update(['rundown' => $rundown]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Rundown kegiatan berhasil diperbarui!',
+        ]);
+    }
+
+    /**
+     * Show rundown for a specific product.
+     */
+    public function showRundown(Product $product)
+    {
+        return view('rundown.show', compact('product'));
     }
 
     /**

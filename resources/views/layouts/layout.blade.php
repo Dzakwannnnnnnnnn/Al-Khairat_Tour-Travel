@@ -13,12 +13,12 @@
     <!-- Main Container -->
     <div class="flex min-h-screen relative">
         <!-- Sidebar (Admin Only) -->
-        @if(auth()->user()->isAdmin())
+        @if(auth()->check() && auth()->user()->isAdmin())
             @include('components.sidebar')
         @endif
         
         <!-- Main Content -->
-        <div class="flex-1 min-h-screen flex flex-col transition-all duration-300 {{ auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
+        <div class="flex-1 min-h-screen flex flex-col transition-all duration-300 {{ auth()->check() && auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
             <main class="flex-1">
                 <!-- Dashboard Header -->
                 @include('components.header')
