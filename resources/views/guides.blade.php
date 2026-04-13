@@ -61,15 +61,17 @@
                                 {{ $guide->status === 'published' ? 'Tampil di Web' : 'Draft' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top whitespace-nowrap">
-                            <button onclick="openEditGuide({{ $guide->id }}, '{{ addslashes($guide->title) }}', '{{ $guide->category }}', '{{ addslashes($guide->content) }}', '{{ $guide->video_url }}', '{{ $guide->status }}')"
-                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+                        <td class="px-6 py-4 align-top">
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="openEditGuide({{ $guide->id }}, '{{ addslashes($guide->title) }}', '{{ $guide->category }}', '{{ addslashes($guide->content) }}', '{{ $guide->video_url }}', '{{ $guide->status }}')"
+                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
 
-                            <form method="POST" action="{{ route('guides.destroy', $guide) }}" class="inline" onsubmit="return confirm('Hapus panduan ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">Hapus</button>
-                            </form>
+                                <form method="POST" action="{{ route('guides.destroy', $guide) }}" class="inline m-0" onsubmit="return confirm('Hapus panduan ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty

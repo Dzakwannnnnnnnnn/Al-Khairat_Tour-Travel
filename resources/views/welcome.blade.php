@@ -224,7 +224,7 @@
         <!-- Slideshow Images -->
         <div class="hero-slideshow">
             @forelse($slideshows as $slideshow)
-            <div class="hero-slide" style="background-image: url('{{ $slideshow->local_path ? asset('storage/' . $slideshow->local_path) : $slideshow->image_url }}');"></div>
+            <div class="hero-slide {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{ $slideshow->local_path ? asset('storage/' . $slideshow->local_path) : $slideshow->image_url }}');"></div>
             @empty
             <!-- Default fallback slides -->
             <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1564769666747-d4b842b2b4d5?w=1200&h=800&fit=crop');"></div>
@@ -263,7 +263,7 @@
         <!-- Navigation Dots -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3">
             @php
-                $slideCount = max($slideshows->count(), 4);
+                $slideCount = $slideshows->count() > 0 ? $slideshows->count() : 4;
             @endphp
             @for($i = 0; $i < $slideCount; $i++)
             <button class="hero-dot {{ $i === 0 ? 'active' : '' }}" data-slide="{{ $i }}" aria-label="Slide {{ $i + 1 }}"></button>
@@ -652,6 +652,11 @@
                             </div>
                         </div>
                         
+                        <div>
+                            <label class="block text-sm font-semibold text-text mb-1">Alamat Email <span class="text-red-500">*</span></label>
+                            <input type="email" name="email" required pattern="^.+@.+\..+$" title="Mohon masukkan email lengkap dengan domain (contoh: @gmail.com)" class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition" placeholder="Agar kami dapat membalas ulasan Anda">
+                        </div>
+
                         <div>
                             <label class="block text-sm font-semibold text-text mb-1">Rating Kepuasan <span class="text-red-500">*</span></label>
                             <select name="rating" required class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">

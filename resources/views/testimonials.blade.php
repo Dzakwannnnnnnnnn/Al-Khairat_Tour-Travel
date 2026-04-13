@@ -46,11 +46,16 @@
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 align-top">
                             <p class="font-semibold text-gray-900">{{ $testimoni->name }}</p>
+                            @if($testimoni->email)
+                            <a href="mailto:{{ $testimoni->email }}" class="text-xs text-slate-500 hover:text-orange flex items-center mt-1 gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                {{ $testimoni->email }}
+                            </a>
+                            @endif
                             @if($testimoni->product)
                             <span class="inline-block mt-1 px-2 py-1 bg-orange/5 text-orange text-[10px] font-black uppercase tracking-widest rounded-md border border-orange/10 transition-all hover:bg-orange hover:text-white">
                                 {{ $testimoni->product->name }}
                             </span>
-
                             @endif
                         </td>
                         <td class="px-6 py-4 align-top">
@@ -79,15 +84,23 @@
                                 {{ $testimoni->status === 'published' ? 'Tampil di Web' : 'Draft' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top whitespace-nowrap">
-                            <button onclick="openEditTestimonial({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ $testimoni->product_id }}', '{{ addslashes($testimoni->message) }}', '{{ $testimoni->video_url }}', '{{ $testimoni->rating }}', '{{ $testimoni->status }}')"
-                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+                        <td class="px-6 py-4 align-top">
+                            <div class="flex flex-wrap gap-2">
+                                @if($testimoni->email)
+                                <button onclick="openReplyModal({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ addslashes($testimoni->email) }}', '{{ addslashes(Str::limit($testimoni->message, 150)) }}')"
+                                   class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Balas Email</button>
+                                @else
+                                <span class="inline-flex items-center justify-center px-3 py-1.5 bg-gray-50 text-gray-400 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-gray-100 cursor-not-allowed" title="Email tidak tersedia untuk testimoni ini">Balas Email</span>
+                                @endif
+                                <button onclick="openEditTestimonial({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ $testimoni->email }}', '{{ $testimoni->product_id }}', '{{ addslashes($testimoni->message) }}', '{{ $testimoni->video_url }}', '{{ $testimoni->rating }}', '{{ $testimoni->status }}')"
+                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
 
-                            <form method="POST" action="{{ route('testimonials.destroy', $testimoni) }}" class="inline" onsubmit="return confirm('Hapus testimoni ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">Hapus</button>
-                            </form>
+                                <form id="delete-form-{{ $testimoni->id }}" method="POST" action="{{ route('testimonials.destroy', $testimoni) }}" class="inline m-0">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="openDeleteModal({{ $testimoni->id }})" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty
@@ -121,9 +134,15 @@
         </div>
         <form method="POST" action="{{ route('testimonials.store') }}" class="space-y-4">
             @csrf
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Jamaah <span class="text-red-500">*</span></label>
-                <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Jamaah <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" required pattern="^.+@.+\..+$" title="Mohon masukkan email lengkap dengan domain (contoh: @gmail.com)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Terkait Paket (Opsional)</label>
@@ -182,9 +201,15 @@
         <form id="editTestimonialForm" method="POST" class="space-y-4">
             @csrf
             @method('PUT')
-            <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Jamaah <span class="text-red-500">*</span></label>
-                <input type="text" name="name" id="editTestimoniName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Jamaah <span class="text-red-500">*</span></label>
+                    <input type="text" name="name" id="editTestimoniName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+                    <input type="email" name="email" id="editTestimoniEmail" required pattern="^.+@.+\..+$" title="Mohon masukkan email lengkap dengan domain (contoh: @gmail.com)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1">Terkait Paket (Opsional)</label>
@@ -232,10 +257,197 @@
     </div>
 </div>
 
+<!-- Modal Reply Email -->
+<div id="replyEmailModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto relative">
+        <!-- Premium Loading Overlay -->
+        <div id="emailLoadingOverlay" class="hidden absolute inset-0 bg-white/90 backdrop-blur-sm z-[60] flex flex-col items-center justify-center transition-all duration-300">
+            <div class="relative">
+                <!-- Outer Pulse -->
+                <div class="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
+                <!-- Spinner -->
+                <div class="w-16 h-16 border-4 border-blue-100 border-t-blue-600 rounded-full animate-spin"></div>
+            </div>
+            <h4 class="mt-6 text-xl font-bold text-gray-900">Sedang Mengirim...</h4>
+            <p class="text-gray-500 text-sm mt-2">Mohon tunggu sebentar, pesan Anda sedang diproses.</p>
+        </div>
+
+        <!-- Success Animation Overlay -->
+        <div id="emailSuccessOverlay" class="hidden absolute inset-0 bg-white/95 backdrop-blur-md z-[70] flex flex-col items-center justify-center transition-all duration-500 translate-y-full opacity-0">
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <svg class="w-12 h-12 text-green-600 animate-[bounce_1s_infinite]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            <h4 class="text-2xl font-bold text-gray-900">Berhasil Terkirim!</h4>
+            <p class="text-gray-500 mt-2">Balasan ulasan telah sampai ke Inbox jamaah.</p>
+        </div>
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-gray-900">Kirim Balasan Email</h3>
+            <button onclick="document.getElementById('replyEmailModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+        <form id="replyEmailForm" method="POST" action="" class="space-y-4">
+            @csrf
+            
+            <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100 mb-4">
+                <p class="text-xs text-blue-600 font-bold tracking-widest uppercase mb-1">Kepada:</p>
+                <p id="replyEmailTargetName" class="font-bold text-gray-900"></p>
+                <p id="replyEmailTargetAddress" class="text-sm text-gray-600"></p>
+                
+                <div class="mt-3 pt-3 border-t border-blue-200/50">
+                    <p class="text-xs text-blue-600 font-bold tracking-widest uppercase mb-1">Ulasan Jamaah:</p>
+                    <p id="replyEmailContextMessage" class="text-sm text-gray-700 italic"></p>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Pesan Balasan <span class="text-red-500">*</span></label>
+                <textarea name="reply_message" rows="5" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ketik balasan Anda di sini..."></textarea>
+                <p class="text-xs text-gray-500 mt-2">Pesan ini akan otomatis dikirim ke email jamaah menggunakan template resmi Al-Khairat.</p>
+            </div>
+            
+            <div class="flex space-x-3 pt-4 border-t border-gray-100">
+                <button type="button" onclick="document.getElementById('replyEmailModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
+                <button type="submit" id="submitReplyBtn" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
+                    <svg id="replySubmitIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    <span id="replySubmitText">Kirim Email</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Konfirmasi Hapus -->
+<div id="deleteConfirmModal" class="hidden fixed inset-0 bg-black/60 z-[100] flex items-center justify-center p-4 backdrop-blur-sm transition-all duration-300">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 transform transition-all duration-300 scale-90 opacity-0" id="deleteModalContent">
+        <div class="text-center">
+            <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg class="w-10 h-10 text-red-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Hapus Testimoni?</h3>
+            <p class="text-gray-500 mb-8 px-2">Tindakan ini tidak dapat dibatalkan. Data ulasan jamaah akan dihapus secara permanen dari sistem.</p>
+            
+            <div class="flex flex-col gap-3">
+                <button onclick="executeDelete()" class="w-full py-3.5 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition shadow-lg shadow-red-600/20 active:scale-95">Ya, Hapus Sekarang</button>
+                <button onclick="closeDeleteModal()" class="w-full py-3.5 bg-gray-50 text-gray-600 rounded-xl font-bold hover:bg-gray-100 transition active:scale-95">Batalkan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    function openEditTestimonial(id, name, product_id, message, video_url, rating, status) {
+    let testimonialIdToDelete = null;
+
+    function openDeleteModal(id) {
+        testimonialIdToDelete = id;
+        const modal = document.getElementById('deleteConfirmModal');
+        const content = document.getElementById('deleteModalContent');
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            content.classList.remove('scale-90', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeDeleteModal() {
+        const modal = document.getElementById('deleteConfirmModal');
+        const content = document.getElementById('deleteModalContent');
+        
+        content.classList.add('scale-90', 'opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            testimonialIdToDelete = null;
+        }, 300);
+    }
+
+    function executeDelete() {
+        if (testimonialIdToDelete) {
+            const form = document.getElementById('delete-form-' + testimonialIdToDelete);
+            if (form) {
+                // Show loading on delete button inside modal
+                const deleteBtn = event.target;
+                deleteBtn.disabled = true;
+                deleteBtn.innerHTML = '<span class="flex items-center justify-center gap-2"><svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Menghapus...</span>';
+                
+                form.submit();
+            }
+        }
+    }
+
+    function openReplyModal(id, name, email, message) {
+        document.getElementById('replyEmailForm').action = '/testimonials/' + id + '/reply';
+        document.getElementById('replyEmailTargetName').textContent = name;
+        document.getElementById('replyEmailTargetAddress').textContent = email;
+        document.getElementById('replyEmailContextMessage').textContent = '"' + message + '"';
+        document.getElementById('replyEmailModal').classList.remove('hidden');
+    }
+
+    document.getElementById('replyEmailForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const form = this;
+        const loadingOverlay = document.getElementById('emailLoadingOverlay');
+        const successOverlay = document.getElementById('emailSuccessOverlay');
+        const btn = document.getElementById('submitReplyBtn');
+        
+        // 1. Show Loading
+        loadingOverlay.classList.remove('hidden');
+        loadingOverlay.classList.add('flex');
+        btn.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.status === 'success') {
+                // 2. Transition Loading -> Success
+                loadingOverlay.classList.add('opacity-0');
+                
+                setTimeout(() => {
+                    loadingOverlay.classList.add('hidden');
+                    successOverlay.classList.remove('hidden');
+                    successOverlay.classList.add('flex');
+                    
+                    // Animate Success in
+                    setTimeout(() => {
+                        successOverlay.classList.remove('translate-y-full', 'opacity-0');
+                    }, 50);
+                }, 300);
+
+                // 3. Close Modal & Reload after 2.5s
+                setTimeout(() => {
+                    location.reload();
+                }, 2500);
+
+            } else {
+                throw new Error(data.message || 'Gagal mengirim email.');
+            }
+        } catch (error) {
+            loadingOverlay.classList.add('hidden');
+            btn.disabled = false;
+            alert('Maaf, ada kendala: ' + error.message);
+        }
+    });
+
+    function openEditTestimonial(id, name, email, product_id, message, video_url, rating, status) {
         document.getElementById('editTestimonialForm').action = '/testimonials/' + id;
         document.getElementById('editTestimoniName').value = name;
+        document.getElementById('editTestimoniEmail').value = email || '';
         document.getElementById('editTestimoniProduct').value = product_id || '';
         document.getElementById('editTestimoniMessage').value = message;
         document.getElementById('editTestimoniVideo').value = video_url || '';

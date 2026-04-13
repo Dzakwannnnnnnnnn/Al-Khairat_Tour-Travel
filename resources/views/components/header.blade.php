@@ -11,27 +11,7 @@
                 </svg>
             </button>
 
-            <!-- Global Search -->
-            <div class="hidden sm:flex flex-1 relative group">
-                <form id="global-search-form" action="{{ route('products.index') }}" method="GET" class="w-full relative">
-                    <div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                        <svg class="w-4 h-4 text-slate-400 group-focus-within:text-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                    <input type="text" name="search" id="global-search-input" 
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-12 pr-12 text-sm text-charcoal placeholder-slate-400 outline-none focus:border-orange/50 focus:ring-4 focus:ring-orange/10 transition-all duration-300"
-                        placeholder="Search system... (Ctrl + K)">
-                    
-                    <div class="absolute inset-y-0 right-2 flex items-center">
-                        <button type="button" id="global-voice-search-btn" class="p-2 rounded-lg text-slate-400 hover:bg-orange/10 hover:text-orange transition-all duration-300" title="Voice Search">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </form>
-            </div>
+
         </div>
 
         <!-- Right: Actions & Profile -->
@@ -98,61 +78,4 @@
 </header>
 
 
-<script>
-    // Global Search & Voice Logic
-    document.addEventListener('DOMContentLoaded', () => {
-        const globalSearchInput = document.getElementById('global-search-input');
-        const globalVoiceBtn = document.getElementById('global-voice-search-btn');
-        const globalSearchForm = document.getElementById('global-search-form');
 
-        if (!globalSearchInput) return;
-
-        // Hotkey: Ctrl + K
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                globalSearchInput.focus();
-            }
-        });
-
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'id-ID';
-            recognition.interimResults = false;
-
-            globalVoiceBtn.addEventListener('click', () => {
-                if (globalVoiceBtn.classList.contains('is-listening')) {
-                    recognition.stop();
-                } else {
-                    recognition.start();
-                }
-            });
-
-            recognition.onstart = () => {
-                globalVoiceBtn.classList.add('is-listening', 'animate-pulse', 'text-indigo-400');
-                globalSearchInput.placeholder = "Listening...";
-            };
-
-            recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                globalSearchInput.value = transcript;
-                globalSearchForm.submit();
-            };
-
-            recognition.onerror = () => {
-                globalVoiceBtn.classList.remove('is-listening', 'animate-pulse', 'text-indigo-400');
-                globalSearchInput.placeholder = "Cari apapun...";
-            };
-
-            recognition.onend = () => {
-                globalVoiceBtn.classList.remove('is-listening', 'animate-pulse', 'text-indigo-400');
-                if (!globalSearchInput.value) {
-                    globalSearchInput.placeholder = "Search system... (Ctrl + K)";
-                }
-            };
-        } else if (globalVoiceBtn) {
-            globalVoiceBtn.style.display = 'none';
-        }
-    });
-</script>

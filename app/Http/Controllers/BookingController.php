@@ -39,6 +39,10 @@ class BookingController extends Controller
             'notes' => 'nullable|string',
         ]);
 
+        if ($request->status === 'fully_paid') {
+            return back()->withErrors(['status' => 'Pemesanan baru tidak bisa langsung Lunas. Silakan buat dengan status Pending, lalu proses di Manajemen Pembayaran.'])->withInput();
+        }
+
         $data = $request->all();
         // Generate random booking code
         $data['booking_code'] = 'BKG-' . date('Ymd') . '-' . strtoupper(Str::random(4));
@@ -49,6 +53,7 @@ class BookingController extends Controller
         // Auto-create payment entry with amount equal to product price
         $product = Product::find($request->product_id);
         if ($product) {
+            $product->decrement('stock', $data['booking_seat']);
             Payment::create([
                 'booking_id' => $booking->id,
                 'user_id' => $booking->user_id,
@@ -133,6 +138,9 @@ class BookingController extends Controller
             }
 
             $totalGroupAmount += $price;
+
+            // Decrement stock for each booking in the group
+            $product->decrement('stock', 1);
         }
 
         // Create a single Payment record for the whole group
@@ -202,13 +210,41 @@ class BookingController extends Controller
             'notes' => 'nullable|string',
         ]);
 
+        if ($request->status === 'fully_paid') {
+            $paymentQuery = !empty($booking->group_code) 
+                ? Payment::whereHas('booking', function($query) use ($booking) {
+                    $query->where('group_code', $booking->group_code);
+                }) 
+                : Payment::where('booking_id', $booking->id);
+
+            $payment = $paymentQuery->first();
+            $invalidMethods = ['belum memilih', 'menunggu pembayaran (otomatis)', ''];
+            
+            if ($payment && in_array(strtolower(trim($payment->payment_method)), $invalidMethods)) {
+                return back()->withErrors(['status' => 'Gagal mengubah ke Lunas (Fully Paid). User atau Admin belum menentukan Metode Pembayaran di data transaksi.'])->withInput();
+            }
+        }
+
+        $oldStatus = $booking->status;
         $booking->update($request->all());
+
+        // Handle stock specifically when status changes to/from cancelled
+        if ($oldStatus !== 'cancelled' && $request->status === 'cancelled') {
+            $booking->product->increment('stock', $booking->booking_seat);
+        } elseif ($oldStatus === 'cancelled' && $request->status !== 'cancelled') {
+            $booking->product->decrement('stock', $booking->booking_seat);
+        }
 
         return redirect()->route('bookings.index')->with('success', 'Data Pemesanan berhasil diperbarui!');
     }
 
     public function destroy(Booking $booking)
     {
+        // Return stock if the booking being deleted was active
+        if ($booking->status !== 'cancelled') {
+            $booking->product->increment('stock', $booking->booking_seat);
+        }
+        
         $booking->delete();
         return redirect()->route('bookings.index')->with('success', 'Data Pemesanan berhasil dihapus!');
     }

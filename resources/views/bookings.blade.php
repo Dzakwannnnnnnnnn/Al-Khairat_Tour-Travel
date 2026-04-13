@@ -98,15 +98,17 @@
                             <p class="text-sm text-gray-900">{{ $booking->created_at->format('d M Y') }}</p>
                             <p class="text-xs text-gray-500">{{ $booking->created_at->format('H:i') }}</p>
                         </td>
-                        <td class="px-6 py-4 align-top whitespace-nowrap">
-                            <button onclick="openEditBooking({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->product_id }}', '{{ $booking->status }}', '{{ addslashes($booking->notes) }}')"
-                                    class="text-orange hover:text-gold mr-3 text-xs font-black uppercase tracking-widest transition-colors">Edit</button>
+                        <td class="px-6 py-4 align-top">
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="openEditBooking({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->product_id }}', '{{ $booking->status }}', '{{ addslashes($booking->notes) }}')"
+                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
 
-                            <form method="POST" action="{{ route('bookings.destroy', $booking) }}" class="inline" onsubmit="return confirm('Hapus pemesanan ini secara permanen?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">Hapus</button>
-                            </form>
+                                <form method="POST" action="{{ route('bookings.destroy', $booking) }}" class="inline m-0" onsubmit="return confirm('Hapus pemesanan ini secara permanen?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty

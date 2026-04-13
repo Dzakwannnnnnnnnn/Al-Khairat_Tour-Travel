@@ -82,6 +82,9 @@ class DatabaseSeeder extends Seeder
             'status' => 'active',
         ]);
 
+        // Seed Slideshows
+        $this->call(SlideshowSeeder::class);
+
         // Seed Guides from Config
         $this->call(GuideSeeder::class);
     }

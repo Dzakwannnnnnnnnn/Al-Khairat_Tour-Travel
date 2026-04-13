@@ -60,17 +60,17 @@
                         <span class="text-sm text-gray-900">{{ $user->created_at->format('d M Y') }}</span>
                     </div>
                 </div>
-                <div class="flex space-x-2 border-t border-slate-100 pt-4">
+                <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100">
                     <button onclick="openEditUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ $user->email }}', '{{ $user->role }}')"
-                        class="flex-1 text-orange hover:text-gold font-black text-[10px] uppercase tracking-widest text-center transition-colors">Edit Profile</button>
+                        class="inline-flex flex-1 items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit Profile</button>
                     @if($user->id !== auth()->id())
-                    <form method="POST" action="{{ route('users.destroy', $user) }}" class="flex-1" onsubmit="return confirm('Yakin hapus user ini?')">
+                    <form method="POST" action="{{ route('users.destroy', $user) }}" class="flex-1 m-0" onsubmit="return confirm('Yakin hapus user ini?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="w-full text-red-500 hover:text-red-700 font-bold text-[10px] uppercase tracking-widest transition-colors">Terminate</button>
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Terminate</button>
                     </form>
                     @else
-                    <span class="flex-1 text-slate-300 text-[10px] uppercase tracking-widest text-center font-bold">(Current Admin)</span>
+                    <span class="flex-1 inline-flex items-center justify-center px-3 py-1.5 bg-slate-50 text-slate-400 rounded-lg text-[10px] uppercase tracking-widest font-bold leading-tight">(Current Admin)</span>
                     @endif
                 </div>
 

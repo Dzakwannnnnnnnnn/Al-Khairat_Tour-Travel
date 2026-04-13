@@ -22,26 +22,32 @@
                 @if($product->rundown && is_array($product->rundown))
                     @foreach($product->rundown as $index => $item)
                     <div class="rundown-item bg-gray-50 p-6 rounded-xl border border-gray-200 mb-4">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-bold text-gray-900">Hari {{ $index + 1 }}</h3>
-                            <button type="button" onclick="removeRundownItem({{ $index }})"
-                                class="text-red-600 hover:text-red-900 font-semibold text-sm">
-                                Hapus
-                            </button>
+                        <div class="flex justify-between items-start mb-4 border-b pb-3">
+                            <h3 class="text-lg font-bold text-gray-900 day-title">Hari {{ $index + 1 }}</h3>
+                            <div class="flex items-center space-x-3">
+                                <button type="button" onclick="insertRundownItemAfter(this)"
+                                    class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm">
+                                    + Sisipkan Disini
+                                </button>
+                                <span class="text-gray-300">|</span>
+                                <button type="button" onclick="removeRundown(this)"
+                                    class="text-red-600 hover:text-red-900 font-semibold text-sm">
+                                    Hapus
+                                </button>
+                            </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Hari/Tanggal</label>
-                                <input type="text" name="rundown[{{ $index }}][day]" value="{{ $item['day'] }}"
-                                    placeholder="Hari 1 - 01 Jan 2025"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal</label>
+                                <input type="date" name="rundown[{{ $index }}][day]" value="{{ preg_match('/^\d{4}-\d{2}-\d{2}$/', (string)$item['day']) ? $item['day'] : '' }}"
+                                    class="day-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Aktivitas Kegiatan</label>
                             <textarea name="rundown[{{ $index }}][activities]" rows="5"
                                 placeholder="Jelaskan aktivitas untuk hari ini..."
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none">{{ $item['activities'] }}</textarea>
+                                class="activities-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none">{{ $item['activities'] }}</textarea>
                             <p class="text-xs text-gray-500 mt-1">Gunakan line break untuk membuat poin-poin terpisah</p>
                         </div>
                     </div>
@@ -50,26 +56,32 @@
                     <!-- Default: Create 9 empty rundown items for umrah -->
                     @for($i = 0; $i < 9; $i++)
                     <div class="rundown-item bg-gray-50 p-6 rounded-xl border border-gray-200 mb-4">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-bold text-gray-900">Hari {{ $i + 1 }}</h3>
-                            <button type="button" onclick="removeRundownItem({{ $i }})"
-                                class="text-red-600 hover:text-red-900 font-semibold text-sm">
-                                Hapus
-                            </button>
+                        <div class="flex justify-between items-start mb-4 border-b pb-3">
+                            <h3 class="text-lg font-bold text-gray-900 day-title">Hari {{ $i + 1 }}</h3>
+                            <div class="flex items-center space-x-3">
+                                <button type="button" onclick="insertRundownItemAfter(this)"
+                                    class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm">
+                                    + Sisipkan Disini
+                                </button>
+                                <span class="text-gray-300">|</span>
+                                <button type="button" onclick="removeRundown(this)"
+                                    class="text-red-600 hover:text-red-900 font-semibold text-sm">
+                                    Hapus
+                                </button>
+                            </div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             <div class="col-span-1">
-                                <label class="block text-sm font-semibold text-gray-700 mb-2">Hari/Tanggal</label>
-                                <input type="text" name="rundown[{{ $i }}][day]" value=""
-                                    placeholder="Hari {{ $i + 1 }} - DD Mon YYYY"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal</label>
+                                <input type="date" name="rundown[{{ $i }}][day]" value=""
+                                    class="day-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                             </div>
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">Aktivitas Kegiatan</label>
                             <textarea name="rundown[{{ $i }}][activities]" rows="5"
                                 placeholder="Jelaskan aktivitas untuk hari ini..."
-                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+                                class="activities-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
                             <p class="text-xs text-gray-500 mt-1">Gunakan line break untuk membuat poin-poin terpisah</p>
                         </div>
                     </div>
@@ -96,6 +108,34 @@
     </div>
 </div>
 
+<!-- Custom Confirm Modal -->
+<div id="deleteConfirmModal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+    <div class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity opacity-0" id="deleteModalBackdrop"></div>
+    <div class="bg-white rounded-2xl shadow-2xl z-10 w-full max-w-sm p-6 transform scale-95 opacity-0 transition-all duration-300" id="deleteModalPanel">
+        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-4 mx-auto">
+            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+        <h3 class="text-xl font-bold text-center text-gray-900 mb-2">Hapus Hari?</h3>
+        <p class="text-center text-sm text-gray-500 mb-6 font-medium" id="deleteModalText">Apakah Anda yakin ingin menghapus Hari?</p>
+        <div class="flex gap-3">
+            <button type="button" onclick="closeDeleteModal()" class="flex-1 px-4 py-2 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition">Batal</button>
+            <button type="button" id="confirmDeleteBtn" class="flex-1 px-4 py-2 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition shadow-lg shadow-red-600/30">Ya, Hapus</button>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Toast -->
+<div id="toastNotification" class="fixed bottom-6 right-6 z-[100] transform translate-y-full opacity-0 transition-all duration-300 shadow-2xl rounded-xl pointer-events-none">
+    <div class="bg-gray-900 text-white px-6 py-4 rounded-xl flex items-center gap-3">
+        <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <span class="font-medium text-sm" id="toastText">Hari berhasil dihapus</span>
+    </div>
+</div>
+
 <script>
     document.getElementById('rundownForm').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -105,11 +145,10 @@
 
         // Parse form data
         const items = document.querySelectorAll('.rundown-item');
-        let itemIndex = 0;
 
         items.forEach((item, idx) => {
-            const dayInput = item.querySelector(`input[name="rundown[${idx}][day]"]`);
-            const activitiesInput = item.querySelector(`textarea[name="rundown[${idx}][activities]"]`);
+            const dayInput = item.querySelector('.day-input');
+            const activitiesInput = item.querySelector('.activities-input');
 
             if (dayInput && activitiesInput) {
                 if (dayInput.value.trim() || activitiesInput.value.trim()) {
@@ -153,38 +192,182 @@
         const newItem = document.createElement('div');
         newItem.className = 'rundown-item bg-gray-50 p-6 rounded-xl border border-gray-200 mb-4';
         newItem.innerHTML = `
-            <div class="flex justify-between items-start mb-4">
-                <h3 class="text-lg font-bold text-gray-900">Hari ${itemCount + 1}</h3>
-                <button type="button" onclick="this.parentElement.parentElement.remove()"
-                    class="text-red-600 hover:text-red-900 font-semibold text-sm">
-                    Hapus
-                </button>
+            <div class="flex justify-between items-start mb-4 border-b pb-3">
+                <h3 class="text-lg font-bold text-gray-900 day-title">Hari ${itemCount + 1}</h3>
+                <div class="flex items-center space-x-3">
+                    <button type="button" onclick="insertRundownItemAfter(this)"
+                        class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm">
+                        + Sisipkan Disini
+                    </button>
+                    <span class="text-gray-300">|</span>
+                    <button type="button" onclick="removeRundown(this)"
+                        class="text-red-600 hover:text-red-900 font-semibold text-sm">
+                        Hapus
+                    </button>
+                </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <div class="col-span-1">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Hari/Tanggal</label>
-                    <input type="text" name="rundown[${itemCount}][day]" value=""
-                        placeholder="Hari ${itemCount + 1} - DD Mon YYYY"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal</label>
+                    <input type="date" name="rundown[${itemCount}][day]" value=""
+                        class="day-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
                 </div>
             </div>
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-2">Aktivitas Kegiatan</label>
                 <textarea name="rundown[${itemCount}][activities]" rows="5"
                     placeholder="Jelaskan aktivitas untuk hari ini..."
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+                    class="activities-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
                 <p class="text-xs text-gray-500 mt-1">Gunakan line break untuk membuat poin-poin terpisah</p>
             </div>
         `;
 
-        container.insertBefore(newItem, container.lastElementChild.previousElementSibling);
+        container.appendChild(newItem);
+        updateRundownIndexes();
     }
 
-    function removeRundownItem(index) {
-        const item = document.querySelectorAll('.rundown-item')[index];
-        if (item) {
-            item.remove();
+    function insertRundownItemAfter(button) {
+        const item = button.closest('.rundown-item');
+        const itemCount = document.querySelectorAll('.rundown-item').length;
+
+        const newItem = document.createElement('div');
+        newItem.className = 'rundown-item bg-indigo-50 p-6 rounded-xl border-2 border-indigo-400 mb-4 shadow-lg transform opacity-0 scale-95 transition-all duration-500 ease-out';
+        newItem.innerHTML = `
+            <div class="flex justify-between items-start mb-4 border-b pb-3">
+                <h3 class="text-lg font-bold text-gray-900 day-title">Hari ${itemCount + 1}</h3>
+                <div class="flex items-center space-x-3">
+                    <button type="button" onclick="insertRundownItemAfter(this)"
+                        class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm">
+                        + Sisipkan Disini
+                    </button>
+                    <span class="text-gray-300">|</span>
+                    <button type="button" onclick="removeRundown(this)"
+                        class="text-red-600 hover:text-red-900 font-semibold text-sm">
+                        Hapus
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="col-span-1">
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal</label>
+                    <input type="date" name="rundown[${itemCount}][day]" value=""
+                        class="day-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">Aktivitas Kegiatan</label>
+                <textarea name="rundown[${itemCount}][activities]" rows="5"
+                    placeholder="Jelaskan aktivitas untuk hari ini..."
+                    class="activities-input w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none"></textarea>
+                <p class="text-xs text-gray-500 mt-1">Gunakan line break untuk membuat poin-poin terpisah</p>
+            </div>
+        `;
+
+        item.insertAdjacentElement('afterend', newItem);
+        updateRundownIndexes();
+
+        // 1. Auto-scroll focus gently
+        newItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // 2. Trigger pop-in animation
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                newItem.classList.remove('opacity-0', 'scale-95');
+                newItem.classList.add('opacity-100', 'scale-100');
+            });
+        });
+
+        // 3. Remove highlight slowly to blend in
+        setTimeout(() => {
+            newItem.classList.remove('bg-indigo-50', 'border-2', 'border-indigo-400', 'shadow-lg');
+            newItem.classList.add('bg-gray-50', 'border', 'border-gray-200', 'shadow-sm');
+        }, 1500);
+    }
+
+    let itemToDelete = null;
+
+    function removeRundown(button) {
+        itemToDelete = button.closest('.rundown-item');
+        const dayTitle = itemToDelete.querySelector('.day-title').textContent.trim();
+        
+        document.getElementById('deleteModalText').textContent = `Apakah Anda yakin ingin menghapus ${dayTitle}? Aktivitas di hari ini akan hilang.`;
+        
+        const modal = document.getElementById('deleteConfirmModal');
+        const backdrop = document.getElementById('deleteModalBackdrop');
+        const panel = document.getElementById('deleteModalPanel');
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        
+        setTimeout(() => {
+            backdrop.classList.remove('opacity-0');
+            backdrop.classList.add('opacity-100');
+            panel.classList.remove('scale-95', 'opacity-0');
+            panel.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeDeleteModal() {
+        const modal = document.getElementById('deleteConfirmModal');
+        const backdrop = document.getElementById('deleteModalBackdrop');
+        const panel = document.getElementById('deleteModalPanel');
+        
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0');
+        panel.classList.remove('scale-100', 'opacity-100');
+        panel.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            itemToDelete = null;
+        }, 300);
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+        if(itemToDelete) {
+            const targetItem = itemToDelete;
+            const dayTitle = targetItem.querySelector('.day-title').textContent.trim();
+            
+            // Animate exit
+            targetItem.classList.add('transition-all', 'duration-[400ms]', 'ease-in', 'scale-90', 'opacity-0', 'bg-red-50', 'border-red-400');
+            
+            // Remove after animation finishes
+            setTimeout(() => {
+                targetItem.remove();
+                updateRundownIndexes();
+            }, 400);
+            
+            closeDeleteModal();
+            showToast(`${dayTitle} berhasil dihapus dari tampilan.`);
         }
+    });
+
+    function showToast(message) {
+        const toast = document.getElementById('toastNotification');
+        document.getElementById('toastText').textContent = message;
+        
+        toast.classList.remove('translate-y-full', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        
+        setTimeout(() => {
+            toast.classList.remove('translate-y-0', 'opacity-100');
+            toast.classList.add('translate-y-full', 'opacity-0');
+        }, 3000);
+    }
+
+    function updateRundownIndexes() {
+        const items = document.querySelectorAll('.rundown-item');
+        items.forEach((item, index) => {
+            const title = item.querySelector('.day-title');
+            if (title) title.textContent = 'Hari ' + (index + 1);
+            
+            const dayInput = item.querySelector('.day-input');
+            if (dayInput) dayInput.name = 'rundown[' + index + '][day]';
+            
+            const activitiesInput = item.querySelector('.activities-input');
+            if (activitiesInput) activitiesInput.name = 'rundown[' + index + '][activities]';
+        });
     }
 </script>
 @endsection

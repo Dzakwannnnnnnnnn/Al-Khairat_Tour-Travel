@@ -55,6 +55,11 @@ class PaymentController extends Controller
 
         $data = $request->except(['proof_image']);
 
+        $invalidMethods = ['belum memilih', 'menunggu pembayaran (otomatis)', ''];
+        if ($request->status === 'verified' && in_array(strtolower(trim($request->payment_method)), $invalidMethods)) {
+            return back()->withErrors(['payment_method' => 'Tidak bisa set ke Lunas (Verified)! Metode pembayaran belum dipilih.'])->withInput();
+        }
+
         if ($request->hasFile('proof_image')) {
             $path = $request->file('proof_image')->store('public/payments');
             $data['proof_image'] = str_replace('public/', '', $path);
@@ -79,6 +84,11 @@ class PaymentController extends Controller
         ]);
 
         $data = $request->except(['proof_image']);
+
+        $invalidMethods = ['belum memilih', 'menunggu pembayaran (otomatis)', ''];
+        if ($request->status === 'verified' && in_array(strtolower(trim($request->payment_method)), $invalidMethods)) {
+            return back()->withErrors(['payment_method' => 'Tidak bisa set ke Lunas (Verified)! Metode pembayaran belum dipilih.'])->withInput();
+        }
 
         if ($request->hasFile('proof_image')) {
             // Delete old image if exists

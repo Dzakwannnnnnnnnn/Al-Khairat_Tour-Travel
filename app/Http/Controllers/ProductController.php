@@ -60,9 +60,11 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('products', 'public');
         }
 
-        // Convert features from comma-separated to array
+        // Convert features from newline-separated to array
         if ($request->filled('features')) {
-            $data['features'] = array_map('trim', explode(',', $request->features));
+            $data['features'] = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $request->features))));
+        } else {
+            $data['features'] = [];
         }
 
         $data['rundown'] = null; // Initialize rundown as null, will be edited separately
@@ -99,9 +101,9 @@ class ProductController extends Controller
             $data['image'] = $request->file('image')->store('products', 'public');
         }
 
-        // Convert features from comma-separated to array
+        // Convert features from newline-separated to array
         if ($request->filled('features')) {
-            $data['features'] = array_map('trim', explode(',', $request->features));
+            $data['features'] = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $request->features))));
         } else {
             $data['features'] = [];
         }

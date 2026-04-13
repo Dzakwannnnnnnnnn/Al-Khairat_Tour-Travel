@@ -100,18 +100,20 @@
                                 {{ $statusLabels[$payment->status] ?? $payment->status }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top whitespace-nowrap">
-                            <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
-                                    class="text-orange hover:text-gold mr-3 text-sm font-medium uppercase tracking-widest">Edit</button>
-                            @if(optional($payment->booking)->group_code)
-                            <a href="{{ route('booking.invoice', $payment->booking->group_code) }}" target="_blank" class="text-emerald-600 hover:text-emerald-700 mr-3 text-sm font-medium uppercase tracking-widest">Invoice</a>
-                            @endif
+                        <td class="px-6 py-4 align-top">
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
+                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
+                                @if(optional($payment->booking)->group_code)
+                                <a href="{{ route('booking.invoice', $payment->booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Invoice</a>
+                                @endif
 
-                            <form method="POST" action="{{ route('payments.destroy', $payment) }}" class="inline" onsubmit="return confirm('Hapus histori pembayaran ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-medium">Hapus</button>
-                            </form>
+                                <form method="POST" action="{{ route('payments.destroy', $payment) }}" class="inline m-0" onsubmit="return confirm('Hapus histori pembayaran ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     @empty
