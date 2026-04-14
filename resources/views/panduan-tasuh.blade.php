@@ -24,8 +24,11 @@
     <!-- Floating Navigation Dock -->
     @include('components.dock-navigation')
 
+    <!-- Spacer for fixed header on mobile -->
+    <div class="lg:hidden" style="height: 90px !important;"></div>
+
     <!-- Main Content -->
-    <main class="min-h-screen pt-32 sm:pt-28 md:pt-40 lg:pt-44 pb-10 lg:pb-40">
+    <main class="min-h-screen pt-2 pb-10 lg:pb-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Section -->
             <div class="text-center mb-16 scroll-animate" data-animation="fade-up">

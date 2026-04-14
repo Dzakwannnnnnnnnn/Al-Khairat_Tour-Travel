@@ -69,12 +69,12 @@
         <!-- Content Overlay -->
         <div class="absolute inset-0 flex items-center justify-center z-20">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight drop-shadow-lg">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-5xl font-serif font-bold mb-3 md:mb-6 leading-tight drop-shadow-lg px-2">
                     Perjalanan Penuh <span class="text-gold">Kehangatan</span>
                 </h1>
-                <p class="text-lg md:text-xl lg:text-2xl 2xl:text-xl font-medium mb-2 md:mb-4 drop-shadow-lg">Pelayanan Secerah Mentari</p>
-                <p class="text-sm md:text-base lg:text-lg 2xl:text-base mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-                    Wujudkan impian spiritual Anda dengan layanan umroh terpercaya. Nikmati pengalaman tak terlupakan dengan memenuhi setiap kebutuhan perjalanan Anda dengan penuh kehangatan dan profesionalisme.
+                <p class="text-base md:text-xl lg:text-2xl 2xl:text-xl font-medium mb-1 md:mb-4 drop-shadow-lg">Pelayanan Secerah Mentari</p>
+                <p class="text-xs md:text-base lg:text-lg 2xl:text-base mb-6 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-4 opacity-90">
+                    Wujudkan impian spiritual Anda dengan layanan umroh terpercaya. Nikmati pengalaman tak terlupakan dengan penuh kehangatan dan profesionalisme.
                 </p>
                 
                 <!-- CTA Buttons -->
@@ -145,8 +145,8 @@
                     </div>
                 </div>
                 
-                <div class="relative scroll-animate flex justify-center" data-animation="fade-left">
-                    <div class="w-full max-w-[350px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl relative z-10 border-4 border-white dark:border-surface transition-colors duration-500 bg-black">
+                <div class="relative scroll-animate flex justify-center mt-8 lg:mt-0" data-animation="fade-left">
+                    <div class="w-full max-w-[320px] sm:max-w-[350px] aspect-[4/5] sm:aspect-[9/16] rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-2xl relative z-10 border-4 border-white dark:border-surface transition-all duration-500 bg-black">
                         <video 
                             autoplay 
                             muted 
@@ -176,7 +176,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
                 <!-- Feature 1 -->
                 <div class="text-center p-4 md:p-6 rounded-lg md:rounded-xl bg-surface border-2 border-border hover:border-orange transition group scroll-animate" data-animation="slide-up" data-delay="0">
                     <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-gradient-sunset flex items-center justify-center mx-auto mb-3 md:mb-4 text-xl md:text-2xl group-hover:shadow-lg group-hover:scale-110 transition flex-shrink-0">
@@ -255,18 +255,18 @@
                                 <div class="w-full h-full bg-gradient-sunset"></div>
                             @endif
                         </div>
-                        <div class="p-5 md:p-8 flex flex-col flex-grow">
+                        <div class="p-4 sm:p-5 md:p-8 flex flex-col flex-grow">
                             <div class="flex-grow">
-                                <h3 class="text-xl md:text-2xl font-serif font-bold text-charcoal mb-2">{{ strtoupper($product->name) }}</h3>
-                                <p class="text-brown text-xs md:text-sm mb-1">Umroh {{ $product->duration }}</p>
+                                <h3 class="text-lg sm:text-xl md:text-2xl font-serif font-bold text-charcoal mb-1 sm:mb-2">{{ strtoupper($product->name) }}</h3>
+                                <p class="text-brown text-[10px] sm:text-xs md:text-sm mb-1">Umroh {{ $product->duration }}</p>
                                 @if($product->departure_date)
-                                <p class="text-xs font-semibold text-orange mb-4 flex items-center gap-1">
+                                <p class="text-[10px] sm:text-xs font-semibold text-orange mb-3 sm:mb-4 flex items-center gap-1">
                                     <span>📅</span> Berangkat: {{ $product->departure_date->translatedFormat('d F Y') }}
                                 </p>
                                 @else
-                                <p class="text-xs text-text/40 italic mb-4">📅 Jadwal segera diumumkan</p>
+                                <p class="text-[10px] sm:text-xs text-text/40 italic mb-3 sm:mb-4">📅 Jadwal segera diumumkan</p>
                                 @endif
-                                <p class="text-2xl md:text-3xl font-bold text-orange mb-6 text-brand">
+                                <p class="text-xl sm:text-2xl md:text-3xl font-bold text-orange mb-4 sm:mb-6 text-brand">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </p>
                                 
@@ -338,7 +338,7 @@
 
             <!-- Video Container (Centred & Scaled Down) -->
             <div class="max-w-4xl mx-auto scroll-animate" data-animation="fade-up">
-                <div class="relative group rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-2xl bg-black border-4 border-white dark:border-surface transition-all duration-500">
+                <div class="relative group rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl bg-black border-2 md:border-4 border-white dark:border-surface transition-all duration-500">
                     <video 
                         id="manasik-video"
                         controls
@@ -420,13 +420,13 @@
             </div>
             @endif
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
                 @forelse($testimonials as $index => $t)
                 <!-- Dynamic Testimonial -->
-                <div class="bg-surface rounded-lg md:rounded-xl p-4 md:p-6 lg:p-8 border-l-4 border-orange hover:shadow-lg transition scroll-animate" data-animation="slide-up" data-delay="{{ $index * 100 }}">
-                    <div class="flex items-center space-x-1 mb-3 md:mb-4">
+                <div class="bg-surface rounded-xl md:rounded-2xl p-5 md:p-8 border-l-4 border-orange hover:shadow-xl transition-all duration-300 scroll-animate" data-animation="slide-up" data-delay="{{ $index * 100 }}">
+                    <div class="flex items-center space-x-1 mb-3 md:mb-5">
                         @for($i = 0; $i < $t->rating; $i++)
-                        <span class="text-lg md:text-2xl">⭐</span>
+                        <span class="text-base md:text-xl">⭐</span>
                         @endfor
                     </div>
                     <p class="text-text/70 mb-4 md:mb-6 italic text-xs md:text-sm line-clamp-4" title="{{ $t->message }}">
@@ -461,7 +461,7 @@
             </div>
 
             <!-- Modal Form Submit Testimoni -->
-            <div id="testimoniFormModal" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm hidden flex-col items-center justify-center p-4">
+            <div id="testimoniFormModal" class="fixed inset-0 z-[2000] bg-black/60 backdrop-blur-sm hidden flex-col items-center justify-center p-4">
                 <div class="bg-surface rounded-2xl p-6 md:p-8 shadow-2xl border border-border w-full max-w-3xl relative max-h-[90vh] overflow-y-auto animate-[slide-up_0.3s_ease-out]" onclick="event.stopPropagation()">
                     <!-- Close button -->
                     <button onclick="toggleTestimoniModal(false)" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition text-2xl font-bold bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm">&times;</button>
@@ -604,59 +604,59 @@
     <x-contact-section />
 
     <!-- Product Detail Modal -->
-    <div id="product-detail-modal" class="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div class="bg-surface w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl animate-[slide-up_0.4s_ease-out] relative max-h-[90vh] flex flex-col md:flex-row">
+    <div id="product-detail-modal" class="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-surface w-full max-w-4xl rounded-3xl shadow-2xl animate-[slide-up_0.4s_ease-out] relative max-h-[90vh] flex flex-col md:flex-row overflow-y-auto md:overflow-hidden">
             <!-- Close Button -->
-            <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-50 bg-charcoal/10 hover:bg-orange/20 text-charcoal hover:text-orange rounded-full p-2 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-50 bg-white/20 backdrop-blur-md hover:bg-orange/20 text-charcoal hover:text-orange rounded-full p-2.5 transition shadow-lg">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
             <!-- Image Side -->
-            <div class="w-full md:w-1/2 h-64 md:h-auto relative">
+            <div class="w-full md:w-1/2 h-52 sm:h-64 md:h-auto relative">
                 <img id="detail-image" src="" alt="" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div class="absolute bottom-6 left-6 text-white">
-                    <span id="detail-category" class="bg-orange px-3 py-1 rounded-full text-xs font-bold uppercase mb-2 inline-block"></span>
-                    <h3 id="detail-name" class="text-3xl font-serif font-bold leading-tight"></h3>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 md:bottom-8 md:left-8 text-white">
+                    <span id="detail-category" class="bg-orange px-2.5 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase mb-2 inline-block shadow-lg"></span>
+                    <h3 id="detail-name" class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-serif font-bold leading-tight"></h3>
                 </div>
             </div>
 
             <!-- Content Side -->
-            <div class="w-full md:w-1/2 p-6 md:p-10 overflow-y-auto bg-surface">
-                <div class="mb-8">
-                    <p class="text-orange text-3xl font-bold mb-1" id="detail-price"></p>
-                    <p class="text-text/60 text-sm font-medium" id="detail-duration"></p>
-                    <div id="detail-departure-container" class="mt-3 flex items-center gap-2 bg-orange/5 border border-orange/10 rounded-xl px-4 py-2.5">
-                        <span class="text-orange text-lg">📅</span>
+            <div class="w-full md:w-1/2 p-5 sm:p-6 md:p-10 md:overflow-y-auto bg-surface">
+                <div class="mb-6 md:mb-8">
+                    <p class="text-orange text-2xl md:text-3xl lg:text-4xl font-bold mb-1" id="detail-price"></p>
+                    <p class="text-text/60 text-[10px] md:text-sm font-medium tracking-wide" id="detail-duration"></p>
+                    <div id="detail-departure-container" class="mt-4 flex items-center gap-3 bg-orange/5 border border-orange/10 rounded-2xl px-4 py-3 md:py-4">
+                        <span class="text-orange text-xl">📅</span>
                         <div>
-                            <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest">Estimasi Berangkat</p>
-                            <p class="font-bold text-text text-sm" id="detail-departure-date"></p>
+                            <p class="text-[9px] md:text-[10px] font-bold text-text/40 uppercase tracking-widest leading-none mb-1">Estimasi Berangkat</p>
+                            <p class="font-bold text-text text-sm md:text-base" id="detail-departure-date"></p>
                         </div>
                     </div>
                 </div>
 
                 <div class="space-y-6">
                     <div>
-                        <h4 class="text-lg font-bold text-text mb-2">Deskripsi Paket</h4>
-                        <p id="detail-description" class="text-text/70 text-sm leading-relaxed"></p>
+                        <h4 class="text-base md:text-lg font-bold text-text mb-2">Deskripsi Paket</h4>
+                        <p id="detail-description" class="text-text/70 text-xs md:text-sm leading-relaxed"></p>
                     </div>
 
                     <div>
-                        <h4 class="text-lg font-bold text-text mb-3">Apa yang Anda Dapatkan?</h4>
-                        <ul id="detail-features" class="grid grid-cols-1 gap-2">
+                        <h4 class="text-base md:text-lg font-bold text-text mb-3">Apa yang Anda Dapatkan?</h4>
+                        <ul id="detail-features" class="grid grid-cols-1 gap-2.5">
                             <!-- Features will be injected here -->
                         </ul>
                     </div>
                 </div>
 
-                <div class="mt-10 pt-6 border-t border-border flex flex-col sm:flex-row gap-4">
-                    <button onclick="openBookingModal()" class="flex-1 text-center bg-orange text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-orange-bright hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                        Daftar Sekarang
+                <div class="mt-8 md:mt-12 pt-6 border-t border-border flex flex-col sm:flex-row gap-3">
+                    <button onclick="openBookingModal()" class="flex-1 text-center bg-orange text-white font-bold py-3.5 md:py-4 rounded-2xl shadow-xl shadow-orange/20 hover:bg-orange-bright hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        <span class="text-sm md:text-base">Daftar Sekarang</span>
                     </button>
-                    <a id="detail-wa-link" href="" target="_blank" class="flex-1 text-center bg-charcoal text-white font-bold py-4 rounded-2xl shadow-lg hover:bg-black hover:scale-[1.02] transition-transform flex items-center justify-center gap-3">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
-                        Tanya Jadwal
+                    <a id="detail-wa-link" href="" target="_blank" class="flex-1 text-center bg-charcoal text-white font-bold py-3.5 md:py-4 rounded-2xl shadow-lg hover:bg-black hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 00(5.912) 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                        <span class="text-sm md:text-base">Tanya Jadwal</span>
                     </a>
                 </div>
             </div>
@@ -664,24 +664,24 @@
     </div>
 
     <!-- Booking Form Modal -->
-    <div id="booking-modal" class="fixed inset-0 z-[2000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div id="booking-modal" class="fixed inset-0 z-[3000] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-surface w-full max-w-2xl rounded-[2.5rem] overflow-hidden shadow-2xl animate-[scaleUp_0.4s_ease-out] relative">
             <button onclick="closeBookingModal()" class="absolute top-6 right-6 z-50 bg-charcoal/10 hover:bg-orange/20 text-charcoal hover:text-orange rounded-full p-2 transition">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <div class="p-8 md:p-12 overflow-y-auto max-h-[90vh]">
-                <div class="text-center mb-8">
-                    <h3 class="text-3xl font-serif font-bold text-charcoal mb-2">Form Pendaftaran</h3>
-                    <p class="text-brown text-sm">Silakan lengkapi data diri Anda untuk pendaftaran paket <span id="booking-target-name" class="font-bold text-orange"></span></p>
+            <div class="p-6 md:p-12 overflow-y-auto max-h-[90vh]">
+                <div class="text-center mb-6 md:mb-8">
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-charcoal mb-2">Form Pendaftaran</h3>
+                    <p class="text-brown text-xs md:text-sm">Silakan lengkapi data diri Anda untuk pendaftaran paket <span id="booking-target-name" class="font-bold text-orange"></span></p>
                 </div>
 
-                <form action="{{ route('bookings.public') }}" method="POST" class="space-y-5">
+                <form action="{{ route('bookings.public') }}" method="POST" class="space-y-4 md:space-y-5">
                     @csrf
                     <input type="hidden" name="product_id" id="booking-product-id">
                     
                     <div>
-                        <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Nama Lengkap (Sesuai Paspor/KTP)</label>
-                        <input type="text" name="full_name" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Contoh: Farrel Azam">
+                        <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">Nama Lengkap</label>
+                        <input type="text" name="full_name" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base" placeholder="Nama Lengkap">
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -711,7 +711,7 @@
                         <textarea name="address" required rows="3" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jl. Mawar No. 123, Jakarta Baru">{{ Auth::user()->address ?? '' }}</textarea>
                     </div>
 
-                    <button type="submit" class="w-full bg-gradient-sunset text-white font-bold py-5 rounded-2xl shadow-xl hover:shadow-orange/30 hover:-translate-y-1 transition duration-300 transform active:scale-95">
+                    <button type="submit" class="w-full bg-gradient-sunset text-white font-bold py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-orange/30 hover:-translate-y-1 transition duration-300 transform active:scale-95 text-sm md:text-base">
                         Selesaikan Pendaftaran
                     </button>
                     

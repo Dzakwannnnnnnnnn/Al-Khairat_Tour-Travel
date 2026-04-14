@@ -223,7 +223,7 @@
 </div>
 
 <!-- Consolidated Search Overlay -->
-<div id="search-overlay" class="fixed inset-0 z-[1000] bg-bg/95 backdrop-blur-2xl opacity-0 invisible transition-all duration-500 flex flex-col items-center justify-start pt-20 md:pt-32 px-4">
+<div id="search-overlay" class="fixed inset-0 z-[4000] bg-bg/95 backdrop-blur-2xl opacity-0 invisible pointer-events-none transition-all duration-500 flex flex-col items-center justify-start pt-20 md:pt-32 px-4">
     <button onclick="window.toggleSearch()" class="absolute top-6 right-6 md:top-8 md:right-8 text-text/50 hover:text-orange transition-all p-2 rounded-full hover:bg-orange/10">
         <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
     </button>
@@ -271,7 +271,7 @@
 </div>
 
 <!-- Voice Search Overlay -->
-<div id="voice-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center opacity-0 invisible transition-all duration-500">
+<div id="voice-overlay" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[9999] flex flex-col items-center justify-center opacity-0 invisible pointer-events-none transition-all duration-500">
     <button onclick="closeVoiceSearch()" class="absolute top-8 right-8 text-white/50 hover:text-white transition-colors">
         <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
@@ -399,17 +399,15 @@
     // Search Functions
     function toggleSearch() {
         const overlay = document.getElementById('search-overlay');
-        const input = document.getElementById('search-input');
+        overlay.classList.toggle('opacity-0');
+        overlay.classList.toggle('invisible');
+        overlay.classList.toggle('pointer-events-none');
         
-        if (overlay.classList.contains('invisible')) {
-            overlay.classList.remove('invisible', 'opacity-0');
-            overlay.classList.add('visible', 'opacity-100');
-            setTimeout(() => input.focus(), 300);
-            document.body.style.overflow = 'hidden'; 
+        if (!overlay.classList.contains('invisible')) {
+            document.getElementById('search-input').focus();
+            document.body.style.overflow = 'hidden';
         } else {
-            overlay.classList.remove('visible', 'opacity-100');
-            overlay.classList.add('invisible', 'opacity-0');
-            document.body.style.overflow = ''; 
+            document.body.style.overflow = '';
         }
     }
 
@@ -422,14 +420,14 @@
     // Voice Search
     function openVoiceSearch() {
         const overlay = document.getElementById('voice-overlay');
-        overlay.classList.remove('invisible', 'opacity-0');
+        overlay.classList.remove('invisible', 'opacity-0', 'pointer-events-none');
         overlay.classList.add('visible', 'opacity-100');
         startSpeechRecognition();
     }
 
     function closeVoiceSearch() {
         const overlay = document.getElementById('voice-overlay');
-        overlay.classList.add('invisible', 'opacity-0');
+        overlay.classList.add('invisible', 'opacity-0', 'pointer-events-none');
         overlay.classList.remove('visible', 'opacity-100');
         if (window.currentRecognition) {
             window.currentRecognition.stop();
