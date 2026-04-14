@@ -22,7 +22,7 @@
     @include('components.dock-navigation')
     <div class="lg:hidden" style="height: 90px !important;"></div>
 
-    <main class="min-h-screen pt-2 pb-24 px-4 sm:px-6 lg:px-8">
+    <main class="min-h-screen pt-2 lg:pt-44 pb-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <!-- Breadcrumb -->
             <nav class="flex flex-wrap gap-y-2 mb-8 text-sm md:text-base font-medium lg:pl-44 xl:pl-52">

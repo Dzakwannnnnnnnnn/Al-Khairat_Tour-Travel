@@ -28,7 +28,7 @@
     <div class="lg:hidden" style="height: 90px !important;"></div>
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-2 pb-32 md:pb-40">
+    <main class="min-h-screen pt-2 lg:pt-44 pb-32 md:pb-40">
         <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <!-- Breadcrumb -->
             <div class="flex flex-wrap items-center gap-y-2 gap-x-1 mb-6 md:mb-8 text-xs sm:text-sm text-text/60 pb-2">
