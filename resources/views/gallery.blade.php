@@ -33,7 +33,7 @@
 
     <!-- Page Header -->
     <div class="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-cream to-white border-b border-orange/10 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-sunset rounded-full filter blur-3xl opacity-20 transform translate-x-1/3 -translate-y-1/2"></div>
+        <!-- decorative blob removed -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <div class="inline-flex items-center space-x-2 bg-orange/10 px-4 py-1.5 rounded-full text-xs font-bold text-orange mb-4 shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>

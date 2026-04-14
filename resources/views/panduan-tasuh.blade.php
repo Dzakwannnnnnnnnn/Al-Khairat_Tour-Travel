@@ -17,7 +17,7 @@
         }
     </script>
 </head>
-<body class="bg-bg font-sans text-text transition-colors duration-500">
+<body class="bg-bg font-sans text-text transition-colors duration-500 pb-10 lg:pb-40">
     <!-- Logo Header -->
     <x-logo-header />
 
@@ -25,7 +25,7 @@
     @include('components.dock-navigation')
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-32 sm:pt-28 md:pt-40 lg:pt-44 pb-20">
+    <main class="min-h-screen pt-32 sm:pt-28 md:pt-40 lg:pt-44 pb-10 lg:pb-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header Section -->
             <div class="text-center mb-16 scroll-animate" data-animation="fade-up">

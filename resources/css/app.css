@@ -408,7 +408,22 @@ html {
 .dock-container {
     @apply fixed bottom-6 left-1/2 -translate-x-1/2 z-[999] flex items-center justify-center pointer-events-none;
     width: 100% !important;
-    padding: 0 1rem;
+    max-width: 95vw;
+    padding: 0 0.5rem;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s;
+    will-change: transform, opacity;
+}
+
+/* Hide on Mobile/Tablet */
+@media (max-width: 1023px) {
+    .dock-container {
+        display: none !important;
+    }
+}
+
+.dock-hidden {
+    transform: translate(-50%, 150%) scale(0.9);
+    opacity: 0;
 }
 
 .dock-wrapper {
@@ -427,7 +442,7 @@ html {
 }
 
 .dock-item {
-    @apply relative flex flex-col items-center justify-center p-1 md:p-3 2xl:p-2 rounded-xl transition-all duration-300;
+    @apply relative flex flex-col items-center justify-center px-3 py-1.5 rounded-2xl transition-all duration-300 hover:bg-orange/10 flex-shrink-0;
 }
 
 .dock-item:hover {
@@ -456,6 +471,27 @@ html {
     .dock-icon {
         @apply w-6 h-6;
     }
+}
+
+.dock-item-active-dot {
+    @apply absolute -bottom-1 w-1 h-1 bg-orange rounded-full opacity-0 scale-0 transition-all duration-300;
+}
+
+/* Mobile Side Drawer Styles */
+.mobile-menu-item {
+    @apply flex flex-col items-center justify-center p-4 bg-white/5 border border-white/10 rounded-2xl transition-all duration-300 hover:bg-orange/10 hover:border-orange/20 active:scale-95;
+}
+
+.menu-icon-box {
+    @apply w-12 h-12 rounded-xl bg-gradient-to-br from-orange/20 to-orange/5 flex items-center justify-center text-orange mb-3 transition-transform duration-300 group-hover:scale-110;
+}
+
+.mobile-tool-btn {
+    @apply flex flex-col items-center justify-center transition-all duration-300 active:scale-95 text-text/60 hover:text-orange;
+}
+
+.tool-icon-box {
+    @apply w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-orange/10 group-hover:border-orange/20;
 }
 
 .dock-active-dot {

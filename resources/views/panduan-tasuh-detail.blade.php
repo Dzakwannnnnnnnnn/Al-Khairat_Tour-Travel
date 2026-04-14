@@ -17,7 +17,7 @@
         }
     </script>
 </head>
-<body class="bg-bg font-sans text-text transition-colors duration-500">
+<body class="bg-bg font-sans text-text transition-colors duration-500 pb-32 md:pb-40">
     <!-- Logo Header -->
     <x-logo-header />
 
@@ -25,7 +25,7 @@
     @include('components.dock-navigation')
 
     <!-- Main Content -->
-    <main class="min-h-screen pt-32 sm:pt-28 md:pt-40 lg:pt-44 pb-16 md:pb-20">
+    <main class="min-h-screen pt-32 sm:pt-28 md:pt-40 lg:pt-44 pb-32 md:pb-40">
         <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
             <!-- Breadcrumb -->
             <div class="flex flex-wrap items-center gap-1 mb-6 md:mb-8 text-xs sm:text-sm text-text/60 overflow-x-auto pb-2">

@@ -1,4 +1,4 @@
-<div id="main-logo-header" class="fixed top-0 left-0 z-[100] pointer-events-none transition-all duration-500 ease-in-out p-4 md:p-8">
+<div id="main-logo-header" class="fixed top-0 left-0 w-full z-[100] pointer-events-none transition-all duration-500 ease-in-out p-4 md:p-8 flex items-center justify-between">
     <!-- Logo Section -->
     <a href="{{ route('home') }}" class="flex items-center gap-4 group pointer-events-auto transform-gpu transition-all duration-500 origin-left" id="logo-wrapper">
         <div class="relative shrink-transition">
@@ -15,6 +15,20 @@
             <p class="text-[12px] font-sans font-bold text-[#8B4513] tracking-[0.4em] uppercase mt-2 logo-subtitle opacity-80">Tour & Travel</p>
         </div>
     </a>
+
+    <!-- Mobile Navigation Trigger (Top Right) -->
+    <div class="lg:hidden pointer-events-auto" id="mobile-trigger">
+        <button onclick="window.toggleMobileMenu()" class="p-3 bg-surface/80 dark:bg-surface/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl shadow-xl text-text hover:text-orange transition-all group scale-trigger">
+            <div class="relative w-8 h-8">
+                <svg id="menu-icon-closed" class="absolute inset-0 w-full h-full transition-all duration-500 opacity-100 scale-100 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+                <svg id="menu-icon-opened" class="absolute inset-0 w-full h-full transition-all duration-500 opacity-0 scale-50 rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+        </button>
+    </div>
 </div>
 
 @push('scripts')
@@ -66,10 +80,13 @@
     /* Mobile Shrink */
     @media (max-width: 767px) {
         .header-scrolled {
-            padding: 0.5rem !important;
+            padding: 0.5rem 1rem !important;
         }
         .header-scrolled .logo-img {
             height: 3.5rem !important; /* h-14 */
+        }
+        .header-scrolled .scale-trigger {
+            transform: scale(0.9);
         }
     }
 
