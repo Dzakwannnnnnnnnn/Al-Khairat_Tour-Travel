@@ -3,21 +3,20 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-6">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-slate-800">Pengaturan Variabel (Key-Value)</h2>
-                <p class="text-sm text-slate-500 mt-1">Konfigurasi dinamis untuk kontak, sosmed, rekening, dan info esensial.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Pengaturan Variabel</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 mt-1">Konfigurasi dinamis kontak dan info esensial.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addSettingModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addSettingModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah Config</span>
         </button>
-
     </div>
 
     <!-- Alert -->
@@ -43,8 +42,8 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
+    <div class="bg-white rounded-[1.5rem] shadow-sm overflow-hidden border border-slate-100">
+        <div class="overflow-x-auto dashboard-scroll">
             <table class="w-full min-w-[800px]">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>

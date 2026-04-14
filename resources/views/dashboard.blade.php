@@ -6,18 +6,18 @@
 @section('content')
     <div class="space-y-12">
         <!-- Welcome Hero Section -->
-        <div class="relative overflow-hidden rounded-[2rem] p-8 md:p-12 gradient-sunset border border-orange/20 group shadow-2xl shadow-orange/20">
+        <div class="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-12 gradient-sunset border border-orange/20 group shadow-2xl shadow-orange/20">
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/10 blur-[100px] rounded-full group-hover:bg-white/20 transition-all duration-700"></div>
-            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
                 <div>
-                    <h1 class="text-4xl md:text-5xl font-serif font-bold text-white leading-tight">
-                        Selamat Datang, <span class="text-white decoration-gold underline underline-offset-8">{{ explode(' ', auth()->user()->name)[0] }}</span>!
+                    <h1 class="text-xl md:text-5xl font-serif font-bold text-white leading-tight">
+                        Selamat Datang, <br class="md:hidden"> <span class="text-white decoration-gold underline underline-offset-4 md:underline-offset-8">{{ explode(' ', auth()->user()->name)[0] }}</span>!
                     </h1>
-                    <p class="text-white/80 mt-6 text-lg max-w-xl font-medium">
-                        Akses kendali penuh untuk operasional Al-Khairat Tour & Travel. <br class="hidden md:block"> Semuanya terpantau dalam satu dashboard premium.
+                    <p class="text-white/80 mt-2 md:mt-6 text-[10px] md:text-lg max-w-xl font-medium">
+                        Akses kendali operasional Al-Khairat. <br class="hidden md:block"> Semuanya terpantau dalam satu dashboard premium.
                     </p>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="hidden md:flex items-center gap-4">
                     <div class="text-right hidden sm:block">
                         <p class="text-[10px] text-white/60 font-bold uppercase tracking-[0.2em] mb-1">Status Sistem</p>
                         <p class="text-emerald-300 font-bold flex items-center justify-end gap-2 text-sm italic">
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
             <!-- Total Users -->
             <div class="dashboard-card group animate-[fadeUp_1s_ease-out_0.1s_both]">
                 <div class="flex items-start justify-between">
@@ -39,8 +39,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                             </svg>
                         </div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Jamaah</p>
-                        <p class="text-3xl font-black text-charcoal mt-2 leading-none">{{ number_format($totalUsers) }}</p>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Jamaah</p>
+                        <p class="text-xl md:text-3xl font-black text-charcoal mt-1 md:mt-2 leading-none">{{ number_format($totalUsers) }}</p>
                     </div>
                     <div class="text-emerald-600 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-lg">
                         +12%
@@ -57,8 +57,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                             </svg>
                         </div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Paket Layanan</p>
-                        <p class="text-3xl font-black text-charcoal mt-2 leading-none">{{ $totalProducts }}</p>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Paket Layanan</p>
+                        <p class="text-xl md:text-3xl font-black text-charcoal mt-1 md:mt-2 leading-none">{{ $totalProducts }}</p>
                     </div>
                 </div>
             </div>
@@ -72,8 +72,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Running Tours</p>
-                        <p class="text-3xl font-black text-charcoal mt-2 leading-none">{{ $activeProducts }}</p>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Running Tours</p>
+                        <p class="text-xl md:text-3xl font-black text-charcoal mt-1 md:mt-2 leading-none">{{ $activeProducts }}</p>
                     </div>
                     <div class="text-orange text-[10px] font-bold border border-orange/20 px-2 py-1 rounded-lg uppercase tracking-tighter">
                         Active Now
@@ -90,8 +90,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
-                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Valuasi</p>
-                        <p class="text-2xl font-black text-charcoal mt-2 leading-none">Rp {{ number_format($totalRevenue / 1000000, 1, ',', '.') }}jt</p>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Valuasi</p>
+                        <p class="text-lg md:text-2xl font-black text-charcoal mt-1 md:mt-2 leading-none">Rp {{ number_format($totalRevenue / 1000000, 1, ',', '.') }}jt</p>
                     </div>
                 </div>
             </div>
@@ -100,13 +100,13 @@
         <!-- Recent Data Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Recent Users Table -->
-            <div class="glass-dashboard rounded-[2rem] p-8 animate-[fadeUp_1s_ease-out_0.5s_both]">
-                <div class="flex justify-between items-center mb-8 px-2">
+            <div class="glass-dashboard rounded-[2rem] p-5 md:p-8 animate-[fadeUp_1s_ease-out_0.5s_both]">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 px-2 gap-4">
                     <div>
-                        <h2 class="text-xl font-bold text-charcoal">Log Registrasi Terbaru</h2>
-                        <p class="text-xs text-slate-400 mt-1">Antrean jamaah yang baru bergabung sistem.</p>
+                        <h2 class="text-lg md:text-xl font-bold text-charcoal">Log Registrasi Terbaru</h2>
+                        <p class="text-[10px] md:text-xs text-slate-400 mt-1">Antrean jamaah yang baru bergabung sistem.</p>
                     </div>
-                    <a href="{{ route('users.index') }}" class="btn-dashboard btn-dashboard-primary text-xs !px-4">Semua Jamaah</a>
+                    <a href="{{ route('users.index') }}" class="btn-dashboard btn-dashboard-primary text-[10px] md:text-xs !px-4 w-full sm:w-auto text-center">Semua Jamaah</a>
                 </div>
                 
                 <div class="space-y-4">
@@ -142,13 +142,13 @@
             </div>
 
             <!-- Recent Products -->
-            <div class="glass-dashboard rounded-[2rem] p-8 animate-[fadeUp_1s_ease-out_0.6s_both]">
-                <div class="flex justify-between items-center mb-8 px-2">
+            <div class="glass-dashboard rounded-[2rem] p-5 md:p-8 animate-[fadeUp_1s_ease-out_0.6s_both]">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 px-2 gap-4">
                     <div>
-                        <h2 class="text-xl font-bold text-charcoal">Layanan Umroh Unggulan</h2>
-                        <p class="text-xs text-slate-400 mt-1">Status ketersediaan paket dan harga terbaru.</p>
+                        <h2 class="text-lg md:text-xl font-bold text-charcoal">Layanan Umroh Unggulan</h2>
+                        <p class="text-[10px] md:text-xs text-slate-400 mt-1">Status ketersediaan paket dan harga terbaru.</p>
                     </div>
-                    <a href="{{ route('products.index') }}" class="btn-dashboard bg-slate-50 hover:bg-slate-100 text-slate-600 text-xs !px-4 border border-slate-200">Katalog Paket</a>
+                    <a href="{{ route('products.index') }}" class="btn-dashboard bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] md:text-xs !px-4 border border-slate-200 w-full sm:w-auto text-center">Katalog Paket</a>
                 </div>
                 
                 <div class="space-y-4">

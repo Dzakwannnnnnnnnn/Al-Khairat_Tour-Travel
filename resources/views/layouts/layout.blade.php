@@ -18,8 +18,9 @@
         @endif
         
         <!-- Main Content -->
-        <div class="flex-1 min-h-screen flex flex-col transition-all duration-300 {{ auth()->check() && auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
-            <main class="flex-1">
+        <div class="flex-1 min-w-0 w-full overflow-x-hidden min-h-screen flex flex-col transition-all duration-300 {{ auth()->check() && auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
+            <div class="lg:hidden" style="height: 10px;"></div>
+            <main class="flex-1 min-w-0 w-full">
                 <!-- Dashboard Header -->
                 @include('components.header')
 
@@ -29,7 +30,7 @@
                 </div>
 
                 <!-- Content Area -->
-                <div class="p-6 md:p-8 lg:p-10 max-w-7xl mx-auto pb-32 md:pb-40">
+                <div class="p-4 md:p-8 lg:p-10 max-w-7xl mx-auto pb-32 md:pb-40">
                     <!-- Flash Messages -->
                     @include('components.alert')
                     
@@ -54,6 +55,8 @@
             overlay.classList.toggle('hidden');
         }
     </script>
+    <!-- Global Custom Confirm Modal -->
+    @include('components.global-confirm')
     
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])

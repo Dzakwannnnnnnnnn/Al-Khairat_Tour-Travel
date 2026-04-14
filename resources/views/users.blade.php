@@ -5,19 +5,23 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto">
-        <!-- Header Section -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900">Manajemen Users</h1>
-                <p class="text-gray-600 mt-2">Kelola semua user sistem</p>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-6">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-orange/10 text-orange rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Manajemen Users</h2>
+                    <p class="text-[11px] md:text-sm text-slate-500 mt-1">Kelola semua user sistem</p>
+                </div>
             </div>
-            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="bg-charcoal text-white px-6 py-2 rounded-lg hover:bg-orange transition flex items-center space-x-2 shadow-lg shadow-orange/10">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="font-bold uppercase tracking-widest text-xs">Tambah User</span>
+                <span class="font-bold uppercase tracking-widest text-[10px] md:text-xs">Tambah User</span>
             </button>
-
         </div>
 
         <div class="mb-8">

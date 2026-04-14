@@ -3,21 +3,20 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-0">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-slate-800">Manajemen Tabungan & Pembayaran</h2>
-                <p class="text-sm text-slate-500 mt-1">Kelola transaksi pembayaran, cicilan tabungan, dan verifikasi mutasi.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Manajemen Pembayaran</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 mt-1">Kelola transaksi dan verifikasi mutasi.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3.5 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Catat Pembayaran</span>
         </button>
-
     </div>
 
     <!-- Alert -->
@@ -43,9 +42,9 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full min-w-[1000px]">
+    <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100">
+        <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
+            <table class="w-full" style="min-width: 950px;">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Terkait Reservasi</th>
@@ -53,15 +52,15 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Metode & Tgl Bayar</th>
                         <th class="px-6 py-3 text-center text-xs font-semibold text-gray-900 uppercase">Bukti Bayar</th>
                         <th class="px-6 py-3 text-center text-xs font-semibold text-gray-900 uppercase">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase sticky right-0 bg-gray-50 z-10 border-l border-gray-200 md:border-l-0 md:static">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse($payments as $payment)
-                    <tr class="hover:bg-gray-50 transition">
+                    <tr class="hover:bg-gray-50 transition group">
                         <td class="px-6 py-4 align-top">
-                            <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $payment->booking->booking_code ?? 'TIDAK VALID' }}</span>
-                            <p class="text-sm font-semibold text-slate-700">{{ $payment->booking->user->name ?? 'User Terhapus' }}</p>
+                            <span class="font-mono text-[11px] md:text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $payment->booking->booking_code ?? 'TIDAK VALID' }}</span>
+                            <p class="text-sm font-bold text-slate-700 mt-1">{{ $payment->booking->user->name ?? 'User Terhapus' }}</p>
                         </td>
 
                         <td class="px-6 py-4 align-top text-right">
@@ -100,7 +99,7 @@
                                 {{ $statusLabels[$payment->status] ?? $payment->status }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top">
+                        <td class="px-6 py-4 align-top sticky right-0 bg-white group-hover:bg-gray-50 transition-colors z-10 border-l border-gray-100 md:border-l-0 md:static">
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
@@ -155,7 +154,7 @@
                 </select>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nominal (Rp) <span class="text-red-500">*</span></label>
                     <input type="number" name="amount" required min="1000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -171,7 +170,7 @@
                 <input type="text" name="payment_method" placeholder="BSI a/n Al-Khairat, Cash, Mandiri, dll" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="col-span-2">
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Status Verifikasi <span class="text-red-500">*</span></label>
                     <select name="status" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-yellow-50 font-medium">
@@ -219,7 +218,7 @@
                 </select>
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nominal (Rp) <span class="text-red-500">*</span></label>
                     <input type="number" name="amount" id="editPaymentAmount" required min="1000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -235,7 +234,7 @@
                 <input type="text" name="payment_method" id="editPaymentMethod" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
             </div>
             
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="col-span-2">
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Aksi Validasi <span class="text-red-500">*</span></label>
                     <select name="status" id="editPaymentStatus" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium">

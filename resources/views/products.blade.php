@@ -6,34 +6,33 @@
 @section('content')
     <div class="max-w-7xl mx-auto">
         <!-- Header Section -->
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4 pt-6 md:pt-0">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900">Paket Umroh</h1>
-                <p class="text-gray-600 mt-2">Kelola semua paket umroh Al-Khairat</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Paket Umroh</h1>
+                <p class="text-[11px] md:text-sm text-gray-600 mt-1">Kelola semua paket umroh Al-Khairat</p>
             </div>
-            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="bg-charcoal text-white px-6 py-2 rounded-lg hover:bg-orange transition flex items-center space-x-2 shadow-lg shadow-orange/10">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="w-full md:w-auto bg-charcoal text-white px-6 py-3 md:py-2.5 rounded-xl border-2 border-transparent hover:border-orange/20 hover:bg-orange transition flex items-center justify-center space-x-2 shadow-lg shadow-orange/10 group">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="font-bold uppercase tracking-widest text-xs">Tambah Paket</span>
+                <span class="font-bold uppercase tracking-widest text-[10px] md:text-xs">Tambah Paket</span>
             </button>
-
         </div>
 
-        <div class="bg-white rounded-[1.5rem] shadow-sm p-6 mb-8 border border-slate-100">
-            <form method="GET" action="{{ route('products.index') }}" id="filter-form" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <select name="category" class="border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50">
+        <div class="bg-white rounded-[1.5rem] shadow-sm p-3 md:p-6 mb-8 border border-slate-100">
+            <form method="GET" action="{{ route('products.index') }}" id="filter-form" class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6">
+                <select name="category" class="border border-slate-200 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 text-[11px] md:text-sm">
                     <option value="">Semua Kategori</option>
                     <option value="Standar" {{ request('category') == 'Standar' ? 'selected' : '' }}>Standar</option>
                     <option value="Premium" {{ request('category') == 'Premium' ? 'selected' : '' }}>Premium</option>
                     <option value="Ekonomis" {{ request('category') == 'Ekonomis' ? 'selected' : '' }}>Ekonomis</option>
                 </select>
-                <select name="status" class="border border-slate-200 rounded-xl px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50">
+                <select name="status" class="border border-slate-200 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 text-[11px] md:text-sm">
                     <option value="">Semua Status</option>
                     <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                     <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
-                <button type="submit" class="bg-orange/10 text-orange font-bold rounded-xl hover:bg-orange hover:text-white transition px-4 py-2.5 border border-orange/20 uppercase tracking-widest text-xs">
+                <button type="submit" class="col-span-2 md:col-span-1 bg-orange/10 text-orange font-black rounded-xl hover:bg-orange hover:text-white transition px-4 py-3 md:py-2.5 border border-orange/20 uppercase tracking-widest text-[9px] md:text-[10px]">
                     Terapkan Filter
                 </button>
             </form>
@@ -41,9 +40,9 @@
 
 
         <!-- Products Table -->
-        <div class="bg-white rounded-lg shadow overflow-hidden">
-            <div class="overflow-x-auto">
-            <table class="w-full min-w-[800px]">
+        <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100">
+            <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
+                <table class="w-full" style="min-width: 850px;">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Gambar</th>
@@ -54,12 +53,12 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Estimasi Berangkat</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kuota</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase sticky right-0 bg-gray-50 z-10 border-l border-gray-200 md:border-l-0 md:static">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse($products as $product)
-                    <tr class="hover:bg-gray-50 transition">
+                    <tr class="hover:bg-gray-50 transition group">
                         <td class="px-6 py-4">
                             @if($product->image)
                                 <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-12 h-12 object-cover rounded shadow-sm">
@@ -68,17 +67,18 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            <p class="font-semibold text-gray-900">{{ $product->name }}</p>
-                            <p class="text-sm text-gray-600">{{ Str::limit($product->description, 50) }}</p>
+                            <p class="font-bold text-gray-900 text-sm md:text-base">{{ $product->name }}</p>
+                            <p class="hidden md:block text-xs text-gray-500 mt-1">{{ Str::limit($product->description, 50) }}</p>
+                            <p class="md:hidden text-[10px] text-gray-400 italic">ID: #{{ $product->id }}</p>
                         </td>
                         <td class="px-6 py-4">
-                            <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold
+                            <span class="inline-block px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider
                                 {{ $product->category === 'Premium' ? 'bg-yellow-100 text-yellow-800' :
                                    ($product->category === 'Standar' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800') }}">
                                 {{ $product->category }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 font-semibold text-gray-900">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                        <td class="px-6 py-4 font-bold text-gray-900 text-sm">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                         <td class="px-6 py-4 text-gray-600">{{ $product->duration ?? '-' }}</td>
                         <td class="px-6 py-4 text-gray-600">
                             @if($product->departure_date)
@@ -100,7 +100,7 @@
                                 {{ $product->status === 'active' ? 'Aktif' : 'Nonaktif' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 sticky right-0 bg-white group-hover:bg-gray-50 transition-colors z-10 border-l border-gray-100 md:border-l-0 md:static">
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openDetailProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->image ? Storage::url($product->image) : '' }}', '{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}', '{{ $product->price_quad }}', '{{ $product->price_triple }}', '{{ $product->price_double }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Detail</button>
@@ -304,7 +304,7 @@
             <form id="editProductForm" method="POST" class="space-y-4" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Paket</label>
                         <input type="text" name="name" id="editProductName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -319,7 +319,7 @@
                     <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
                         <select name="category" id="editProductCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -333,7 +333,7 @@
                         <input type="text" name="duration" id="editProductDuration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
                 </div>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
                         <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">

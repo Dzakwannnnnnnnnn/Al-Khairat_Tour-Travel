@@ -3,21 +3,20 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-6">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-slate-800">Manajemen Testimoni</h2>
-                <p class="text-sm text-slate-500 mt-1">Kelola ulasan dan pengalaman ibadah jamaah Al-Khairat.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Manajemen Testimoni</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 mt-1">Kelola ulasan dan pengalaman jamaah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addTestimonialModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addTestimonialModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah Testimoni</span>
         </button>
-
     </div>
 
     <!-- Alert -->
@@ -29,21 +28,21 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full min-w-[800px]">
+    <div class="bg-white rounded-[1.5rem] shadow-sm border border-slate-100">
+        <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
+            <table class="w-full" style="min-width: 850px;">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">Nama Jamaah</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider w-1/2">Keterangan</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">Rating</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase tracking-wider sticky right-0 bg-gray-50 z-10 border-l border-gray-200 md:border-l-0 md:static">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse($testimonials as $testimoni)
-                    <tr class="hover:bg-gray-50 transition">
+                    <tr class="hover:bg-gray-50 transition group">
                         <td class="px-6 py-4 align-top">
                             <p class="font-semibold text-gray-900">{{ $testimoni->name }}</p>
                             @if($testimoni->email)
@@ -84,7 +83,7 @@
                                 {{ $testimoni->status === 'published' ? 'Tampil di Web' : 'Draft' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top">
+                        <td class="px-6 py-4 sticky right-0 bg-white group-hover:bg-gray-50 transition-colors z-10 border-l border-gray-100 md:border-l-0 md:static">
                             <div class="flex flex-wrap gap-2">
                                 @if($testimoni->email)
                                 <button onclick="openReplyModal({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ addslashes($testimoni->email) }}', '{{ addslashes(Str::limit($testimoni->message, 150)) }}')"

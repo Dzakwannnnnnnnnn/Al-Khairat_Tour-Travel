@@ -3,21 +3,20 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-0">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-lg">
+            <div class="p-3 bg-orange/10 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-slate-800">Manajemen Pemesanan (Bookings)</h2>
-                <p class="text-sm text-slate-500 mt-1">Kelola pendaftaran jamaah ke paket umrah yang tersedia.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Manajemen Pemesanan</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 mt-1">Kelola pendaftaran jamaah ke paket umrah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3.5 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Buat Pemesanan Baru</span>
+            <span>Booking Baru</span>
         </button>
-
     </div>
 
     <!-- Alert -->
@@ -43,9 +42,9 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full min-w-[1000px]">
+    <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100">
+        <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
+            <table class="w-full" style="min-width: 850px;">
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kode Booking</th>
@@ -53,19 +52,20 @@
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Paket Terpilih</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Status Pembayaran</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Tanggal</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase sticky right-0 bg-gray-50 z-10 border-l border-gray-200 md:border-l-0 md:static">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
                     @forelse($bookings as $booking)
-                    <tr class="hover:bg-gray-50 transition">
+                    <tr class="hover:bg-gray-50 transition group">
                         <td class="px-6 py-4 align-top">
                             <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors">{{ $booking->booking_code }}</span>
                         </td>
 
                         <td class="px-6 py-4 align-top">
-                            <p class="font-semibold text-gray-900">{{ $booking->user->name ?? 'User Terhapus' }}</p>
-                            <p class="text-xs text-gray-500">{{ $booking->user->email ?? '' }}</p>
+                            <p class="font-bold text-gray-900 text-sm">{{ $booking->user->name ?? 'User Terhapus' }}</p>
+                            <p class="hidden md:block text-xs text-gray-500">{{ $booking->user->email ?? '' }}</p>
+                            <p class="md:hidden text-[10px] text-gray-400">ID: #{{ $booking->user_id }}</p>
                         </td>
                         <td class="px-6 py-4 align-top">
                             <p class="text-sm text-gray-900 font-medium">{{ $booking->product->name ?? 'Paket Terhapus' }}</p>
@@ -98,7 +98,7 @@
                             <p class="text-sm text-gray-900">{{ $booking->created_at->format('d M Y') }}</p>
                             <p class="text-xs text-gray-500">{{ $booking->created_at->format('H:i') }}</p>
                         </td>
-                        <td class="px-6 py-4 align-top">
+                        <td class="px-6 py-4 align-top sticky right-0 bg-white group-hover:bg-gray-50 transition-colors z-10 border-l border-gray-100 md:border-l-0 md:static">
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openEditBooking({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->product_id }}', '{{ $booking->status }}', '{{ addslashes($booking->notes) }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>

@@ -1,12 +1,12 @@
 <!-- Premium Dashboard Header -->
-<header class="sticky top-0 z-50 transition-all duration-500 w-full px-4 py-4">
-    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white rounded-2xl px-6 py-3 border-slate-200 shadow-xl">
+<header class="sticky top-0 z-50 transition-all duration-500 w-full px-2 md:px-4 py-2 md:py-4">
+    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-3 border-slate-200 shadow-xl">
         
         <!-- Left: Search Area -->
         <div class="flex items-center gap-6 flex-1 max-w-2xl">
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleSidebar()" class="md:hidden p-2 rounded-xl text-slate-400 hover:bg-slate-100 hover:text-orange transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="toggleSidebar()" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-orange transition-all">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>

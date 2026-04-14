@@ -199,3 +199,96 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Global Form Submit Protection (Anti Double-Submit & Loading State & Custom Confirm Dialog)
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    
+    // Hijack native browser confirms on forms
+    forms.forEach(form => {
+        const onsubmitAttr = form.getAttribute('onsubmit');
+        if (onsubmitAttr && onsubmitAttr.includes('return confirm')) {
+            const match = onsubmitAttr.match(/confirm\('([^']+)'\)/);
+            if (match) {
+                form.dataset.confirmMsg = match[1];
+            } else {
+                form.dataset.confirmMsg = "Apakah Anda yakin?";
+            }
+            form.removeAttribute('onsubmit');
+        }
+    });
+
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            // Biarkan form dengan target="_blank" berjalan normal (seperti cetak invoice)
+            if (form.getAttribute('target') === '_blank') return;
+            
+            // Jika form adalah GET (seperti filter pencarian), beri efek disable ringan
+            if (form.getAttribute('method') && form.getAttribute('method').toUpperCase() === 'GET') {
+                const submitBtns = form.querySelectorAll('button[type="submit"]');
+                submitBtns.forEach(btn => btn.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none'));
+                return;
+            }
+
+            // Memicu Custom Modal Jika Ada Pesan Konfirmasi
+            if (form.dataset.confirmMsg && form.dataset.confirmed !== 'true') {
+                e.preventDefault();
+                if (window.showGlobalConfirm) {
+                    window.showGlobalConfirm(form.dataset.confirmMsg, () => {
+                        form.dataset.confirmed = 'true';
+                        // Gunakan method natural HTMLFormElement untuk submit ulang
+                        HTMLFormElement.prototype.requestSubmit.call(form);
+                    });
+                } else {
+                    // Fallback aman
+                    if (confirm(form.dataset.confirmMsg)) {
+                        form.dataset.confirmed = 'true';
+                        HTMLFormElement.prototype.requestSubmit.call(form);
+                    }
+                }
+                return;
+            }
+
+            // Cegah jika event sudah dibatalkan oleh konfirmasi browser (misal user klik "Batal" saat hapus)
+            if (e.defaultPrevented) return;
+
+            // Cegah double klik
+            if (form.classList.contains('is-submitting')) {
+                e.preventDefault();
+                return;
+            }
+            
+            // Cek apakah ini form hapus data
+            const isDelete = form.querySelector('input[name="_method"][value="DELETE"]') !== null || form.action.includes('delete') || form.action.includes('destroy');
+            const loadingText = isDelete ? 'Menghapus...' : 'Menyimpan...';
+
+            // Tandai form sedang submit
+            form.classList.add('is-submitting');
+            
+            // Ubah tampilan semua tombol submit di dalam form ini
+            const submitButtons = form.querySelectorAll('button[type="submit"]');
+            
+            submitButtons.forEach(button => {
+                // Jangan mengubah tombol yang secara spesifik memiliki efek lain
+                button.disabled = true;
+                button.classList.add('cursor-wait', 'opacity-90', 'pointer-events-none');
+                
+                // Simpan teks asli
+                if (!button.dataset.originalHtml) {
+                    button.dataset.originalHtml = button.innerHTML;
+                }
+                
+                // Ganti isi tombol dengan spinner
+                button.innerHTML = `
+                    <div class="flex items-center justify-center gap-2">
+                        <svg class="animate-spin h-5 w-5 text-current opacity-80" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="font-bold">${loadingText}</span>
+                    </div>
+                `;
+            });
+        });
+    });
+});

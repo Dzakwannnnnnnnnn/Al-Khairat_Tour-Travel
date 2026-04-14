@@ -4,13 +4,13 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="mb-8">
+<div class="mb-6 md:mb-8 pt-6 md:pt-0">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-charcoal mb-2">Kelola Panduan & Manasik</h1>
-            <p class="text-text/60">Kelola semua panduan dan manasik untuk umrah dan haji</p>
+            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-charcoal mb-1 md:mb-2">Kelola Panduan & Manasik</h1>
+            <p class="text-[11px] md:text-sm text-text/60">Kelola semua panduan dan manasik untuk umrah dan haji</p>
         </div>
-        <a href="{{ route('guides.create') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-sunset hover:shadow-lg text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+        <a href="{{ route('guides.create') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-sunset hover:shadow-lg text-white font-bold rounded-xl transition-all duration-300 uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
             </svg>
@@ -37,10 +37,10 @@
 @endif
 
 <!-- Guides Table Card -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200">
+<div class="bg-white rounded-[2rem] shadow-sm border border-slate-100">
     <!-- Table -->
-    <div class="overflow-x-auto">
-        <table class="w-full">
+    <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
+        <table class="w-full" style="min-width: 800px;">
             <thead class="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
                 <tr>
                     <th class="px-6 py-4 text-left text-sm font-bold text-charcoal w-12">#</th>
@@ -49,12 +49,12 @@
                     <th class="px-6 py-4 text-left text-sm font-bold text-charcoal">Deskripsi</th>
                     <th class="px-6 py-4 text-center text-sm font-bold text-charcoal w-20">Urutan</th>
                     <th class="px-6 py-4 text-center text-sm font-bold text-charcoal w-24">Status</th>
-                    <th class="px-6 py-4 text-center text-sm font-bold text-charcoal w-16">Aksi</th>
+                    <th class="px-6 py-4 text-right text-sm font-bold text-charcoal sticky right-0 bg-gradient-to-r from-slate-50 to-slate-100 z-10 border-l border-slate-200 md:border-l-0 md:static">Aksi</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-200">
                 @forelse($guides as $key => $guide)
-                <tr class="hover:bg-slate-50/50 transition-colors duration-200">
+                <tr class="hover:bg-slate-50/50 transition-colors group">
                     <td class="px-6 py-4 text-sm text-text/70 font-medium">{{ $key + 1 }}</td>
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
@@ -86,8 +86,8 @@
                             </button>
                         </form>
                     </td>
-                    <td class="px-6 py-4 text-center">
-                        <div class="flex items-center justify-center gap-2">
+                    <td class="px-6 py-4 text-right sticky right-0 bg-white group-hover:bg-slate-50/50 transition-colors z-10 border-l border-slate-100 md:border-l-0 md:static">
+                        <div class="flex justify-end gap-2">
                             <a href="{{ route('guides.edit', $guide) }}" 
                                class="inline-flex items-center justify-center w-8 h-8 text-orange hover:bg-orange/10 rounded-lg transition-colors duration-200" 
                                title="Edit">

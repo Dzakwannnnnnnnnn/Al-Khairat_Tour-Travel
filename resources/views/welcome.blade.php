@@ -157,7 +157,6 @@
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-gradient-sunset rounded-full filter blur-3xl opacity-30 z-0"></div>
                 </div>
             </div>
         </div>
@@ -283,7 +282,7 @@
                             </div>
                             
                             <div class="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border/50">
-                                <button onclick="openProductDetail({{ $product->id }})" class="flex-1 text-center bg-white border-2 border-orange text-orange font-bold text-xs py-3 rounded-xl hover:bg-orange/5 transition">
+                                <button onclick="openProductDetail({{ $product->id }})" class="flex-1 text-center bg-white border-2 border-orange text-orange font-bold text-xs py-3 rounded-xl hover:bg-orange hover:text-white transition">
                                     Lihat Detail
                                 </button>
                                 <a href="https://wa.me/{{ $product->guide_phone ?? $whatsapp }}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20konsultasi%20mengenai%20paket%20{{ urlencode($product->name) }}." target="_blank" class="flex-1 text-center {{ $product->status == 'featured' ? 'bg-gradient-sunset shadow-lg shadow-orange/20' : 'bg-charcoal' }} text-white font-bold text-xs py-3 rounded-xl hover:scale-105 transition flex items-center justify-center gap-1">

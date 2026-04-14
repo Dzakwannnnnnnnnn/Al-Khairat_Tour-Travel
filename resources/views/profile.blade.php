@@ -8,7 +8,7 @@
 
 <div class="max-w-5xl mx-auto">
     <div
-        class="relative overflow-hidden rounded-[2.5rem] p-8 md:p-12 gradient-sunset border border-orange/20 shadow-2xl mb-10 group">
+        class="relative overflow-hidden rounded-[2.5rem] p-6 md:p-12 gradient-sunset border border-orange/20 shadow-2xl mb-6 md:mb-10 group">
         <div
             class="absolute -right-20 -top-20 w-80 h-80 bg-white/10 blur-[100px] rounded-full group-hover:bg-white/20 transition-all duration-700">
         </div>
@@ -30,9 +30,9 @@
                 </label>
             </div>
             <div class="text-center md:text-left">
-                <h1 class="text-3xl font-serif font-bold text-white leading-tight">Halo, {{ $user->nickname ??
+                <h1 class="text-xl md:text-3xl font-serif font-bold text-white leading-tight">Halo, {{ $user->nickname ??
                     $user->name }}!</h1>
-                <p class="text-white/80 mt-2 font-medium">Kelola identitas digital Anda untuk pengalaman yang lebih
+                <p class="text-white/80 mt-2 text-sm md:text-base font-medium">Kelola identitas digital Anda untuk pengalaman yang lebih
                     personal.</p>
                 <div
                     class="mt-4 flex flex-wrap justify-center md:justify-start gap-2 text-[10px] font-bold uppercase tracking-widest">
@@ -54,10 +54,10 @@
             <input type="file" name="avatar" id="avatar-input" class="hidden" accept="image/*"
                 onchange="previewAvatar(this)">
 
-            <div class="glass-dashboard rounded-[2.5rem] p-8 border border-slate-100 shadow-xl">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl">
+                <div class="flex items-center gap-3 mb-6 md:mb-8">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
@@ -98,9 +98,9 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end pt-8">
+                <div class="flex justify-end pt-6 md:pt-8">
                     <button type="submit"
-                        class="btn-dashboard btn-dashboard-primary min-w-[220px] px-8 py-4 rounded-2xl shadow-lg shadow-orange/20 flex items-center justify-center gap-2 group">
+                        class="btn-dashboard btn-dashboard-primary w-full md:min-w-[220px] px-8 py-4 rounded-2xl shadow-lg shadow-orange/20 flex items-center justify-center gap-2 group">
                         <span class="group-hover:rotate-12 transition-transform">💾</span>
                         <span>Simpan Perubahan</span>
                     </button>
@@ -109,10 +109,10 @@
         </form>
 
         <div class="space-y-6">
-            <div class="glass-dashboard rounded-[2.5rem] p-8 border border-slate-100 shadow-xl bg-slate-50/30 h-fit">
+            <div class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl bg-slate-50/30 h-fit">
                 <div class="flex items-center gap-3 mb-5">
-                    <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z">
                             </path>
@@ -133,13 +133,13 @@
             </div>
 
             <form action="{{ route('profile.password.update') }}" method="POST"
-                class="glass-dashboard rounded-[2.5rem] p-8 border border-slate-100 shadow-xl bg-white space-y-5 lg:sticky lg:top-8">
+                class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl bg-white space-y-5 lg:sticky lg:top-8">
                 @csrf
                 @method('PUT')
 
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z">
                             </path>
@@ -230,7 +230,7 @@
             };
             @endphp
 
-            <div class="glass-dashboard rounded-[2.5rem] p-8 border shadow-xl {{ $statusMeta['card'] }}">
+            <div class="glass-dashboard rounded-[2.5rem] p-5 md:p-8 border shadow-xl {{ $statusMeta['card'] }}">
                 <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                     <div class="space-y-6 flex-1">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
@@ -244,14 +244,14 @@
                                         {{ $history->created_at->translatedFormat('d F Y') }}
                                     </span>
                                 </div>
-                                <h3 class="text-2xl font-bold text-charcoal uppercase">{{ $history->product_name }}</h3>
-                                <p class="text-sm text-slate-500 mt-2">Kode Referensi: <span
+                                <h3 class="text-lg md:text-2xl font-bold text-charcoal uppercase">{{ $history->product_name }}</h3>
+                                <p class="text-[11px] md:text-sm text-slate-500 mt-2">Kode Referensi: <span
                                         class="font-black text-slate-700">{{ $history->reference_code }}</span></p>
                             </div>
-                            <div class="rounded-3xl bg-slate-50/80 border border-slate-100 px-5 py-4 min-w-[240px]">
+                            <div class="rounded-3xl bg-slate-50/80 border border-slate-100 px-5 py-4 min-w-full md:min-w-[240px]">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Total
                                     Pembayaran</p>
-                                <p class="mt-2 text-2xl font-black text-charcoal">Rp {{
+                                <p class="mt-2 text-xl md:text-2xl font-black text-charcoal">Rp {{
                                     number_format($history->total_amount, 0, ',', '.') }}</p>
                                 <p class="mt-1 text-sm text-slate-500">{{ $history->payment_method }}</p>
                             </div>
