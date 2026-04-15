@@ -16,8 +16,8 @@
         </div>
     </a>
 
-    <!-- Mobile Navigation Trigger (Top Right) -->
-    <div class="lg:hidden pointer-events-auto" id="mobile-trigger">
+    <!-- Mobile Navigation Trigger (Top Right) - STRICTLY HIDDEN ON DESKTOP -->
+    <div class="md:hidden pointer-events-auto" id="mobile-trigger">
         <button onclick="window.toggleMobileMenu()" class="pointer-events-auto w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-surface/90 dark:bg-surface/80 shadow-xl border border-orange/10 flex items-center justify-center text-charcoal hover:bg-orange hover:text-white transition-all duration-300 active:scale-95 group z-[110]">
             <div class="relative w-8 h-8">
                 <svg id="menu-icon-closed" class="absolute inset-0 w-full h-full transition-all duration-500 opacity-100 scale-100 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">

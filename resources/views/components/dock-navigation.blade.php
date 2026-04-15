@@ -126,10 +126,10 @@
     </div>
 </div>
 
-<!-- Mobile Side Drawer (Handphone Only) -->
-<div id="mobile-menu-overlay" class="fixed inset-0 z-[999] bg-bg/60 backdrop-blur-md opacity-0 invisible transition-all duration-500 lg:hidden" onclick="window.toggleMobileMenu()"></div>
+<!-- Mobile Side Drawer (Handphone Only - STRICTLY HIDDEN ON DESKTOP) -->
+<div id="mobile-menu-overlay" class="fixed inset-0 z-[999] bg-bg/60 backdrop-blur-md opacity-0 invisible transition-all duration-500 md:hidden" onclick="window.toggleMobileMenu()"></div>
 
-<div id="mobile-side-drawer" class="fixed top-0 right-0 h-full w-[85%] max-w-sm z-[1000] bg-surface/90 backdrop-blur-2xl border-l border-white/10 translate-x-full transition-all duration-500 lg:hidden flex flex-col">
+<div id="mobile-side-drawer" class="fixed top-0 right-0 h-full w-[85%] max-w-sm z-[1000] bg-surface/90 backdrop-blur-2xl border-l border-white/10 translate-x-full transition-all duration-500 md:hidden flex flex-col">
     <!-- Drawer Header -->
     <div class="p-8 border-b border-white/10 flex items-center justify-between">
         <h2 class="text-2xl font-serif font-bold text-text">Menu</h2>
