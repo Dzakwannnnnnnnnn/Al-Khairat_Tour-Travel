@@ -63,6 +63,7 @@ Route::get('/products/{product}/rundown', [ProductController::class, 'showRundow
 Route::get('/invoice/{groupCode}', [BookingController::class, 'showInvoice'])->name('booking.invoice');
 Route::get('/invoice/{groupCode}/pdf', [BookingController::class, 'downloadInvoicePDF'])->name('booking.invoice.pdf');
 Route::post('/invoice/{groupCode}/payment-method', [BookingController::class, 'updatePaymentMethod'])->name('booking.payment_method');
+Route::get('/invoice/{groupCode}/status', [BookingController::class, 'checkPaymentStatus'])->name('booking.invoice.status');
 Route::get('/paket-daftar', fn() => redirect()->route('home'));
 
 // ========================================
@@ -87,6 +88,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+
+    // Member Bookings
+    Route::get('/my-bookings', [BookingController::class, 'myBookings'])->name('member.bookings');
 
     // Specific Admin Section
     Route::middleware('admin')->group(function () {

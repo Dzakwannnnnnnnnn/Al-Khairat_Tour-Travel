@@ -103,8 +103,24 @@
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openEditPayment({{ $payment->id }}, '{{ $payment->booking_id }}', '{{ (int)$payment->amount }}', '{{ $payment->payment_method }}', '{{ \Carbon\Carbon::parse($payment->payment_date)->format('Y-m-d') }}', '{{ $payment->status }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
+                                
                                 @if(optional($payment->booking)->group_code)
-                                <a href="{{ route('booking.invoice', $payment->booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Invoice</a>
+                                    @if($payment->status === 'verified')
+                                    <a href="{{ route('booking.invoice.pdf', $payment->booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm gap-1">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        PDF Invoice
+                                    </a>
+                                    @elseif($payment->status === 'pending')
+                                    <a href="{{ route('booking.invoice.pdf', $payment->booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm gap-1">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        PDF Invoice
+                                    </a>
+                                    @elseif($payment->status === 'rejected')
+                                    <span class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-400 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm gap-1 cursor-not-allowed">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        Ditolak
+                                    </span>
+                                    @endif
                                 @endif
 
                                 <form method="POST" action="{{ route('payments.destroy', $payment) }}" class="inline m-0" onsubmit="return confirm('Hapus histori pembayaran ini?')">

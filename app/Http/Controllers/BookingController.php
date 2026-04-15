@@ -20,6 +20,17 @@ class BookingController extends Controller
         return view('bookings', compact('bookings', 'users', 'products'));
     }
 
+    public function myBookings()
+    {
+        $bookings = Booking::with('product')
+            ->where('user_id', auth()->id())
+            ->latest()
+            ->get()
+            ->groupBy('group_code');
+            
+        return view('member.bookings', compact('bookings'));
+    }
+
     public function showBookingPage(Product $product)
     {
         if (!auth()->check()) {
@@ -236,6 +247,21 @@ class BookingController extends Controller
         }
 
         return redirect()->route('bookings.index')->with('success', 'Data Pemesanan berhasil diperbarui!');
+    }
+
+    public function checkPaymentStatus($groupCode)
+    {
+        $bookings = Booking::where('group_code', $groupCode)->get();
+        if ($bookings->isEmpty()) {
+            return response()->json(['status' => 'not_found'], 404);
+        }
+
+        $payment = Payment::where('booking_id', $bookings->first()->id)->first();
+        if (!$payment) {
+            return response()->json(['status' => 'no_payment'], 404);
+        }
+
+        return response()->json(['status' => $payment->status]);
     }
 
     public function destroy(Booking $booking)

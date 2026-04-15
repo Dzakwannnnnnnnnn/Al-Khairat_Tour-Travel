@@ -5,13 +5,11 @@
         <!-- Left: Search Area -->
         <div class="flex items-center gap-6 flex-1 max-w-2xl">
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleSidebar()" class="md:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-orange transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="toggleSidebar()" class="md:hidden -ml-2 p-4 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-orange transition-all relative z-[70] cursor-pointer" aria-label="Toggle Sidebar">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-
-
         </div>
 
         <!-- Right: Actions & Profile -->
@@ -26,8 +24,8 @@
 
             <!-- Profile Dropdown -->
             @if(auth()->check())
-            <div class="relative group">
-                <button class="flex items-center gap-3 p-1 rounded-xl hover:bg-slate-50 transition-all duration-300 border border-transparent hover:border-slate-200">
+            <div class="relative">
+                <button onclick="toggleProfileMenu(event)" class="flex items-center gap-3 p-1 rounded-xl hover:bg-slate-50 transition-all duration-300 border border-transparent hover:border-slate-200">
                     <div class="relative">
                         <img src="{{ auth()->user()->avatar_url }}" 
                              alt="Avatar" 
@@ -38,13 +36,13 @@
                         <p class="text-xs font-bold text-charcoal truncate max-w-[100px]">{{ auth()->user()->nickname ?? auth()->user()->name }}</p>
                         <p class="text-[9px] font-bold text-orange/80 uppercase tracking-tighter">{{ auth()->user()->role }}</p>
                     </div>
-                    <svg class="w-4 h-4 text-slate-400 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg id="profile-chevron" class="w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
 
                 <!-- Dropdown Menu -->
-                <div class="absolute right-0 mt-4 w-56 bg-white rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 overflow-hidden shadow-2xl border border-slate-100">
+                <div id="adminProfileMenu" class="absolute right-0 mt-4 w-56 bg-white rounded-2xl opacity-0 invisible translate-y-2 transition-all duration-300 overflow-hidden shadow-2xl border border-slate-100 z-[70]">
                     <div class="p-5 bg-orange/5 border-b border-slate-50">
                         <p class="text-sm font-bold text-charcoal truncate">{{ auth()->user()->name ?? 'User' }}</p>
                         <p class="text-[10px] text-slate-500 truncate mt-0.5">{{ auth()->user()->email ?? '' }}</p>

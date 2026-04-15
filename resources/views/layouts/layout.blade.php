@@ -8,24 +8,92 @@
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
     @stack('styles')
+
+    <!-- Pre-load Critical Navigation Scripts -->
+    <script>
+        // Use early-mount pattern for mobile interactivity
+        window.toggleSidebar = function() {
+            const sidebar = document.getElementById('adminSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) {
+                return;
+            }
+            
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+
+            if (isHidden) {
+                // Open
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden', 'pointer-events-none');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    overlay.classList.add('opacity-100');
+                }, 50);
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Close
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                overlay.classList.remove('opacity-100');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden', 'pointer-events-none');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        };
+
+        window.toggleProfileMenu = function(event) {
+            if (event) event.stopPropagation();
+            const menu = document.getElementById('adminProfileMenu');
+            const chevron = document.getElementById('profile-chevron');
+            if (!menu) return;
+            
+            const isHidden = menu.classList.contains('invisible') || menu.classList.contains('hidden');
+
+            if (isHidden) {
+                menu.classList.remove('invisible', 'hidden', 'opacity-0', 'translate-y-2');
+                menu.classList.add('visible', 'opacity-100', 'translate-y-0');
+                if (chevron) chevron.classList.add('rotate-180');
+            } else {
+                menu.classList.add('invisible', 'opacity-0', 'translate-y-2');
+                menu.classList.remove('visible', 'opacity-100', 'translate-y-0');
+                if (chevron) chevron.classList.remove('rotate-180');
+            }
+        };
+
+        document.addEventListener('click', function(event) {
+            const profileMenu = document.getElementById('adminProfileMenu');
+            const profileChevron = document.getElementById('profile-chevron');
+            if (profileMenu && !profileMenu.contains(event.target)) {
+                profileMenu.classList.add('invisible', 'opacity-0', 'translate-y-2');
+                profileMenu.classList.remove('visible', 'opacity-100', 'translate-y-0');
+                if (profileChevron) profileChevron.classList.remove('rotate-180');
+            }
+        });
+    </script>
 </head>
 <body class="bg-bg text-text selection:bg-orange/30 font-sans antialiased">
     <!-- Main Container -->
     <div class="flex min-h-screen relative">
-        <!-- Sidebar (Admin Only) -->
-        @if(auth()->check() && auth()->user()->isAdmin())
+        <!-- Sidebar (For all authenticated users) -->
+        @if(auth()->check())
             @include('components.sidebar')
+            <!-- Mobile Sidebar Overlay -->
+            <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-[90] hidden pointer-events-none transition-opacity duration-300 opacity-0" onclick="toggleSidebar()"></div>
         @endif
         
         <!-- Main Content -->
-        <div class="flex-1 min-w-0 w-full overflow-x-hidden min-h-screen flex flex-col transition-all duration-300 {{ auth()->check() && auth()->user()->isAdmin() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
+        <div class="flex-1 min-w-0 w-full overflow-x-hidden min-h-screen flex flex-col transition-all duration-300 {{ auth()->check() ? 'ml-0 md:ml-72 lg:ml-80' : 'ml-0' }}">
             <div class="lg:hidden" style="height: 10px;"></div>
             <main class="flex-1 min-w-0 w-full">
                 <!-- Dashboard Header -->
                 @include('components.header')
 
-                <!-- Navigation Breadcrumb -->
-                <div class="px-4">
+                <!-- Navigation Breadcrumb (Increased spacing to prevent 'dempet' look) -->
+                <div class="px-4 mb-10 md:mb-12">
                     @include('components.breadcrumb')
                 </div>
 
@@ -46,15 +114,6 @@
         </div>
     </div>
 
-    <!-- Sidebar Toggle Script -->
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('adminSidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
-    </script>
     <!-- Global Custom Confirm Modal -->
     @include('components.global-confirm')
     

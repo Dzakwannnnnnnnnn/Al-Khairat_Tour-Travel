@@ -548,6 +548,28 @@
             }, { threshold: 0.1 });
 
             document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+
+            // Polling for Payment Status
+            const initialStatus = "{{ $payment->status }}";
+            const groupCode = "{{ $groupCode }}";
+
+            if (initialStatus !== 'verified' && initialStatus !== 'rejected') {
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const response = await fetch(`/invoice/${groupCode}/status`);
+                        const data = await response.json();
+
+                        if (data.status && data.status !== initialStatus) {
+                            if (data.status === 'verified' || data.status === 'rejected' || (initialStatus === 'Belum Memilih' && data.status === 'pending')) {
+                                clearInterval(pollInterval);
+                                window.location.reload();
+                            }
+                        }
+                    } catch (error) {
+                        console.error('Error polling payment status:', error);
+                    }
+                }, 5000); // Poll every 5 seconds
+            }
         });
     </script>
     @stack('scripts')

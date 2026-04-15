@@ -103,6 +103,25 @@
                                 <button onclick="openEditBooking({{ $booking->id }}, '{{ $booking->user_id }}', '{{ $booking->product_id }}', '{{ $booking->status }}', '{{ addslashes($booking->notes) }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
 
+                                @if($booking->group_code)
+                                    @if(in_array($booking->status, ['fully_paid', 'completed']))
+                                    <a href="{{ route('booking.invoice.pdf', $booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm gap-1">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        PDF
+                                    </a>
+                                    @elseif(in_array($booking->status, ['pending', 'dp_paid']))
+                                    <a href="{{ route('booking.invoice.pdf', $booking->group_code) }}" target="_blank" class="inline-flex items-center justify-center px-3 py-1.5 bg-yellow-50 text-yellow-700 hover:bg-yellow-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm gap-1">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                        PDF
+                                    </a>
+                                    @elseif($booking->status === 'cancelled')
+                                    <span class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-400 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm gap-1 cursor-not-allowed">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        Batal
+                                    </span>
+                                    @endif
+                                @endif
+
                                 <form method="POST" action="{{ route('bookings.destroy', $booking) }}" class="inline m-0" onsubmit="return confirm('Hapus pemesanan ini secara permanen?')">
                                     @csrf
                                     @method('DELETE')

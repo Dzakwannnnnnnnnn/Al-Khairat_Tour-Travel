@@ -83,6 +83,30 @@
                                 </button>
                             </div>
                         </div>
+                        
+                        <!-- Fixed Departure Date Card -->
+                        <div class="bg-surface rounded-3xl border border-border p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-500 scroll-animate" data-animation="slide-up">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange text-xl">
+                                    📅
+                                </div>
+                                <h2 class="text-xl md:text-2xl font-serif font-bold text-text">Jadwal Keberangkatan</h2>
+                            </div>
+                            
+                            <div class="p-4 bg-orange/5 rounded-2xl border border-orange/10">
+                                <label class="block text-[10px] font-bold text-text/40 uppercase tracking-widest mb-1">Paket yang dipilih</label>
+                                <p class="text-lg font-bold text-text mb-3 uppercase">{{ $product->name }}</p>
+                                
+                                <label class="block text-[10px] font-bold text-text/40 uppercase tracking-widest mb-1">Tanggal Keberangkatan Resmi</label>
+                                <div class="flex items-center gap-3">
+                                    <div class="text-3xl font-bold text-orange">
+                                        {{ $product->departure_date ? $product->departure_date->translatedFormat('d F Y') : 'Jadwal segera diumumkan' }}
+                                    </div>
+                                    <span class="bg-emerald-500/10 text-emerald-600 text-[10px] font-bold px-3 py-1 rounded-full border border-emerald-500/20 uppercase">TERKONFIRMASI</span>
+                                </div>
+                                <p class="text-[10px] text-text/40 mt-3 italic">* Jadwal keberangkatan ini telah ditetapkan oleh admin dan tidak dapat diubah oleh jamaah.</p>
+                            </div>
+                        </div>
 
                         <!-- Detail Peserta Section -->
                         <div id="pilgrims-container" class="space-y-6">

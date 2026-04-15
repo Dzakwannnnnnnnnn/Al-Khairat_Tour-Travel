@@ -79,9 +79,15 @@
                 
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    @guest
                     <a href="{{ route('register') }}" class="btn-primary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Daftar Sekarang
                     </a>
+                    @else
+                    <a href="{{ route('profile.edit') }}" class="btn-primary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
+                        Dashboard Saya
+                    </a>
+                    @endguest
                     <a href="#paket" class="btn-secondary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
                         Lihat Paket
                     </a>
@@ -89,15 +95,7 @@
             </div>
         </div>
         
-        <!-- Navigation Dots (Desktop Only) -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 hidden lg:flex space-x-3">
-            @php
-                $slideCount = $slideshows->count() > 0 ? $slideshows->count() : 4;
-            @endphp
-            @for($i = 0; $i < $slideCount; $i++)
-            <button class="hero-dot {{ $i === 0 ? 'active' : '' }}" data-slide="{{ $i }}" aria-label="Slide {{ $i + 1 }}"></button>
-            @endfor
-        </div>
+
         
 
     </section>
@@ -231,7 +229,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="product-grid">
                 @forelse($products as $product)
                     <!-- Dynamic Live Seat Package -->
-                    <div class="product-card bg-surface rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate relative border {{ $product->status == 'featured' ? 'border-orange' : 'border-transparent' }}" data-animation="slide-up" data-name="{{ strtolower($product->name) }}">
+                    <div class="product-card bg-surface rounded-xl md:rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden scroll-animate relative border flex flex-col {{ $product->status == 'featured' ? 'border-orange' : 'border-transparent' }}" data-animation="slide-up" data-name="{{ strtolower($product->name) }}">
                         <!-- LIVE SEAT WIDGET -->
                         <div class="absolute top-4 left-4 z-20 bg-red-600 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-xs font-bold shadow-lg flex items-center space-x-2 border border-red-400">
                             <span class="relative flex h-2.5 w-2.5">
@@ -247,7 +245,7 @@
                         </div>
                         @endif
 
-                        <div class="h-32 md:h-40 relative">
+                        <div class="h-32 md:h-40 relative flex-shrink-0">
                             @if($product->image)
                                 <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-cover filter brightness-90">
                             @else
@@ -281,8 +279,8 @@
                                 </ul>
                             </div>
                             
-                            <div class="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border/50">
-                                <button onclick="openProductDetail({{ $product->id }})" class="flex-1 text-center bg-white border-2 border-orange text-orange font-bold text-xs py-3 rounded-xl hover:bg-orange hover:text-white transition">
+                            <div class="flex flex-col sm:flex-row gap-2 pt-4 border-t border-border/50 mt-auto">
+                                <button onclick="openProductDetail({{ $product->id }})" class="btn-primary flex-1 text-xs py-3 rounded-xl shadow-none hover:shadow-lg">
                                     Lihat Detail
                                 </button>
                                 <a href="https://wa.me/{{ $product->guide_phone ?? $whatsapp }}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20konsultasi%20mengenai%20paket%20{{ urlencode($product->name) }}." target="_blank" class="flex-1 text-center {{ $product->status == 'featured' ? 'bg-gradient-sunset shadow-lg shadow-orange/20' : 'bg-charcoal' }} text-white font-bold text-xs py-3 rounded-xl hover:scale-105 transition flex items-center justify-center gap-1">
@@ -450,10 +448,10 @@
 
             <!-- Form Submit Testimoni / Tulis Ulasan / Galeri Video -->
             <div class="text-center mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button onclick="toggleTestimoniModal(true)" class="bg-surface text-orange border-2 border-orange font-semibold text-sm md:text-base px-6 md:px-10 py-3 rounded-xl hover:bg-orange hover:text-white shadow hover:shadow-lg transition transform hover:-translate-y-1 w-full sm:w-auto">
+                <button onclick="toggleTestimoniModal(true)" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto">
                     Tulis Ulasan Anda
                 </button>
-                <a href="{{ route('gallery') }}" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 hover:shadow-lg transition transform hover:-translate-y-1 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                <a href="{{ route('gallery') }}" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Lihat Galeri Video Makkah
                 </a>
