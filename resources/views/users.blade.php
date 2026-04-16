@@ -42,7 +42,7 @@
             @forelse($users as $user)
             <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
                 <div class="flex items-center space-x-4 mb-4">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=E07856&color=fff" alt="{{ $user->name }}" class="w-12 h-12 rounded-full">
+                    <img src="{{ $user->avatar_url }}" alt="{{ $user->name }}" class="w-12 h-12 rounded-full object-cover border border-slate-100 shadow-sm">
                     <div>
                         <h3 class="font-semibold text-gray-900">{{ $user->name }}</h3>
                         <p class="text-sm text-gray-600">{{ $user->email }}</p>

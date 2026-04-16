@@ -29,7 +29,7 @@
         </div>
 
         <!-- Stats Grid -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-8">
             <!-- Total Users -->
             <div class="dashboard-card group animate-[fadeUp_1s_ease-out_0.1s_both]">
                 <div class="flex items-start justify-between">
@@ -75,9 +75,24 @@
                         <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Running Tours</p>
                         <p class="text-xl md:text-3xl font-black text-charcoal mt-1 md:mt-2 leading-none">{{ $activeProducts }}</p>
                     </div>
-                    <div class="text-orange text-[10px] font-bold border border-orange/20 px-2 py-1 rounded-lg uppercase tracking-tighter">
-                        Active Now
+                </div>
+            </div>
+
+            <!-- Total Testimoni -->
+            <div class="dashboard-card group animate-[fadeUp_1s_ease-out_0.35s_both]">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <div class="dashboard-stat-icon group-hover:scale-110 group-hover:-rotate-6 bg-indigo-50">
+                            <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Ulasan</p>
+                        <p class="text-xl md:text-3xl font-black text-charcoal mt-1 md:mt-2 leading-none">{{ $totalTestimonials }}</p>
                     </div>
+                    <a href="{{ route('testimonials.index') }}" class="p-1 hover:bg-slate-100 rounded-lg transition-colors">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
                 </div>
             </div>
 

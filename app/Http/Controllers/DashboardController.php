@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -22,6 +23,7 @@ class DashboardController extends Controller
         $totalProducts = Product::count();
         $activeProducts = Product::where('status', 'active')->count();
         $totalRevenue = Product::where('status', 'active')->sum('price');
+        $totalTestimonials = Testimonial::count();
 
         // Recent users
         $recentUsers = User::latest()->take(5)->get();
@@ -34,6 +36,7 @@ class DashboardController extends Controller
             'totalProducts',
             'activeProducts',
             'totalRevenue',
+            'totalTestimonials',
             'recentUsers',
             'recentProducts'
         ));
