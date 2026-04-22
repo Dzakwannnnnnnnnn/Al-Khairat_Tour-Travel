@@ -11,8 +11,8 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\FaqController;
-use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SavingsController;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Product;
@@ -92,6 +92,10 @@ Route::middleware('auth')->group(function () {
     // Member Bookings
     Route::get('/my-bookings', [BookingController::class, 'myBookings'])->name('member.bookings');
 
+    // Member Savings
+    Route::get('/my-savings', [SavingsController::class, 'mySavings'])->name('member.savings');
+    Route::post('/my-savings', [SavingsController::class, 'storePlan'])->name('member.savings.store');
+
     // Specific Admin Section
     Route::middleware('admin')->group(function () {
         // Data Master
@@ -123,5 +127,14 @@ Route::middleware('auth')->group(function () {
 
         // Systems
         Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);
+
+        // Savings Management
+        Route::get('admin/savings', [SavingsController::class, 'adminIndex'])->name('admin.savings.index');
+        Route::post('admin/savings/deposit', [SavingsController::class, 'adminDeposit'])->name('admin.savings.deposit');
+        Route::delete('admin/savings/{id}', [SavingsController::class, 'destroyPlan'])->name('admin.savings.destroy');
+        Route::post('admin/savings/{id}/approve-refund', [SavingsController::class, 'approveRefund'])->name('admin.savings.approve_refund');
     });
+
+    // Member Refund Request
+    Route::post('/my-savings/{id}/request-refund', [SavingsController::class, 'requestRefund'])->name('member.savings.request_refund');
 });

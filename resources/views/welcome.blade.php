@@ -17,7 +17,7 @@
         }
     </script>
 </head>
-<body class="bg-bg font-sans text-text transition-colors duration-500 pb-10 lg:pb-40">
+<body class="bg-bg font-sans text-text transition-colors duration-500">
     <!-- Elegant Cinematic Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-bg flex flex-col items-center justify-center z-[9999] opacity-100">
         <div class="loader-content flex flex-col items-center">
@@ -101,7 +101,7 @@
     </section>
 
     <!-- About Us Section with PPIU Integration -->
-    <section id="about" class="section-py bg-bg relative overflow-hidden">
+    <section id="about" class="section-py relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="scroll-animate" data-animation="fade-right">
@@ -164,8 +164,8 @@
     <div class="divider-palm"></div>
 
     <!-- Section Keunggulan -->
-    <section id="keunggulan" class="section-py bg-bg transition-colors duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="keunggulan" class="section-py transition-colors duration-500 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Keunggulan Kami</h2>
                 <p class="text-sm md:text-base lg:text-lg text-text/70 max-w-2xl mx-auto px-2">
@@ -217,7 +217,7 @@
     <div class="divider-palm"></div>
 
     <!-- Section Paket -->
-    <section id="paket" class="section-py bg-cream">
+    <section id="paket" class="section-py">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Paket Umroh Pilihan</h2>
@@ -323,8 +323,11 @@
     <!-- Divider with Palm -->
     <div class="divider-palm"></div>
 
+    <!-- Savings Section -->
+    <x-savings-section />
+
     <!-- Section Digital Guidance -->
-    <section id="digital-guidance" class="section-py bg-cream relative overflow-hidden transition-colors duration-500">
+    <section id="digital-guidance" class="section-py relative overflow-hidden transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10 md:mb-14 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Eksplorasi <span class="text-gradient-sunset">Digital Al-Khairat</span></h2>
@@ -402,8 +405,8 @@
     <div class="divider-palm"></div>
 
     <!-- Section Testimonial -->
-    <section id="testimoni" class="section-py bg-bg transition-colors duration-500">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="testimoni" class="section-py transition-colors duration-500 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Testimonial Jemaat Kami</h2>
                 <p class="text-sm md:text-base lg:text-lg text-brown max-w-2xl mx-auto px-2">
@@ -541,7 +544,8 @@
     <div class="divider-palm"></div>
 
     <!-- FAQ Section -->
-    <section id="faq" class="section-py bg-cream transition-colors duration-500">
+    <!-- FAQ Section -->
+    <section id="faq" class="section-py transition-colors duration-500">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12 md:mb-16 scroll-animate" data-animation="fade-up">
                 <h2 class="text-heading mb-3 md:mb-4">Pertanyaan yang Sering Diajukan</h2>
@@ -677,14 +681,33 @@
                     <input type="hidden" name="product_id" id="booking-product-id">
                     
                     <div>
-                        <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">Nama Lengkap</label>
-                        <input type="text" name="full_name" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base" placeholder="Nama Lengkap">
+                        <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">Nama Pemesan (Penanggung Jawab)</label>
+                        <input type="text" name="orderer_name" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base font-medium" placeholder="Nama Lengkap">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">Email Pemesan</label>
+                            <input type="email" name="orderer_email" required value="{{ Auth::user()->email ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base font-medium" placeholder="email@contoh.com">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">No. HP / WhatsApp</label>
+                            <input type="tel" name="orderer_phone" required value="{{ Auth::user()->phone ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base font-medium" placeholder="0812xxxxxxxx">
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-border/20 mt-4">
+                        <label class="block text-[10px] md:text-xs font-bold text-orange uppercase tracking-[0.2em] mb-4 text-left">Data Jamaah Utama</label>
+                        <div>
+                            <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">Nama Lengkap Jamaah</label>
+                            <input type="text" name="full_name[]" required value="{{ Auth::user()->name ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base" placeholder="Nama Sesuai KTP/Paspor">
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">NIK KTP (16 Digit)</label>
-                            <input type="text" name="nik" required maxlength="16" value="{{ Auth::user()->nik ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="327xxxxxxxxxxxxx">
+                            <input type="text" name="nik[]" required maxlength="16" value="{{ Auth::user()->nik ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="327xxxxxxxxxxxxx">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Jumlah Kursi</label>
@@ -695,17 +718,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Tempat Lahir</label>
-                            <input type="text" name="birth_place" required value="{{ Auth::user()->birth_place ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jakarta">
+                            <input type="text" name="birth_place[]" required value="{{ Auth::user()->birth_place ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jakarta">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Tanggal Lahir</label>
-                            <input type="date" name="birth_date" required value="{{ Auth::user()->birth_date ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all">
+                            <input type="date" name="birth_date[]" required value="{{ Auth::user()->birth_date ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Alamat Lengkap</label>
-                        <textarea name="address" required rows="3" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jl. Mawar No. 123, Jakarta Baru">{{ Auth::user()->address ?? '' }}</textarea>
+                        <textarea name="address[]" required rows="3" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="Jl. Mawar No. 123, Jakarta Baru">{{ Auth::user()->address ?? '' }}</textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-gradient-sunset text-white font-bold py-4 md:py-5 rounded-2xl shadow-xl hover:shadow-orange/30 hover:-translate-y-1 transition duration-300 transform active:scale-95 text-sm md:text-base">

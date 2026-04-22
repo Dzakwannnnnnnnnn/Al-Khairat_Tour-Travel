@@ -306,7 +306,7 @@
 
                     <!-- Payment Method Section -->
                     <div class="pt-10 border-t border-border border-dashed">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' ? 'Status Pembayaran' : 'Pilih Metode Pembayaran') }}</h3>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
 
                         @if($payment->status === 'pending')
                         <div class="mb-6 rounded-3xl border border-yellow-300/60 bg-yellow-50 px-5 py-4 text-yellow-900">
@@ -334,49 +334,7 @@
                         </div>
                         @endif
                         
-                        @if(!in_array($payment->status, ['verified', 'rejected']))
-                        <form action="{{ route('booking.payment_method', $groupCode) }}" method="POST" id="payment-method-form">
-                            @csrf
-                            <div class="space-y-4 mb-8">
-                                <!-- Bank Transfer Option -->
-                                <div class="bg-surface rounded-3xl border-2 {{ str_contains($payment->payment_method, 'Transfer') ? 'border-orange bg-orange/5' : 'border-border' }} p-6 transition-all">
-                                    <label class="flex items-center justify-between cursor-pointer mb-4">
-                                        <div class="flex items-center gap-4">
-                                            <div class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center text-orange text-lg">🏦</div>
-                                            <div>
-                                                <p class="font-bold text-text">Transfer Bank (Manual)</p>
-                                                <p class="text-[10px] text-text/40 uppercase font-bold">Pilih bank Anda di bawah</p>
-                                            </div>
-                                        </div>
-                                        <input type="radio" name="method_group" value="bank" {{ str_contains($payment->payment_method, 'Transfer') ? 'checked' : '' }} class="w-6 h-6 text-orange focus:ring-orange accent-orange" onchange="togglePaymentSection('bank')">
-                                    </label>
 
-                                    <div id="bank-select-container" class="{{ str_contains($payment->payment_method, 'Transfer') ? '' : 'hidden' }} space-y-4 animate-[fadeIn_0.3s_ease-out]">
-                                        <select name="payment_method" class="form-input w-full bg-bg border-border font-bold text-text" onchange="this.form.submit()">
-                                            <option value="Belum Memilih" disabled {{ $payment->payment_method === 'Belum Memilih' ? 'selected' : '' }}>-- Silakan Pilih Bank --</option>
-                                            <option value="Transfer Mandiri" {{ $payment->payment_method === 'Transfer Mandiri' ? 'selected' : '' }}>BANK MANDIRI (123-xxx)</option>
-                                            <option value="Transfer BCA" {{ $payment->payment_method === 'Transfer BCA' ? 'selected' : '' }}>BANK BCA (888-xxx)</option>
-                                            <option value="Transfer BSI" {{ $payment->payment_method === 'Transfer BSI' ? 'selected' : '' }}>BANK BSI (SYARIAH) (999-xxx)</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- QRIS Option -->
-                                <div class="bg-surface rounded-3xl border-2 {{ str_contains($payment->payment_method, 'QRIS') ? 'border-orange bg-orange/5' : 'border-border' }} p-6 transition-all">
-                                    <label class="flex items-center justify-between cursor-pointer">
-                                        <div class="flex items-center gap-4">
-                                            <div class="w-12 h-12 rounded-xl bg-orange/10 flex items-center justify-center text-orange text-lg">📱</div>
-                                            <div>
-                                                <p class="font-bold text-text">QRIS / E-Wallet</p>
-                                                <p class="text-[10px] text-text/40 uppercase font-bold">Proses Instan & Otomatis</p>
-                                            </div>
-                                        </div>
-                                        <input type="radio" name="payment_method" value="QRIS / E-Wallet" {{ str_contains($payment->payment_method, 'QRIS') ? 'checked' : '' }} class="w-6 h-6 text-orange focus:ring-orange accent-orange" onchange="this.form.submit()">
-                                    </label>
-                                </div>
-                            </div>
-                        </form>
-                        @endif
 
                         <!-- Payment Instructions -->
                         @if($payment->status === 'verified')
@@ -433,81 +391,103 @@
                                 </div>
                             </div>
                         </div>
-                        @elseif($payment->payment_method !== 'Belum Memilih')
-                        <div class="bg-bg rounded-3xl p-8 border border-border animate-[scaleUp_0.4s_ease-out]">
-                            @if(str_contains($payment->payment_method, 'Transfer'))
-                                <div class="flex flex-col md:flex-row gap-8 items-center md:items-start text-center md:text-left">
-                                    <div class="flex-1">
-                                        <h4 class="text-xs font-bold text-text/40 uppercase tracking-widest mb-4">Instruksi {{ $payment->payment_method }}</h4>
-                                        <div class="space-y-4">
-                                            @php
-                                                $accountNumber = '123-456-7890-000';
-                                                $bankLogo = '';
-                                                if(str_contains($payment->payment_method, 'Mandiri')) {
-                                                    $accountNumber = '123-456-7890-000';
-                                                    $bankLogo = 'https://upload.wikimedia.org/wikipedia/id/thumb/a/ad/Bank_Mandiri_logo_2016.svg/1200px-Bank_Mandiri_logo_2016.svg.png';
-                                                } elseif(str_contains($payment->payment_method, 'BCA')) {
-                                                    $accountNumber = '888-777-666-555';
-                                                    $bankLogo = 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/1200px-Bank_Central_Asia.svg.png';
-                                                } elseif(str_contains($payment->payment_method, 'BSI')) {
-                                                    $accountNumber = '999-000-111-222';
-                                                    $bankLogo = 'https://upload.wikimedia.org/wikipedia/id/thumb/a/a2/Logo_Bank_Syariah_Indonesia.svg/1200px-Logo_Bank_Syariah_Indonesia.svg.png';
-                                                }
-                                            @endphp
-                                            <div>
-                                                <p class="text-sm text-text/60 mb-1">Nomor Rekening</p>
-                                                <div class="flex items-center justify-center md:justify-start gap-3">
-                                                    <span class="text-2xl font-mono font-black text-text tracking-tighter">{{ $accountNumber }}</span>
-                                                    <button onclick="copyToClipboard('{{ str_replace('-', '', $accountNumber) }}')" class="text-orange text-sm font-bold hover:underline">Salin</button>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <p class="text-sm text-text/60 mb-1">Nama Pemilik Rekening</p>
-                                                <p class="text-xl font-bold text-text">PT AL-KHAIRAT TOUR & TRAVEL</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @if($bankLogo)
-                                    <div class="w-32 h-16 bg-surface rounded-2xl border border-border flex items-center justify-center p-3 overflow-hidden">
-                                        <img src="{{ $bankLogo }}" class="max-w-full opacity-80 h-auto grayscale hover:grayscale-0 transition-all duration-300 object-contain max-h-full">
-                                    </div>
-                                    @endif
-                                </div>
-                            @elseif(str_contains($payment->payment_method, 'QRIS'))
-                                <div class="text-center">
-                                    <h4 class="text-xs font-bold text-text/40 uppercase tracking-widest mb-6">Scan QRIS Untuk Membayar</h4>
-                                    <div class="inline-block p-4 bg-white rounded-3xl shadow-xl border border-border mb-6">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" class="w-48 h-48 opacity-90">
-                                    </div>
-                                    <p class="text-sm text-text/60 max-w-sm mx-auto italic">Berlaku untuk GoPay, OVO, ShopeePay, Dana, dan seluruh Aplikasi Perbankan Nasional.</p>
-                                </div>
-                            @endif
-
-                            <div class="mt-8 pt-8 border-t border-border border-dashed">
-                                <h4 class="text-xs font-bold text-text/40 uppercase tracking-widest text-center mb-6">Langkah Selanjutnya</h4>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <!-- Print Button (Now PDF) -->
-                                    <a href="{{ route('booking.invoice.pdf', $groupCode) }}" target="_blank" class="group flex items-center justify-center gap-3 bg-surface border-2 border-border text-text font-bold py-4 rounded-2xl hover:border-orange hover:text-orange transition-all duration-300">
-                                        <span class="text-xl group-hover:scale-110 transition-transform">📄</span> Simpan ke PDF
-                                    </a>
-
-                                    <!-- WA Button -->
-                                    <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20sudah%20memilih%20metode%20pembayaran%20{{ $payment->payment_method }}%20untuk%20booking%20{{ $groupCode }}.%20Berikut%20adalah%20detailnya..." 
-                                       target="_blank"
-                                       class="group flex items-center justify-center gap-3 bg-gradient-sunset text-white font-bold py-4 rounded-2xl hover:shadow-xl hover:shadow-orange/20 hover:scale-[1.02] transition-all duration-300">
-                                        <span class="text-xl group-hover:rotate-12 transition-transform">📸</span> Konfirmasi via WhatsApp
-                                    </a>
-                                </div>
-
-                                <p class="text-[10px] text-text/40 text-center mt-6 font-bold uppercase tracking-[0.2em] leading-loose">
-                                    PENTING: Mohon cantumkan kode <span class="text-orange">#{{ $groupCode }}</span> pada berita transfer Anda agar verifikasi lebih cepat.
-                                </p>
-                            </div>
-                        </div>
                         @else
-                        <div class="text-center py-10 bg-bg/50 rounded-3xl border-2 border-dashed border-border animate-pulse">
-                            <p class="text-text/40 font-bold uppercase text-xs tracking-widest">Silakan Pilih Metode Pembayaran Di Atas</p>
+                        <div class="bg-surface rounded-3xl p-8 border border-border mt-6 relative overflow-hidden shadow-sm">
+                            <!-- Background Accent -->
+                            <div class="absolute -right-20 -top-20 w-64 h-64 bg-orange/5 rounded-full blur-3xl pointer-events-none"></div>
+                            
+                            <div class="text-center mb-8 relative z-10">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 text-orange mb-4">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                </span>
+                                <h4 class="text-xl md:text-2xl font-serif font-bold text-text">Instruksi Transfer Bank</h4>
+                                <p class="text-sm text-text/60 mt-2 max-w-lg mx-auto">Silakan lakukan transfer sesuai total tagihan ke salah satu rekening resmi Al-Khairat di bawah ini.</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 relative z-10">
+                                <!-- Bank Mandiri -->
+                                <div class="bg-bg rounded-2xl border border-border p-6 hover:shadow-lg hover:border-orange/30 transition-all duration-300 group">
+                                    <img src="{{ asset('images/banks/mandiri.svg') }}" class="h-6 w-auto mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <p class="text-[10px] font-black tracking-widest text-text/40 uppercase mb-1">Nomor Rekening</p>
+                                    <div class="flex items-center justify-between gap-2 mb-3">
+                                        <p class="text-xl font-mono font-bold text-text tracking-tight">123-456-7890</p>
+                                        <button onclick="copyToClipboard('1234567890')" class="p-2 rounded-lg bg-orange/10 text-orange hover:bg-orange hover:text-white transition-colors" title="Salin Rekening">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-[10px] font-bold text-text/70 uppercase">A.N PT Al-Khairat Tour</p>
+                                </div>
+
+                                <!-- Bank BCA -->
+                                <div class="bg-bg rounded-2xl border border-border p-6 hover:shadow-lg hover:border-orange/30 transition-all duration-300 group">
+                                    <img src="{{ asset('images/banks/bca.svg') }}" class="h-6 w-auto mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <p class="text-[10px] font-black tracking-widest text-text/40 uppercase mb-1">Nomor Rekening</p>
+                                    <div class="flex items-center justify-between gap-2 mb-3">
+                                        <p class="text-xl font-mono font-bold text-text tracking-tight">888-777-666</p>
+                                        <button onclick="copyToClipboard('888777666')" class="p-2 rounded-lg bg-orange/10 text-orange hover:bg-orange hover:text-white transition-colors" title="Salin Rekening">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-[10px] font-bold text-text/70 uppercase">A.N PT Al-Khairat Tour</p>
+                                </div>
+
+                                <!-- Bank BSI -->
+                                <div class="bg-bg rounded-2xl border border-border p-6 hover:shadow-lg hover:border-orange/30 transition-all duration-300 group">
+                                    <img src="{{ asset('images/banks/bsi.svg') }}" class="h-6 w-auto mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
+                                    <p class="text-[10px] font-black tracking-widest text-text/40 uppercase mb-1">Nomor Rekening</p>
+                                    <div class="flex items-center justify-between gap-2 mb-3">
+                                        <p class="text-xl font-mono font-bold text-text tracking-tight">999-000-111</p>
+                                        <button onclick="copyToClipboard('999000111')" class="p-2 rounded-lg bg-orange/10 text-orange hover:bg-orange hover:text-white transition-colors" title="Salin Rekening">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                        </button>
+                                    </div>
+                                    <p class="text-[10px] font-bold text-text/70 uppercase">A.N PT Al-Khairat Tour</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-8 border-t border-border border-dashed relative z-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                                    <!-- Konsultasi (Pre-Transfer) -->
+                                    <div class="bg-surface p-6 rounded-2xl border border-border flex flex-col items-center text-center hover:border-orange/30 transition-all shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange mb-3">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </div>
+                                        <h4 class="text-sm font-bold text-text mb-1">Ada Pertanyaan?</h4>
+                                        <p class="text-xs text-text/60 mb-5 flex-1">Ingin bertanya seputar cara pembayaran atau memastikan total tagihan? Silakan konsultasi sebelum transfer.</p>
+                                        
+                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20ingin%20bertanya%20seputar%20pembayaran%20untuk%20kode%20booking%20*{{ $groupCode }}*." 
+                                           target="_blank"
+                                           class="w-full group flex items-center justify-center gap-2 bg-surface border-2 border-orange/20 text-orange font-bold py-3 px-4 rounded-xl hover:bg-orange/5 hover:border-orange transition-all duration-300">
+                                            Konsultasi via WA
+                                        </a>
+                                    </div>
+
+                                    <!-- Sudah Bayar (Post-Transfer) -->
+                                    <div class="bg-orange/5 p-6 rounded-2xl border border-orange/10 flex flex-col items-center text-center">
+                                    <!-- Konsultasi & Konfirmasi -->
+                                    <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange mb-3">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <h4 class="text-sm font-bold text-text mb-1">Sudah Membayar?</h4>
+                                    <p class="text-xs text-text/60 mb-5 flex-1">Kirim bukti transfer dengan kode <span class="font-bold text-orange">#{{ $groupCode }}</span> ke WhatsApp Admin untuk diverifikasi.</p>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20ingin%20konsultasi%20mengenai%20pembayaran%20untuk%20booking%20*{{ $groupCode }}*" target="_blank" class="flex items-center justify-center gap-2 py-4 px-4 bg-bg border-2 border-border rounded-2xl hover:border-orange/30 transition shadow-sm group">
+                                            <span class="text-xl group-hover:scale-110 transition">💬</span>
+                                            <div class="text-left">
+                                                <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest leading-none mb-1">Ada Pertanyaan?</p>
+                                                <p class="text-xs font-bold text-text">Konsultasi WA</p>
+                                            </div>
+                                        </a>
+                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20*{{ urlencode($displayOrdererName) }}*%20({{ urlencode($primaryBooking->orderer_email ?? $primaryBooking->user->email) }})%20sudah%20melakukan%20transfer%20pembayaran%20untuk%20kode%20booking%20*{{ $groupCode }}*.%20Berikut%20bukti%20transfernya:" target="_blank" class="flex items-center justify-center gap-2 py-4 px-4 bg-orange text-white rounded-2xl hover:bg-orange-bright transition shadow-lg shadow-orange/20 group">
+                                            <span class="text-xl group-hover:scale-110 transition">✅</span>
+                                            <div class="text-left">
+                                                <p class="text-[10px] font-bold text-white/60 uppercase tracking-widest leading-none mb-1">Sudah Membayar?</p>
+                                                <p class="text-xs font-bold">Konfirmasi WA</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         @endif
                     </div>

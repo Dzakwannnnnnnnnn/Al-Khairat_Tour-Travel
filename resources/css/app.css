@@ -45,6 +45,69 @@
     --color-brown: #C9BBA8;
 }
 
+/* Auto Dark Mode for Hardcoded Utilities */
+.dark .bg-white, .dark .bg-white\/80, .dark .bg-slate-50, .dark .bg-slate-50\/80, .dark .bg-slate-50\/50, .dark .bg-slate-50\/30, .dark .bg-gray-50, .dark .bg-gray-100, .dark .bg-slate-100 {
+    background-color: var(--color-surface) !important;
+}
+
+.dark .text-gray-900, .dark .text-slate-900, .dark .text-slate-800, .dark .text-gray-800, .dark .text-charcoal {
+    color: var(--color-text) !important;
+}
+
+.dark .text-gray-700, .dark .text-slate-700, .dark .text-gray-600, .dark .text-slate-600 {
+    color: rgba(224, 215, 198, 0.7) !important;
+}
+
+.dark .text-gray-500, .dark .text-slate-500, .dark .text-gray-400, .dark .text-slate-400 {
+    color: rgba(224, 215, 198, 0.5) !important;
+}
+
+.dark .border-slate-50, .dark .border-slate-100, .dark .border-slate-200, .dark .border-gray-100, .dark .border-gray-200, .dark .border-gray-300, .dark .border-white\/30 {
+    border-color: var(--color-border) !important;
+}
+
+.dark .shadow-xl, .dark .shadow-2xl, .dark .shadow-sm {
+    --tw-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark .bg-orange\/5, .dark .bg-orange\/10 {
+    background-color: rgba(224, 120, 86, 0.08) !important;
+}
+
+.dark .bg-red-50 {
+    background-color: rgba(239, 68, 68, 0.1) !important;
+}
+
+.dark .bg-emerald-50, .dark .bg-emerald-100 {
+    background-color: rgba(16, 185, 129, 0.1) !important;
+}
+
+.dark .bg-amber-50, .dark .bg-amber-100 {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+}
+
+.dark .bg-yellow-50, .dark .bg-yellow-100 {
+    background-color: rgba(234, 179, 8, 0.1) !important;
+}
+
+.dark .bg-blue-100 {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.dark .bg-purple-100 {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+.dark .bg-indigo-600 {
+    background-color: rgba(79, 70, 229, 0.9) !important;
+}
+
+.dark input:not([type="checkbox"]):not([type="radio"]), .dark textarea, .dark select {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: var(--color-text) !important;
+    border-color: var(--color-border) !important;
+}
+
 /* Custom Utility Classes */
 .font-serif {
     font-family: 'Playfair Display', serif;
@@ -599,7 +662,7 @@ body {
 }
 
 .dashboard-card {
-    @apply bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:border-orange/20 transition-all duration-500;
+    @apply bg-surface p-8 rounded-[2rem] border border-border shadow-sm hover:shadow-xl hover:border-orange/50 transition-all duration-500;
 }
 
 .dashboard-stat-icon {
@@ -676,7 +739,6 @@ body {
 /* Premium Contact Section Styles */
 .contact-section {
     position: relative;
-    background-color: var(--color-bg);
 }
 
 .contact-badge {

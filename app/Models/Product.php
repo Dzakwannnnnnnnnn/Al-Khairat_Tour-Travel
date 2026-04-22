@@ -39,4 +39,11 @@ class Product extends Model
             'departure_date' => 'date',
         ];
     }
+    public function bookings() {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function savingsPlans() {
+        return $this->hasMany(SavingsPlan::class);
+    }
 }

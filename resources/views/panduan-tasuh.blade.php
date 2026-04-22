@@ -17,7 +17,7 @@
         }
     </script>
 </head>
-<body class="bg-bg font-sans text-text transition-colors duration-500 pb-10 lg:pb-40">
+<body class="bg-bg font-sans text-text transition-colors duration-500">
     <!-- Logo Header -->
     <x-logo-header />
 

@@ -147,22 +147,22 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Paket</label>
-                        <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Contoh: Paket Premium Madinah">
+                        <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: Paket Premium Madinah">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Gambar (Opsional)</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-slate-800">
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
-                    <input type="date" name="departure_date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="date" name="departure_date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                     <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
-                        <select name="category" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <select name="category" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                             <option value="Standar">Standar</option>
                             <option value="Premium">Premium</option>
                             <option value="Ekonomis">Ekonomis</option>
@@ -170,46 +170,46 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Durasi</label>
-                        <input type="text" name="duration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="9 Hari">
+                        <input type="text" name="duration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="9 Hari">
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
-                        <input type="number" name="price" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="35000000">
+                        <input type="number" name="price" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="35000000">
                         <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
-                        <input type="number" name="price_triple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="2000000">
+                        <input type="number" name="price_triple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="2000000">
                         <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
-                        <input type="number" name="price_double" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="5000000">
+                        <input type="number" name="price_double" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="5000000">
                         <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                    <input type="number" name="stock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="30">
+                    <input type="number" name="stock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="30">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
-                    <textarea name="description" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Deskripsi singkat paket umroh"></textarea>
+                    <textarea name="description" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Deskripsi singkat paket umroh"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Fitur Utama (1 baris = 1 fitur)</label>
-                    <textarea name="features" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
+                    <textarea name="features" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed text-slate-800" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor WA Tour Guide</label>
-                    <input type="text" name="guide_phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Contoh: 628123456789">
+                    <input type="text" name="guide_phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: 628123456789">
                     <p class="text-[10px] text-gray-500 mt-1">* Gunakan format internasional tanpa tanda + (contoh: 62812...)</p>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Status</label>
-                    <select name="status" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <select name="status" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                         <option value="active">Aktif</option>
                         <option value="inactive">Nonaktif</option>
                     </select>
@@ -307,22 +307,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Paket</label>
-                        <input type="text" name="name" id="editProductName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="text" name="name" id="editProductName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Upload Gambar Baru</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-slate-800">
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
-                    <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                     <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
-                        <select name="category" id="editProductCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <select name="category" id="editProductCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                             <option value="Standar">Standar</option>
                             <option value="Premium">Premium</option>
                             <option value="Ekonomis">Ekonomis</option>
@@ -330,46 +330,46 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Durasi</label>
-                        <input type="text" name="duration" id="editProductDuration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="text" name="duration" id="editProductDuration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
-                        <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                         <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
-                        <input type="number" name="price_triple" id="editProductPriceTriple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="2000000">
+                        <input type="number" name="price_triple" id="editProductPriceTriple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="2000000">
                         <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
-                        <input type="number" name="price_double" id="editProductPriceDouble" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="5000000">
+                        <input type="number" name="price_double" id="editProductPriceDouble" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="5000000">
                         <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                    <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
-                    <textarea name="description" id="editProductDescription" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                    <textarea name="description" id="editProductDescription" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Fitur Utama (1 baris = 1 fitur)</label>
-                    <textarea name="features" id="editProductFeatures" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
+                    <textarea name="features" id="editProductFeatures" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed text-slate-800" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor WA Tour Guide</label>
-                    <input type="text" name="guide_phone" id="editProductGuidePhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Contoh: 628123456789">
+                    <input type="text" name="guide_phone" id="editProductGuidePhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: 628123456789">
                     <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika ingin menggunakan nomor WA Admin pusat.</p>
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Status</label>
-                    <select name="status" id="editProductStatus" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <select name="status" id="editProductStatus" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                         <option value="active">Aktif</option>
                         <option value="inactive">Nonaktif</option>
                     </select>

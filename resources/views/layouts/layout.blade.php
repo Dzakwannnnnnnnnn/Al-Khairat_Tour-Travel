@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Al-Khairat')</title>
+
+    <!-- Dark Mode Init (must run before CSS to prevent flash) -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
     
     <!-- Vite CSS -->
     @vite(['resources/css/app.css'])
@@ -120,5 +129,26 @@
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
     @stack('scripts')
+
+    <!-- Dashboard Theme Toggle -->
+    <script>
+        function updateDashboardThemeIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const sun = document.getElementById('themeIconSun');
+            const moon = document.getElementById('themeIconMoon');
+            if (sun && moon) {
+                sun.classList.toggle('hidden', !isDark);
+                moon.classList.toggle('hidden', isDark);
+            }
+        }
+
+        function toggleDashboardTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateDashboardThemeIcon();
+        }
+
+        document.addEventListener('DOMContentLoaded', updateDashboardThemeIcon);
+    </script>
 </body>
 </html>

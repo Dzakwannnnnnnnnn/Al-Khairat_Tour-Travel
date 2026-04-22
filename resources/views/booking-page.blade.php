@@ -77,11 +77,7 @@
                                 </div>
                             </div>
 
-                            <div class="mt-8 pt-6 border-t border-border flex justify-end">
-                                <button type="button" onclick="copyOrdererToPilgrim()" class="bg-orange/10 text-orange font-bold text-sm px-6 py-3 rounded-xl hover:bg-orange hover:text-white transition-all transform active:scale-95 shadow-sm">
-                                    Masukkan Sebagai Jamaah
-                                </button>
-                            </div>
+
                         </div>
                         
                         <!-- Fixed Departure Date Card -->
@@ -443,18 +439,7 @@
             if (e.target.type === 'radio') updateSummary();
         });
 
-        function copyOrdererToPilgrim() {
-            const ordererName = document.querySelector('input[name="orderer_name"]').value;
-            const pilgrimName = document.querySelector('.pilgrim-name-input');
-            
-            if (ordererName) {
-                pilgrimName.value = ordererName;
-                pilgrimName.classList.add('ring-2', 'ring-orange');
-                setTimeout(() => pilgrimName.classList.remove('ring-2', 'ring-orange'), 1000);
-            } else {
-                alert('Silakan isi Nama Pemesan terlebih dahulu.');
-            }
-        }
+
 
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {

@@ -28,7 +28,7 @@
             <form method="GET" action="{{ route('users.index') }}">
                 <div class="relative group">
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari berdasarkan nama atau email..."
-                        class="w-full border border-slate-200 rounded-[1.2rem] px-6 py-3.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-white shadow-sm transition-all">
+                        class="w-full border border-slate-200 rounded-[1.2rem] px-6 py-3.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-white shadow-sm transition-all text-slate-800">
                     <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 group-hover:text-orange transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
@@ -105,19 +105,19 @@
                 @csrf
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nama</label>
-                    <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Nama lengkap">
+                    <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Nama lengkap">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
-                    <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="email@contoh.com">
+                    <input type="email" name="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="email@contoh.com">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
-                    <input type="password" name="password" required minlength="8" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Minimal 8 karakter">
+                    <input type="password" name="password" required minlength="8" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Minimal 8 karakter">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Role</label>
-                    <select name="role" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <select name="role" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
                     </select>
@@ -144,19 +144,19 @@
                 @method('PUT')
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Nama</label>
-                    <input type="text" name="name" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="text" name="name" id="editName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Email</label>
-                    <input type="email" name="email" id="editEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input type="email" name="email" id="editEmail" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Password Baru (kosongkan jika tidak diubah)</label>
-                    <input type="password" name="password" minlength="8" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="Kosongkan jika tidak diubah">
+                    <input type="password" name="password" minlength="8" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Kosongkan jika tidak diubah">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-1">Role</label>
-                    <select name="role" id="editRole" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <select name="role" id="editRole" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
                     </select>

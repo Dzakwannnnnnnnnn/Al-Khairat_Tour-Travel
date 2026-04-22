@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 items-start">
+    <div class="grid grid-cols-1 xl:grid-cols-[3fr_2fr] gap-8 items-start">
         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
@@ -108,71 +108,54 @@
             </div>
         </form>
 
-        <div class="space-y-6">
-            <div class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl bg-slate-50/30 h-fit">
-                <div class="flex items-center gap-3 mb-5">
-                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
-                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-lg font-bold text-charcoal">Keamanan Akun</h2>
-                        <p class="text-xs text-slate-500 mt-1">Semua pengaturan password sekarang terkumpul rapi di sisi
-                            kanan.</p>
-                    </div>
-                </div>
+        <form action="{{ route('profile.password.update') }}" method="POST"
+            class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl bg-white xl:sticky xl:top-8 space-y-6">
+            @csrf
+            @method('PUT')
 
-                <div class="rounded-[1.75rem] border border-orange/10 bg-white/80 p-5">
-                    <p class="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Panduan Singkat</p>
-                    <p class="mt-3 text-sm leading-relaxed text-slate-500">Gunakan password minimal 8 karakter dan
-                        pastikan berbeda dari password yang sedang dipakai sekarang.</p>
+            <div class="flex items-center gap-3 mb-6 md:mb-8">
+                <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                        </path>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-charcoal">Keamanan Akun</h2>
+                    <p class="text-sm text-slate-500 mt-1">Perbarui password akun Anda diubah berkala.</p>
                 </div>
             </div>
 
-            <form action="{{ route('profile.password.update') }}" method="POST"
-                class="glass-dashboard rounded-[2.5rem] p-6 md:p-8 border border-slate-100 shadow-xl bg-white space-y-5 lg:sticky lg:top-8">
-                @csrf
-                @method('PUT')
-
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-orange/10 flex items-center justify-center text-orange">
-                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div>
-                        <h2 class="text-lg font-bold text-charcoal">Reset Password</h2>
-                        <p class="text-xs text-slate-500 mt-1">Masukkan password lama dan password baru Anda.</p>
-                    </div>
-                </div>
-
+            <div class="space-y-6">
                 <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Password Saat Ini</label>
                     <input type="password" name="current_password"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-charcoal focus:border-orange outline-none transition-all"
-                        placeholder="Password Saat Ini" required>
+                        class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-charcoal focus:border-orange focus:ring-4 focus:ring-orange/5 transition-all outline-none"
+                        placeholder="Ketik password lama" required>
                 </div>
                 <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Password Baru</label>
                     <input type="password" name="new_password"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-charcoal focus:border-orange outline-none transition-all"
-                        placeholder="Password Baru" required>
+                        class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-charcoal focus:border-orange focus:ring-4 focus:ring-orange/5 transition-all outline-none"
+                        placeholder="Ketik password baru" required>
                 </div>
                 <div>
+                    <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Konfirmasi Password Baru</label>
                     <input type="password" name="new_password_confirmation"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs font-bold text-charcoal focus:border-orange outline-none transition-all"
-                        placeholder="Konfirmasi Password Baru" required>
+                        class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-charcoal focus:border-orange focus:ring-4 focus:ring-orange/5 transition-all outline-none"
+                        placeholder="Ulangi password baru" required>
                 </div>
+            </div>
 
+            <div class="pt-4">
                 <button type="submit"
-                    class="w-full btn-dashboard btn-dashboard-primary py-4 rounded-2xl shadow-lg shadow-orange/20">
-                    Reset Password
+                    class="w-full btn-dashboard btn-dashboard-primary py-4 rounded-2xl shadow-lg shadow-orange/20 flex items-center justify-center gap-2 group">
+                    <span class="group-hover:rotate-12 transition-transform">🔐</span>
+                    <span>Reset Password</span>
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     <div class="mt-12 space-y-6">
