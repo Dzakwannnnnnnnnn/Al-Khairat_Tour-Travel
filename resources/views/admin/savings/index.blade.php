@@ -3,7 +3,7 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-0">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:p-8 bg-white rounded-[2rem] shadow-sm border border-slate-100 mb-8 gap-4">
         <div class="flex items-center space-x-4">
             <div class="p-3 bg-orange/10 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -37,7 +37,35 @@
     </div>
 
     <!-- Table Section -->
-    <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100">
+    <div class="bg-white rounded-[2rem] shadow-md border border-slate-100 overflow-hidden">
+        <!-- Dashboard Toolbar -->
+        <div class="px-6 py-8 border-b border-slate-100 bg-gradient-to-r from-slate-50/50 to-white">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="flex-1 max-w-2xl">
+                    <form action="{{ route('admin.savings.index') }}" method="GET" class="relative group">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-orange transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <input type="text" name="search" id="dashboardSearch" value="{{ request('search') }}" 
+                            class="w-full pl-12 pr-12 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:border-orange focus:ring-8 focus:ring-orange/5 focus:outline-none transition-all duration-300 text-sm md:text-base font-semibold text-slate-700 placeholder:text-slate-400 placeholder:font-normal shadow-sm group-hover:border-slate-200" 
+                            placeholder="Cari Jemaah, Email, atau Paket Tabungan...">
+                        
+                        @if(request('search'))
+                            <a href="{{ route('admin.savings.index') }}" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-300 hover:text-red-500 transition-colors duration-200">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </a>
+                        @endif
+                    </form>
+                </div>
+                
+                @if(request('search'))
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Filter:</span>
+                    <span class="px-3 py-1 bg-orange/10 text-orange text-xs font-bold rounded-lg border border-orange/20">{{ request('search') }}</span>
+                </div>
+                @endif
+            </div>
+        </div>
         <div class="overflow-x-auto dashboard-scroll">
             <table class="w-full text-left border-collapse">
                 <thead class="bg-slate-50/50 border-b border-slate-100">
@@ -235,6 +263,24 @@
         document.getElementById('adminDepositUserName').innerText = userName + ' | ' + productName;
         toggleAdminDepositModal();
     }
+
+    // Search Highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        
+        if (searchQuery && searchQuery.length >= 2) {
+            const table = document.querySelector('table');
+            const cells = table.querySelectorAll('td p, td span.font-black, td span.text-slate-400');
+            const regex = new RegExp(`(${searchQuery})`, 'gi');
+            
+            cells.forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(searchQuery.toLowerCase())) {
+                    cell.innerHTML = cell.innerHTML.replace(regex, '<mark class="bg-orange/20 text-orange-700 font-bold px-0.5 rounded-sm font-sans">$1</mark>');
+                }
+            });
+        }
+    });
 </script>
 @endpush
 @endsection

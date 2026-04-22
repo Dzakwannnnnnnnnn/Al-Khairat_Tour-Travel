@@ -136,12 +136,23 @@ class SavingsController extends Controller
     /**
      * Admin view of all savings.
      */
-    public function adminIndex()
+    public function adminIndex(Request $request)
     {
-        $plans = SavingsPlan::with(['user', 'product', 'deposits'])
-            ->latest()
-            ->paginate(15);
-        
+        $query = SavingsPlan::with(['user', 'product', 'deposits'])->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->whereHas('user', function($uq) use ($search) {
+                    $uq->where('name', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                })->orWhereHas('product', function($pq) use ($search) {
+                    $pq->where('name', 'like', "%{$search}%");
+                })->orWhere('status', 'like', "%{$search}%");
+            });
+        }
+
+        $plans = $query->paginate(15)->withQueryString();
         $totalSavings = SavingsDeposit::sum('amount');
         
         return view('admin.savings.index', compact('plans', 'totalSavings'));

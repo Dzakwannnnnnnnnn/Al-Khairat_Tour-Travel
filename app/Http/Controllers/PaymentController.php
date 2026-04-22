@@ -34,12 +34,45 @@ class PaymentController extends Controller
         $query->update(['status' => $bookingStatus]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $payments = Payment::with(['booking', 'booking.user'])->latest()->paginate(10);
-        // Cuma bawa booking yang belum dibatalkan untuk opsi dropdown
-        $bookings = Booking::with('user')->where('status', '!=', 'cancelled')->get();
-        return view('payments', compact('payments', 'bookings'));
+        // Now fetching from Bookings instead of Payments
+        $query = Booking::with(['product', 'user', 'payment'])->latest();
+
+        // Stats calculation based on Booking status
+        $stats = [
+            'total' => Booking::count(),
+            'pending' => Booking::where('status', 'pending')->count(),
+            'dp_paid' => Booking::where('status', 'dp_paid')->count(),
+            'fully_paid' => Booking::where('status', 'fully_paid')->count(),
+            'savings' => Booking::where('status', 'savings')->count(),
+        ];
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('booking_code', 'like', "%{$search}%")
+                  ->orWhere('group_code', 'like', "%{$search}%")
+                  ->orWhere('full_name', 'like', "%{$search}%")
+                  ->orWhere('orderer_email', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($uq) use ($search) {
+                      $uq->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        // Filter by booking status (finance-centric categories)
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->paginate(10)->withQueryString();
+        
+        // For the "Add Payment" modal dropdown (all active bookings)
+        $booking_options = Booking::with('user')->where('status', '!=', 'cancelled')->get();
+        
+        return view('payments', compact('bookings', 'booking_options', 'stats'));
     }
 
     public function store(Request $request)

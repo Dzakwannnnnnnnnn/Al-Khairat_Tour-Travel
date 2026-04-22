@@ -12,12 +12,41 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $bookings = Booking::with(['user', 'product'])->latest()->paginate(10);
+        $query = Booking::with(['product', 'user', 'payment'])->latest();
+
+        // Stats calculation
+        $stats = [
+            'total' => Booking::count(),
+            'pending' => Booking::where('status', 'pending')->count(),
+            'dp_paid' => Booking::where('status', 'dp_paid')->count(),
+            'fully_paid' => Booking::where('status', 'fully_paid')->count(),
+            'savings' => Booking::where('status', 'savings')->count(),
+        ];
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('booking_code', 'like', "%{$search}%")
+                  ->orWhere('group_code', 'like', "%{$search}%")
+                  ->orWhere('full_name', 'like', "%{$search}%")
+                  ->orWhere('orderer_email', 'like', "%{$search}%")
+                  ->orWhereHas('user', function($uq) use ($search) {
+                      $uq->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->paginate(10)->withQueryString();
         $users = User::all();
         $products = Product::all();
-        return view('bookings', compact('bookings', 'users', 'products'));
+        return view('bookings', compact('bookings', 'users', 'products', 'stats'));
     }
 
     public function myBookings()
@@ -44,9 +73,11 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'full_name' => 'required|string|max:255',
+            'orderer_email' => 'nullable|email|max:255',
+            'orderer_phone' => 'nullable|string|max:20',
             'product_id' => 'required|exists:products,id',
-            'status' => 'required|in:pending,dp_paid,fully_paid,completed,cancelled',
+            'status' => 'required|in:pending,dp_paid,fully_paid,completed,cancelled,savings',
             'notes' => 'nullable|string',
         ]);
 
@@ -54,10 +85,34 @@ class BookingController extends Controller
             return back()->withErrors(['status' => 'Pemesanan baru tidak bisa langsung Lunas. Silakan buat dengan status Pending, lalu proses di Manajemen Pembayaran.'])->withInput();
         }
 
-        $data = $request->all();
+        // Logic to find or create user based on email
+        $userId = null;
+        if ($request->orderer_email) {
+            $user = User::where('email', $request->orderer_email)->first();
+            if (!$user) {
+                $user = User::create([
+                    'name' => $request->full_name,
+                    'email' => $request->orderer_email,
+                    'password' => \Hash::make('password123'), // Default temporary password
+                    'role' => 'user'
+                ]);
+            }
+            $userId = $user->id;
+        }
+
+        $data = $request->except(['full_name', 'orderer_email', 'orderer_phone']);
+        $data['user_id'] = $userId;
+        $data['full_name'] = $request->full_name;
+        $data['orderer_email'] = $request->orderer_email;
+        $data['orderer_phone'] = $request->orderer_phone;
+        
         // Generate random booking code
         $data['booking_code'] = 'BKG-' . date('Ymd') . '-' . strtoupper(Str::random(4));
         $data['booking_seat'] = $data['booking_seat'] ?? 1;
+
+        // Calculate total price based on product
+        $product = Product::find($request->product_id);
+        $data['total_price'] = $product ? ($product->price * $data['booking_seat']) : 0;
 
         $booking = Booking::create($data);
 
@@ -189,9 +244,17 @@ class BookingController extends Controller
             abort(404);
         }
 
-        $payment = Payment::where('booking_id', $bookings->first()->id)->first();
+        // Ambil semua pembayaran yang sudah terverifikasi untuk grup ini
+        $allPayments = Payment::whereIn('booking_id', $bookings->pluck('id'))
+                            ->where('status', 'verified')
+                            ->get();
         
-        $pdf = Pdf::loadView('pdf.invoice', compact('bookings', 'payment', 'groupCode'));
+        $totalPaid = $allPayments->sum('amount');
+        
+        // Tetap bawa 1 payment record untuk info metode (ambil yang terakhir)
+        $payment = Payment::whereIn('booking_id', $bookings->pluck('id'))->latest()->first();
+        
+        $pdf = Pdf::loadView('pdf.invoice', compact('bookings', 'payment', 'groupCode', 'totalPaid', 'allPayments'));
 
         return $pdf->stream('Invoice-' . $groupCode . '.pdf');
     }
@@ -215,29 +278,69 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'full_name' => 'required|string|max:255',
+            'orderer_email' => 'nullable|email|max:255',
+            'orderer_phone' => 'nullable|string|max:20',
             'product_id' => 'required|exists:products,id',
-            'status' => 'required|in:pending,dp_paid,fully_paid,completed,cancelled',
+            'status' => 'required|in:pending,dp_paid,fully_paid,completed,cancelled,savings',
             'notes' => 'nullable|string',
         ]);
 
-        if ($request->status === 'fully_paid') {
-            $paymentQuery = !empty($booking->group_code) 
-                ? Payment::whereHas('booking', function($query) use ($booking) {
-                    $query->where('group_code', $booking->group_code);
-                }) 
-                : Payment::where('booking_id', $booking->id);
-
-            $payment = $paymentQuery->first();
-            $invalidMethods = ['belum memilih', 'menunggu pembayaran (otomatis)', ''];
-            
-            if ($payment && in_array(strtolower(trim($payment->payment_method)), $invalidMethods)) {
-                return back()->withErrors(['status' => 'Gagal mengubah ke Lunas (Fully Paid). User atau Admin belum menentukan Metode Pembayaran di data transaksi.'])->withInput();
+        // Logic to find or create user based on email
+        $userId = $booking->user_id;
+        if ($request->orderer_email && $request->orderer_email !== ($booking->orderer_email ?? $booking->user->email ?? '')) {
+            $user = User::where('email', $request->orderer_email)->first();
+            if (!$user) {
+                $user = User::create([
+                    'name' => $request->full_name,
+                    'email' => $request->orderer_email,
+                    'password' => \Hash::make('password123'),
+                    'role' => 'user'
+                ]);
             }
+            $userId = $user->id;
         }
 
         $oldStatus = $booking->status;
-        $booking->update($request->all());
+        
+        $data = $request->all();
+        $data['user_id'] = $userId;
+        
+        // Find the payment record associated with this booking/group
+        $payment = !empty($booking->group_code) 
+            ? Payment::whereHas('booking', function($query) use ($booking) {
+                $query->where('group_code', $booking->group_code);
+            })->first()
+            : Payment::where('booking_id', $booking->id)->first();
+
+        // Update payment method if provided
+        if ($request->filled('payment_method') && $payment) {
+            $payment->update([
+                'payment_method' => $request->payment_method
+            ]);
+            // Refresh payment object to get latest data for the next check
+            $payment->refresh();
+        }
+
+        // Final check for Fully Paid status: require a valid payment method
+        if ($request->status === 'fully_paid') {
+            $invalidMethods = ['belum memilih', 'menunggu pembayaran (otomatis)', '', null];
+            $currentMethod = $payment ? strtolower(trim($payment->payment_method)) : '';
+            
+            if (!$payment || in_array($currentMethod, $invalidMethods)) {
+                return back()->withErrors(['status' => 'Gagal mengubah ke Lunas (Fully Paid). Anda harus menentukan Metode Pembayaran terlebih dahulu.'])->withInput();
+            }
+
+            // Sync payment status to verified when booking is fully paid
+            if ($payment->status !== 'verified') {
+                $payment->update(['status' => 'verified']);
+            }
+        } elseif (in_array($request->status, ['pending', 'dp_paid']) && $payment && $payment->status === 'verified') {
+            // Revert payment status if booking is downgraded from fully paid
+            $payment->update(['status' => 'pending']);
+        }
+        
+        $booking->update($data);
 
         // Handle stock specifically when status changes to/from cancelled
         if ($oldStatus !== 'cancelled' && $request->status === 'cancelled') {

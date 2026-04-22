@@ -13,6 +13,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SavingsController;
+use App\Http\Controllers\SettingController;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Product;

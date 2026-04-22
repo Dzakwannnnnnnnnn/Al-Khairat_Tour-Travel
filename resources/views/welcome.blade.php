@@ -84,8 +84,8 @@
                         Daftar Sekarang
                     </a>
                     @else
-                    <a href="{{ route('profile.edit') }}" class="btn-primary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
-                        Dashboard Saya
+                    <a href="{{ auth()->user()->isAdmin() ? route('dashboard') : route('profile.edit') }}" class="btn-primary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">
+                        {{ auth()->user()->isAdmin() ? 'Dashboard Saya' : 'Profil Saya' }}
                     </a>
                     @endguest
                     <a href="#paket" class="btn-secondary text-sm md:text-base 2xl:text-sm px-6 md:px-10 2xl:px-8 py-3 md:py-4 2xl:py-3 hover:shadow-2xl transition transform hover:scale-105 text-center">

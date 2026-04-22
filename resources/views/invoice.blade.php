@@ -33,10 +33,15 @@
 
             <!-- Success Message Header -->
             <div class="text-center mb-12 scroll-animate" data-animation="fade-up">
-                <div class="{{ $payment->status === 'verified' ? 'inline-flex' : 'hidden' }} items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 text-4xl mb-6">
-                    ✅
-                </div>
-                @if($payment->status === 'pending')
+                @if($payment->status === 'verified')
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 text-4xl mb-6">
+                        ✅
+                    </div>
+                @elseif($primaryBooking->status === 'dp_paid')
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 text-blue-500 text-4xl mb-6">
+                        💳
+                    </div>
+                @elseif($payment->status === 'pending')
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-yellow-500/10 mb-6 relative">
                         <span class="absolute inset-0 rounded-full border-4 border-yellow-300/40 border-t-orange animate-spin"></span>
                         <span class="text-yellow-600 text-xl font-black tracking-[0.3em] pl-1">...</span>
@@ -45,14 +50,21 @@
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-500/10 text-red-500 text-4xl mb-6">
                         !
                     </div>
-                @elseif($payment->status !== 'verified')
+                @else
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-orange/10 text-orange text-4xl mb-6">
                         i
                     </div>
                 @endif
+
                 @if($payment->status === 'verified')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pembayaran Anda Telah Lunas</h1>
                     <p class="text-text/60 max-w-2xl mx-auto leading-relaxed">Admin telah mengonfirmasi pembayaran Anda. Di bawah ini adalah ringkasan pemesan dan detail paket perjalanan yang sudah aktif untuk rombongan Anda.</p>
+                @elseif($primaryBooking->status === 'dp_paid')
+                    <div class="flex items-center justify-center gap-3 mb-2 text-blue-600">
+                        <span class="text-xs font-black uppercase tracking-[0.25em]">DP Terverifikasi</span>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Menunggu Pelunasan</h1>
+                    <p class="text-text/60 max-w-lg mx-auto leading-relaxed">DP Anda telah kami terima dan verifikasi. Silakan lakukan pelunasan sesuai jadwal untuk mendapatkan akses penuh ke invoice resmi (PDF) dan keberangkatan.</p>
                 @elseif($payment->status === 'rejected')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pembayaran Ditolak</h1>
                     <p class="text-text/60 max-w-lg mx-auto leading-relaxed">Pembayaran ini belum dapat diverifikasi. Silakan cek kembali detail transfer Anda atau hubungi admin.</p>
@@ -85,6 +97,9 @@
                                 @if($payment->status === 'verified')
                                     <span class="w-2 h-2 rounded-full bg-green-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">BERHASIL / TERVERIFIKASI</span>
+                                @elseif($primaryBooking->status === 'dp_paid')
+                                    <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                                    <span class="font-bold uppercase text-sm tracking-widest">SUDAH DP (MENCICIL)</span>
                                 @elseif($payment->status === 'rejected')
                                     <span class="w-2 h-2 rounded-full bg-red-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">DITOLAK / GAGAL</span>
@@ -308,7 +323,19 @@
                     <div class="pt-10 border-t border-border border-dashed">
                         <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
 
-                        @if($payment->status === 'pending')
+                        @if($primaryBooking->status === 'dp_paid')
+                        <div class="mb-6 rounded-3xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900 animate-[pulse_3s_infinite]">
+                            <div class="flex items-start gap-3">
+                                <span class="mt-0.5 text-xl">💳</span>
+                                <div>
+                                    <p class="font-bold uppercase tracking-wide text-sm">DP Telah Diterima & Diverifikasi</p>
+                                    <p class="text-sm text-blue-800/90 mt-1">
+                                        Terima kasih! Pembayaran awal (DP) Anda sudah kami catat. Silakan lakukan pelunasan sesuai total tagihan di bawah ini untuk mendapatkan invoice resmi (PDF).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @elseif($payment->status === 'pending')
                         <div class="mb-6 rounded-3xl border border-yellow-300/60 bg-yellow-50 px-5 py-4 text-yellow-900">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 inline-flex h-5 w-5 rounded-full border-2 border-yellow-300 border-t-orange animate-spin"></span>
@@ -445,57 +472,36 @@
                                 </div>
                             </div>
 
-                            <div class="pt-8 border-t border-border border-dashed relative z-10">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto">
-                                    <!-- Konsultasi (Pre-Transfer) -->
-                                    <div class="bg-surface p-6 rounded-2xl border border-border flex flex-col items-center text-center hover:border-orange/30 transition-all shadow-sm">
-                                        <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange mb-3">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div class="max-w-xl mx-auto pt-8 border-t border-border border-dashed relative z-10">
+                                <!-- Konfirmasi Pembayaran (Single Card) -->
+                                <div class="bg-orange/5 p-6 md:p-8 rounded-[2.5rem] border-2 border-orange/10 flex flex-col items-center text-center">
+                                    <div class="w-12 h-12 rounded-full bg-orange/10 flex items-center justify-center text-orange mb-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-text mb-2">Sudah Melakukan Pembayaran?</h4>
+                                    <p class="text-sm text-text/60 mb-6 max-w-sm">Kirim bukti transfer dengan mencantumkan kode <span class="font-bold text-orange">#{{ $groupCode }}</span> ke WhatsApp Admin untuk diverifikasi cepat.</p>
+                                    
+                                    <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20*{{ urlencode($displayOrdererName) }}*%20({{ urlencode($primaryBooking->orderer_email ?? $primaryBooking->user->email) }})%20sudah%20melakukan%20transfer%20pembayaran%20untuk%20kode%20booking%20*{{ $groupCode }}*.%20Berikut%20bukti%20transfernya:" 
+                                       target="_blank" 
+                                       class="w-full flex items-center justify-center gap-3 py-4 px-8 bg-orange text-white rounded-2xl hover:bg-orange-bright transition shadow-xl shadow-orange/20 group">
+                                        <span class="text-2xl group-hover:scale-110 transition">✅</span>
+                                        <div class="text-left">
+                                            <p class="text-[10px] font-black text-white/70 uppercase tracking-[0.2em] leading-none mb-1">Konfirmasi Sekarang</p>
+                                            <p class="text-base font-bold">Kirim Bukti via WhatsApp</p>
                                         </div>
-                                        <h4 class="text-sm font-bold text-text mb-1">Ada Pertanyaan?</h4>
-                                        <p class="text-xs text-text/60 mb-5 flex-1">Ingin bertanya seputar cara pembayaran atau memastikan total tagihan? Silakan konsultasi sebelum transfer.</p>
-                                        
-                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20ingin%20bertanya%20seputar%20pembayaran%20untuk%20kode%20booking%20*{{ $groupCode }}*." 
-                                           target="_blank"
-                                           class="w-full group flex items-center justify-center gap-2 bg-surface border-2 border-orange/20 text-orange font-bold py-3 px-4 rounded-xl hover:bg-orange/5 hover:border-orange transition-all duration-300">
-                                            Konsultasi via WA
-                                        </a>
-                                    </div>
-
-                                    <!-- Sudah Bayar (Post-Transfer) -->
-                                    <div class="bg-orange/5 p-6 rounded-2xl border border-orange/10 flex flex-col items-center text-center">
-                                    <!-- Konsultasi & Konfirmasi -->
-                                    <div class="w-10 h-10 rounded-full bg-orange/10 flex items-center justify-center text-orange mb-3">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                    </div>
-                                    <h4 class="text-sm font-bold text-text mb-1">Sudah Membayar?</h4>
-                                    <p class="text-xs text-text/60 mb-5 flex-1">Kirim bukti transfer dengan kode <span class="font-bold text-orange">#{{ $groupCode }}</span> ke WhatsApp Admin untuk diverifikasi.</p>
-                                    <div class="grid grid-cols-2 gap-4">
-                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20ingin%20konsultasi%20mengenai%20pembayaran%20untuk%20booking%20*{{ $groupCode }}*" target="_blank" class="flex items-center justify-center gap-2 py-4 px-4 bg-bg border-2 border-border rounded-2xl hover:border-orange/30 transition shadow-sm group">
-                                            <span class="text-xl group-hover:scale-110 transition">💬</span>
-                                            <div class="text-left">
-                                                <p class="text-[10px] font-bold text-text/40 uppercase tracking-widest leading-none mb-1">Ada Pertanyaan?</p>
-                                                <p class="text-xs font-bold text-text">Konsultasi WA</p>
-                                            </div>
-                                        </a>
-                                        <a href="https://wa.me/{{ $whatsapp }}?text=Halo%20Admin,%20saya%20*{{ urlencode($displayOrdererName) }}*%20({{ urlencode($primaryBooking->orderer_email ?? $primaryBooking->user->email) }})%20sudah%20melakukan%20transfer%20pembayaran%20untuk%20kode%20booking%20*{{ $groupCode }}*.%20Berikut%20bukti%20transfernya:" target="_blank" class="flex items-center justify-center gap-2 py-4 px-4 bg-orange text-white rounded-2xl hover:bg-orange-bright transition shadow-lg shadow-orange/20 group">
-                                            <span class="text-xl group-hover:scale-110 transition">✅</span>
-                                            <div class="text-left">
-                                                <p class="text-[10px] font-bold text-white/60 uppercase tracking-widest leading-none mb-1">Sudah Membayar?</p>
-                                                <p class="text-xs font-bold">Konfirmasi WA</p>
-                                            </div>
-                                        </a>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </div>
             </div>
 
-            <div class="text-center scroll-animate {{ $payment->status === 'rejected' ? 'hidden' : '' }}" data-animation="fade-up">
-                <a href="{{ route('home') }}" class="text-orange font-bold text-sm tracking-widest hover:underline uppercase">← Kembali ke Beranda</a>
+            <div class="mt-12 flex justify-center scroll-animate {{ $payment->status === 'rejected' ? 'hidden' : '' }}" data-animation="fade-up">
+                <a href="{{ route('home') }}" class="inline-flex items-center gap-3 px-10 py-4 bg-surface border-2 border-border text-text font-bold rounded-2xl hover:border-orange hover:text-orange transition-all duration-300 shadow-sm group">
+                    <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Kembali ke Beranda Utama
+                </a>
             </div>
         </div>
     </main>

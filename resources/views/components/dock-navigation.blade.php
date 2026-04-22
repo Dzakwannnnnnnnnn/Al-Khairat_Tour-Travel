@@ -107,7 +107,7 @@
         </button>
 
         @auth
-        <a href="{{ route('profile.edit') }}" class="dock-item group active">
+        <a href="{{ auth()->user()->isAdmin() ? route('dashboard') : route('profile.edit') }}" class="dock-item group active">
             <span class="dock-label">{{ auth()->user()->nickname ?? 'Profil' }}</span>
             <img src="{{ auth()->user()->avatar_url }}" 
                  alt="Avatar" 
@@ -181,7 +181,7 @@
 
             <!-- User Profile (Mobile Link) -->
             @auth
-            <a href="{{ route('profile.edit') }}" class="mobile-menu-item group" onclick="window.toggleMobileMenu()">
+            <a href="{{ auth()->user()->isAdmin() ? route('dashboard') : route('profile.edit') }}" class="mobile-menu-item group" onclick="window.toggleMobileMenu()">
                 <div class="menu-icon-box">
                     <img src="{{ auth()->user()->avatar_url }}" class="w-7 h-7 rounded-full object-cover">
                 </div>

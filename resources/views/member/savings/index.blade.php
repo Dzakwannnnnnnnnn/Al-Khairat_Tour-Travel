@@ -176,14 +176,50 @@
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 mt-8">
-                        <p class="text-[10px] uppercase font-black text-slate-400 tracking-widest mb-3">Rekening Resmi</p>
-                        <p class="text-lg font-black text-slate-800 whitespace-pre-line leading-relaxed">{{ $bankAccount }}</p>
+                    <!-- Bank Accounts List -->
+                    <div class="space-y-4 mt-8">
+                        <p class="text-[10px] uppercase font-black text-slate-400 tracking-widest pl-2 mb-2">Rekening Resmi Al-Khairat</p>
                         
-                        <div class="mt-6 pt-6 border-t border-slate-200">
+                        <!-- Bank Mandiri -->
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 group hover:border-orange/30 transition-all duration-300">
+                            <div class="flex items-center justify-between mb-4">
+                                <img src="{{ asset('images/banks/mandiri.svg') }}" class="h-4 w-auto grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100">
+                                <button onclick="copyToClipboard('1234567890')" class="p-2 rounded-lg bg-white shadow-sm text-slate-400 hover:text-orange transition-colors" title="Salin Rekening">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <p class="text-sm font-black text-slate-800 tracking-tight">123-456-7890</p>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">A.N PT Al-Khairat Tour</p>
+                        </div>
+
+                        <!-- Bank BCA -->
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 group hover:border-orange/30 transition-all duration-300">
+                            <div class="flex items-center justify-between mb-4">
+                                <img src="{{ asset('images/banks/bca.svg') }}" class="h-4 w-auto grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100">
+                                <button onclick="copyToClipboard('888777666')" class="p-2 rounded-lg bg-white shadow-sm text-slate-400 hover:text-orange transition-colors" title="Salin Rekening">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <p class="text-sm font-black text-slate-800 tracking-tight">888-777-666</p>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">A.N PT Al-Khairat Tour</p>
+                        </div>
+
+                        <!-- Bank BSI -->
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 group hover:border-orange/30 transition-all duration-300">
+                            <div class="flex items-center justify-between mb-4">
+                                <img src="{{ asset('images/banks/bsi.svg') }}" class="h-4 w-auto grayscale group-hover:grayscale-0 transition-all opacity-70 group-hover:opacity-100">
+                                <button onclick="copyToClipboard('999000111')" class="p-2 rounded-lg bg-white shadow-sm text-slate-400 hover:text-orange transition-colors" title="Salin Rekening">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+                                </button>
+                            </div>
+                            <p class="text-sm font-black text-slate-800 tracking-tight">999-000-111</p>
+                            <p class="text-[9px] font-bold text-slate-400 uppercase mt-1 tracking-wider">A.N PT Al-Khairat Tour</p>
+                        </div>
+                        
+                        <div class="mt-6 pt-6 border-t border-slate-100">
                             <a href="https://wa.me/{{ $whatsapp }}" target="_blank" class="flex items-center justify-center gap-3 w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl transition-all font-black uppercase tracking-widest text-[10px] shadow-lg shadow-emerald-500/20">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-                                WhatsApp Admin
+                                Hubungi Admin WhatsApp
                             </a>
                         </div>
                     </div>
@@ -364,6 +400,26 @@
     radios.forEach(r => r.addEventListener('change', calculateEstimation));
     quantityInput.addEventListener('input', calculateEstimation);
     monthlyInput.addEventListener('input', calculateEstimation);
+
+    function copyToClipboard(text) {
+        const tempInput = document.createElement('input');
+        tempInput.value = text;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        
+        // Premium Toast Notification
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-charcoal text-white px-6 py-3 rounded-2xl shadow-2xl z-[5000] font-bold text-xs uppercase tracking-widest animate__animated animate__fadeInUp';
+        toast.innerHTML = '<span class="text-orange mr-2">✓</span> Rekening Salin ke Clipboard';
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.replace('animate__fadeInUp', 'animate__fadeOutDown');
+            setTimeout(() => toast.remove(), 500);
+        }, 2000);
+    }
 </script>
 @endpush
 @endsection
