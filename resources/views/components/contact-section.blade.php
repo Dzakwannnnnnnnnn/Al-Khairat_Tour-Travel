@@ -31,14 +31,14 @@
                         </div>
 
                         <!-- Phone Card -->
-                        <a href="https://wa.me/6281351408541" target="_blank" class="contact-glass-card block group scroll-animate p-4 md:p-6" data-animation="slide-up" data-delay="100">
+                        <a href="https://wa.me/6281253088788" target="_blank" class="contact-glass-card block group scroll-animate p-4 md:p-6" data-animation="slide-up" data-delay="100">
                             <div class="contact-info-icon group-hover:bg-orange group-hover:text-white transition-all transform group-hover:rotate-12 w-10 h-10 md:w-12 md:h-12">
                                 <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
                             </div>
                             <h4 class="text-lg md:text-xl font-serif font-bold mb-1 md:mb-2 text-text">WhatsApp</h4>
-                            <p class="text-text/70 text-[11px] md:text-sm">+62 813-5140-8541</p>
+                            <p class="text-text/70 text-[11px] md:text-sm">+62 812-5308-8788</p>
                         </a>
 
                         <!-- Email Card -->

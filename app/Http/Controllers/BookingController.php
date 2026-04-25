@@ -10,6 +10,8 @@ use App\Models\Payment;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use App\Models\SavingsPlan;
+
 class BookingController extends Controller
 {
     public function index(Request $request)
@@ -32,18 +34,26 @@ class BookingController extends Controller
                   ->orWhere('group_code', 'like', "%{$search}%")
                   ->orWhere('full_name', 'like', "%{$search}%")
                   ->orWhere('orderer_email', 'like', "%{$search}%")
+                  ->orWhere('orderer_phone', 'like', "%{$search}%")
                   ->orWhereHas('user', function($uq) use ($search) {
                       $uq->where('name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%");
                   });
             });
+
+            // Prioritize exact name matches or name starting with search term
+            $query->orderByRaw("CASE 
+                WHEN full_name = ? THEN 1 
+                WHEN full_name LIKE ? THEN 2 
+                ELSE 3 
+            END", [$search, "{$search}%"]);
         }
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        $bookings = $query->paginate(10)->withQueryString();
+        $bookings = $query->paginate(20)->withQueryString();
         $users = User::all();
         $products = Product::all();
         return view('bookings', compact('bookings', 'users', 'products', 'stats'));
@@ -66,7 +76,7 @@ class BookingController extends Controller
             return redirect()->route('login')->with('info', 'Silakan masuk terlebih dahulu untuk melakukan pendaftaran paket.');
         }
 
-        $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+        $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
         return view('booking-page', compact('product', 'whatsapp'));
     }
 
@@ -115,6 +125,7 @@ class BookingController extends Controller
         $data['total_price'] = $product ? ($product->price * $data['booking_seat']) : 0;
 
         $booking = Booking::create($data);
+        $this->syncSavingsPlan($booking);
 
         // Auto-create payment entry with amount equal to product price
         $product = Product::find($request->product_id);
@@ -190,6 +201,8 @@ class BookingController extends Controller
                 'notes' => $request->notes,
             ]);
 
+            $this->syncSavingsPlan($booking);
+
             if ($index === 0) {
                 $firstBooking = $booking;
                 // Update user profile with first pilgrim data if requested
@@ -226,20 +239,28 @@ class BookingController extends Controller
 
     public function showInvoice($groupCode)
     {
-        $bookings = Booking::with(['product', 'user'])->where('group_code', $groupCode)->get();
+        $bookings = Booking::with(['product', 'user'])
+            ->where('group_code', $groupCode)
+            ->orWhere('booking_code', $groupCode)
+            ->get();
+            
         if ($bookings->isEmpty()) {
             abort(404);
         }
 
         $payment = Payment::where('booking_id', $bookings->first()->id)->first();
-        $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+        $whatsapp = \App\Models\Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
         
         return view('invoice', compact('bookings', 'payment', 'whatsapp', 'groupCode'));
     }
 
     public function downloadInvoicePDF($groupCode)
     {
-        $bookings = Booking::with(['product', 'user'])->where('group_code', $groupCode)->get();
+        $bookings = Booking::with(['product', 'user'])
+            ->where('group_code', $groupCode)
+            ->orWhere('booking_code', $groupCode)
+            ->get();
+            
         if ($bookings->isEmpty()) {
             abort(404);
         }
@@ -265,7 +286,10 @@ class BookingController extends Controller
             'payment_method' => 'required|string',
         ]);
 
-        $firstBooking = Booking::where('group_code', $groupCode)->firstOrFail();
+        $firstBooking = Booking::where('group_code', $groupCode)
+            ->orWhere('booking_code', $groupCode)
+            ->firstOrFail();
+            
         $payment = Payment::where('booking_id', $firstBooking->id)->firstOrFail();
         
         $payment->update([
@@ -341,6 +365,7 @@ class BookingController extends Controller
         }
         
         $booking->update($data);
+        $this->syncSavingsPlan($booking);
 
         // Handle stock specifically when status changes to/from cancelled
         if ($oldStatus !== 'cancelled' && $request->status === 'cancelled') {
@@ -354,7 +379,10 @@ class BookingController extends Controller
 
     public function checkPaymentStatus($groupCode)
     {
-        $bookings = Booking::where('group_code', $groupCode)->get();
+        $bookings = Booking::where('group_code', $groupCode)
+            ->orWhere('booking_code', $groupCode)
+            ->get();
+            
         if ($bookings->isEmpty()) {
             return response()->json(['status' => 'not_found'], 404);
         }
@@ -376,5 +404,27 @@ class BookingController extends Controller
         
         $booking->delete();
         return redirect()->route('bookings.index')->with('success', 'Data Pemesanan berhasil dihapus!');
+    }
+
+    private function syncSavingsPlan(Booking $booking)
+    {
+        if ($booking->status === 'savings') {
+            SavingsPlan::updateOrCreate(
+                ['booking_id' => $booking->id],
+                [
+                    'user_id' => $booking->user_id,
+                    'product_id' => $booking->product_id,
+                    'quantity' => $booking->booking_seat,
+                    'target_amount' => $booking->total_price,
+                    'status' => 'active',
+                ]
+            );
+        } else {
+            // If status changed away from savings, we mark the plan as cancelled
+            $plan = SavingsPlan::where('booking_id', $booking->id)->first();
+            if ($plan && $plan->status === 'active') {
+                $plan->update(['status' => 'cancelled']);
+            }
+        }
     }
 }

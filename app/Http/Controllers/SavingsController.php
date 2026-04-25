@@ -24,7 +24,7 @@ class SavingsController extends Controller
             ->get();
         
         $availableProducts = Product::where('status', 'active')->get();
-        $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+        $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
         $bankAccount = Setting::where('key', 'bank_account_info')->first()->value ?? "BANK SYARIAH INDONESIA (BSI) \n 721-XXXX-XXX \n a.n AL KHAIRAT TOUR TRAVEL";
 
         return view('member.savings.index', compact('plans', 'availableProducts', 'whatsapp', 'bankAccount'));
@@ -70,6 +70,12 @@ class SavingsController extends Controller
         ]);
 
         $plan = SavingsPlan::findOrFail($request->savings_plan_id);
+        $currentBalance = $plan->currentBalance();
+        $remaining = $plan->target_amount - $currentBalance;
+
+        if ($request->amount > $remaining) {
+            return back()->with('error', 'Gagal! Jumlah setoran (Rp ' . number_format($request->amount, 0, ',', '.') . ') melebihi sisa target tabungan (Sisa: Rp ' . number_format($remaining, 0, ',', '.') . ').');
+        }
 
         SavingsDeposit::create([
             'savings_plan_id' => $plan->id,
@@ -106,10 +112,23 @@ class SavingsController extends Controller
             return back()->with('error', 'Hanya tabungan aktif yang dapat dibatalkan.');
         }
 
+        $request->validate([
+            'note' => 'required|string|max:1000',
+            'refund_bank_name' => 'required|string|max:100',
+            'refund_bank_account' => 'required|string|max:50',
+        ], [
+            'refund_bank_name.required' => 'Nama Bank wajib diisi.',
+            'refund_bank_account.required' => 'Nomor Rekening wajib diisi.',
+            'note.required' => 'Alasan pembatalan wajib diisi.',
+        ]);
+
         $plan->update([
             'status' => 'refund_requested',
             'refund_note' => $request->note,
+            'refund_bank_name' => $request->refund_bank_name,
+            'refund_bank_account' => $request->refund_bank_account,
             'refund_requested_at' => now(),
+            'refund_rejection_note' => null, // Clear past rejection if any
         ]);
 
         return back()->with('success', 'Permintaan pembatalan dan refund telah diajukan kepada Admin.');
@@ -138,7 +157,9 @@ class SavingsController extends Controller
      */
     public function adminIndex(Request $request)
     {
-        $query = SavingsPlan::with(['user', 'product', 'deposits'])->latest();
+        $query = SavingsPlan::with(['user', 'product', 'deposits'])
+            ->where('status', '!=', 'refunded')
+            ->latest();
 
         if ($request->filled('search')) {
             $search = $request->search;
@@ -150,11 +171,103 @@ class SavingsController extends Controller
                     $pq->where('name', 'like', "%{$search}%");
                 })->orWhere('status', 'like', "%{$search}%");
             });
+
+            // Prioritize name matches
+            $query->join('users', 'savings_plans.user_id', '=', 'users.id')
+                  ->select('savings_plans.*')
+                  ->orderByRaw("CASE 
+                      WHEN users.name = ? THEN 1 
+                      WHEN users.name LIKE ? THEN 2 
+                      ELSE 3 
+                  END", [$search, "{$search}%"]);
         }
 
-        $plans = $query->paginate(15)->withQueryString();
+        $plans = $query->paginate(20)->withQueryString();
         $totalSavings = SavingsDeposit::sum('amount');
         
-        return view('admin.savings.index', compact('plans', 'totalSavings'));
+        // Calculate total pending refunds (only for plans with refund_requested status)
+        $pendingRefundPlans = SavingsPlan::where('status', 'refund_requested')->get();
+        $totalPendingRefunds = $pendingRefundPlans->sum(fn($p) => $p->currentBalance());
+        
+        return view('admin.savings.index', compact('plans', 'totalSavings', 'totalPendingRefunds'));
+    }
+
+    public function adminProcessCancellation(Request $request, $id)
+    {
+        $plan = SavingsPlan::findOrFail($id);
+        $action = $request->input('action'); // 'delete', 'refund', or 'reject'
+        $note = $request->input('note');
+
+        if ($action === 'delete') {
+            $plan->deposits()->delete();
+            $plan->delete();
+            return back()->with('success', 'Data tabungan telah dihapus permanen.');
+        } elseif ($action === 'reject') {
+            $request->validate(['note' => 'required|string|max:1000']);
+            $plan->update([
+                'status' => 'active',
+                'refund_rejection_note' => $note,
+            ]);
+            return back()->with('success', 'Permintaan refund jemaah ' . $plan->user->name . ' telah DITOLAK.');
+        } else {
+            $plan->update([
+                'status' => 'refunded',
+                'refund_note' => $note,
+            ]);
+            return back()->with('success', 'Refund jemaah ' . $plan->user->name . ' telah dikonfirmasi sebagai TERBAYAR.');
+        }
+    }
+
+    /**
+     * View for refunded/cancelled savings.
+     */
+    public function adminTrash(Request $request)
+    {
+        $query = SavingsPlan::with(['user', 'product', 'deposits'])
+            ->where('status', 'refunded')
+            ->latest();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->whereHas('user', function($uq) use ($search) {
+                    $uq->where('name', 'like', "%{$search}%")
+                      ->orWhere('email', 'like', "%{$search}%");
+                })->orWhereHas('product', function($pq) use ($search) {
+                    $pq->where('name', 'like', "%{$search}%");
+                });
+            });
+
+            // Prioritize name matches
+            $query->join('users', 'savings_plans.user_id', '=', 'users.id')
+                  ->select('savings_plans.*')
+                  ->orderByRaw("CASE 
+                      WHEN users.name = ? THEN 1 
+                      WHEN users.name LIKE ? THEN 2 
+                      ELSE 3 
+                  END", [$search, "{$search}%"]);
+        }
+
+        $plans = $query->paginate(20)->withQueryString();
+        $totalSavings = SavingsDeposit::whereHas('plan', function($q) {
+            $q->where('status', 'refunded');
+        })->sum('amount');
+        
+        return view('admin.savings.trash', compact('plans', 'totalSavings'));
+    }
+
+    /**
+     * Permanently delete all refunded savings.
+     */
+    public function emptyTrash()
+    {
+        $refundedPlans = SavingsPlan::where('status', 'refunded')->get();
+        
+        foreach ($refundedPlans as $plan) {
+            $plan->deposits()->delete();
+            $plan->delete();
+        }
+
+        return back()->with('success', 'Semua riwayat sampah tabungan telah dibersihkan secara permanen.');
     }
 }

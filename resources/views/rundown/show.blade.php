@@ -5,23 +5,33 @@
 
 @section('content')
 <!-- Navigation Dock -->
-@include('components.dock-navigation')
+<div class="print-hide">
+    @include('components.dock-navigation')
+</div>
 
 <div class="max-w-5xl mx-auto py-8">
     <!-- Header -->
-    <div class="mb-12">
+    <div class="mb-12 print-hide">
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h1 class="text-4xl font-bold text-charcoal">Rundown Kegiatan</h1>
                 <p class="text-slate-600 mt-2">{{ $product->name }}</p>
             </div>
-            <a href="javascript:history.back()" class="px-6 py-3 bg-slate-100 text-charcoal rounded-xl hover:bg-slate-200 transition font-semibold">
-                ← Kembali
-            </a>
+            <div class="flex gap-3">
+                <button onclick="window.print()" class="flex items-center gap-2 px-6 py-3 bg-charcoal text-white rounded-xl hover:bg-slate-800 transition font-semibold shadow-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                    Cetak
+                </button>
+                <a href="javascript:history.back()" class="px-6 py-3 bg-slate-100 text-charcoal rounded-xl hover:bg-slate-200 transition font-semibold">
+                    ← Kembali
+                </a>
+            </div>
         </div>
 
         <!-- Product Info Card -->
-        <div class="glass-dashboard rounded-[2rem] p-8 border border-slate-100 shadow-xl mb-8 gradient-sunset">
+        <div class="glass-dashboard rounded-[2rem] p-8 border border-slate-100 shadow-xl mb-8 gradient-sunset print-hide">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div class="text-white">
                     <h2 class="text-2xl font-bold mb-2">{{ $product->name }}</h2>
@@ -61,7 +71,53 @@
 
     <!-- Rundown List -->
     @if($product->rundown && is_array($product->rundown) && count($product->rundown) > 0)
-        <div class="space-y-6">
+        <!-- Rundown Table (Print Only) -->
+        <div class="print-only w-full">
+            <h2 class="text-2xl font-bold text-center mb-6">RUNDOWN KEGIATAN<br><span class="text-lg font-normal">{{ $product->name }}</span></h2>
+            <table class="w-full border-collapse border border-slate-300 text-sm mb-8">
+                <thead>
+                    <tr class="bg-slate-100">
+                        <th class="border border-slate-300 px-4 py-3 text-left w-32 uppercase tracking-widest text-[10px] font-black text-slate-500">Hari</th>
+                        <th class="border border-slate-300 px-4 py-3 text-left uppercase tracking-widest text-[10px] font-black text-slate-500">Aktivitas & Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($product->rundown as $index => $day)
+                    <tr>
+                        <td class="border border-slate-300 px-4 py-3 font-bold align-top whitespace-nowrap">{{ $day['day'] ?? "Hari " . ($index + 1) }}</td>
+                        <td class="border border-slate-300 px-4 py-3 align-top">
+                            @php
+                                $activities = $day['activities'] ?? '';
+                                $lines = explode("\n", $activities);
+                            @endphp
+                            @if($activities)
+                                @if(count($lines) > 1)
+                                    <ul class="list-disc pl-5 m-0 space-y-1">
+                                        @foreach($lines as $line)
+                                            @if(trim($line))
+                                                <li>{{ trim($line) }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p class="m-0">{{ $activities }}</p>
+                                @endif
+                            @else
+                                <span class="text-slate-400 italic">-</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            
+            <div class="text-right mt-12 text-sm">
+                <p>Dicetak pada: {{ now()->format('d M Y, H:i') }}</p>
+            </div>
+        </div>
+
+        <!-- Rundown Cards (Screen Only) -->
+        <div class="space-y-6 print-hide">
             @foreach($product->rundown as $index => $day)
             <div class="glass-dashboard rounded-[1.75rem] p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300">
                 <!-- Day Header -->
@@ -106,7 +162,7 @@
         </div>
 
         <!-- Call to Action -->
-        <div class="mt-12 bg-gradient-to-r from-orange-50 to-amber-50 rounded-[2rem] p-8 border border-orange/20 shadow-lg">
+        <div class="mt-12 bg-gradient-to-r from-orange-50 to-amber-50 rounded-[2rem] p-8 border border-orange/20 shadow-lg print-hide">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div>
                     <h3 class="text-2xl font-bold text-charcoal mb-2">Tertarik dengan paket ini?</h3>
@@ -154,6 +210,22 @@
     .prose li::before {
         content: "✓";
         @apply text-orange font-bold flex-shrink-0;
+    }
+
+    .print-only {
+        display: none;
+    }
+
+    @media print {
+        body { background: white !important; }
+        .print-hide { display: none !important; }
+        .print-only { display: block !important; }
+        .glass-dashboard {
+            box-shadow: none !important;
+            border: 1px solid #e2e8f0 !important;
+            page-break-inside: avoid;
+        }
+        nav, header, footer { display: none !important; }
     }
 </style>
 @endsection

@@ -3,17 +3,17 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white rounded-lg shadow-sm">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center p-6 bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800 mb-8 gap-4 pt-6 md:pt-6">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-lg">
+            <div class="p-3 bg-orange/10 dark:bg-orange/20 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-2xl font-bold text-slate-800">Pertanyaan Sering Diajukan (FAQ)</h2>
-                <p class="text-sm text-slate-500 mt-1">Kelola daftar resolusi pertanyaan calon jamaah.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">FAQ (Tanya Jawab)</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola daftar resolusi pertanyaan calon jamaah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addFaqModal').classList.remove('hidden')" class="mt-4 sm:mt-0 flex items-center space-x-2 bg-charcoal text-white px-4 py-2 rounded-lg hover:bg-orange transition shadow-sm font-medium">
+        <button onclick="document.getElementById('addFaqModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3.5 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah FAQ</span>
         </button>
@@ -29,22 +29,22 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full min-w-[800px]">
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Pertanyaan & Jawaban</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kategori</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Pertanyaan & Jawaban</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Kategori</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                     @forelse($faqs as $faq)
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 align-top max-w-xl">
-                            <p class="font-semibold text-gray-900 break-words mb-1">{{ $faq->question }}</p>
-                            <p class="text-sm text-gray-600 break-words line-clamp-3">{{ $faq->answer }}</p>
+                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
+                        <td class="px-6 py-6 align-top max-w-xl">
+                            <p class="font-black text-slate-800 dark:text-slate-100 break-words mb-2">{{ $faq->question }}</p>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 break-words line-clamp-3 font-medium">{{ $faq->answer }}</p>
                         </td>
                         <td class="px-6 py-4 align-top">
                             <span class="inline-block px-2 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-md">{{ $faq->category ?? '-' }}</span>
@@ -64,7 +64,16 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">Belum ada data FAQ.</td>
+                    <tr>
+                        <td colspan="3" class="px-6 py-28 text-center bg-slate-50/20 dark:bg-slate-900/10">
+                            <div class="flex flex-col items-center justify-center grayscale opacity-60">
+                                <div class="w-24 h-24 bg-white dark:bg-slate-800 rounded-[3rem] shadow-xl flex items-center justify-center text-slate-200 dark:text-slate-700 mb-8 overflow-hidden border border-slate-100 dark:border-slate-700">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest">Tiada FAQ</h3>
+                                <p class="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-[280px] mx-auto font-medium leading-relaxed">Belum ada daftar tanya jawab yang terdaftar.</p>
+                            </div>
+                        </td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -79,66 +88,65 @@
 </div>
 
 <!-- Modal Create -->
-<div id="addFaqModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-gray-900">Tambah FAQ</h3>
-            <button onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+<div id="addFaqModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+            <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Tambah FAQ Baru</h3>
+            <button onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
         </div>
-        <form method="POST" action="{{ route('faqs.store') }}" class="space-y-4">
+        <form method="POST" action="{{ route('faqs.store') }}" class="space-y-6">
             @csrf
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Pertanyaan <span class="text-red-500">*</span></label>
-                <input type="text" name="question" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Pertanyaan <span class="text-red-500">*</span></label>
+                <input type="text" name="question" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Jawaban <span class="text-red-500">*</span></label>
-                <textarea name="answer" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Jawaban <span class="text-red-500">*</span></label>
+                <textarea name="answer" rows="4" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200"></textarea>
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori (Opsional)</label>
-                <input type="text" name="category" placeholder="Pendaftaran, Syarat, Pembulatan..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Kategori (Opsional)</label>
+                <input type="text" name="category" placeholder="Pendaftaran, Syarat, Pembulatan..." class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
             </div>
             
-            <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan</button>
+            <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                <button type="button" onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan FAQ</button>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Modal Edit -->
-<div id="editFaqModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-gray-900">Edit FAQ</h3>
-            <button onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+<div id="editFaqModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+            <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Edit FAQ</h3>
+            <button onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
         </div>
-        <form id="editFaqForm" method="POST" class="space-y-4">
+        <form id="editFaqForm" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Pertanyaan <span class="text-red-500">*</span></label>
-                <input type="text" name="question" id="editFaqQuestion" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Pertanyaan <span class="text-red-500">*</span></label>
+                <input type="text" name="question" id="editFaqQuestion" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Jawaban <span class="text-red-500">*</span></label>
-                <textarea name="answer" id="editFaqAnswer" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Jawaban <span class="text-red-500">*</span></label>
+                <textarea name="answer" id="editFaqAnswer" rows="4" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200"></textarea>
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori (Opsional)</label>
-                <input type="text" name="category" id="editFaqCategory" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2 px-1">Kategori (Opsional)</label>
+                <input type="text" name="category" id="editFaqCategory" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
             </div>
             
-            <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Perubahan</button>
-
+            <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                <button type="button" onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Update FAQ</button>
             </div>
         </form>
     </div>

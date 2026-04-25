@@ -49,9 +49,18 @@
                         <div class="flex justify-between items-start">
                             <h3 class="text-xl md:text-2xl font-black text-slate-800">{{ $plan->product->name }}</h3>
                             @if($plan->status == 'active')
-                                <button onclick="openRefundModal({{ $plan->id }}, '{{ $plan->product->name }}')" class="px-4 py-2 border border-red-100 text-red-400 hover:bg-red-50 hover:text-red-600 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">
-                                    Batalkan & Refund
-                                </button>
+                                @if($plan->refund_rejection_note)
+                                    <a href="https://wa.me/6281253088788?text={{ urlencode('Halo Admin Al-Khairat, saya ingin menanyakan perihal penolakan refund tabungan saya untuk ' . $plan->product->name . '. Kenapa ditolak ya?') }}" 
+                                       target="_blank"
+                                       class="px-4 py-2 bg-red-600 text-white hover:bg-red-700 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all shadow-lg shadow-red-200 flex items-center gap-2">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.89 9.884 0 2.225.569 3.931 1.696 5.861l-1.006 3.676 3.791-.994zm11.389-5.411c-.164-.082-.975-.481-1.126-.537-.151-.055-.26-.082-.37.082-.11.164-.424.537-.52.648-.096.11-.192.126-.357.043-.164-.083-.694-.256-1.321-.817-.487-.435-.815-.971-.911-1.136-.096-.165-.01-.254.073-.336.075-.073.164-.191.247-.287.082-.095.11-.164.164-.273.055-.109.028-.205-.014-.287-.04-.082-.37-.893-.507-1.224-.134-.324-.28-.28-.383-.285-.099-.005-.213-.006-.328-.006-.115 0-.301.041-.458.213-.158.171-.603.589-.603 1.436 0 .848.616 1.668.702 1.785.086.117 1.213 1.854 2.939 2.597.411.177.732.282.983.362.413.131.789.112 1.087.067.332-.05.975-.398 1.112-.783.137-.384.137-.714.095-.783-.04-.07-.15-.111-.314-.194z"/></svg>
+                                        Konsultasi Penolakan
+                                    </a>
+                                @else
+                                    <button onclick="openRefundModal({{ $plan->id }}, '{{ $plan->product->name }}')" class="px-4 py-2 border border-red-100 text-red-400 hover:bg-red-50 hover:text-red-600 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all">
+                                        Batalkan & Refund
+                                    </button>
+                                @endif
                             @endif
                         </div>
                         
@@ -80,6 +89,32 @@
                             <div>
                                 <p class="text-[10px] font-black uppercase text-amber-700 tracking-widest">Menunggu Konfirmasi Admin</p>
                                 <p class="text-xs text-amber-600 mt-0.5">Admin akan memproses pengembalian dana Rp {{ number_format($plan->currentBalance(), 0, ',', '.') }} Anda.</p>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if($plan->refund_rejection_note && $plan->status == 'active')
+                        <div class="bg-red-50/50 rounded-3xl p-6 border-2 border-red-500/10 relative overflow-hidden group">
+                            <div class="flex items-start gap-5 relative z-10">
+                                <div class="w-12 h-12 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-lg shadow-red-200">
+                                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <p class="text-xs font-black uppercase text-red-600 tracking-tight">REFUND DITOLAK ADMIN</p>
+                                        <div class="h-1 w-1 rounded-full bg-red-400"></div>
+                                        <span class="text-[10px] font-bold text-red-500 uppercase italic">Informasi Pembatalan</span>
+                                    </div>
+                                    <div class="relative">
+                                        <p class="text-sm text-red-700 leading-relaxed font-black bg-white rounded-2xl p-4 border-2 border-red-100 shadow-sm">
+                                            "{{ $plan->refund_rejection_note }}"
+                                        </p>
+                                    </div>
+                                    <p class="text-[10px] text-red-600/80 mt-3 font-bold flex items-center gap-2">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                        Silakan hubungi admin atau perbaiki data rekening Anda untuk mengajukan ulang.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         @endif
@@ -314,6 +349,17 @@
             
             <form id="refundForm" method="POST" class="space-y-6">
                 @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest ml-4">Nama Bank</label>
+                        <input type="text" name="refund_bank_name" required placeholder="Misal: BCA, Mandiri..." class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm text-slate-700 font-bold">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest ml-4">Nomor Rekening</label>
+                        <input type="text" name="refund_bank_account" required placeholder="0000-0000..." class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm text-slate-700 font-bold">
+                    </div>
+                </div>
+
                 <div class="space-y-2 text-left">
                     <label class="text-[10px] uppercase font-black text-slate-400 tracking-widest ml-4">Alasan Pembatalan</label>
                     <textarea name="note" required placeholder="Mohon sertakan alasan Anda..." class="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-red-200 outline-none transition-all text-sm text-slate-700 h-24 resize-none"></textarea>

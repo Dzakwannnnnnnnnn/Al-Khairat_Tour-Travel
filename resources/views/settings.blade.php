@@ -3,17 +3,17 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white rounded-2xl shadow-sm border border-slate-100 mb-6 gap-4 pt-6 md:pt-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-6 gap-4 pt-6 md:pt-6">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-xl">
+            <div class="p-3 bg-orange/10 dark:bg-orange/20 text-orange rounded-xl">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </div>
             <div>
-                <h2 class="text-lg md:text-2xl font-bold text-slate-800 leading-tight">Pengaturan Variabel</h2>
-                <p class="text-[11px] md:text-sm text-slate-500 mt-1">Konfigurasi dinamis kontak dan info esensial.</p>
+                <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Pengaturan Variabel</h2>
+                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Konfigurasi dinamis kontak dan info esensial.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addSettingModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
+        <button onclick="document.getElementById('addSettingModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal dark:bg-orange text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             <span>Tambah Config</span>
         </button>
@@ -42,31 +42,31 @@
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white rounded-[1.5rem] shadow-sm overflow-hidden border border-slate-100">
+    <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] shadow-sm overflow-hidden border border-slate-100 dark:border-slate-800">
         <div class="overflow-x-auto dashboard-scroll">
             <table class="w-full min-w-[800px]">
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Key (Kunci)</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Value (Isi Konfigurasi)</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Tipe Data</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Aksi</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Key (Kunci)</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Value (Konfigurasi)</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tipe Data</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest sticky right-0 bg-white dark:bg-slate-900 z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)]">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                     @forelse($settings as $setting)
-                    <tr class="hover:bg-gray-50 transition">
+                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
                         <td class="px-6 py-4 align-top">
                             <p class="font-mono text-sm font-semibold text-orange">{{ $setting->key }}</p>
                         </td>
 
                         <td class="px-6 py-4 align-top max-w-xl">
-                            <p class="text-sm text-gray-800 break-words line-clamp-3">{{ $setting->value }}</p>
+                            <p class="text-sm text-slate-700 dark:text-slate-300 break-words line-clamp-3 font-medium">{{ $setting->value }}</p>
                         </td>
                         <td class="px-6 py-4 align-top">
-                            <span class="inline-block px-2 py-1 bg-gray-100 text-gray-600 text-xs font-medium rounded-md uppercase">{{ $setting->type }}</span>
+                            <span class="inline-block px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-slate-200 dark:border-slate-700">{{ $setting->type }}</span>
                         </td>
-                        <td class="px-6 py-4 align-top">
+                        <td class="px-6 py-4 align-top sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openEditSetting({{ $setting->id }}, '{{ addslashes($setting->key) }}', '{{ addslashes(str_replace(array("\r", "\n"), array('\r', '\n'), $setting->value)) }}', '{{ $setting->type }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
@@ -96,76 +96,74 @@
 </div>
 
 <!-- Modal Create -->
-<div id="addSettingModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-gray-900">Tambah Config Baru</h3>
-            <button onclick="document.getElementById('addSettingModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+<div id="addSettingModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 border border-slate-100 dark:border-slate-800">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+            <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Tambah Config Baru</h3>
+            <button onclick="document.getElementById('addSettingModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
         </div>
-        <form method="POST" action="{{ route('settings.store') }}" class="space-y-4">
+        <form method="POST" action="{{ route('settings.store') }}" class="space-y-6">
             @csrf
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Key Konfigurasi <span class="text-red-500">*</span></label>
-                <input type="text" name="key" required placeholder="misal: CS_WHATSAPP_NUMBER" class="w-full px-4 py-2 font-mono text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <p class="text-xs text-gray-500 mt-1">Gunakan format UPPER_SNAKE_CASE (tanpa spasi)</p>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Key Konfigurasi <span class="text-red-500">*</span></label>
+                <input type="text" name="key" required placeholder="misal: CS_WHATSAPP_NUMBER" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-mono font-bold text-orange">
+                <p class="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-tight">* Gunakan UPPER_SNAKE_CASE</p>
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Tipe Data <span class="text-red-500">*</span></label>
-                <select name="type" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Tipe Data <span class="text-red-500">*</span></label>
+                <select name="type" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                     <option value="text">Teks Singkat (Text)</option>
                     <option value="longtext">Teks Panjang (LongText)</option>
                     <option value="image">URL Gambar (Image)</option>
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Value (Isi) <span class="text-red-500">*</span></label>
-                <textarea name="value" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Value (Isi) <span class="text-red-500">*</span></label>
+                <textarea name="value" rows="4" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Masukkan nilai konfigurasi..."></textarea>
             </div>
             
-            <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('addSettingModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition">Simpan Config</button>
+            <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                <button type="button" onclick="document.getElementById('addSettingModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan Config</button>
             </div>
         </form>
     </div>
 </div>
 
 <!-- Modal Edit -->
-<div id="editSettingModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-bold text-gray-900">Edit Konfigurasi</h3>
-            <button onclick="document.getElementById('editSettingModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+<div id="editSettingModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 border border-slate-100 dark:border-slate-800">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+            <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Edit Konfigurasi</h3>
+            <button onclick="document.getElementById('editSettingModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
         </div>
-        <form id="editSettingForm" method="POST" class="space-y-4">
+        <form id="editSettingForm" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Key Konfigurasi <span class="text-red-500">*</span></label>
-                <input type="text" name="key" id="editSettingKey" required class="w-full px-4 py-2 font-mono text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-50" readonly>
-                <p class="text-xs text-orange-600 mt-1">Nama variabel key tidak boleh diubah untuk mencegah error sistem.</p>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Key Konfigurasi (Read Only)</label>
+                <input type="text" name="key" id="editSettingKey" readonly class="w-full px-5 py-4 bg-slate-100 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-2xl text-sm font-mono font-bold text-slate-400 cursor-not-allowed">
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Tipe Data <span class="text-red-500">*</span></label>
-                <select name="type" id="editSettingType" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Tipe Data <span class="text-red-500">*</span></label>
+                <select name="type" id="editSettingType" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                     <option value="text">Teks Singkat (Text)</option>
                     <option value="longtext">Teks Panjang (LongText)</option>
                     <option value="image">URL Gambar (Image)</option>
                 </select>
             </div>
             <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-1">Value (Isi Baru) <span class="text-red-500">*</span></label>
-                <textarea name="value" id="editSettingValue" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Value (Isi Baru) <span class="text-red-500">*</span></label>
+                <textarea name="value" id="editSettingValue" rows="4" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200"></textarea>
             </div>
             
-            <div class="flex space-x-3 pt-4 border-t border-gray-100">
-                <button type="button" onclick="document.getElementById('editSettingModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 font-medium transition">Batal</button>
-                <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange font-medium transition shadow-lg shadow-orange/10">Simpan Perubahan</button>
-
+            <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                <button type="button" onclick="document.getElementById('editSettingModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Update Config</button>
             </div>
         </form>
     </div>

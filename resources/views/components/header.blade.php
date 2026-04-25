@@ -1,6 +1,6 @@
 <!-- Premium Dashboard Header -->
 <header class="sticky top-0 z-50 transition-all duration-500 w-full px-2 md:px-4 py-2 md:py-4">
-    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-3 border-slate-200 shadow-xl">
+    <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-3 border border-slate-200 dark:border-slate-800 shadow-xl">
         
         <!-- Left: Search Area -->
         <div class="flex items-center gap-6 flex-1 max-w-2xl">
@@ -31,15 +31,15 @@
             <!-- Profile Dropdown -->
             @if(auth()->check())
             <div class="relative">
-                <button onclick="toggleProfileMenu(event)" class="flex items-center gap-3 p-1 rounded-xl hover:bg-slate-50 transition-all duration-300 border border-transparent hover:border-slate-200">
+                <button onclick="toggleProfileMenu(event)" class="flex items-center gap-3 p-1 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300 border border-transparent hover:border-slate-200 dark:hover:border-slate-700">
                     <div class="relative">
                         <img src="{{ auth()->user()->avatar_url }}" 
                              alt="Avatar" 
-                             class="w-9 h-9 rounded-lg object-cover border border-slate-200">
+                             class="w-9 h-9 rounded-lg object-cover border border-slate-200 dark:border-slate-700">
                         <div class="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-orange border-2 border-white shadow-sm"></div>
                     </div>
                     <div class="hidden md:block text-left">
-                        <p class="text-xs font-bold text-charcoal truncate max-w-[100px]">{{ auth()->user()->nickname ?? auth()->user()->name }}</p>
+                        <p class="text-xs font-bold text-charcoal dark:text-slate-100 truncate max-w-[100px]">{{ auth()->user()->nickname ?? auth()->user()->name }}</p>
                         <p class="text-[9px] font-bold text-orange/80 uppercase tracking-tighter">{{ auth()->user()->role }}</p>
                     </div>
                     <svg id="profile-chevron" class="w-4 h-4 text-slate-400 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,9 +48,9 @@
                 </button>
 
                 <!-- Dropdown Menu -->
-                <div id="adminProfileMenu" class="absolute right-0 mt-4 w-56 bg-white rounded-2xl opacity-0 invisible translate-y-2 transition-all duration-300 overflow-hidden shadow-2xl border border-slate-100 z-[70]">
-                    <div class="p-5 bg-orange/5 border-b border-slate-50">
-                        <p class="text-sm font-bold text-charcoal truncate">{{ auth()->user()->name ?? 'User' }}</p>
+                <div id="adminProfileMenu" class="absolute right-0 mt-4 w-56 bg-white dark:bg-slate-900 rounded-2xl opacity-0 invisible translate-y-2 transition-all duration-300 overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800 z-[70]">
+                    <div class="p-5 bg-orange/5 dark:bg-orange/10 border-b border-slate-50 dark:border-slate-800">
+                        <p class="text-sm font-bold text-charcoal dark:text-slate-100 truncate">{{ auth()->user()->name ?? 'User' }}</p>
                         <p class="text-[10px] text-slate-500 truncate mt-0.5">{{ auth()->user()->email ?? '' }}</p>
                     </div>
                     <div class="p-2">

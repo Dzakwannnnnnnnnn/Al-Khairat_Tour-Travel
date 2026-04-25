@@ -14,8 +14,8 @@
         </div>
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div class="relative">
-                <div class="w-32 h-32 rounded-[2rem] overflow-hidden border-4 border-white/30 shadow-2xl">
-                    <img id="avatar-preview" src="{{ $user->avatar_url }}" class="w-full h-full object-cover"
+                <div class="w-32 h-32 rounded-[2rem] overflow-hidden border-4 border-white/30 shadow-2xl cursor-pointer group/avatar" onclick="openAvatarModal(this.querySelector('img').src)">
+                    <img id="avatar-preview" src="{{ $user->avatar_url }}" class="w-full h-full object-cover group-hover/avatar:scale-110 transition-transform duration-500"
                         alt="Profile Backdrop">
                 </div>
                 <label for="avatar-input"
@@ -192,24 +192,30 @@
             @foreach($bookingHistories as $history)
             @php
             $statusMeta = match ($history->payment_status) {
-            'verified' => [
-            'badge' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
-            'title' => 'Pembayaran Lunas',
-            'card' => 'border-emerald-100',
-            'accent' => 'text-emerald-600',
-            ],
-            'rejected' => [
-            'badge' => 'bg-red-100 text-red-700 border-red-200',
-            'title' => 'Pembayaran Ditolak',
-            'card' => 'border-red-100',
-            'accent' => 'text-red-600',
-            ],
-            default => [
-            'badge' => 'bg-yellow-100 text-yellow-700 border-yellow-200',
-            'title' => 'Menunggu Verifikasi',
-            'card' => 'border-yellow-100',
-            'accent' => 'text-yellow-600',
-            ],
+                'verified' => [
+                    'badge' => 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/50',
+                    'title' => 'Lunas Terbayar',
+                    'card' => 'border-emerald-100 dark:border-emerald-900/50',
+                    'accent' => 'text-emerald-600 dark:text-emerald-500',
+                ],
+                'dp_paid' => [
+                    'badge' => 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-900/50',
+                    'title' => 'Mencicil (DP)',
+                    'card' => 'border-blue-100 dark:border-blue-900/50',
+                    'accent' => 'text-blue-600 dark:text-blue-500',
+                ],
+                'rejected' => [
+                    'badge' => 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-900/50',
+                    'title' => 'Pembayaran Ditolak',
+                    'card' => 'border-red-100 dark:border-red-900/50',
+                    'accent' => 'text-red-600 dark:text-red-500',
+                ],
+                default => [
+                    'badge' => 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-500 border-amber-200 dark:border-amber-900/50',
+                    'title' => 'Menunggu Verifikasi',
+                    'card' => 'border-yellow-100 dark:border-yellow-900/50',
+                    'accent' => 'text-yellow-600 dark:text-yellow-500',
+                ],
             };
             @endphp
 
@@ -227,16 +233,16 @@
                                         {{ $history->created_at->translatedFormat('d F Y') }}
                                     </span>
                                 </div>
-                                <h3 class="text-lg md:text-2xl font-bold text-charcoal uppercase">{{ $history->product_name }}</h3>
-                                <p class="text-[11px] md:text-sm text-slate-500 mt-2">Kode Referensi: <span
-                                        class="font-black text-slate-700">{{ $history->reference_code }}</span></p>
+                                <h3 class="text-lg md:text-2xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">{{ $history->product_name }}</h3>
+                                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-2">Kode Referensi: <span
+                                        class="font-mono font-black text-slate-700 dark:text-slate-200">#{{ $history->reference_code }}</span></p>
                             </div>
-                            <div class="rounded-3xl bg-slate-50/80 border border-slate-100 px-5 py-4 min-w-full md:min-w-[240px]">
-                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Total
+                            <div class="rounded-3xl bg-slate-50/80 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700 px-5 py-4 min-w-full md:min-w-[240px]">
+                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Total
                                     Pembayaran</p>
-                                <p class="mt-2 text-xl md:text-2xl font-black text-charcoal">Rp {{
+                                <p class="mt-2 text-xl md:text-2xl font-black text-slate-800 dark:text-white">Rp {{
                                     number_format($history->total_amount, 0, ',', '.') }}</p>
-                                <p class="mt-1 text-sm text-slate-500">{{ $history->payment_method }}</p>
+                                <p class="mt-1 text-sm text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">{{ $history->payment_method }}</p>
                             </div>
                         </div>
 
@@ -341,6 +347,37 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    function openAvatarModal(src) {
+        const modal = document.getElementById('avatarModal');
+        const modalImg = document.getElementById('avatarModalImg');
+        modalImg.src = src;
+        modal.classList.remove('hidden');
+        // Trigger reflow
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modalImg.classList.remove('scale-95');
+        modalImg.classList.add('scale-100');
+    }
+
+    function closeAvatarModal() {
+        const modal = document.getElementById('avatarModal');
+        const modalImg = document.getElementById('avatarModalImg');
+        modal.classList.add('opacity-0');
+        modalImg.classList.remove('scale-100');
+        modalImg.classList.add('scale-95');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
 </script>
+
+<!-- Avatar Modal -->
+<div id="avatarModal" class="hidden fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300" onclick="closeAvatarModal()">
+    <button class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <img id="avatarModalImg" src="" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300" onclick="event.stopPropagation()">
+</div>
 @endpush
 @endsection

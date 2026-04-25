@@ -1,8 +1,8 @@
 <!-- Premium Sidebar -->
-<aside id="adminSidebar" class="w-72 lg:w-80 bg-white fixed inset-y-0 left-0 overflow-hidden z-[100] transition-all duration-500 -translate-x-full md:translate-x-0 border-r border-slate-200 flex flex-col shadow-2xl">
+<aside id="adminSidebar" class="w-72 lg:w-80 bg-white dark:bg-slate-900 fixed inset-y-0 left-0 overflow-hidden z-[100] transition-all duration-500 -translate-x-full md:translate-x-0 border-r border-slate-200 dark:border-slate-800 flex flex-col shadow-2xl">
     
     <!-- Branding Section (Fixed Height) -->
-    <div class="px-6 py-5 border-b border-slate-50 relative flex-none">
+    <div class="px-6 py-5 border-b border-slate-50 dark:border-slate-800 relative flex-none">
         <!-- Close Button (Mobile Only) -->
         <button onclick="toggleSidebar()" class="md:hidden absolute top-4 right-4 p-2 rounded-xl bg-slate-50 text-slate-400 hover:text-orange transition-all">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -15,7 +15,7 @@
                 <img src="{{ asset('images/logo.jpg') }}" class="w-7 h-7 object-contain rounded-lg" alt="Logo">
             </div>
             <div class="truncate">
-                <h1 class="font-serif font-bold text-lg tracking-tight text-charcoal truncate">Al-Khairat</h1>
+                <h1 class="font-serif font-bold text-lg tracking-tight text-charcoal dark:text-slate-100 truncate">Al-Khairat</h1>
                 <p class="text-[9px] uppercase tracking-widest text-orange/60 font-black leading-none mt-1">Portal Reservasi</p>
             </div>
         </a>
@@ -67,9 +67,13 @@
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     <span class="font-medium text-sm">Pesanan Baru</span>
                 </a>
-                <a href="{{ route('admin.savings.index') }}" class="sidebar-link {{ request()->routeIs('admin.savings.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.savings.index') }}" class="sidebar-link {{ request()->routeIs('admin.savings.index') ? 'active' : '' }}">
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599" /></svg>
                     <span class="font-medium text-sm">Monitor Tabungan</span>
+                </a>
+                <a href="{{ route('admin.savings.trash') }}" class="sidebar-link {{ request()->routeIs('admin.savings.trash') ? 'active' : '' }}">
+                    <svg class="w-5 h-5 text-red-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    <span class="font-medium text-sm">Trash / Sampah</span>
                 </a>
                 <a href="{{ route('payments.index') }}" class="sidebar-link {{ request()->routeIs('payments.*') ? 'active' : '' }}">
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -146,7 +150,7 @@
     </nav>
 
     <!-- Footer Action (Pinned at the very bottom, full width of sidebar) -->
-    <div class="px-5 py-6 border-t border-slate-100 space-y-3 bg-white flex-none">
+    <div class="px-5 py-6 border-t border-slate-100 dark:border-slate-800 space-y-3 bg-white dark:bg-slate-900 flex-none">
         <form method="POST" action="{{ route('logout') }}" class="m-0">
             @csrf
             <button type="submit" class="w-full flex items-center gap-4 px-5 py-4 rounded-2xl bg-red-50 text-red-600 hover:bg-red-100 transition-all group">

@@ -8,31 +8,31 @@
         <!-- Header Section -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4 pt-6 md:pt-0">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Paket Umroh</h1>
-                <p class="text-[11px] md:text-sm text-gray-600 mt-1">Kelola semua paket umroh Al-Khairat</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Paket Umroh</h1>
+                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua paket umroh Al-Khairat</p>
             </div>
-            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="w-full md:w-auto bg-charcoal text-white px-6 py-3 md:py-2.5 rounded-xl border-2 border-transparent hover:border-orange/20 hover:bg-orange transition flex items-center justify-center space-x-2 shadow-lg shadow-orange/10 group">
+            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="w-full md:w-auto bg-charcoal dark:bg-orange text-white px-6 py-3.5 rounded-xl hover:bg-orange transition flex items-center justify-center space-x-2 shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
                 <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span class="font-bold uppercase tracking-widest text-[10px] md:text-xs">Tambah Paket</span>
+                <span>Tambah Paket</span>
             </button>
         </div>
 
-        <div class="bg-white rounded-[1.5rem] shadow-sm p-3 md:p-6 mb-8 border border-slate-100">
+        <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] shadow-sm p-3 md:p-6 mb-8 border border-slate-100 dark:border-slate-800">
             <form method="GET" action="{{ route('products.index') }}" id="filter-form" class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-6">
-                <select name="category" class="border border-slate-200 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 text-[11px] md:text-sm">
+                <select name="category" class="border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 dark:bg-slate-800/50 text-[11px] md:text-sm text-slate-700 dark:text-slate-200">
                     <option value="">Semua Kategori</option>
                     <option value="Standar" {{ request('category') == 'Standar' ? 'selected' : '' }}>Standar</option>
                     <option value="Premium" {{ request('category') == 'Premium' ? 'selected' : '' }}>Premium</option>
                     <option value="Ekonomis" {{ request('category') == 'Ekonomis' ? 'selected' : '' }}>Ekonomis</option>
                 </select>
-                <select name="status" class="border border-slate-200 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 text-[11px] md:text-sm">
+                <select name="status" class="border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 md:py-2.5 focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange bg-slate-50/50 dark:bg-slate-800/50 text-[11px] md:text-sm text-slate-700 dark:text-slate-200">
                     <option value="">Semua Status</option>
                     <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                     <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
-                <button type="submit" class="col-span-2 md:col-span-1 bg-orange/10 text-orange font-black rounded-xl hover:bg-orange hover:text-white transition px-4 py-3 md:py-2.5 border border-orange/20 uppercase tracking-widest text-[9px] md:text-[10px]">
+                <button type="submit" class="col-span-2 md:col-span-1 bg-orange/10 dark:bg-orange/20 text-orange font-black rounded-xl hover:bg-orange hover:text-white transition px-4 py-3 md:py-2.5 border border-orange/20 dark:border-orange/30 uppercase tracking-widest text-[10px]">
                     Terapkan Filter
                 </button>
             </form>
@@ -40,36 +40,36 @@
 
 
         <!-- Products Table -->
-        <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100">
+        <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800">
             <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
                 <table class="w-full" style="min-width: 850px;">
-                <thead class="bg-gray-50 border-b border-gray-200">
+                <thead class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Gambar</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Nama Paket</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kategori</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Harga</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Durasi</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Estimasi Berangkat</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Kuota</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-900 uppercase sticky right-0 bg-gray-50 z-10 border-l border-gray-200 md:border-l-0 md:static">Aksi</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Gambar</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Nama Paket</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Kategori</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Harga Dasar</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Durasi</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Keberangkatan</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Sisa</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Status</th>
+                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest sticky right-0 bg-white dark:bg-slate-900 z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)]">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-gray-200">
+                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                     @forelse($products as $product)
-                    <tr class="hover:bg-gray-50 transition group">
+                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
                         <td class="px-6 py-4">
                             @if($product->image)
                                 <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-12 h-12 object-cover rounded shadow-sm">
                             @else
-                                <div class="w-12 h-12 bg-gray-100 rounded flex items-center justify-center text-xs text-gray-400 border border-gray-200">Kosong</div>
+                                <div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded flex items-center justify-center text-[10px] text-slate-400 border border-slate-200 dark:border-slate-700 font-bold uppercase">Kosong</div>
                             @endif
                         </td>
                         <td class="px-6 py-4">
-                            <p class="font-bold text-gray-900 text-sm md:text-base">{{ $product->name }}</p>
-                            <p class="hidden md:block text-xs text-gray-500 mt-1">{{ Str::limit($product->description, 50) }}</p>
-                            <p class="md:hidden text-[10px] text-gray-400 italic">ID: #{{ $product->id }}</p>
+                            <p class="font-black text-slate-800 dark:text-slate-100 text-sm md:text-base leading-tight">{{ $product->name }}</p>
+                            <p class="hidden md:block text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-tight">{{ Str::limit($product->description, 50) }}</p>
+                            <p class="md:hidden text-[10px] text-slate-400 italic">ID: #{{ $product->id }}</p>
                         </td>
                         <td class="px-6 py-4">
                             <span class="inline-block px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider
@@ -78,13 +78,13 @@
                                 {{ $product->category }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 font-bold text-gray-900 text-sm">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                        <td class="px-6 py-4 text-gray-600">{{ $product->duration ?? '-' }}</td>
-                        <td class="px-6 py-4 text-gray-600">
+                        <td class="px-6 py-4 font-black text-slate-800 dark:text-white text-sm">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                        <td class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400">{{ $product->duration ?? '-' }}</td>
+                        <td class="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
                             @if($product->departure_date)
                                 {{ $product->departure_date->translatedFormat('d M Y') }}
                             @else
-                                <span class="text-gray-400 italic text-xs">Belum diatur</span>
+                                <span class="text-slate-300 dark:text-slate-600 italic">N/A</span>
                             @endif
                         </td>
                         <td class="px-6 py-4">
@@ -100,12 +100,12 @@
                                 {{ $product->status === 'active' ? 'Aktif' : 'Nonaktif' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 sticky right-0 bg-white group-hover:bg-gray-50 transition-colors z-10 border-l border-gray-100 md:border-l-0 md:static">
+                        <td class="px-6 py-4 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
                             <div class="flex flex-wrap gap-2">
-                                <button onclick="openDetailProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->image ? Storage::url($product->image) : '' }}', '{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}', '{{ $product->price_quad }}', '{{ $product->price_triple }}', '{{ $product->price_double }}')"
-                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Detail</button>
-                                <button onclick="openEditProduct({{ $product->id }}, '{{ addslashes($product->name) }}', '{{ $product->category }}', '{{ $product->price }}', '{{ addslashes($product->duration) }}', '{{ addslashes($product->description) }}', '{{ is_array($product->features) ? addslashes(implode('\n', $product->features)) : '' }}', '{{ $product->stock }}', '{{ $product->status }}', '{{ $product->guide_phone }}', '{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}', '{{ $product->price_quad }}', '{{ $product->price_triple }}', '{{ $product->price_double }}')"
-                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
+                                <button type="button" class="btn-detail-product inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm"
+                                        data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-image="{{ $product->image ? Storage::url($product->image) : '' }}" data-date="{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">Detail</button>
+                                <button type="button" class="btn-edit-product inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm"
+                                        data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">Edit</button>
                                 <a href="{{ route('products.edit-rundown', $product) }}"
                                     class="inline-flex items-center justify-center px-3 py-1.5 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Rundown</a>
 
@@ -119,7 +119,15 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="9" class="px-6 py-12 text-center text-gray-500">Belum ada paket umroh.</td>
+                        <td colspan="9" class="px-6 py-28 text-center bg-slate-50/20 dark:bg-slate-900/10">
+                            <div class="flex flex-col items-center justify-center grayscale opacity-60">
+                                <div class="w-24 h-24 bg-white dark:bg-slate-800 rounded-[3rem] shadow-xl flex items-center justify-center text-slate-200 dark:text-slate-700 mb-8 overflow-hidden border border-slate-100 dark:border-slate-700">
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                </div>
+                                <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest">Tiada Paket Umroh</h3>
+                                <p class="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-[280px] mx-auto font-medium leading-relaxed">Belum ada paket yang terdaftar atau sesuai filter.</p>
+                            </div>
+                        </td>
                     </tr>
                     @endforelse
                 </tbody>
@@ -134,11 +142,11 @@
     </div>
 
     <!-- Add Product Modal -->
-    <div id="addProductModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-900">Tambah Paket Umroh</h3>
-                <button onclick="document.getElementById('addProductModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+    <div id="addProductModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+                <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Tambah Paket Umroh</h3>
+                <button onclick="document.getElementById('addProductModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
             </div>
@@ -146,86 +154,87 @@
                 @csrf
                 <div class="grid grid-cols-2 gap-4">
                     <div class="col-span-2 sm:col-span-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Paket</label>
-                        <input type="text" name="name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: Paket Premium Madinah">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Nama Paket</label>
+                        <input type="text" name="name" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-100" placeholder="Contoh: Paket Premium Madinah">
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Gambar (Opsional)</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-slate-800">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Gambar (Opsional)</label>
+                        <input type="file" name="image" accept="image/*" class="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-bold text-slate-400 file:hidden cursor-pointer hover:border-orange transition-all">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
-                    <input type="date" name="departure_date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
-                    <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Estimasi Tgl Berangkat (Opsional)</label>
+                    <input type="date" name="departure_date" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-100">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
-                        <select name="category" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kategori <span class="text-red-500">*</span></label>
+                        <select name="category" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                             <option value="Standar">Standar</option>
                             <option value="Premium">Premium</option>
                             <option value="Ekonomis">Ekonomis</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Durasi</label>
-                        <input type="text" name="duration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="9 Hari">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Durasi (Hari)</label>
+                        <input type="text" name="duration" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="9 Hari">
                     </div>
                 </div>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
-                        <input type="number" name="price" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="35000000">
-                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
-                        <input type="number" name="price_triple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="2000000">
-                        <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Harga Quad (Rp) <span class="text-red-500">*</span></label>
+                        <input type="number" name="price" required min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="35000000">
+                        <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Kamar ber-4 orang</p>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
-                        <input type="number" name="price_double" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="5000000">
-                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Up Triple (+Rp)</label>
+                        <input type="number" name="price_triple" min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="2000000">
+                        <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Tambahan Kamar ber-3</p>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Up Double (+Rp)</label>
+                        <input type="number" name="price_double" min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="5000000">
+                        <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter">Kamar ber-2</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kuota Kursi <span class="text-red-500">*</span></label>
+                        <input type="number" name="stock" required min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="30">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Status Publikasi <span class="text-red-500">*</span></label>
+                        <select name="status" required class="w-full px-5 py-4 bg-orange/5 dark:bg-orange/10 border-2 border-orange/20 dark:border-orange/30 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-orange">
+                            <option value="active">Aktif (Tampil)</option>
+                            <option value="inactive">Nonaktif (Draft)</option>
+                        </select>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                    <input type="number" name="stock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="30">
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Deskripsi Singkat</label>
+                    <textarea name="description" rows="2" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Deskripsi singkat paket umroh"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
-                    <textarea name="description" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Deskripsi singkat paket umroh"></textarea>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Fasilitas Unggulan (1 baris = 1 item)</label>
+                    <textarea name="features" rows="3" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Fitur Utama (1 baris = 1 fitur)</label>
-                    <textarea name="features" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed text-slate-800" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kontak Tour Guide (WA)</label>
+                    <input type="text" name="guide_phone" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Contoh: 628123456789">
+                    <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">* Tanpa tanda +</p>
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor WA Tour Guide</label>
-                    <input type="text" name="guide_phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: 628123456789">
-                    <p class="text-[10px] text-gray-500 mt-1">* Gunakan format internasional tanpa tanda + (contoh: 62812...)</p>
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Status</label>
-                    <select name="status" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
-                        <option value="active">Aktif</option>
-                        <option value="inactive">Nonaktif</option>
-                    </select>
-                </div>
-                <div class="flex space-x-3 pt-2">
-                    <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">Simpan</button>
+                <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
+                    <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                    <button type="submit" class="flex-1 px-4 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Detail Product Modal -->
-    <div id="detailProductModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl overflow-hidden relative">
-            <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="absolute top-4 right-4 z-50 bg-gray-100 hover:bg-gray-200 text-gray-500 rounded-full p-2 transition">
+    <div id="detailProductModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl w-full max-w-3xl overflow-hidden relative border border-slate-100 dark:border-slate-800">
+            <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="absolute top-6 right-6 z-50 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md text-slate-400 hover:text-red-500 rounded-2xl p-3 transition shadow-lg">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div class="flex flex-col md:flex-row h-full max-h-[85vh]">
@@ -235,57 +244,64 @@
                     <div id="viewProductImagePlaceholder" class="w-full h-full bg-gradient-sunset flex items-center justify-center text-white font-bold hidden">No Image</div>
                 </div>
                 <!-- Content Section -->
-                <div class="w-full md:w-1/2 p-8 overflow-y-auto">
+                <div class="w-full md:w-1/2 p-8 overflow-y-auto bg-white dark:bg-slate-900">
                     <div class="mb-6">
-                        <span id="viewProductCategory" class="px-3 py-1 bg-orange/10 text-orange text-[10px] font-bold uppercase rounded-full tracking-widest"></span>
-                        <h3 id="viewProductName" class="text-2xl font-bold text-gray-900 mt-2"></h3>
-                        <p id="viewProductPrice" class="text-xl font-bold text-orange mt-1"></p>
+                        <span id="viewProductCategory" class="px-3 py-1 bg-orange/10 dark:bg-orange/20 text-orange text-[10px] font-black uppercase rounded-lg tracking-widest"></span>
+                        <h3 id="viewProductName" class="text-2xl font-black text-slate-800 dark:text-slate-100 mt-3 leading-tight"></h3>
+                        <p id="viewProductPrice" class="text-xl font-black text-orange mt-2"></p>
                     </div>
                     
-                    <div class="space-y-4 text-sm text-gray-600">
-                        <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Durasi</p>
-                            <p id="viewProductDuration"></p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Estimasi Berangkat</p>
-                            <p id="viewProductDepartureDate" class="text-orange font-semibold"></p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Stok / Kuota</p>
-                            <p id="viewProductStock"></p>
-                        </div>
-                        <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Harga Dasar (Kamar Ber-4)</p>
-                            <p id="viewProductPrice" class="text-indigo-600 font-bold"></p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <div>
-                                <p class="font-bold text-gray-900 uppercase text-[8px] tracking-widest mb-1">Upgrade Ber-3</p>
-                                <p id="viewProductPriceTriple" class="text-xs text-gray-600 font-semibold"></p>
-                            </div>
-                            <div>
-                                <p class="font-bold text-gray-900 uppercase text-[8px] tracking-widest mb-1">Upgrade Ber-2</p>
-                                <p id="viewProductPriceDouble" class="text-xs text-gray-600 font-semibold"></p>
+                    <div class="space-y-6 text-sm text-slate-600 dark:text-slate-400">
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-100 dark:border-slate-700">
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <p class="font-black text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-widest mb-1">Durasi</p>
+                                    <p id="viewProductDuration" class="font-bold text-slate-700 dark:text-slate-200"></p>
+                                </div>
+                                <div>
+                                    <p class="font-black text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-widest mb-1">Berangkat</p>
+                                    <p id="viewProductDepartureDate" class="text-orange font-bold"></p>
+                                </div>
+                                <div>
+                                    <p class="font-black text-slate-400 dark:text-slate-500 uppercase text-[9px] tracking-widest mb-1">Sisa Kuota</p>
+                                    <p id="viewProductStock" class="font-bold text-slate-700 dark:text-slate-200"></p>
+                                </div>
                             </div>
                         </div>
+
                         <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Deskripsi</p>
-                            <p id="viewProductDescription" class="italic"></p>
+                            <p class="font-black text-slate-800 dark:text-slate-100 uppercase text-[10px] tracking-widest mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">Varian Kamar (Upgrade)</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                                    <p class="font-black text-slate-400 dark:text-slate-500 uppercase text-[8px] tracking-widest mb-1">Kamar Ber-3</p>
+                                    <p id="viewProductPriceTriple" class="text-sm text-slate-700 dark:text-slate-200 font-bold"></p>
+                                </div>
+                                <div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                                    <p class="font-black text-slate-400 dark:text-slate-500 uppercase text-[8px] tracking-widest mb-1">Kamar Ber-2</p>
+                                    <p id="viewProductPriceDouble" class="text-sm text-slate-700 dark:text-slate-200 font-bold"></p>
+                                </div>
+                            </div>
                         </div>
+
                         <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Tour Guide WA</p>
-                            <p id="viewProductGuidePhone" class="text-orange font-mono"></p>
+                            <p class="font-black text-slate-800 dark:text-slate-100 uppercase text-[10px] tracking-widest mb-2 border-b border-slate-100 dark:border-slate-800 pb-2">Deskripsi Paket</p>
+                            <p id="viewProductDescription" class="text-xs leading-relaxed"></p>
                         </div>
+
                         <div>
-                            <p class="font-bold text-gray-900 uppercase text-[10px] tracking-widest mb-1">Fitur Utama</p>
-                            <ul id="viewProductFeatures" class="list-disc list-inside space-y-1"></ul>
+                            <p class="font-black text-slate-800 dark:text-slate-100 uppercase text-[10px] tracking-widest mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">Kontak Tour Guide</p>
+                            <p id="viewProductGuidePhone" class="text-xs font-bold text-slate-700 dark:text-slate-200"></p>
+                        </div>
+
+                        <div>
+                            <p class="font-black text-slate-800 dark:text-slate-100 uppercase text-[10px] tracking-widest mb-3 border-b border-slate-100 dark:border-slate-800 pb-2">Fasilitas Unggulan</p>
+                            <ul id="viewProductFeatures" class="grid grid-cols-1 gap-2"></ul>
                         </div>
                     </div>
                     
-                    <div class="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center">
-                        <div id="viewProductStatus" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest"></div>
-                        <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="bg-gray-900 text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-orange transition">Tutup Detail</button>
+                    <div class="mt-8 pt-6 border-t border-slate-50 dark:border-slate-800 flex justify-between items-center">
+                        <div id="viewProductStatus" class="px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest"></div>
+                        <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="bg-charcoal dark:bg-slate-800 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange transition shadow-lg shadow-orange/10">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -293,91 +309,91 @@
     </div>
 
     <!-- Edit Product Modal -->
-    <div id="editProductModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-6 max-h-[90vh] overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-900">Edit Paket Umroh</h3>
-                <button onclick="document.getElementById('editProductModal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+    <div id="editProductModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto border border-slate-100 dark:border-slate-800">
+            <div class="flex justify-between items-center mb-8 border-b border-slate-50 dark:border-slate-800 pb-6">
+                <h3 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest">Edit Paket Umroh</h3>
+                <button onclick="document.getElementById('editProductModal').classList.add('hidden')" class="text-slate-400 hover:text-red-500 transition-colors">
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </button>
             </div>
-            <form id="editProductForm" method="POST" class="space-y-4" enctype="multipart/form-data">
+            <form id="editProductForm" method="POST" class="space-y-6" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nama Paket</label>
-                        <input type="text" name="name" id="editProductName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Nama Paket <span class="text-red-500">*</span></label>
+                        <input type="text" name="name" id="editProductName" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upload Gambar Baru</label>
-                        <input type="file" name="image" accept="image/*" class="w-full px-4 py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-slate-800">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Update Gambar (Opsional)</label>
+                        <input type="file" name="image" accept="image/*" class="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-bold text-slate-400 file:hidden cursor-pointer hover:border-orange transition-all">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Estimasi Tgl Berangkat (Opsional)</label>
-                    <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
-                    <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika belum ada jadwal pasti.</p>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Estimasi Tgl Berangkat (Opsional)</label>
+                    <input type="date" name="departure_date" id="editProductDepartureDate" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Kategori</label>
-                        <select name="category" id="editProductCategory" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kategori <span class="text-red-500">*</span></label>
+                        <select name="category" id="editProductCategory" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                             <option value="Standar">Standar</option>
                             <option value="Premium">Premium</option>
                             <option value="Ekonomis">Ekonomis</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Durasi</label>
-                        <input type="text" name="duration" id="editProductDuration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Durasi (Hari)</label>
+                        <input type="text" name="duration" id="editProductDuration" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Harga Dasar / Quad (Rp)</label>
-                        <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
-                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-4 orang — paling hemat</p>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-3 (+Rp)</label>
-                        <input type="number" name="price_triple" id="editProductPriceTriple" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="2000000">
-                        <p class="text-[10px] text-gray-500 mt-1">Tambahan untuk kamar ber-3</p>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Harga Quad (Rp) <span class="text-red-500">*</span></label>
+                        <input type="number" name="price" id="editProductPrice" required min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Upgrade Ber-2 (+Rp)</label>
-                        <input type="number" name="price_double" id="editProductPriceDouble" min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="5000000">
-                        <p class="text-[10px] text-gray-500 mt-1">Kamar ber-2 — paling privat & mahal</p>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Up Triple (+Rp)</label>
+                        <input type="number" name="price_triple" id="editProductPriceTriple" min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="2000000">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Up Double (+Rp)</label>
+                        <input type="number" name="price_double" id="editProductPriceDouble" min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="5000000">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kuota Kursi <span class="text-red-500">*</span></label>
+                        <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Status Publikasi <span class="text-red-500">*</span></label>
+                        <select name="status" id="editProductStatus" required class="w-full px-5 py-4 bg-orange/5 dark:bg-orange/10 border-2 border-orange/20 dark:border-orange/30 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-orange">
+                            <option value="active">Aktif (Tampil)</option>
+                            <option value="inactive">Nonaktif (Draft)</option>
+                        </select>
                     </div>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Kuota</label>
-                    <input type="number" name="stock" id="editProductStock" required min="0" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Deskripsi Singkat</label>
+                    <textarea name="description" id="editProductDescription" rows="2" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Deskripsi</label>
-                    <textarea name="description" id="editProductDescription" rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800"></textarea>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Fasilitas Unggulan (1 baris = 1 item)</label>
+                    <textarea name="features" id="editProductFeatures" rows="3" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200"></textarea>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Fitur Utama (1 baris = 1 fitur)</label>
-                    <textarea name="features" id="editProductFeatures" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm leading-relaxed text-slate-800" placeholder="Hotel bintang 5&#10;Pesawat langsung PP&#10;Makan 3x sehari"></textarea>
+                    <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Kontak Tour Guide (WA)</label>
+                    <input type="text" name="guide_phone" id="editProductGuidePhone" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Contoh: 628123456789">
+                    <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">* Tanpa tanda +</p>
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor WA Tour Guide</label>
-                    <input type="text" name="guide_phone" id="editProductGuidePhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800" placeholder="Contoh: 628123456789">
-                    <p class="text-[10px] text-gray-500 mt-1">* Kosongkan jika ingin menggunakan nomor WA Admin pusat.</p>
+                
+                <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                    <button type="button" onclick="document.getElementById('editProductModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
+                    <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Update Paket</button>
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-1">Status</label>
-                    <select name="status" id="editProductStatus" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-800">
-                        <option value="active">Aktif</option>
-                        <option value="inactive">Nonaktif</option>
-                    </select>
-                </div>
-                <div class="flex space-x-3 pt-2">
-                    <button type="button" onclick="document.getElementById('editProductModal').classList.add('hidden')" class="flex-1 px-4 py-2 border border-slate-200 text-slate-500 rounded-lg hover:bg-slate-50 transition font-bold uppercase tracking-widest text-[10px]">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-2 bg-charcoal text-white rounded-lg hover:bg-orange transition font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-orange/10">Update</button>
-                </div>
+            </form>
 
             </form>
         </div>
@@ -422,10 +438,10 @@
             const statusEl = document.getElementById('viewProductStatus');
             if (status === 'active') {
                 statusEl.innerText = 'Aktif';
-                statusEl.className = 'px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-green-100 text-green-700';
+                statusEl.className = 'px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800';
             } else {
                 statusEl.innerText = 'Nonaktif';
-                statusEl.className = 'px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-red-100 text-red-700';
+                statusEl.className = 'px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-800';
             }
 
             document.getElementById('detailProductModal').classList.remove('hidden');
@@ -447,6 +463,22 @@
             document.getElementById('editProductGuidePhone').value = guide_phone || '';
             document.getElementById('editProductModal').classList.remove('hidden');
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.addEventListener('click', function(e) {
+                const btnDetail = e.target.closest('.btn-detail-product');
+                if (btnDetail) {
+                    const ds = btnDetail.dataset;
+                    openDetailProduct(ds.id, ds.name, ds.category, ds.price, ds.duration, ds.description, ds.features, ds.stock, ds.status, ds.guidephone, ds.image, ds.date, ds.quad, ds.triple, ds.double);
+                }
+
+                const btnEdit = e.target.closest('.btn-edit-product');
+                if (btnEdit) {
+                    const ds = btnEdit.dataset;
+                    openEditProduct(ds.id, ds.name, ds.category, ds.price, ds.duration, ds.description, ds.features, ds.stock, ds.status, ds.guidephone, ds.dateraw, ds.quad, ds.triple, ds.double);
+                }
+            });
+        });
 
         // Voice Search Logic
         const voiceSearchBtn = document.getElementById('voice-search-btn');

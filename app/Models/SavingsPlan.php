@@ -9,11 +9,15 @@ class SavingsPlan extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'booking_id',
         'quantity',
         'target_amount',
         'monthly_target',
         'status',
         'refund_note',
+        'refund_bank_name',
+        'refund_bank_account',
+        'refund_rejection_note',
         'refund_requested_at',
     ];
 

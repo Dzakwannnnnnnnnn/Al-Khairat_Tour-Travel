@@ -2,6 +2,9 @@
 
 @import 'tailwindcss';
 
+/* Force Tailwind dark: variants to use .dark class instead of OS preference */
+@custom-variant dark (&:is(.dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -78,24 +81,44 @@
     background-color: rgba(239, 68, 68, 0.1) !important;
 }
 
-.dark .bg-emerald-50, .dark .bg-emerald-100 {
+.dark .bg-emerald-50, .dark .bg-emerald-100, .dark .bg-emerald-500\/10 {
     background-color: rgba(16, 185, 129, 0.1) !important;
 }
 
-.dark .bg-amber-50, .dark .bg-amber-100 {
+.dark .bg-amber-50, .dark .bg-amber-100, .dark .bg-amber-500\/10 {
     background-color: rgba(245, 158, 11, 0.1) !important;
 }
 
-.dark .bg-yellow-50, .dark .bg-yellow-100 {
+.dark .bg-yellow-50, .dark .bg-yellow-100, .dark .bg-yellow-500\/10 {
     background-color: rgba(234, 179, 8, 0.1) !important;
 }
 
-.dark .bg-blue-100 {
+.dark .bg-blue-50, .dark .bg-blue-100, .dark .bg-blue-500\/10 {
     background-color: rgba(59, 130, 246, 0.1) !important;
 }
 
-.dark .bg-purple-100 {
+.dark .bg-purple-50, .dark .bg-purple-100, .dark .bg-purple-500\/10 {
     background-color: rgba(139, 92, 246, 0.1) !important;
+}
+
+.dark .bg-teal-50, .dark .bg-teal-100, .dark .bg-teal-500\/10 {
+    background-color: rgba(20, 184, 166, 0.1) !important;
+}
+
+.dark .text-emerald-600, .dark .text-emerald-700, .dark .text-emerald-800 {
+    color: #34D399 !important;
+}
+
+.dark .text-amber-600, .dark .text-amber-700, .dark .text-amber-800 {
+    color: #FBBF24 !important;
+}
+
+.dark .text-blue-600, .dark .text-blue-700, .dark .text-blue-800 {
+    color: #60A5FA !important;
+}
+
+.dark .text-teal-600, .dark .text-teal-700, .dark .text-teal-800 {
+    color: #2DD4BF !important;
 }
 
 .dark .bg-indigo-600 {

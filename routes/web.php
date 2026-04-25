@@ -27,14 +27,14 @@ Route::get('/', function () {
     $testimonials = Testimonial::with('product')->where('status', 'published')->latest()->take(6)->get();
     $products = Product::where('status', 'active')->get();
     $slideshows = Slideshow::where('is_active', true)->orderBy('order')->get();
-    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
     return view('welcome', compact('testimonials', 'products', 'slideshows', 'whatsapp'));
 })->name('home');
 
 Route::view('/galeri-video', 'gallery')->name('gallery');
 
 Route::get('/panduan-tasuh', function () {
-    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
     $panduan = Guide::where('is_active', true)->get()->groupBy('category');
     return view('panduan-tasuh', compact('whatsapp', 'panduan'));
 })->name('panduan-tasuh');
@@ -45,7 +45,7 @@ Route::get('/panduan-tasuh/{category}/{guide}', function ($category, $guide) {
         ->where('is_active', true)
         ->firstOrFail();
     
-    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+    $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
     
     return view('panduan-tasuh-detail', compact('category', 'guide', 'guideData', 'whatsapp'));
 })->where('category', 'umrah|haji')
@@ -131,9 +131,12 @@ Route::middleware('auth')->group(function () {
 
         // Savings Management
         Route::get('admin/savings', [SavingsController::class, 'adminIndex'])->name('admin.savings.index');
+        Route::get('admin/savings/trash', [SavingsController::class, 'adminTrash'])->name('admin.savings.trash');
+        Route::post('admin/savings/trash/empty', [SavingsController::class, 'emptyTrash'])->name('admin.savings.empty_trash');
         Route::post('admin/savings/deposit', [SavingsController::class, 'adminDeposit'])->name('admin.savings.deposit');
         Route::delete('admin/savings/{id}', [SavingsController::class, 'destroyPlan'])->name('admin.savings.destroy');
         Route::post('admin/savings/{id}/approve-refund', [SavingsController::class, 'approveRefund'])->name('admin.savings.approve_refund');
+        Route::post('admin/savings/{id}/cancel', [SavingsController::class, 'adminProcessCancellation'])->name('admin.savings.process_cancellation');
     });
 
     // Member Refund Request

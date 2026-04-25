@@ -4,143 +4,137 @@
 
 @section('content')
 <!-- Page Header -->
-<div class="mb-8">
-    <div class="flex items-center gap-4 mb-4">
-        <a href="{{ route('slideshow.index') }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg hover:bg-slate-100 transition-colors duration-200">
-            <svg class="w-6 h-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-        </a>
-        <div>
-            <h1 class="text-3xl md:text-4xl font-bold text-charcoal">Tambah Slideshow Baru</h1>
-            <p class="text-text/60 mt-1">Buat slideshow baru untuk halaman utama</p>
-        </div>
+<div class="mb-10 flex items-center gap-6">
+    <a href="{{ route('slideshow.index') }}" class="group flex items-center justify-center w-14 h-14 bg-white dark:bg-slate-800/50 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:bg-orange hover:border-orange transition-all duration-300">
+        <svg class="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path>
+        </svg>
+    </a>
+    <div>
+        <h1 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">Tambah <span class="text-orange">Slideshow</span></h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 font-medium italic">Buat visual slideshow baru untuk beranda utama</p>
     </div>
 </div>
 
-<!-- Form Card -->
-<div class="max-w-2xl">
-    <div class="bg-white rounded-xl shadow-lg border border-slate-200 overflow-hidden">
-        <form method="POST" action="{{ route('slideshow.store') }}" enctype="multipart/form-data">
-            @csrf
+<!-- Form Container -->
+<div class="w-full min-w-0">
+    <form method="POST" action="{{ route('slideshow.store') }}" enctype="multipart/form-data" class="space-y-8 w-full">
+        @csrf
 
-            <!-- Image Section -->
-            <div class="p-8 border-b border-slate-200">
-                <h2 class="text-xl font-bold text-charcoal mb-6">📸 Gambar Slideshow</h2>
-                
-                <!-- Tabs -->
-                <div class="flex gap-0 mb-6 border-b border-slate-200">
-                    <button type="button" class="tab-btn flex-1 px-4 py-3 text-center font-semibold transition-all duration-200 border-b-2 border-orange text-orange" data-tab="local">
-                        📁 Upload File
-                    </button>
-                    <button type="button" class="tab-btn flex-1 px-4 py-3 text-center font-semibold transition-all duration-200 border-b-2 border-transparent text-text/60 hover:text-text" data-tab="url">
-                        🔗 URL Eksternal
-                    </button>
-                </div>
-
-                <!-- Local Upload Tab -->
-                <div class="tab-content" id="tab-local">
-                    <div class="mb-6">
-                        <label class="block text-sm font-semibold text-charcoal mb-3">Pilih Gambar</label>
-                        <div class="relative">
-                            <input type="file" class="sr-only" name="image" id="image" accept="image/*" onchange="previewImage(this)">
-                            <label for="image" class="flex flex-col items-center justify-center w-full p-8 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-orange hover:bg-orange/5 transition-all duration-200">
-                                <svg class="w-12 h-12 text-slate-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                <p class="text-center">
-                                    <span class="font-semibold text-orange">Klik untuk upload</span><br>
-                                    <span class="text-sm text-text/60">atau drag & drop gambar di sini</span>
-                                </p>
-                                <p class="text-xs text-text/40 mt-3">Format: JPG, PNG, GIF • Max 5MB</p>
-                            </label>
-                        </div>
-                        @error('image')
-                            <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                                <p class="text-sm text-red-600">{{ $message }}</p>
+        <div class="flex flex-col lg:flex-row gap-8 w-full">
+            <!-- Left: Image Management -->
+            <div class="flex-1 min-w-0 space-y-8">
+                <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                    <div class="p-8 border-b border-slate-50 dark:border-slate-800">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-orange/10 dark:bg-orange/20 text-orange rounded-2xl flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             </div>
-                        @enderror
-                    </div>
+                            <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">Visual Slideshow</h2>
+                        </div>
 
-                    <!-- Image Preview -->
-                    <div id="image-preview" class="hidden">
-                        <p class="text-sm font-semibold text-text/60 mb-3">Preview:</p>
-                        <div class="relative w-full max-w-xs mx-auto">
-                            <img id="preview-img" src="" alt="Preview" class="w-full rounded-lg shadow-md border border-slate-200">
-                            <button type="button" onclick="clearImagePreview()" class="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                </svg>
+                        <!-- Upload Tabs -->
+                        <div class="flex p-1 bg-slate-50 dark:bg-slate-900/50 rounded-2xl mb-8 border border-slate-100 dark:border-slate-700 shadow-inner">
+                            <button type="button" class="tab-btn flex-1 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 bg-white dark:bg-slate-800 text-orange shadow-lg shadow-orange/10" data-tab="local">
+                                File Lokal
+                            </button>
+                            <button type="button" class="tab-btn flex-1 px-6 py-3 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300" data-tab="url">
+                                URL Eksternal
                             </button>
                         </div>
-                    </div>
-                </div>
 
-                <!-- URL Tab -->
-                <div class="tab-content hidden" id="tab-url">
-                    <div>
-                        <label class="block text-sm font-semibold text-charcoal mb-3">URL Gambar</label>
-                        <input type="url" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent @error('image_url') border-red-500 @enderror" 
-                               name="image_url" placeholder="https://example.com/image.jpg" value="{{ old('image_url') }}">
-                        @error('image_url')
-                            <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                                <p class="text-sm text-red-600">{{ $message }}</p>
+                        <!-- Local Upload -->
+                        <div class="tab-content" id="tab-local">
+                            <div class="relative group">
+                                <input type="file" class="sr-only" name="image" id="image" accept="image/*" onchange="previewImage(this)">
+                                <label for="image" class="flex flex-col items-center justify-center w-full aspect-video border-4 border-dashed border-slate-200 dark:border-slate-700 rounded-[2.5rem] cursor-pointer hover:border-orange hover:bg-orange/5 dark:hover:bg-orange/10 transition-all duration-500">
+                                    <div class="p-6 bg-slate-50 dark:bg-slate-900/50 rounded-3xl group-hover:bg-white dark:group-hover:bg-slate-800 transition-colors shadow-sm">
+                                        <svg class="w-10 h-10 text-slate-300 group-hover:text-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="mt-6 text-center">
+                                        <span class="block font-black text-slate-800 dark:text-slate-100 uppercase tracking-widest text-[11px]">Pilih Visual Utama</span>
+                                        <span class="text-[10px] text-slate-400 dark:text-slate-500 font-medium italic mt-2 block">Klik atau tarik gambar ke area ini</span>
+                                    </p>
+                                </label>
                             </div>
-                        @enderror
-                    </div>
-                </div>
-            </div>
-
-            <!-- Details Section -->
-            <div class="p-8 border-b border-slate-200">
-                <h2 class="text-xl font-bold text-charcoal mb-6">📝 Detail Slideshow</h2>
-
-                <div class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-charcoal mb-2">Judul (Opsional)</label>
-                        <input type="text" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent @error('title') border-red-500 @enderror" 
-                               name="title" placeholder="Contoh: Destinasi Indah" value="{{ old('title') }}">
-                        @error('title')
-                            <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            
+                            <!-- Dynamic Preview (16:9) -->
+                            <div id="image-preview" class="hidden mt-8">
+                                <p class="text-[10px] font-black text-orange uppercase tracking-widest mb-4 flex items-center gap-2">
+                                    <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
+                                    Preview Tampilan (16:9)
+                                </p>
+                                <div class="relative aspect-video w-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-orange/20">
+                                    <img id="preview-img" src="" alt="Preview" class="w-full h-full object-cover">
+                                    <button type="button" onclick="clearImagePreview()" class="absolute top-4 right-4 p-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all shadow-xl">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
                             </div>
-                        @enderror
-                    </div>
+                        </div>
 
-                    <div>
-                        <label class="block text-sm font-semibold text-charcoal mb-2">Deskripsi (Opsional)</label>
-                        <textarea class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent resize-none @error('description') border-red-500 @enderror" 
-                                  name="description" rows="4" placeholder="Deskripsi singkat tentang slideshow ini...">{{ old('description') }}</textarea>
-                        @error('description')
-                            <div class="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                                <p class="text-sm text-red-600">{{ $message }}</p>
+                        <!-- URL Tab -->
+                        <div class="tab-content hidden" id="tab-url">
+                            <div class="relative">
+                                <input type="url" name="image_url" placeholder="https://example.com/slide.jpg" value="{{ old('image_url') }}"
+                                       class="w-full px-8 py-5 bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-medium dark:text-slate-200">
+                                <div class="mt-4 p-4 bg-blue-50 dark:bg-blue-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                                    <p class="text-[10px] text-blue-600 dark:text-blue-400 font-bold uppercase tracking-widest leading-relaxed">Pastikan URL memiliki akses publik dan rasio yang lebar (Widescreen) agar tidak terpotong.</p>
+                                </div>
                             </div>
-                        @enderror
-                    </div>
-
-                    <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                        <input type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }} class="w-5 h-5 text-orange rounded focus:ring-2 focus:ring-orange">
-                        <label for="is_active" class="font-semibold text-charcoal cursor-pointer">
-                            Aktifkan Slideshow
-                        </label>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Footer -->
-            <div class="p-8 bg-slate-50 border-t border-slate-200 flex gap-3 justify-end">
-                <a href="{{ route('slideshow.index') }}" class="px-6 py-3 text-charcoal font-semibold rounded-lg border border-slate-300 hover:bg-slate-100 transition-colors duration-200">
-                    Batal
-                </a>
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-sunset hover:shadow-lg text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <span>Simpan Slideshow</span>
-                </button>
+            <!-- Right: Content & Metadata -->
+            <div class="lg:w-5/12 flex-shrink-0 space-y-8">
+                <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 p-8">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 text-blue-500 rounded-2xl flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        </div>
+                        <h2 class="text-xl font-black text-slate-800 dark:text-slate-100 uppercase tracking-tight">Detail Konten</h2>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Judul (Opsional)</label>
+                            <input type="text" name="title" value="{{ old('title') }}" placeholder="Contoh: Promo Ramadhan"
+                                   class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-bold dark:text-slate-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Deskripsi (Opsional)</label>
+                            <textarea name="description" rows="4" placeholder="Teks yang akan muncul di atas slideshow..."
+                                      class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900/50 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-medium dark:text-slate-200 resize-none">{{ old('description') }}</textarea>
+                        </div>
+
+                        <div class="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border-2 border-transparent">
+                            <input type="checkbox" name="is_active" id="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }}
+                                   class="w-5 h-5 text-orange bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-orange">
+                            <label for="is_active" class="text-xs font-black text-slate-700 dark:text-slate-300 uppercase tracking-tight cursor-pointer">Langsung Aktifkan</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 p-8 flex flex-col gap-4">
+                    <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-sunset text-white font-black rounded-2xl shadow-lg shadow-orange/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-widest text-xs">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span>Simpan Slideshow</span>
+                    </button>
+                    <a href="{{ route('slideshow.index') }}" class="w-full inline-flex items-center justify-center px-8 py-5 bg-slate-100 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 font-black rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all uppercase tracking-widest text-[10px]">
+                        Batalkan
+                    </a>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -151,10 +145,13 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
         document.getElementById('tab-' + tab).classList.remove('hidden');
         
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('border-orange', 'text-orange'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.add('border-transparent', 'text-text/60'));
-        this.classList.remove('border-transparent', 'text-text/60');
-        this.classList.add('border-orange', 'text-orange');
+        document.querySelectorAll('.tab-btn').forEach(b => {
+            b.classList.remove('bg-white', 'dark:bg-slate-800', 'text-orange', 'shadow-lg', 'shadow-orange/10');
+            b.classList.add('text-slate-400', 'dark:text-slate-500');
+        });
+        
+        this.classList.remove('text-slate-400', 'dark:text-slate-500');
+        this.classList.add('bg-white', 'dark:bg-slate-800', 'text-orange', 'shadow-lg', 'shadow-orange/10');
     });
 });
 
@@ -165,6 +162,7 @@ function previewImage(input) {
         reader.onload = function(e) {
             document.getElementById('preview-img').src = e.target.result;
             document.getElementById('image-preview').classList.remove('hidden');
+            document.getElementById('image-preview').scrollIntoView({ behavior: 'smooth' });
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -176,49 +174,25 @@ function clearImagePreview() {
 }
 
 // Drag and drop
-const fileInput = document.getElementById('image');
 const dropZone = document.querySelector('label[for="image"]');
+if (dropZone) {
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+    });
 
-['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, preventDefaults, false);
-});
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.add('border-orange', 'bg-orange/5'), false);
+    });
 
-function preventDefaults(e) {
-    e.preventDefault();
-    e.stopPropagation();
-}
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.remove('border-orange', 'bg-orange/5'), false);
+    });
 
-['dragenter', 'dragover'].forEach(eventName => {
-    dropZone.addEventListener(eventName, highlight, false);
-});
-
-['dragleave', 'drop'].forEach(eventName => {
-    dropZone.addEventListener(eventName, unhighlight, false);
-});
-
-function highlight(e) {
-    dropZone.classList.add('border-orange', 'bg-orange/5');
-}
-
-function unhighlight(e) {
-    dropZone.classList.remove('border-orange', 'bg-orange/5');
-}
-
-dropZone.addEventListener('drop', handleDrop, false);
-
-function handleDrop(e) {
-    const dt = e.dataTransfer;
-    const files = dt.files;
-    fileInput.files = files;
-    
-    if (files && files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('preview-img').src = e.target.result;
-            document.getElementById('image-preview').classList.remove('hidden');
-        };
-        reader.readAsDataURL(files[0]);
-    }
+    dropZone.addEventListener('drop', e => {
+        const files = e.dataTransfer.files;
+        document.getElementById('image').files = files;
+        previewImage(document.getElementById('image'));
+    }, false);
 }
 </script>
 
