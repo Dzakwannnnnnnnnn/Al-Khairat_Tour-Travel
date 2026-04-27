@@ -101,13 +101,13 @@
                 <!-- Dashboard Header -->
                 @include('components.header')
 
-                <!-- Navigation Breadcrumb (Increased spacing to prevent 'dempet' look) -->
-                <div class="px-4 mb-10 md:mb-12">
+                <!-- Navigation Breadcrumb (Reduced spacing so content moves up closer) -->
+                <div class="px-4 mb-4 md:mb-6">
                     @include('components.breadcrumb')
                 </div>
 
                 <!-- Content Area -->
-                <div class="p-4 md:p-8 lg:p-10 max-w-7xl mx-auto pb-32 md:pb-40">
+                <div class="px-4 pt-0 md:px-6 md:pt-2 lg:px-8 max-w-7xl mx-auto pb-32 md:pb-40">
                     <!-- Flash Messages -->
                     @include('components.alert')
                     

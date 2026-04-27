@@ -150,14 +150,15 @@
                 </div>
 
                 <!-- Form Actions -->
-                <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 p-8 flex flex-col gap-4">
-                    <button type="submit" class="w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-sunset text-white font-black rounded-2xl shadow-lg shadow-orange/20 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-widest text-xs">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-700 p-8 flex flex-col gap-4">
+                    <button type="submit" class="group w-full inline-flex items-center justify-center gap-3 px-8 py-5 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white font-black rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 uppercase tracking-widest text-xs touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
+                        <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        <span>Simpan Perubahan</span>
+                        <span class="group-hover:tracking-[0.2em] transition-all duration-200">Simpan Perubahan</span>
                     </button>
-                    <a href="{{ route('slideshow.index') }}" class="w-full inline-flex items-center justify-center px-8 py-5 bg-slate-100 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 font-black rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all uppercase tracking-widest text-[10px]">
+                    <a href="{{ route('slideshow.index') }}" class="group w-full inline-flex items-center justify-center px-8 py-5 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 font-black rounded-2xl shadow-sm border-2 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 uppercase tracking-widest text-[10px] touch-manipulation">
+                        <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
                         Batalkan
                     </a>
                 </div>

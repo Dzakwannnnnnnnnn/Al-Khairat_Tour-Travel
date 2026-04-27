@@ -11,11 +11,11 @@
                 <h1 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Paket Umroh</h1>
                 <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua paket umroh Al-Khairat</p>
             </div>
-            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="w-full md:w-auto bg-charcoal dark:bg-orange text-white px-6 py-3.5 rounded-xl hover:bg-orange transition flex items-center justify-center space-x-2 shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-600 dark:to-green-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-emerald-400/50 dark:border-emerald-500/50 hover:border-emerald-300 dark:hover:border-emerald-400">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
-                <span>Tambah Paket</span>
+                <span class="group-hover:tracking-[0.2em] transition-all duration-200">Tambah Paket</span>
             </button>
         </div>
 
@@ -32,7 +32,7 @@
                     <option value="active" {{ request('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                     <option value="inactive" {{ request('status') == 'inactive' ? 'selected' : '' }}>Nonaktif</option>
                 </select>
-                <button type="submit" class="col-span-2 md:col-span-1 bg-orange/10 dark:bg-orange/20 text-orange font-black rounded-xl hover:bg-orange hover:text-white transition px-4 py-3 md:py-2.5 border border-orange/20 dark:border-orange/30 uppercase tracking-widest text-[10px]">
+                <button type="submit" class="col-span-2 md:col-span-1 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 text-amber-600 dark:text-amber-400 font-black rounded-xl shadow-sm shadow-amber-500/10 dark:shadow-amber-700/20 hover:shadow-md hover:shadow-amber-500/30 dark:hover:shadow-amber-600/40 hover:scale-[1.02] active:scale-95 transition-all duration-200 px-4 py-3 md:py-2.5 border-2 border-amber-300 dark:border-amber-700 hover:border-amber-400 dark:hover:border-amber-500 hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-500 dark:hover:from-amber-600 dark:hover:to-orange-600 hover:text-white uppercase tracking-widest text-[10px] touch-manipulation">
                     Terapkan Filter
                 </button>
             </form>
@@ -40,98 +40,110 @@
 
 
         <!-- Products Table -->
-        <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800">
+        <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800">
             <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
                 <table class="w-full" style="min-width: 850px;">
-                <thead class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
-                    <tr>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Gambar</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Nama Paket</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Kategori</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Harga Dasar</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Durasi</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Keberangkatan</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Sisa</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Status</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest sticky right-0 bg-white dark:bg-slate-900 z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)]">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
-                    @forelse($products as $product)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
-                        <td class="px-6 py-4">
-                            @if($product->image)
-                                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-12 h-12 object-cover rounded shadow-sm">
-                            @else
-                                <div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded flex items-center justify-center text-[10px] text-slate-400 border border-slate-200 dark:border-slate-700 font-bold uppercase">Kosong</div>
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="font-black text-slate-800 dark:text-slate-100 text-sm md:text-base leading-tight">{{ $product->name }}</p>
-                            <p class="hidden md:block text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-tight">{{ Str::limit($product->description, 50) }}</p>
-                            <p class="md:hidden text-[10px] text-slate-400 italic">ID: #{{ $product->id }}</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-block px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider
-                                {{ $product->category === 'Premium' ? 'bg-yellow-100 text-yellow-800' :
-                                   ($product->category === 'Standar' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800') }}">
-                                {{ $product->category }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 font-black text-slate-800 dark:text-white text-sm">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                        <td class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400">{{ $product->duration ?? '-' }}</td>
-                        <td class="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
-                            @if($product->departure_date)
-                                {{ $product->departure_date->translatedFormat('d M Y') }}
-                            @else
-                                <span class="text-slate-300 dark:text-slate-600 italic">N/A</span>
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-block px-3 py-1 rounded-full text-sm
-                                {{ $product->stock > 10 ? 'bg-green-100 text-green-800' :
-                                   ($product->stock > 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800') }}">
-                                {{ $product->stock }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-block px-3 py-1 rounded-full text-sm font-medium
-                                {{ $product->status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                {{ $product->status === 'active' ? 'Aktif' : 'Nonaktif' }}
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
-                            <div class="flex flex-wrap gap-2">
-                                <button type="button" class="btn-detail-product inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm"
-                                        data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-image="{{ $product->image ? Storage::url($product->image) : '' }}" data-date="{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">Detail</button>
-                                <button type="button" class="btn-edit-product inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm"
-                                        data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">Edit</button>
-                                <a href="{{ route('products.edit-rundown', $product) }}"
-                                    class="inline-flex items-center justify-center px-3 py-1.5 bg-purple-50 text-purple-700 hover:bg-purple-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Rundown</a>
+                    <thead class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Gambar</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Nama Paket</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Kategori</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Harga Dasar</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Durasi</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Keberangkatan</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Sisa</th>
+                            <th class="px-6 py-4 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Status</th>
+                            <th class="px-4 py-4 text-center text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest sticky right-0 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 z-10 border-l-2 border-slate-200 dark:border-slate-700 shadow-[-10px_0_15px_rgba(0,0,0,0.03)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.3)] w-[140px] min-w-[140px]">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                        @forelse($products as $product)
+                        <tr class="hover:bg-gradient-to-r hover:from-orange-50/50 hover:to-pink-50/50 dark:hover:from-orange-900/10 dark:hover:to-pink-900/10 transition-all duration-200 row-group">
+                            <td class="px-6 py-4">
+                                @if($product->image)
+                                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-12 h-12 object-cover rounded-lg shadow-sm ring-2 ring-slate-100 dark:ring-slate-700 hover:scale-110 transition-transform duration-200">
+                                @else
+                                    <div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-[10px] text-slate-400 dark:text-slate-500 border-2 border-dashed border-slate-200 dark:border-slate-700 font-bold uppercase">Kosong</div>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="font-black text-slate-800 dark:text-slate-100 text-sm md:text-base leading-tight row-group-hover:text-orange-600 dark:row-group-hover:text-orange-400 transition-colors">{{ $product->name }}</p>
+                                <p class="hidden md:block text-xs font-bold text-slate-400 dark:text-slate-500 mt-1 uppercase tracking-tight">{{ Str::limit($product->description, 50) }}</p>
+                                <p class="md:hidden text-[10px] text-slate-400 dark:text-slate-500 italic">ID: #{{ $product->id }}</p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-block px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider shadow-sm
+                                    {{ $product->category === 'Premium' ? 'bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-800 border border-yellow-300' :
+                                    ($product->category === 'Standar' ? 'bg-gradient-to-r from-blue-100 to-sky-100 text-blue-800 border border-blue-300' : 'bg-gradient-to-r from-gray-100 to-slate-100 text-gray-800 border border-gray-300') }}">
+                                    {{ $product->category }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 font-black text-slate-800 dark:text-white text-sm">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400">{{ $product->duration ?? '-' }}</td>
+                            <td class="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+                                @if($product->departure_date)
+                                    {{ $product->departure_date->translatedFormat('d M Y') }}
+                                @else
+                                    <span class="text-slate-300 dark:text-slate-600 italic">N/A</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-block px-3 py-1.5 rounded-full text-sm font-bold shadow-sm
+                                    {{ $product->stock > 10 ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-300' :
+                                    ($product->stock > 0 ? 'bg-gradient-to-r from-yellow-100 to-amber-100 text-yellow-800 border border-yellow-300' : 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-300') }}">
+                                    {{ $product->stock }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="inline-block px-3 py-1.5 rounded-full text-sm font-bold shadow-sm
+                                    {{ $product->status === 'active' ? 'bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-300' : 'bg-gradient-to-r from-red-100 to-rose-100 text-red-800 border border-red-300' }}">
+                                    {{ $product->status === 'active' ? 'Aktif' : 'Nonaktif' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-4 sticky right-0 bg-white dark:bg-slate-900 row-group-hover:bg-gradient-to-r row-group-hover:from-orange-50/50 row-group-hover:to-pink-50/50 dark:row-group-hover:from-orange-900/10 dark:row-group-hover:to-pink-900/10 transition-all duration-200 z-10 border-l-2 border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.03)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.3)] w-[140px] min-w-[140px]">
+                                <div class="flex flex-col items-center gap-1.5">
+                                    <button type="button" class="detail-group btn-detail-product w-full inline-flex items-center justify-center px-2.5 py-1.5 bg-gradient-to-r from-blue-50 to-sky-50 dark:from-blue-900/30 dark:to-sky-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-blue-500/10 dark:shadow-blue-700/20 hover:shadow-md hover:shadow-blue-500/20 dark:hover:shadow-blue-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation"
+                                            data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-image="{{ $product->image ? Storage::url($product->image) : '' }}" data-date="{{ $product->departure_date ? $product->departure_date->format('d M Y') : '' }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">
+                                        <svg class="w-3 h-3 mr-1 detail-group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                        Detail
+                                    </button>
+                                    <button type="button" class="edit-group btn-edit-product w-full inline-flex items-center justify-center px-2.5 py-1.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-amber-500/10 dark:shadow-amber-700/20 hover:shadow-md hover:shadow-amber-500/20 dark:hover:shadow-amber-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation"
+                                            data-id="{{ $product->id }}" data-name="{{ $product->name }}" data-category="{{ $product->category }}" data-price="{{ $product->price }}" data-duration="{{ $product->duration }}" data-description="{{ $product->description }}" data-features="{{ is_array($product->features) ? implode("\n", $product->features) : $product->features }}" data-stock="{{ $product->stock }}" data-status="{{ $product->status }}" data-guidephone="{{ $product->guide_phone }}" data-dateraw="{{ $product->departure_date ? $product->departure_date->format('Y-m-d') : '' }}" data-quad="{{ $product->price_quad }}" data-triple="{{ $product->price_triple }}" data-double="{{ $product->price_double }}">
+                                        <svg class="w-3 h-3 mr-1 edit-group-hover:scale-110 edit-group-hover:rotate-12 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                        Edit
+                                    </button>
+                                    <a href="{{ route('products.edit-rundown', $product) }}"
+                                        class="rundown-group w-full inline-flex items-center justify-center px-2.5 py-1.5 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-900/30 dark:to-purple-900/30 text-violet-600 dark:text-violet-400 border border-violet-200 dark:border-violet-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-violet-500/10 dark:shadow-violet-700/20 hover:shadow-md hover:shadow-violet-500/20 dark:hover:shadow-violet-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation">
+                                        <svg class="w-3 h-3 mr-1 rundown-group-hover:scale-110 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                                        Rundown
+                                    </a>
 
-                                <form method="POST" action="{{ route('products.destroy', $product) }}" class="inline m-0" onsubmit="return confirm('Yakin hapus paket ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="9" class="px-6 py-28 text-center bg-slate-50/20 dark:bg-slate-900/10">
-                            <div class="flex flex-col items-center justify-center grayscale opacity-60">
-                                <div class="w-24 h-24 bg-white dark:bg-slate-800 rounded-[3rem] shadow-xl flex items-center justify-center text-slate-200 dark:text-slate-700 mb-8 overflow-hidden border border-slate-100 dark:border-slate-700">
-                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                    <form method="POST" action="{{ route('products.destroy', $product) }}" class="w-full m-0" onsubmit="return confirm('Yakin hapus paket ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="delete-group w-full inline-flex items-center justify-center px-2.5 py-1.5 bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/30 dark:to-rose-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-700 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-red-500/10 dark:shadow-red-700/20 hover:shadow-md hover:shadow-red-500/20 dark:hover:shadow-red-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation">
+                                            <svg class="w-3 h-3 mr-1 delete-group-hover:scale-110 delete-group-hover:rotate-12 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </div>
-                                <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest">Tiada Paket Umroh</h3>
-                                <p class="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-[280px] mx-auto font-medium leading-relaxed">Belum ada paket yang terdaftar atau sesuai filter.</p>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="9" class="px-6 py-28 text-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <div class="w-24 h-24 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-700 rounded-[3rem] shadow-xl flex items-center justify-center text-slate-300 dark:text-slate-600 mb-8 border-2 border-dashed border-slate-200 dark:border-slate-700">
+                                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                                    </div>
+                                    <h3 class="text-xl font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tiada Paket Umroh</h3>
+                                    <p class="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-[280px] mx-auto font-medium leading-relaxed">Belum ada paket yang terdaftar atau sesuai filter.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -224,8 +236,8 @@
                     <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">* Tanpa tanda +</p>
                 </div>
                 <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
-                    <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan</button>
+                    <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                    <button type="submit" class="flex-1 px-4 py-4 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-600 dark:to-green-600 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-emerald-400/50 dark:border-emerald-500/50 hover:border-emerald-300 dark:hover:border-emerald-400">Simpan</button>
                 </div>
             </form>
         </div>
@@ -301,7 +313,10 @@
                     
                     <div class="mt-8 pt-6 border-t border-slate-50 dark:border-slate-800 flex justify-between items-center">
                         <div id="viewProductStatus" class="px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest"></div>
-                        <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="bg-charcoal dark:bg-slate-800 text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-orange transition shadow-lg shadow-orange/10">Tutup</button>
+                        <button onclick="document.getElementById('detailProductModal').classList.add('hidden')" class="group bg-gradient-to-r from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-700 text-slate-600 dark:text-slate-300 px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-md shadow-slate-300/20 dark:shadow-slate-900/30 border-2 border-slate-300 dark:border-slate-600 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-lg hover:shadow-slate-400/30 dark:hover:shadow-slate-700/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-slate-300/40 transition-all duration-200 touch-manipulation flex items-center gap-2">
+                            <svg class="w-3.5 h-3.5 group-hover:scale-110 group-hover:rotate-90 transition-transform duration-300 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"/></svg>
+                            Tutup
+                        </button>
                     </div>
                 </div>
             </div>
@@ -390,8 +405,8 @@
                 </div>
                 
                 <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
-                    <button type="button" onclick="document.getElementById('editProductModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                    <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Update Paket</button>
+                    <button type="button" onclick="document.getElementById('editProductModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                    <button type="submit" class="flex-1 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-600 dark:to-orange-600 text-white rounded-2xl shadow-md shadow-amber-500/20 dark:shadow-amber-700/30 hover:shadow-lg hover:shadow-amber-500/40 dark:hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-amber-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-amber-400/50 dark:border-amber-500/50 hover:border-amber-300 dark:hover:border-amber-400">Update Paket</button>
                 </div>
             </form>
 

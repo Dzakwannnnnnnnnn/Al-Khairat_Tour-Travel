@@ -233,12 +233,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Memicu Custom Modal Jika Ada Pesan Konfirmasi
             if (form.dataset.confirmMsg && form.dataset.confirmed !== 'true') {
                 e.preventDefault();
+                const isDelete = form.querySelector('input[name="_method"][value="DELETE"]') !== null || form.action.includes('delete') || form.action.includes('destroy');
+                const confirmOptions = isDelete
+                    ? { title: 'Konfirmasi Hapus', okText: 'Ya, Hapus!' }
+                    : { title: 'Konfirmasi', okText: 'Ya, Lanjutkan' };
+
                 if (window.showGlobalConfirm) {
                     window.showGlobalConfirm(form.dataset.confirmMsg, () => {
                         form.dataset.confirmed = 'true';
                         // Gunakan method natural HTMLFormElement untuk submit ulang
                         HTMLFormElement.prototype.requestSubmit.call(form);
-                    });
+                    }, confirmOptions);
                 } else {
                     // Fallback aman
                     if (confirm(form.dataset.confirmMsg)) {
@@ -291,4 +296,96 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+});
+
+
+// Scroll dragging untuk tabel
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainers = document.querySelectorAll('.dashboard-scroll');
+    
+    scrollContainers.forEach(container => {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            container.classList.add('cursor-grab', 'active');
+            container.classList.remove('cursor-grab');
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.classList.remove('active');
+            container.classList.add('cursor-grab');
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDown = false;
+            container.classList.remove('active');
+            container.classList.add('cursor-grab');
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 2; // Kecepatan scroll
+            container.scrollLeft = scrollLeft - walk;
+        });
+    });
+});
+
+
+
+// Simpan & restore scroll position sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.querySelector('#adminSidebar .dashboard-scroll');
+    
+    if (sidebar) {
+        // Restore scroll position
+        const savedScroll = localStorage.getItem('sidebarScrollPosition');
+        if (savedScroll) {
+            sidebar.scrollTop = parseInt(savedScroll);
+        }
+
+        // Simpan scroll position sebelum pindah halaman
+        sidebar.addEventListener('scroll', function() {
+            localStorage.setItem('sidebarScrollPosition', sidebar.scrollTop);
+        });
+
+        // Simpan juga saat klik link di sidebar
+        const sidebarLinks = document.querySelectorAll('#adminSidebar a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                localStorage.setItem('sidebarScrollPosition', sidebar.scrollTop);
+            });
+        });
+    }
+});
+
+// Simpan & restore scroll position untuk halaman booking
+document.addEventListener('DOMContentLoaded', function() {
+    // Restore scroll position khusus untuk halaman booking
+    if (window.location.pathname.includes('/bookings')) {
+        const savedScrollY = sessionStorage.getItem('bookingPageScroll');
+        if (savedScrollY) {
+            window.scrollTo(0, parseInt(savedScrollY));
+        }
+
+        // Simpan scroll saat klik link apapun di area konten utama
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.href.startsWith('javascript:') && !link.href.startsWith('#')) {
+                sessionStorage.setItem('bookingPageScroll', window.scrollY);
+            }
+        });
+
+        // Simpan juga saat form submit
+        document.addEventListener('submit', function(e) {
+            sessionStorage.setItem('bookingPageScroll', window.scrollY);
+        });
+    }
 });

@@ -13,9 +13,9 @@
                 <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Pemantauan status keuangan jamaah dari pendaftaran.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-gradient-sunset text-white px-6 py-3.5 rounded-xl hover:opacity-90 transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Catat Manual</span>
+        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
+            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Catat Manual</span>
         </button>
     </div>
 
@@ -171,9 +171,9 @@
                         <td class="px-6 py-6 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] border-b border-slate-50 dark:border-slate-800">
                             <div class="flex flex-wrap gap-2">
                                 <a href="{{ route('booking.invoice.pdf', $booking->group_code ?? $booking->booking_code) }}" target="_blank" 
-                                    class="flex items-center justify-center space-x-2 bg-orange text-white px-6 py-2.5 rounded-xl hover:bg-charcoal transition-all font-bold uppercase tracking-widest text-[9px] shadow-lg shadow-orange/20">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                    <span>INVOICE</span>
+                                    class="invoice-group flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-600 dark:to-orange-600 text-white px-6 py-2.5 rounded-xl shadow-md shadow-amber-500/20 dark:shadow-amber-700/30 hover:shadow-lg hover:shadow-amber-500/40 dark:hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-amber-400/50 transition-all duration-200 font-bold uppercase tracking-widest text-[9px] touch-manipulation border-2 border-amber-400/50 dark:border-amber-500/50 hover:border-amber-300 dark:hover:border-amber-400">
+                                    <svg class="w-4 h-4 invoice-group-hover:scale-110 invoice-group-hover:-translate-y-0.5 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                    <span class="invoice-group-hover:tracking-[0.2em] transition-all duration-200">INVOICE</span>
                                 </a>
                             </div>
                         </td>
@@ -262,8 +262,8 @@
             </div>
             
             <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
-                <button type="button" onclick="document.getElementById('addPaymentModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded-2xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all font-black uppercase tracking-widest text-[10px]">Batal</button>
-                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange dark:hover:bg-orange-600 transition-all font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan Kas</button>
+                <button type="button" onclick="document.getElementById('addPaymentModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-600 dark:to-green-600 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-emerald-400/50 dark:border-emerald-500/50 hover:border-emerald-300 dark:hover:border-emerald-400">Simpan Kas</button>
             </div>
         </form>
     </div>

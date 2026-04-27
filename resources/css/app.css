@@ -33,6 +33,9 @@
     --color-cream: #FBF8F3;
     --color-brown-palm: #8B6F47;
     --color-brown: #5D4E45;
+
+    /* Animation Shake buat termination hhahahahhahadHADHAHWDAHDAWHDA */
+    --animate-shake: shake 0.5s ease-in-out infinite;
 }
 
 /* Night Mode Overrides */
@@ -840,3 +843,96 @@ body {
     }
 }
 
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+}
+
+/* Scrollbar lebih tebal dan mudah di-aim */
+.dashboard-scroll::-webkit-scrollbar {
+    height: 10px;
+}
+
+.dashboard-scroll::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.dashboard-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.dashboard-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Dark mode */
+.dark .dashboard-scroll::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.dark .dashboard-scroll::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+.dark .dashboard-scroll::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* Firefox */
+.dashboard-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.dark .dashboard-scroll {
+    scrollbar-color: #475569 #1e293b;
+}
+
+
+
+.dashboard-scroll {
+    cursor: grab;
+    user-select: none;
+}
+
+.dashboard-scroll:active {
+    cursor: grabbing;
+}
+
+
+
+
+
+
+/* Fix autofill - cara paling kuat */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: inherit !important;
+    -webkit-text-fill-color: currentColor !important;
+    transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+    /* Paksa hilangin style bawaan */
+    animation: autofill-fix 1s forwards;
+}
+
+@keyframes autofill-fix {
+    0% { background: inherit; }
+    100% { background: inherit; }
+}
+
+/* Light mode */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px rgb(248 250 252) inset !important;
+}
+
+/* Dark mode */
+.dark input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px rgb(30 41 59) inset !important;
+}

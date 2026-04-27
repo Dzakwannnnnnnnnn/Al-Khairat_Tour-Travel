@@ -3,9 +3,9 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-6 gap-4 pt-6 md:pt-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800 mb-6 gap-4 pt-6 md:pt-6">
         <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 dark:bg-orange/20 text-orange rounded-xl">
+            <div class="p-3 bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-800/40 dark:to-orange-700/40 text-orange-500 dark:text-orange-400 rounded-xl shadow-md shadow-orange-500/10 border border-orange-200 dark:border-orange-800">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
             </div>
             <div>
@@ -13,103 +13,124 @@
                 <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola ulasan dan pengalaman jamaah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addTestimonialModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Tambah Testimoni</span>
+        <button onclick="document.getElementById('addTestimonialModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
+            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Tambah Testimoni</span>
         </button>
     </div>
 
     <!-- Alert -->
     @if(session('success'))
-    <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 flex items-center shadow-sm">
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-        <span class="font-medium">Berhasil!</span>&nbsp;{{ session('success') }}
+    <div class="p-5 bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/10 border-2 border-emerald-200 dark:border-emerald-800 rounded-2xl flex items-center gap-4 shadow-md shadow-emerald-500/10 animate__animated animate__fadeIn">
+        <div class="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-500 text-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/30">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <div class="flex-1">
+            <p class="font-black text-emerald-700 dark:text-emerald-400 uppercase tracking-widest text-[10px]">{{ session('success') }}</p>
+        </div>
+        <button onclick="this.parentElement.style.display='none'" class="text-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300 hover:scale-110 active:scale-95 transition-all duration-200 p-1">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
     </div>
     @endif
 
     <!-- Table Section -->
-    <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] shadow-sm border border-slate-100 dark:border-slate-800">
+    <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800">
         <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
             <table class="w-full" style="min-width: 850px;">
-                <thead class="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
+                <thead class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
                     <tr>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Nama Jamaah</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest w-1/2">Keterangan</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Rating</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Status</th>
-                        <th class="px-6 py-4 text-left text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest sticky right-0 bg-slate-50 dark:bg-slate-900 z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)]">Aksi</th>
+                        <th class="px-6 py-5 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Nama Jamaah</th>
+                        <th class="px-6 py-5 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest w-1/2">Keterangan</th>
+                        <th class="px-6 py-5 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Rating</th>
+                        <th class="px-6 py-5 text-left text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">Status</th>
+                        <th class="px-6 py-5 text-center text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest sticky right-0 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 z-10 border-l-2 border-slate-200 dark:border-slate-700 shadow-[-10px_0_15px_rgba(0,0,0,0.03)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.3)] w-[200px] min-w-[200px]">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
+                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                     @forelse($testimonials as $testimoni)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
+                    <tr class="hover:bg-gradient-to-r hover:from-amber-50/50 hover:to-orange-50/50 dark:hover:from-amber-900/10 dark:hover:to-orange-900/10 transition-all duration-200 row-group">
                         <td class="px-6 py-4 align-top">
-                            <p class="font-black text-slate-800 dark:text-slate-100">{{ $testimoni->name }}</p>
+                            <p class="font-black text-slate-800 dark:text-slate-100 row-group-hover:text-orange-600 dark:row-group-hover:text-orange-400 transition-colors">{{ $testimoni->name }}</p>
                             @if($testimoni->email)
-                            <a href="mailto:{{ $testimoni->email }}" class="text-xs text-slate-400 dark:text-slate-500 hover:text-orange flex items-center mt-1 gap-1">
+                            <a href="mailto:{{ $testimoni->email }}" class="inline-flex items-center text-xs text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 mt-1 gap-1 transition-colors">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                                 {{ $testimoni->email }}
                             </a>
                             @endif
                             @if($testimoni->product)
-                            <span class="inline-block mt-1 px-2 py-1 bg-orange/5 text-orange text-[10px] font-black uppercase tracking-widest rounded-md border border-orange/10 transition-all hover:bg-orange hover:text-white">
+                            <span class="inline-block mt-2 px-2.5 py-1 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-black uppercase tracking-widest rounded-lg border border-amber-200 dark:border-amber-800 shadow-sm hover:bg-gradient-to-r hover:from-amber-500 hover:to-orange-500 hover:text-white dark:hover:from-amber-600 dark:hover:to-orange-600 transition-all duration-200">
                                 {{ $testimoni->product->name }}
                             </span>
                             @endif
                         </td>
                         <td class="px-6 py-4 align-top">
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium line-clamp-3">"{{ $testimoni->message }}"</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-medium line-clamp-3 italic">"{{ $testimoni->message }}"</p>
                             @if($testimoni->video_url)
-                            <a href="{{ $testimoni->video_url }}" target="_blank" class="mt-2 inline-flex items-center text-xs font-medium text-red-600 hover:text-red-800 hover:underline">
+                            <a href="{{ $testimoni->video_url }}" target="_blank" class="mt-2 inline-flex items-center text-xs font-bold text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 hover:underline transition-colors">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path></svg>
                                 Buka Link Video
                             </a>
                             @endif
                         </td>
                         <td class="px-6 py-4 align-top">
-                            <div class="flex text-yellow-400">
+                            <div class="flex gap-0.5">
                                 @for($i=1; $i<=5; $i++)
                                     @if($i <= $testimoni->rating)
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        <svg class="w-4 h-4 text-yellow-400 drop-shadow-[0_0_3px_rgba(250,204,21,0.5)]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     @else
-                                        <svg class="w-4 h-4 text-gray-300 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                                        <svg class="w-4 h-4 text-slate-300 dark:text-slate-600" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     @endif
                                 @endfor
                             </div>
                         </td>
                         <td class="px-6 py-4 align-top">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                                {{ $testimoni->status === 'published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm border-2 {{ $testimoni->status === 'published' ? 'bg-gradient-to-r from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800 shadow-emerald-500/10' : 'bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 text-slate-400 dark:text-slate-500 border-slate-200 dark:border-slate-600' }}">
+                                @if($testimoni->status === 'published')
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 shadow-[0_0_6px_rgba(16,185,129,0.5)] flex-shrink-0"></span>
+                                @endif
                                 {{ $testimoni->status === 'published' ? 'Tampil di Web' : 'Draft' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
-                            <div class="flex flex-wrap gap-2">
+                        <td class="px-4 py-4 sticky right-0 bg-white dark:bg-slate-900 row-group-hover:bg-gradient-to-r row-group-hover:from-amber-50/50 row-group-hover:to-orange-50/50 dark:row-group-hover:from-amber-900/10 dark:row-group-hover:to-orange-900/10 transition-all duration-200 z-10 border-l-2 border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.03)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.3)] w-[200px] min-w-[200px]">
+                            <div class="flex flex-col items-center gap-1.5">
                                 @if($testimoni->email)
                                 <button onclick="openReplyModal({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ addslashes($testimoni->email) }}', '{{ addslashes(Str::limit($testimoni->message, 150)) }}')"
-                                   class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Balas Email</button>
+                                class="reply-group w-full inline-flex items-center justify-center px-3 py-2.5 bg-gradient-to-r from-blue-50 to-sky-50 dark:from-blue-900/30 dark:to-sky-900/30 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-700 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-blue-500/10 dark:shadow-blue-700/20 hover:shadow-md hover:shadow-blue-500/20 dark:hover:shadow-blue-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation">
+                                    <svg class="w-3.5 h-3.5 mr-1 reply-group-hover:scale-110 reply-group-hover:-translate-y-0.5 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    Balas Email
+                                </button>
                                 @else
-                                <span class="inline-flex items-center justify-center px-3 py-1.5 bg-gray-50 text-gray-400 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-gray-100 cursor-not-allowed" title="Email tidak tersedia untuk testimoni ini">Balas Email</span>
+                                <span class="w-full inline-flex items-center justify-center px-3 py-2.5 bg-slate-50 dark:bg-slate-800/50 text-slate-400 dark:text-slate-500 rounded-xl text-[10px] font-bold uppercase tracking-widest border border-slate-200 dark:border-slate-700 cursor-not-allowed" title="Email tidak tersedia untuk testimoni ini">
+                                    <svg class="w-3.5 h-3.5 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                    Balas Email
+                                </span>
                                 @endif
                                 <button onclick="openEditTestimonial({{ $testimoni->id }}, '{{ addslashes($testimoni->name) }}', '{{ $testimoni->email }}', '{{ $testimoni->product_id }}', '{{ addslashes($testimoni->message) }}', '{{ $testimoni->video_url }}', '{{ $testimoni->rating }}', '{{ $testimoni->status }}')"
-                                        class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>
+                                        class="edit-group w-full inline-flex items-center justify-center px-3 py-2.5 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-700 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-amber-500/10 dark:shadow-amber-700/20 hover:shadow-md hover:shadow-amber-500/20 dark:hover:shadow-amber-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation">
+                                    <svg class="w-3.5 h-3.5 mr-1 edit-group-hover:scale-110 edit-group-hover:rotate-12 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                    Edit
+                                </button>
 
-                                <form id="delete-form-{{ $testimoni->id }}" method="POST" action="{{ route('testimonials.destroy', $testimoni) }}" class="inline m-0">
+                                <form id="delete-form-{{ $testimoni->id }}" method="POST" action="{{ route('testimonials.destroy', $testimoni) }}" class="w-full m-0">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" onclick="openDeleteModal({{ $testimoni->id }})" class="inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Hapus</button>
+                                    <button type="button" onclick="openDeleteModal({{ $testimoni->id }})" class="delete-group w-full inline-flex items-center justify-center px-3 py-2.5 bg-gradient-to-r from-red-50 to-rose-50 dark:from-red-900/30 dark:to-rose-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-700 rounded-xl text-[10px] font-bold uppercase tracking-widest shadow-sm shadow-red-500/10 dark:shadow-red-700/20 hover:shadow-md hover:shadow-red-500/20 dark:hover:shadow-red-600/30 hover:scale-105 active:scale-95 transition-all duration-200 touch-manipulation">
+                                        <svg class="w-3.5 h-3.5 mr-1 delete-group-hover:scale-110 delete-group-hover:rotate-12 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                        Hapus
+                                    </button>
                                 </form>
                             </div>
                         </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-28 text-center bg-slate-50/20 dark:bg-slate-900/10">
-                            <div class="flex flex-col items-center justify-center grayscale opacity-60">
-                                <div class="w-24 h-24 bg-white dark:bg-slate-800 rounded-[3rem] shadow-xl flex items-center justify-center text-slate-200 dark:text-slate-700 mb-8 overflow-hidden border border-slate-100 dark:border-slate-700">
+                        <td colspan="5" class="px-6 py-28 text-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <div class="w-24 h-24 bg-gradient-to-br from-amber-50 to-orange-100 dark:from-amber-900/20 dark:to-orange-900/20 rounded-[3rem] shadow-xl flex items-center justify-center text-amber-300 dark:text-amber-600 mb-8 border-2 border-dashed border-amber-200 dark:border-amber-800">
                                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                                 </div>
-                                <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 uppercase tracking-widest">Tiada Testimoni</h3>
+                                <h3 class="text-xl font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Tiada Testimoni</h3>
                                 <p class="text-sm text-slate-400 dark:text-slate-500 mt-2 max-w-[280px] mx-auto font-medium leading-relaxed">Belum ada ulasan jamaah yang masuk ke sistem.</p>
                             </div>
                         </td>
@@ -185,8 +206,8 @@
             </div>
             
             <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
-                <button type="button" onclick="document.getElementById('addTestimonialModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan Testimoni</button>
+            <button type="button" onclick="document.getElementById('addTestimonialModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+            <button type="submit" class="flex-1 px-8 py-4 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">Simpan Testimoni</button>
             </div>
         </form>
     </div>
@@ -252,8 +273,8 @@
             </div>
             
             <div class="flex gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
-                <button type="button" onclick="document.getElementById('editTestimonialModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                <button type="submit" class="flex-1 px-8 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editTestimonialModal').classList.add('hidden')" class="flex-1 px-8 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-1 px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-500 dark:from-violet-600 dark:to-purple-600 text-white rounded-2xl shadow-md shadow-violet-500/20 dark:shadow-violet-700/30 hover:shadow-lg hover:shadow-violet-500/40 dark:hover:shadow-violet-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-violet-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-violet-400/50 dark:border-violet-500/50 hover:border-violet-300 dark:hover:border-violet-400">Simpan Perubahan</button>
             </div>
         </form>
     </div>
@@ -309,10 +330,10 @@
             </div>
             
             <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
-                <button type="button" onclick="document.getElementById('replyEmailModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                <button type="submit" id="submitReplyBtn" class="flex-1 px-4 py-4 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-blue-600/20 flex items-center justify-center gap-2">
-                    <svg id="replySubmitIcon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                    <span id="replySubmitText">Kirim Balasan</span>
+                <button type="button" onclick="document.getElementById('replyEmailModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" id="submitReplyBtn" class="group flex-1 px-4 py-4 bg-gradient-to-r from-blue-500 to-sky-500 dark:from-blue-600 dark:to-sky-600 text-white rounded-2xl shadow-md shadow-blue-500/20 dark:shadow-blue-700/30 hover:shadow-lg hover:shadow-blue-500/40 dark:hover:shadow-blue-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-blue-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-blue-400/50 dark:border-blue-500/50 hover:border-blue-300 dark:hover:border-blue-400 flex items-center justify-center gap-2">
+                    <svg id="replySubmitIcon" class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    <span id="replySubmitText" class="group-hover:tracking-[0.2em] transition-all duration-200">Kirim Balasan</span>
                 </button>
             </div>
         </form>
@@ -330,8 +351,8 @@
             <p class="text-slate-500 dark:text-slate-400 text-sm mb-8 px-2 font-medium leading-relaxed">Tindakan ini permanen. Data ulasan akan dihapus dari sistem.</p>
             
             <div class="flex flex-col gap-3">
-                <button onclick="executeDelete()" class="w-full py-4 bg-red-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-red-700 transition shadow-xl shadow-red-600/20 active:scale-95">Ya, Hapus Sekarang</button>
-                <button onclick="closeDeleteModal()" class="w-full py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-slate-200 transition active:scale-95">Batalkan</button>
+                <button onclick="executeDelete()" class="group w-full py-4 bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-600 dark:to-rose-600 text-white rounded-2xl shadow-md shadow-red-500/20 dark:shadow-red-700/30 hover:shadow-lg hover:shadow-red-500/40 dark:hover:shadow-red-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-red-400/50 dark:border-red-500/50 hover:border-red-300 dark:hover:border-red-400 hover:animate-shake">Ya, Hapus Sekarang</button>
+                <button onclick="closeDeleteModal()" class="w-full py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batalkan</button>
             </div>
         </div>
     </div>

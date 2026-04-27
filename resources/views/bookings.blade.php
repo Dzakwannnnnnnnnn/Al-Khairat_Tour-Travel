@@ -13,9 +13,9 @@
                 <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola pendaftaran jamaah ke paket umrah.</p>
             </div>
         </div>
-        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-gradient-sunset text-white px-6 py-3.5 rounded-xl hover:opacity-90 transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Booking Baru</span>
+        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
+            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Booking Baru</span>
         </button>
     </div>
 
@@ -124,10 +124,10 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                     @forelse($bookings as $booking)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
+                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all row-group">
                         <!-- Kode Booking -->
                         <td class="px-8 py-10 vertical-top">
-                            <span class="font-mono text-base font-black text-orange-600 block transition-colors group-hover:text-orange-700">{{ $booking->booking_code }}</span>
+                            <span class="font-mono text-base font-black text-orange-600 block transition-colors row-group-hover:text-orange-700">{{ $booking->booking_code }}</span>
                             @if($booking->group_code)
                             <div class="mt-2 flex items-center gap-2">
                                 <span class="px-2 py-1 bg-slate-100 dark:bg-slate-900 text-[10px] font-black text-slate-500 dark:text-slate-400 rounded-md uppercase tracking-widest border border-slate-200 dark:border-slate-800">Group</span>
@@ -141,7 +141,7 @@
                             <p class="font-black text-slate-800 dark:text-slate-100 text-base leading-none tracking-tight truncate shrink-0">{{ $booking->full_name ?? $booking->user->name ?? 'User Terhapus' }}</p>
                             <p class="text-[10px] font-bold text-slate-400 dark:text-slate-500 mt-2 uppercase tracking-widest truncate max-w-[150px]">{{ $booking->orderer_email ?? $booking->user->email ?? '' }}</p>
                             @if($booking->orderer_phone)
-                            <div class="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500 font-bold group-hover:text-slate-800 transition-colors">
+                            <div class="flex items-center gap-1.5 mt-1.5 text-[10px] text-slate-500 font-bold row-group-hover:text-slate-800 transition-colors">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                 {{ $booking->orderer_phone }}
                             </div>
@@ -174,7 +174,7 @@
                                 {{ $conf['label'] }}
                             </span>
                             @if($booking->notes)
-                            <div class="mt-4 px-4 py-2 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700 max-w-[150px] mx-auto group-hover:bg-white dark:group-hover:bg-slate-800 group-hover:border-slate-200 dark:group-hover:border-slate-600 transition-all">
+                            <div class="mt-4 px-4 py-2 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-100 dark:border-slate-700 max-w-[150px] mx-auto row-group-hover:bg-white dark:row-group-hover:bg-slate-800 row-group-hover:border-slate-200 dark:row-group-hover:border-slate-600 transition-all">
                                 <p class="text-[9px] text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest mb-1">Catatan:</p>
                                 <p class="text-[10px] text-slate-600 dark:text-slate-400 font-medium leading-relaxed truncate">{{ $booking->notes }}</p>
                             </div>
@@ -191,26 +191,26 @@
                         </td>
 
                         <!-- Aksi -->
-                        <td class="px-6 py-6 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-50 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] border-b border-slate-100 dark:border-slate-800">
+                        <td class="px-6 py-6 sticky right-0 bg-white dark:bg-slate-900 row-group-hover:bg-slate-50 dark:row-group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] border-b border-slate-100 dark:border-slate-800">
                             <div class="flex items-center gap-2">
                                 <!-- Ubah Button -->
-                                <button type="button" class="btn-edit-booking p-4 bg-orange text-white rounded-xl shadow-lg shadow-orange/20 hover:scale-105 transition-all" title="UBAH DATA"
+                                <button type="button" class="edit-group btn-edit-booking p-4 bg-gradient-to-r from-amber-400 to-orange-500 dark:from-amber-500 dark:to-orange-600 text-white rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-110 active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400" title="UBAH DATA"
                                         data-id="{{ $booking->id }}" data-name="{{ $booking->full_name ?? $booking->user->name }}" data-email="{{ $booking->orderer_email ?? $booking->user->email ?? '' }}" data-phone="{{ $booking->orderer_phone ?? $booking->user->phone ?? '' }}" data-product="{{ $booking->product_id }}" data-status="{{ $booking->status }}" data-notes="{{ $booking->notes }}" data-payment="{{ $booking->payment->payment_method ?? '' }}">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                    <svg class="w-4 h-4 edit-group-hover:scale-110 edit-group-hover:rotate-12 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                                 </button>
                                 
                                 <!-- Invoice Button -->
                                 <a href="{{ route('booking.invoice.pdf', $booking->group_code ?? $booking->booking_code) }}" target="_blank" 
-                                    class="p-4 bg-white dark:bg-slate-900 text-orange border-2 border-orange/10 dark:border-orange/20 rounded-xl hover:bg-orange/5 dark:hover:bg-orange/10 transition-all shadow-sm" title="INVOICE">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                    class="invoice-group p-4 bg-white dark:bg-slate-800 text-amber-500 dark:text-amber-400 border-2 border-amber-300 dark:border-amber-700 rounded-xl shadow-sm shadow-amber-500/10 dark:shadow-amber-700/20 hover:bg-amber-50 dark:hover:bg-amber-900/30 hover:shadow-md hover:shadow-amber-500/20 dark:hover:shadow-amber-700/30 hover:scale-110 active:scale-95 transition-all duration-200 touch-manipulation hover:border-amber-400 dark:hover:border-amber-500" title="INVOICE">
+                                    <svg class="w-4 h-4 invoice-group-hover:scale-110 invoice-group-hover:-translate-y-0.5 transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                 </a>
 
                                 <!-- Delete Button -->
                                 <form method="POST" action="{{ route('bookings.destroy', $booking) }}" class="m-0" onsubmit="return confirm('Apakah Anda yakin ingin MENGHAPUS pendaftaran ini secara permanen?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="p-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-red-500/20">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    <button type="submit" class="delete-group p-4 bg-gradient-to-r from-red-500 to-rose-500 dark:from-red-600 dark:to-rose-600 text-white rounded-xl shadow-md shadow-red-500/20 dark:shadow-red-700/30 hover:shadow-lg hover:shadow-red-500/40 dark:hover:shadow-red-600/50 hover:scale-110 active:scale-95 active:shadow-sm active:shadow-red-400/50 transition-all duration-200 touch-manipulation border-2 border-red-400/50 dark:border-red-500/50 hover:border-red-300 dark:hover:border-red-400">
+                                        <svg class="w-4 h-4 delete-group-hover:scale-110 delete-group-hover:rotate-12 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                                     </button>
                                 </form>
                             </div>
@@ -299,8 +299,8 @@
             </div>
             
             <div class="flex gap-4 pt-6">
-                <button type="button" onclick="document.getElementById('addBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-slate-100 dark:bg-slate-900 text-slate-500 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all hover:bg-slate-200 dark:hover:bg-slate-700">Batal</button>
-                <button type="submit" class="flex-[2] py-4 bg-orange text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-orange/20 transition-all hover:scale-[1.02] active:scale-95">Buat Pemesanan</button>
+                <button type="button" onclick="document.getElementById('addBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-[2] py-4 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">Buat Pemesanan</button>
             </div>
         </form>
     </div>
@@ -373,8 +373,8 @@
             </div>
             
             <div class="flex gap-4 pt-6">
-                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-slate-100 dark:bg-slate-900 text-slate-500 rounded-2xl font-black uppercase tracking-widest text-[10px] transition-all hover:bg-slate-200 dark:hover:bg-slate-700">Batal</button>
-                <button type="submit" class="flex-[2] py-4 bg-orange text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-orange/20 transition-all hover:scale-[1.02] active:scale-95">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-[2] py-4 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">Simpan Perubahan</button>
             </div>
         </form>
     </div>

@@ -18,14 +18,15 @@
                 <p class="text-slate-600 mt-2">{{ $product->name }}</p>
             </div>
             <div class="flex gap-3">
-                <button onclick="window.print()" class="flex items-center gap-2 px-6 py-3 bg-charcoal text-white rounded-xl hover:bg-slate-800 transition font-semibold shadow-lg">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onclick="window.print()" class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-semibold touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
+                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                     </svg>
                     Cetak
                 </button>
-                <a href="javascript:history.back()" class="px-6 py-3 bg-slate-100 text-charcoal rounded-xl hover:bg-slate-200 transition font-semibold">
-                    ← Kembali
+                <a href="javascript:history.back()" class="group flex items-center gap-2 px-6 py-3 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-xl shadow-sm border-2 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-semibold touch-manipulation">
+                    <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Kembali
                 </a>
             </div>
         </div>

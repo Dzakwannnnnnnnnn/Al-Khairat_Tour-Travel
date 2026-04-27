@@ -6,14 +6,14 @@
 @section('content')
     <div class="space-y-12">
         <!-- Welcome Hero Section -->
-        <div class="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] p-5 md:p-12 gradient-sunset border border-orange/20 group shadow-2xl shadow-orange/20">
+        <div class="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 gradient-sunset border border-orange/20 group shadow-2xl shadow-orange/20">
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/10 blur-[100px] rounded-full group-hover:bg-white/20 transition-all duration-700"></div>
-            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6">
                 <div>
                     <h1 class="text-xl md:text-5xl font-serif font-bold text-white leading-tight">
                         Selamat Datang, <br class="md:hidden"> <span class="text-white decoration-gold underline underline-offset-4 md:underline-offset-8">{{ explode(' ', auth()->user()->name)[0] }}</span>!
                     </h1>
-                    <p class="text-white/80 mt-2 md:mt-6 text-[10px] md:text-lg max-w-xl font-medium">
+                    <p class="text-white/80 mt-1 md:mt-3 text-[10px] md:text-lg max-w-xl font-medium">
                         Akses kendali operasional Al-Khairat. <br class="hidden md:block"> Semuanya terpantau dalam satu dashboard premium.
                     </p>
                 </div>
@@ -163,37 +163,50 @@
                         <h2 class="text-lg md:text-xl font-bold text-slate-800 dark:text-slate-100">Layanan Umroh Unggulan</h2>
                         <p class="text-[10px] md:text-xs text-slate-400 dark:text-slate-500 mt-1">Status ketersediaan paket dan harga terbaru.</p>
                     </div>
-                    <a href="{{ route('products.index') }}" class="btn-dashboard bg-slate-50 hover:bg-slate-100 text-slate-600 text-[10px] md:text-xs !px-4 border border-slate-200 w-full sm:w-auto text-center">Katalog Paket</a>
+                    <a href="{{ route('products.index') }}" class="group bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/10 hover:from-amber-100 hover:to-orange-100 dark:hover:from-amber-800/30 dark:hover:to-orange-800/30 text-amber-700 dark:text-amber-400 hover:text-orange-700 dark:hover:text-orange-400 text-[10px] md:text-xs px-4 py-2.5 rounded-xl border border-amber-300 dark:border-amber-700 hover:border-amber-400 dark:hover:border-amber-500 shadow-sm shadow-amber-500/10 dark:shadow-amber-700/20 hover:shadow-md hover:shadow-amber-500/20 dark:hover:shadow-amber-700/30 hover:scale-[1.02] active:scale-95 transition-all duration-200 font-bold uppercase tracking-widest w-full sm:w-auto text-center flex items-center justify-center gap-1.5 touch-manipulation">
+                        <span>Katalog Paket</span>
+                        <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                    </a>
                 </div>
                 
-                <div class="space-y-4">
-                    @forelse($recentProducts as $product)
-                    <div class="group flex items-center justify-between p-5 rounded-3xl bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:border-orange/30 transition-all duration-500">
-                        <div class="flex items-center gap-5">
-                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange to-gold flex items-center justify-center border border-white/20 dark:border-slate-700 group-hover:scale-105 transition-transform shadow-lg shadow-orange/10">
-                                <span class="text-xl">🕋</span>
-                            </div>
-                            <div>
-                                <p class="font-black text-slate-700 dark:text-slate-200 text-sm group-hover:text-orange transition-colors uppercase tracking-tight">{{ $product->name }}</p>
-                                <div class="flex items-center gap-3 mt-1.5">
-                                    <span class="text-[10px] text-orange font-bold uppercase">{{ $product->category }}</span>
-                                    <span class="w-1 h-1 rounded-full bg-slate-200"></span>
-                                    <span class="text-[10px] text-slate-400">{{ $product->duration }}</span>
-                                </div>
-                            </div>
+            <div class="space-y-4">
+                @forelse($recentProducts as $product)
+                <div class="group flex items-center justify-between p-5 rounded-3xl bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-lg hover:shadow-orange-500/5 dark:hover:shadow-orange-800/10 transition-all duration-500">
+                    <div class="flex items-center gap-5">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-800/40 dark:to-orange-700/40 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/10 dark:group-hover:shadow-orange-700/20 transition-all duration-300 overflow-hidden">
+                            @if($product->image)
+                                <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                            @else
+                                <span class="text-2xl">🕋</span>
+                            @endif
                         </div>
-                        <div class="text-right">
-                            <p class="font-black text-slate-800 dark:text-slate-100 text-base">Rp {{ number_format($product->price / 1000000, 1, ',', '.') }}<span class="text-xs text-slate-400 ml-0.5">jt</span></p>
-                            <span class="inline-flex items-center gap-1.5 mt-2 {{ $product->status === 'active' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400' }} text-[9px] font-bold uppercase tracking-widest bg-white dark:bg-slate-900 px-2 py-0.5 rounded-full border border-slate-100 dark:border-slate-700">
-                                <span class="w-1 h-1 rounded-full {{ $product->status === 'active' ? 'bg-emerald-500 animate-pulse' : 'bg-red-500' }}"></span>
-                                {{ $product->status === 'active' ? 'Listed' : 'Private' }}
-                            </span>
+                        <div>
+                            <p class="font-black text-slate-700 dark:text-slate-200 text-sm group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors uppercase tracking-tight">{{ $product->name }}</p>
+                            <div class="flex items-center gap-3 mt-1.5">
+                                <span class="text-[10px] text-orange-600 dark:text-orange-400 font-bold uppercase">{{ $product->category }}</span>
+                                <span class="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></span>
+                                <span class="text-[10px] text-slate-400 dark:text-slate-500">{{ $product->duration }}</span>
+                            </div>
                         </div>
                     </div>
-                    @empty
-                    <p class="text-slate-400 text-sm text-center py-10 italic">Layanan tidak ditemukan.</p>
-                    @endforelse
+                    <div class="text-right flex-shrink-0">
+                        <p class="font-black text-slate-800 dark:text-slate-100 text-base">Rp {{ number_format($product->price / 1000000, 1, ',', '.') }}<span class="text-xs text-slate-400 ml-0.5">jt</span></p>
+                        <span class="inline-flex items-center gap-1.5 mt-2 {{ $product->status === 'active' ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400' }} text-[9px] font-bold uppercase tracking-widest bg-white dark:bg-slate-900 px-2.5 py-1 rounded-full border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <span class="w-1.5 h-1.5 rounded-full {{ $product->status === 'active' ? 'bg-emerald-500 animate-pulse shadow-[0_0_6px_rgba(16,185,129,0.5)]' : 'bg-red-500' }}"></span>
+                            {{ $product->status === 'active' ? 'Listed' : 'Private' }}
+                        </span>
+                    </div>
                 </div>
+                @empty
+                <div class="text-center py-16">
+                    <div class="w-20 h-20 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-700 rounded-[2rem] flex items-center justify-center mx-auto mb-5 border-2 border-dashed border-slate-200 dark:border-slate-600">
+                        <span class="text-3xl">🕋</span>
+                    </div>
+                    <p class="text-slate-400 dark:text-slate-500 text-sm font-bold uppercase tracking-widest">Layanan tidak ditemukan</p>
+                    <p class="text-slate-300 dark:text-slate-600 text-xs mt-1">Belum ada paket unggulan yang tersedia.</p>
+                </div>
+                @endforelse
+            </div>
             </div>
         </div>
     </div>

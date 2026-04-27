@@ -18,6 +18,7 @@
     </script>
 </head>
 <body class="bg-bg font-sans text-text transition-colors duration-500">
+    @include('components.alert')
     <!-- Elegant Cinematic Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 bg-bg flex flex-col items-center justify-center z-[9999] opacity-100">
         <div class="loader-content flex flex-col items-center">
@@ -245,9 +246,14 @@
                         </div>
                         @endif
 
-                        <div class="h-32 md:h-40 relative flex-shrink-0">
+                        <div class="h-60 md:h-[32rem] relative flex-shrink-0 group overflow-hidden rounded-t-xl">
                             @if($product->image)
-                                <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-cover filter brightness-90">
+                                <img src="{{ asset('storage/'.$product->image) }}" class="w-full h-full object-cover filter brightness-90 transition duration-500 group-hover:scale-[1.02]">
+                                <button type="button" onclick="openImageZoom(this.dataset.image, this.dataset.title)" data-image="{{ asset('storage/'.$product->image) }}" data-title="{{ $product->name }}" class="absolute inset-0 z-20 bg-transparent cursor-zoom-in" aria-label="Perbesar gambar paket"></button>
+                                <div class="absolute bottom-4 right-4 z-30 bg-black/50 text-white text-[10px] uppercase tracking-[0.2em] px-3 py-1.5 rounded-full flex items-center gap-2 shadow-lg">
+                                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                                    <span>Perbesar</span>
+                                </div>
                             @else
                                 <div class="w-full h-full bg-gradient-sunset"></div>
                             @endif
@@ -283,8 +289,8 @@
                                 <button onclick="openProductDetail({{ $product->id }})" class="btn-primary flex-1 text-xs py-3 rounded-xl shadow-none hover:shadow-lg">
                                     Lihat Detail
                                 </button>
-                                <a href="https://wa.me/{{ $product->guide_phone ?? $whatsapp }}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20konsultasi%20mengenai%20paket%20{{ urlencode($product->name) }}." target="_blank" class="flex-1 text-center {{ $product->status == 'featured' ? 'bg-gradient-sunset shadow-lg shadow-orange/20' : 'bg-charcoal' }} text-white font-bold text-xs py-3 rounded-xl hover:scale-105 transition flex items-center justify-center gap-1">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                                <a href="https://wa.me/{{ $product->guide_phone ?? $whatsapp }}?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20konsultasi%20mengenai%20paket%20{{ urlencode($product->name) }}." target="_blank" class="flex-1 text-center {{ $product->status == 'featured' ? 'bg-emerald-600 shadow-md shadow-emerald-600/30' : 'bg-emerald-700 shadow-md shadow-emerald-700/30' }} text-white font-bold text-xs py-3 rounded-xl hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50 active:scale-95 active:shadow-md active:shadow-emerald-400/60 transition-all duration-200 flex items-center justify-center gap-1 touch-manipulation">
+                                    <svg class="w-4 h-4 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
                                     Konsultasi
                                 </a>
                             </div>
@@ -319,6 +325,30 @@
             </div>
         </div>
     </section>
+
+    <!-- Image Zoom Modal -->
+    <div id="image-zoom-modal" class="fixed inset-0 z-[4000] hidden items-center justify-center bg-black/90 backdrop-blur-xl p-4 overflow-hidden">
+        <div class="relative w-full max-w-5xl h-[80vh] md:h-[90vh] rounded-[2rem] overflow-hidden bg-black shadow-2xl">
+            <button onclick="closeImageZoom()" class="absolute top-4 right-4 z-50 bg-red-600 text-white rounded-full p-3 transition shadow-[0_0_20px_rgba(239,68,68,0.35)] ring-2 ring-red-400/50 hover:bg-red-500">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="flex flex-col h-full" onclick="event.stopPropagation()">
+                <div class="relative flex-1 min-h-[60vh] overflow-hidden bg-black">
+                <div id="zoom-image-frame" class="relative w-full h-full touch-none" style="touch-action: none;">
+                    <img id="zoom-image" src="" alt="" draggable="false" ondragstart="return false;" class="absolute inset-0 w-full h-full object-contain" style="transform: translate3d(0px, 0px, 0px) scale(1); will-change: transform; -webkit-user-drag: none; user-drag: none; touch-action: none;">
+                </div>
+            </div>
+            <div class="border-t border-white/10 bg-black/80 p-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="text-white text-sm font-medium">Lihat lebih jelas, geser zoom untuk memperbesar.</div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="setImageZoom(0.1)" class="bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition">+</button>
+                        <button type="button" onclick="setImageZoom(-0.1)" class="bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition">-</button>
+                        <div class="text-white text-sm">Zoom: <span id="zoom-level-text">100%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Divider with Palm -->
     <div class="divider-palm"></div>
@@ -413,12 +443,6 @@
                     Ribuan jemaat telah merasakan kehangatan dalam perjalanan spiritual mereka
                 </p>
             </div>
-
-            @if(session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-8 max-w-3xl mx-auto text-center" role="alert">
-                <span class="block sm:inline font-medium">✨ {{ session('success') }}</span>
-            </div>
-            @endif
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
                 @forelse($testimonials as $index => $t)
@@ -655,8 +679,8 @@
                         <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
                         <span class="text-sm md:text-base">Daftar Sekarang</span>
                     </button>
-                    <a id="detail-wa-link" href="" target="_blank" class="flex-1 text-center bg-charcoal text-white font-bold py-3.5 md:py-4 rounded-2xl shadow-lg hover:bg-black hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 00(5.912) 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
+                    <a id="detail-wa-link" href="https://wa.me/6281253088788?text=Halo%20Admin%20Al-Khairat,%20saya%20ingin%20bertanya%20lebih%20lanjut%20tentang%20paket%20Paket%20Standar%20Madinah-Makkah." target="_blank" class="flex-1 text-center bg-emerald-600 text-white font-bold py-3.5 md:py-4 rounded-2xl shadow-lg shadow-emerald-500/20 hover:bg-emerald-500 hover:scale-[1.02] hover:shadow-emerald-400/30 hover:shadow-xl active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 touch-manipulation">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 pointer-events-none" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.029c0 2.119.554 4.188 1.61 6.01L0 24l6.135-1.61a11.75 11.75 0 005.912 1.593h.005c6.637 0 12.032-5.393 12.035-12.031a11.77 11.77 0 00-3.538-8.455z"/></svg>
                         <span class="text-sm md:text-base">Tanya Jadwal</span>
                     </a>
                 </div>
@@ -996,6 +1020,129 @@
             document.body.style.overflow = '';
         }
 
+        // --- Image Zoom Modal Logic ---
+        let currentZoomLevel = 1;
+        let currentPanX = 0;
+        let currentPanY = 0;
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let panOriginX = 0;
+        let panOriginY = 0;
+        const zoomStep = 0.1;
+        const zoomMax = 3;
+        const zoomMin = 1;
+
+        function updateZoomTransform() {
+            const zoomImage = document.getElementById('zoom-image');
+            zoomImage.style.transform = `translate3d(${currentPanX}px, ${currentPanY}px, 0px) scale(${currentZoomLevel})`;
+        }
+
+        function resetZoomState() {
+            currentZoomLevel = 1;
+            currentPanX = 0;
+            currentPanY = 0;
+            panStartX = 0;
+            panStartY = 0;
+            panOriginX = 0;
+            panOriginY = 0;
+            updateZoomTransform();
+        }
+
+        function openImageZoom(imageSrc, imageTitle) {
+            const modal = document.getElementById('image-zoom-modal');
+            const zoomImage = document.getElementById('zoom-image');
+            const zoomText = document.getElementById('zoom-level-text');
+            const zoomFrame = document.getElementById('zoom-image-frame');
+            resetZoomState();
+
+            zoomImage.src = imageSrc || 'https://via.placeholder.com/1200x800?text=Gambar+Tidak+Tersedia';
+            zoomImage.alt = imageTitle || 'Gambar paket umroh';
+            zoomImage.style.transition = 'transform 0.2s ease';
+            zoomText.textContent = '100%';
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+
+            // enable panning only when image is zoomed
+            zoomFrame.style.cursor = 'grab';
+
+            // Add wheel event listener for scroll zoom
+            zoomFrame.addEventListener('wheel', handleZoomWheel);
+        }
+
+        function closeImageZoom() {
+            const modal = document.getElementById('image-zoom-modal');
+            const zoomFrame = document.getElementById('zoom-image-frame');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+
+            // Remove wheel event listener
+            zoomFrame.removeEventListener('wheel', handleZoomWheel);
+        }
+
+        function setImageZoom(delta) {
+            const zoomText = document.getElementById('zoom-level-text');
+            currentZoomLevel = Math.min(zoomMax, Math.max(zoomMin, currentZoomLevel + delta));
+            if (currentZoomLevel === 1) {
+                currentPanX = 0;
+                currentPanY = 0;
+            }
+            updateZoomTransform();
+            zoomText.textContent = `${Math.round(currentZoomLevel * 100)}%`;
+        }
+
+        function handleZoomWheel(event) {
+            event.preventDefault();
+            const delta = event.deltaY > 0 ? -zoomStep : zoomStep;
+            setImageZoom(delta);
+        }
+
+        function startImagePan(event) {
+            event.preventDefault();
+            if (currentZoomLevel <= 1) return;
+            const frame = document.getElementById('zoom-image-frame');
+            const zoomImage = document.getElementById('zoom-image');
+            isPanning = true;
+            panStartX = event.clientX;
+            panStartY = event.clientY;
+            panOriginX = currentPanX;
+            panOriginY = currentPanY;
+            frame.setPointerCapture(event.pointerId);
+            frame.style.cursor = 'grabbing';
+            zoomImage.style.transition = 'none';
+            document.addEventListener('pointermove', moveImagePan);
+            document.addEventListener('pointerup', endImagePan);
+            document.addEventListener('pointercancel', endImagePan);
+        }
+
+        function moveImagePan(event) {
+            if (!isPanning) return;
+            const deltaX = event.clientX - panStartX;
+            const deltaY = event.clientY - panStartY;
+            currentPanX = panOriginX + deltaX;
+            currentPanY = panOriginY + deltaY;
+            updateZoomTransform();
+            event.preventDefault();
+        }
+
+        function endImagePan(event) {
+            if (!isPanning) return;
+            const frame = document.getElementById('zoom-image-frame');
+            const zoomImage = document.getElementById('zoom-image');
+            isPanning = false;
+            frame.releasePointerCapture(event.pointerId);
+            frame.style.cursor = 'grab';
+            zoomImage.style.transition = 'transform 0.2s ease';
+            document.removeEventListener('pointermove', moveImagePan);
+            document.removeEventListener('pointerup', endImagePan);
+            document.removeEventListener('pointercancel', endImagePan);
+        }
+
         // --- Booking Modal Logic ---
         function openBookingModal() {
             const data = document.querySelector('[data-active-detail="true"]');
@@ -1016,18 +1163,29 @@
             if (e.key === 'Escape') {
                 closeProductDetail();
                 closeBookingModal();
+                closeImageZoom();
                 closeVoiceSearch();
                 // Close search overlay if not visible? No, search has its own logic.
             }
         });
 
-        // Close on Backdrop Click
+        // Close on Backdrop Click for non-zoom modals only
         window.addEventListener('click', (e) => {
             const detailModal = document.getElementById('product-detail-modal');
             const bookingModal = document.getElementById('booking-modal');
             if (e.target === detailModal) closeProductDetail();
             if (e.target === bookingModal) closeBookingModal();
         });
+
+        // Image pan handlers for zoom modal
+        const zoomFrame = document.getElementById('zoom-image-frame');
+        if (zoomFrame) {
+            zoomFrame.addEventListener('pointerdown', startImagePan);
+            zoomFrame.addEventListener('pointermove', moveImagePan);
+            zoomFrame.addEventListener('pointerup', endImagePan);
+            zoomFrame.addEventListener('pointerleave', endImagePan);
+            zoomFrame.addEventListener('pointercancel', endImagePan);
+        }
 
         // Update active marker for logic
         function setActivePackageMarker(id) {

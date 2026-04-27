@@ -1,16 +1,56 @@
 <!-- Success Alert -->
 @if ($message = Session::get('success'))
-    <div class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center space-x-3">
-        <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-        </svg>
-        <span class="text-green-800">{{ $message }}</span>
-        <button onclick="this.parentElement.style.display='none'" class="text-green-600 hover:text-green-800">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+    <div id="floatingAlert" class="fixed top-6 right-6 z-50 w-full max-w-sm bg-green-50 border border-green-200 rounded-2xl shadow-xl shadow-green-500/10 overflow-hidden transform translate-x-full opacity-0 transition-all duration-500 ease-out">
+        <div class="p-4 flex items-center space-x-3">
+            <svg class="w-5 h-5 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
             </svg>
-        </button>
+            <span class="text-green-800 flex-1 text-sm leading-snug">{{ $message }}</span>
+            <button id="floatingAlertClose" class="text-green-600 hover:text-green-800 focus:outline-none">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="h-1 bg-green-100 relative overflow-hidden">
+            <div id="floatingAlertProgress" class="h-full bg-green-500 rounded-full transition-all duration-300 ease-linear" style="width: 100%;"></div>
+        </div>
     </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            const alertEl = document.getElementById('floatingAlert');
+            const progressEl = document.getElementById('floatingAlertProgress');
+            const closeBtn = document.getElementById('floatingAlertClose');
+            if (!alertEl || !progressEl) return;
+
+            // slide in
+            requestAnimationFrame(() => {
+                alertEl.classList.remove('translate-x-full', 'opacity-0');
+            });
+
+            let remaining = 3000;
+            const step = 50;
+            const totalSteps = remaining / step;
+            let currentStep = 0;
+            const intervalId = setInterval(() => {
+                currentStep += 1;
+                const percent = Math.max(0, 100 - (currentStep / totalSteps) * 100);
+                progressEl.style.width = percent + '%';
+                if (currentStep >= totalSteps) {
+                    clearInterval(intervalId);
+                }
+            }, step);
+
+            const hideAlert = () => {
+                clearInterval(intervalId);
+                alertEl.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => alertEl.remove(), 500);
+            };
+
+            closeBtn?.addEventListener('click', hideAlert);
+            setTimeout(hideAlert, remaining);
+        });
+    </script>
 @endif
 
 <!-- Error Alert -->

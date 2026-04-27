@@ -16,8 +16,8 @@
                     <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua user sistem</p>
                 </div>
             </div>
-            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform" fill="currentColor" viewBox="0 0 20 20">
+            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-emerald-500 dark:bg-emerald-700 text-white px-6 py-3 rounded-xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:bg-emerald-400 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-400/40 dark:hover:shadow-emerald-800/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-300/50 dark:active:shadow-emerald-700/60 transition-all duration-200 font-bold uppercase tracking-widest text-[10px] touch-manipulation group">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                 </svg>
                 <span class="font-bold uppercase tracking-widest text-[10px] md:text-xs">Tambah User</span>
@@ -66,15 +66,14 @@
                 </div>
                 <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                     <button onclick="openEditUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ $user->email }}', '{{ $user->role }}')"
-                        class="inline-flex flex-1 items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit Profile</button>
-                    @if($user->id !== auth()->id())
+                        class="inline-flex flex-1 items-center justify-center px-3 py-1.5 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm hover:bg-amber-100 dark:hover:bg-amber-900/50 hover:shadow-md hover:shadow-amber-500/10 dark:hover:shadow-amber-900/30 hover:scale-[1.02] active:scale-95 transition-all duration-200 touch-manipulation">Edit Profile</button>                    @if($user->id !== auth()->id())
                     <form method="POST" action="{{ route('users.destroy', $user) }}" class="flex-1 m-0" onsubmit="return confirm('Yakin hapus user ini?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Terminate</button>
+                        <button type="submit" class="w-full inline-flex items-center justify-center px-3 py-1.5 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-lg text-[10px] font-bold uppercase tracking-widest shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/40 hover:animate-shake active:scale-95 active:bg-red-200 dark:active:bg-red-800 active:shadow-red-400/30 transition-all duration-200 touch-manipulation">Terminate</button>
                     </form>
                     @else
-                    <span class="flex-1 inline-flex items-center justify-center px-3 py-1.5 bg-slate-50 text-slate-400 rounded-lg text-[10px] uppercase tracking-widest font-bold leading-tight">(Current Admin)</span>
+                    <span class="flex-1 inline-flex items-center justify-center px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 rounded-lg text-[10px] uppercase tracking-widest font-bold leading-tight">(Current Admin)</span>
                     @endif
                 </div>
 
@@ -123,8 +122,8 @@
                     </select>
                 </div>
                 <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
-                    <button type="button" onclick="document.getElementById('addUserModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-2xl hover:bg-slate-200 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-xl shadow-orange/20">Simpan</button>
+                    <button type="button" onclick="document.getElementById('addUserModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                    <button type="submit" class="flex-1 px-4 py-4 bg-emerald-500 dark:bg-emerald-700 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:bg-emerald-400 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-400/40 dark:hover:shadow-emerald-800/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-300/50 dark:active:shadow-emerald-700/60 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Simpan</button>
                 </div>
             </form>
         </div>
@@ -162,8 +161,8 @@
                     </select>
                 </div>
                 <div class="flex space-x-3 pt-6 border-t border-slate-100 dark:border-slate-800">
-                    <button type="button" onclick="document.getElementById('editUserModal').classList.add('hidden')" class="flex-1 px-4 py-4 border border-slate-200 dark:border-slate-700 text-slate-500 rounded-2xl hover:bg-slate-50 transition font-black uppercase tracking-widest text-[10px]">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-4 bg-charcoal dark:bg-orange text-white rounded-2xl hover:bg-orange transition font-black uppercase tracking-widest text-[10px] shadow-lg shadow-orange/10">Simpan Perubahan</button>
+                    <button type="button" onclick="document.getElementById('editUserModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                    <button type="submit" class="flex-1 px-4 py-4 bg-emerald-500 dark:bg-emerald-700 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:bg-emerald-400 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-400/40 dark:hover:shadow-emerald-800/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-300/50 dark:active:shadow-emerald-700/60 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Simpan Perubahan</button>
                 </div>
 
             </form>
