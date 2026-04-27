@@ -436,7 +436,7 @@
                 <h3 class="text-3xl font-serif font-bold mb-4">Siap untuk Perjalanan Spiritual Anda?</h3>
                 <p class="text-lg text-white/90 mb-8 max-w-2xl mx-auto">Hubungi tim Al-Khairat untuk konsultasi dan panduan lengkap mengenai paket Umrah atau Haji Anda.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('home') }}" class="bg-white text-orange font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:scale-105 transition-all">
+                    <a href="{{ route('home') }}#paket" class="bg-white text-orange font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:scale-105 transition-all">
                         Lihat Paket
                     </a>
                     <a href="https://wa.me/{{ $whatsapp ?? '6281253088788' }}" target="_blank" class="bg-white/20 backdrop-blur text-white font-bold px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all">

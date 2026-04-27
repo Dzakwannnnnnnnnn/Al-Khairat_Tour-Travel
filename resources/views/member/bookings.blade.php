@@ -135,7 +135,7 @@
             </div>
             <h3 class="text-lg font-bold text-slate-800 mb-2">Belum Ada Pesanan</h3>
             <p class="text-slate-500 text-sm max-w-sm mx-auto mb-8">Anda belum memiliki riwayat pendaftaran paket umrah. Silakan pilih paket kami di halaman beranda.</p>
-            <a href="{{ route('home') }}" class="inline-flex items-center px-8 py-4 bg-orange text-white rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-orange/90 transition-all shadow-lg shadow-orange/20">
+            <a href="{{ route('home') }}#paket" class="inline-flex items-center px-8 py-4 bg-orange text-white rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-orange/90 transition-all shadow-lg shadow-orange/20">
                 Lihat Paket Umrah
             </a>
         </div>
