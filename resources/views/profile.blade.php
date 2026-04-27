@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title', 'Akun Saya - Al-Khairat')
-@section('breadcrumb', 'Pengaturan Profil')
+@section('breadcrumb', 'Profil')
 
 @section('content')
 @include('components.dock-navigation')
@@ -219,7 +219,7 @@
             };
             @endphp
 
-            <div class="glass-dashboard rounded-[2.5rem] p-5 md:p-8 border shadow-xl {{ $statusMeta['card'] }}">
+            <div class="glass-dashboard rounded-[2.5rem] p-5 md:p-8 border shadow-xl transition-all duration-300 hover:shadow-2xl hover:bg-slate-50 dark:hover:bg-slate-800/50 {{ $statusMeta['card'] }}">
                 <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
                     <div class="space-y-6 flex-1">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">

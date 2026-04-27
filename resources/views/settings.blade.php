@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Sistem & Pengaturan Web')
+@section('breadcrumb', 'Settings')
 @section('content')
 <div class="space-y-6">
     <!-- Header -->

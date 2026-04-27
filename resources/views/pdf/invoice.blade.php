@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>INVOICE #{{ $groupCode }}</title>
+    <title>Invoice {{ $groupCode }}</title>
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
     @php
         $status = $bookings->first()->status;
         $theme = [

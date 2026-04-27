@@ -68,13 +68,26 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required', 'string', 'regex:/^(\+62|62|0)8[1-9][0-9]{6,11}$/'],
+            'email' => [
+                'required', 
+                'string', 
+                'email', 
+                'max:255', 
+                'unique:users',
+                'regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/i' // Enforce Gmail as requested "harus di google"
+            ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'email.regex' => 'Pendaftaran hanya diperbolehkan menggunakan akun Google (Gmail).',
+            'phone.regex' => 'Nomor telepon tidak valid. Gunakan nomor WhatsApp aktif (contoh: 08123456789).',
         ]);
 
         $user = User::create([
             'name' => $request->name,
+            'nickname' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'role' => 'user',
         ]);

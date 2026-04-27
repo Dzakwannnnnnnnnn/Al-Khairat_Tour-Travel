@@ -1,22 +1,29 @@
 @extends('layouts.layout')
 @section('title', 'Manasik Digital & Panduan')
+@section('breadcrumb', 'Panduan Digital')
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-6 gap-4 pt-6 md:pt-6">
-        <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 dark:bg-orange/20 text-orange rounded-xl">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+    <!-- Header Section -->
+    <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="flex items-center space-x-6">
+                <div class="p-4 bg-orange-500/10 text-orange-500 rounded-2xl hidden md:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">E-Manasik Digital</h1>
+                    <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Kelola konten panduan dan perlengkapan.</p>
+                </div>
             </div>
-            <div>
-                <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">E-Manasik Digital</h2>
-                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola konten panduan dan perlengkapan.</p>
-            </div>
+            <button onclick="document.getElementById('addGuideModal').classList.remove('hidden')" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Tambah Panduan</span>
+            </button>
         </div>
-        <button onclick="document.getElementById('addGuideModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-charcoal text-white px-6 py-3 rounded-xl hover:bg-orange transition shadow-lg shadow-orange/10 font-bold uppercase tracking-widest text-[10px]">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Tambah Panduan</span>
-        </button>
     </div>
 
     <!-- Alert -->
@@ -41,7 +48,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                     @forelse($guides as $guide)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
+                    <tr class="hover:bg-orange/5 dark:hover:bg-orange/10 transition-all group">
                         <td class="px-6 py-4 align-top">
                             <p class="font-black text-slate-800 dark:text-slate-100 leading-tight">{{ $guide->title }}</p>
                             @if($guide->video_url)
@@ -60,7 +67,7 @@
                                 {{ $guide->status === 'published' ? 'Tampil di Web' : 'Draft' }}
                             </span>
                         </td>
-                        <td class="px-6 py-4 align-top sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-[#1a2333] transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
+                        <td class="px-6 py-4 align-top sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-orange/5 dark:group-hover:bg-orange/10 transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] md:static">
                             <div class="flex flex-wrap gap-2">
                                 <button onclick="openEditGuide({{ $guide->id }}, '{{ addslashes($guide->title) }}', '{{ $guide->category }}', '{{ addslashes($guide->content) }}', '{{ $guide->video_url }}', '{{ $guide->status }}')"
                                         class="inline-flex items-center justify-center px-3 py-1.5 bg-orange-50 text-orange-600 hover:bg-orange-100 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all shadow-sm">Edit</button>

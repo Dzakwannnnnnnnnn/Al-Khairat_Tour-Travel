@@ -1,22 +1,29 @@
 @extends('layouts.layout')
 @section('title', 'Riwayat Pembayaran')
+@section('breadcrumb', 'Pembayaran')
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:p-8 bg-white dark:bg-slate-800/50 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700 mb-8 gap-4 backdrop-blur-md">
-        <div class="flex items-center space-x-4">
-            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599" /></svg>
+    <!-- Header Section -->
+    <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="flex items-center space-x-6">
+                <div class="p-4 bg-indigo-500/10 text-indigo-500 rounded-2xl hidden md:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">Riwayat Pembayaran</h1>
+                    <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Pemantauan status keuangan jamaah dari pendaftaran.</p>
+                </div>
             </div>
-            <div>
-                <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Riwayat Pembayaran</h2>
-                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Pemantauan status keuangan jamaah dari pendaftaran.</p>
-            </div>
+            <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Catat Manual</span>
+            </button>
         </div>
-        <button onclick="document.getElementById('addPaymentModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
-            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Catat Manual</span>
-        </button>
     </div>
 
     <!-- Stats Bar -->
@@ -116,7 +123,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-50 dark:divide-slate-800">
                     @forelse($bookings as $booking)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all group">
+                    <tr class="hover:bg-orange/5 dark:hover:bg-orange/10 transition-all group">
                         <td class="px-6 py-6 border-b border-slate-50 dark:border-slate-800">
                             <span class="font-mono text-sm font-bold text-orange group-hover:text-gold transition-colors leading-none tracking-tighter">{{ $booking->booking_code }}</span>
                             <p class="text-sm font-black text-slate-800 dark:text-slate-100 mt-2 leading-tight">{{ $booking->full_name ?? $booking->user->name ?? 'User Terhapus' }}</p>
@@ -168,7 +175,7 @@
                             <p class="text-[9px] text-slate-400 dark:text-slate-500 mt-1 uppercase font-black tracking-widest">{{ $booking->created_at->format('H:i') }} WIB</p>
                         </td>
 
-                        <td class="px-6 py-6 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] border-b border-slate-50 dark:border-slate-800">
+                        <td class="px-6 py-6 sticky right-0 bg-white dark:bg-slate-900 group-hover:bg-orange/5 dark:group-hover:bg-orange/10 transition-colors z-10 border-l border-slate-100 dark:border-slate-800 shadow-[-10px_0_15px_rgba(0,0,0,0.02)] dark:shadow-[-10px_0_15px_rgba(0,0,0,0.2)] border-b border-slate-50 dark:border-slate-800">
                             <div class="flex flex-wrap gap-2">
                                 <a href="{{ route('booking.invoice.pdf', $booking->group_code ?? $booking->booking_code) }}" target="_blank" 
                                     class="invoice-group flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-600 dark:to-orange-600 text-white px-6 py-2.5 rounded-xl shadow-md shadow-amber-500/20 dark:shadow-amber-700/30 hover:shadow-lg hover:shadow-amber-500/40 dark:hover:shadow-amber-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-amber-400/50 transition-all duration-200 font-bold uppercase tracking-widest text-[9px] touch-manipulation border-2 border-amber-400/50 dark:border-amber-500/50 hover:border-amber-300 dark:hover:border-amber-400">

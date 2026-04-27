@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('title', 'Tambah Panduan')
+@section('breadcrumb', 'Tambah Panduan')
 
 @section('content')
 <!-- Page Header -->
@@ -170,9 +171,9 @@
                     <a href="{{ route('guides.admin-index') }}" class="px-6 py-3 text-charcoal font-semibold rounded-lg border border-slate-300 hover:bg-slate-100 transition-colors duration-200">
                         Batal
                     </a>
-                    <button type="submit" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-sunset hover:shadow-lg text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105">
+                    <button type="submit" class="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 dark:bg-emerald-700 text-white font-black rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 border-b-4 border-emerald-800 dark:border-emerald-900 uppercase tracking-widest text-[10px]">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                         </svg>
                         <span>Simpan Panduan</span>
                     </button>

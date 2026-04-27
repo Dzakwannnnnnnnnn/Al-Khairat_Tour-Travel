@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Al-Khairat - Perjalanan Penuh Kehangatan</title>
+    <meta name="description" content="Al-Khairat Tour & Travel - Penyelenggara perjalanan Umroh dan Haji resmi dengan pelayanan penuh kehangatan secerah mentari di Samarinda, Kalimantan Timur.">
+    <meta name="keywords" content="umroh samarinda, haji samarinda, alkhairat tour travel, travel umroh terpercaya, paket umroh murah samarinda">
+    <meta name="author" content="Al-Khairat Tour & Travel">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:title" content="Al-Khairat Tour & Travel - Perjalanan Penuh Kehangatan">
+    <meta property="og:description" content="Wujudkan impian spiritual Anda ke Baitullah bersama Al-Khairat. Layanan profesional, transparan, dan penuh keberkahan.">
+    <meta property="og:image" content="{{ asset('images/logo.jpg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url('/') }}">
+    <meta property="twitter:title" content="Al-Khairat Tour & Travel - Perjalanan Penuh Kehangatan">
+    <meta property="twitter:description" content="Wujudkan impian spiritual Anda ke Baitullah bersama Al-Khairat. Layanan profesional, transparan, dan penuh keberkahan.">
+    <meta property="twitter:image" content="{{ asset('images/logo.jpg') }}">
+    
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
     
     @vite(['resources/css/app.css'])
     @stack('styles')

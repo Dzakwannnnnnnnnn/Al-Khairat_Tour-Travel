@@ -109,16 +109,6 @@
             </div>
         </div>
 
-        <!-- System Configuration -->
-        <div>
-            <p class="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Konfigurasi</p>
-            <div class="space-y-1">
-                <a href="{{ route('settings.index') }}" class="sidebar-link {{ request()->routeIs('settings.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 text-slate-400 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span class="font-medium text-sm">Pengaturan Sistem</span>
-                </a>
-            </div>
-        </div>
         @else
         <!-- Regular User Navigation -->
         <div>
@@ -134,15 +124,11 @@
                 </a>
                 <a href="{{ route('member.bookings') }}" class="sidebar-link {{ request()->routeIs('member.bookings') ? 'active' : '' }}">
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                    <span class="font-medium">Riwayat Umroh</span>
+                    <span class="font-medium">Riwayat Pesanan</span>
                 </a>
                 <a href="{{ route('member.savings') }}" class="sidebar-link {{ request()->routeIs('member.savings') ? 'active' : '' }}">
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599" /></svg>
                     <span class="font-medium">Tabungan Saya</span>
-                </a>
-                <a href="{{ route('guides.index') }}" class="sidebar-link {{ request()->routeIs('guides.index') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 text-gold flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    <span class="font-medium">Buku Panduan</span>
                 </a>
             </div>
         </div>

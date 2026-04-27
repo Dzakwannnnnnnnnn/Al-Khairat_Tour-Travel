@@ -90,7 +90,7 @@
                         <p class="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Total Ulasan</p>
                         <p class="text-xl md:text-3xl font-black text-slate-800 dark:text-slate-100 mt-1 md:mt-2 leading-none">{{ $totalTestimonials }}</p>
                     </div>
-                    <a href="{{ route('testimonials.index') }}" class="p-1 hover:bg-slate-100 rounded-lg transition-colors">
+                    <a href="{{ route('testimonials.index') }}" class="p-1 hover:bg-orange/5 rounded-lg transition-colors">
                         <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </a>
                 </div>
@@ -126,7 +126,7 @@
                 
                 <div class="space-y-4">
                     @forelse($recentUsers as $user)
-                    <div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800/50 border border-transparent hover:border-slate-100 dark:border-slate-800 transition-all duration-300">
+                    <div class="group flex items-center justify-between p-4 rounded-2xl hover:bg-orange/5 dark:hover:bg-orange/10 border border-transparent hover:border-orange/10 dark:border-orange/20 transition-all duration-300">
                         <div class="flex items-center gap-4">
                             <div class="relative">
                                 <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=E07856&color=fff&size=80" 
@@ -171,7 +171,7 @@
                 
             <div class="space-y-4">
                 @forelse($recentProducts as $product)
-                <div class="group flex items-center justify-between p-5 rounded-3xl bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800/50 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-lg hover:shadow-orange-500/5 dark:hover:shadow-orange-800/10 transition-all duration-500">
+                <div class="group flex items-center justify-between p-5 rounded-3xl bg-slate-50/50 dark:bg-slate-800/30 border border-slate-100 dark:border-slate-700 hover:bg-orange/5 dark:hover:bg-orange/10 hover:border-orange-200 dark:hover:border-orange-800 hover:shadow-lg hover:shadow-orange-500/5 dark:hover:shadow-orange-800/10 transition-all duration-500">
                     <div class="flex items-center gap-5">
                         <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-200 dark:from-amber-800/40 dark:to-orange-700/40 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-orange-500/10 dark:group-hover:shadow-orange-700/20 transition-all duration-300 overflow-hidden">
                             @if($product->image)

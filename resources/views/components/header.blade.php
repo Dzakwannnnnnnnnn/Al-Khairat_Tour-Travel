@@ -3,13 +3,19 @@
     <div class="max-w-[1600px] mx-auto flex justify-between items-center bg-white dark:bg-slate-900 rounded-xl md:rounded-2xl px-4 md:px-6 py-2 md:py-3 border border-slate-200 dark:border-slate-800 shadow-xl">
         
         <!-- Left: Search Area -->
-        <div class="flex items-center gap-6 flex-1 max-w-2xl">
+        <div class="flex items-center gap-3 md:gap-4 flex-1 max-w-2xl">
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleSidebar()" class="md:hidden -ml-2 p-4 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-orange transition-all relative z-[70] cursor-pointer" aria-label="Toggle Sidebar">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button onclick="toggleSidebar()" class="md:hidden -ml-2 p-3 rounded-xl text-slate-500 hover:bg-slate-100 hover:text-orange transition-all relative z-[70] cursor-pointer" aria-label="Toggle Sidebar">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
+
+            <!-- Vertical Separator (Mobile only) -->
+            <div class="h-6 w-[1px] bg-slate-200 dark:bg-slate-800 md:hidden"></div>
+
+            <!-- Breadcrumb inside Header -->
+            @include('components.breadcrumb')
         </div>
 
         <!-- Right: Actions & Profile -->

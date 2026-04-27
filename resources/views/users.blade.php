@@ -1,27 +1,31 @@
 @extends('layouts.layout')
 
 @section('title', 'Users - Al-Khairat')
-@section('breadcrumb', 'Users')
+@section('breadcrumb', 'Manajemen User')
 
 @section('content')
     <div class="max-w-7xl mx-auto">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-5 md:p-6 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-6 gap-4 pt-6 md:pt-6">
-            <div class="flex items-center space-x-4">
-                <div class="p-3 bg-orange/10 text-orange rounded-xl">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+        <!-- Header Section -->
+        <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="flex items-center space-x-6">
+                    <div class="p-4 bg-orange/10 text-orange rounded-2xl hidden md:block">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">Manajemen Users</h1>
+                        <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Kelola semua user sistem dan hak akses.</p>
+                    </div>
                 </div>
-                <div>
-                    <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Manajemen Users</h2>
-                    <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua user sistem</p>
-                </div>
+                <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+                    <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Tambah User</span>
+                </button>
             </div>
-            <button onclick="document.getElementById('addUserModal').classList.remove('hidden')" class="w-full md:w-auto flex items-center justify-center space-x-2 bg-emerald-500 dark:bg-emerald-700 text-white px-6 py-3 rounded-xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:bg-emerald-400 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-400/40 dark:hover:shadow-emerald-800/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-300/50 dark:active:shadow-emerald-700/60 transition-all duration-200 font-bold uppercase tracking-widest text-[10px] touch-manipulation group">
-                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="font-bold uppercase tracking-widest text-[10px] md:text-xs">Tambah User</span>
-            </button>
         </div>
 
         <div class="mb-8">
@@ -123,7 +127,7 @@
                 </div>
                 <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
                     <button type="button" onclick="document.getElementById('addUserModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
-                    <button type="submit" class="flex-1 px-4 py-4 bg-emerald-500 dark:bg-emerald-700 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:bg-emerald-400 dark:hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-400/40 dark:hover:shadow-emerald-800/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-300/50 dark:active:shadow-emerald-700/60 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Simpan</button>
+                    <button type="submit" class="flex-1 px-4 py-4 bg-emerald-600 dark:bg-emerald-700 text-white rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 border-b-4 border-emerald-800 dark:border-emerald-900 font-black uppercase tracking-widest text-[10px] touch-manipulation">Simpan</button>
                 </div>
             </form>
         </div>

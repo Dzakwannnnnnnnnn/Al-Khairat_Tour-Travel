@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Tabungan Umroh Saya')
+@section('breadcrumb', 'Tabungan')
 @section('content')
 <div class="space-y-8 pb-10">
     <!-- Header Section -->
@@ -148,7 +149,7 @@
 
                 <!-- Transaction History -->
                 <div class="bg-slate-50/50">
-                    <button onclick="toggleDetails({{ $plan->id }})" class="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-100/50 transition-colors">
+                    <button onclick="toggleDetails({{ $plan->id }})" class="w-full flex items-center justify-between px-6 py-4 hover:bg-orange/5 transition-colors">
                         <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 leading-none">Riwayat Tabungan</span>
                         <svg id="chevron-{{ $plan->id }}" class="w-4 h-4 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -159,7 +160,7 @@
                         <table class="w-full text-left">
                             <tbody class="divide-y divide-white">
                                 @forelse($plan->deposits as $deposit)
-                                    <tr class="group hover:bg-white transition-colors">
+                                    <tr class="group hover:bg-orange/5 dark:hover:bg-orange/10 transition-colors">
                                         <td class="px-8 py-4">
                                             <p class="text-xs font-bold text-slate-700">{{ $deposit->created_at->format('d M Y') }}</p>
                                         </td>

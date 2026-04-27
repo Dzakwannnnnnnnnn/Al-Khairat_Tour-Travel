@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panduan Tasuh Digital - Al-Khairat</title>
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
     
     @vite(['resources/css/app.css'])
     @stack('styles')
@@ -45,15 +46,11 @@
             <!-- Category Tabs -->
             <div class="flex justify-center gap-4 mb-12">
                 <button onclick="switchCategory('umrah')" class="category-tab tab-umrah tab-active px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 bg-gradient-sunset text-white shadow-lg shadow-orange/20 hover:shadow-xl hover:shadow-orange/40" data-category="umrah">
-                    <svg class="w-6 h-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" style="stroke: white;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <span class="text-2xl mr-2">✈️</span>
                     Umrah
                 </button>
                 <button onclick="switchCategory('haji')" class="category-tab tab-haji tab-inactive px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 bg-surface/50 dark:bg-surface/30 border-2 border-border/50 hover:border-orange text-text/60 dark:text-text/50" data-category="haji">
-                    <svg class="w-6 h-6 inline-block mr-2" fill="none" viewBox="0 0 24 24" style="stroke: rgba(224, 215, 198, 0.6);">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                    <span class="text-2xl mr-2">🕋</span>
                     Haji
                 </button>
             </div>
@@ -64,183 +61,153 @@
                 <div id="category-umrah" class="category-content animate-[fadeUp_0.5s_ease-out]">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Tasuh Umrah - Dokumen Perjalanan -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="0">
-                            <div class="flex items-start justify-between mb-4">
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="0">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">01</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     ✈️
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">DOKUMEN</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Dokumen Perjalanan Umrah</h3>
-                            <p class="text-text/70 text-sm mb-6">Berisi kelengkapan surat-surat resmi untuk keberangkatan umrah yang diakui oleh pemerintah dan maskapai penerbangan.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Persiapan & Administrasi</h3>
+                            <p class="text-text/70 text-sm mb-6">Langkah awal untuk memastikan dokumen perjalanan Anda lengkap dan sah secara hukum dan agama.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Surat Keterangan Tasuh
+                                    <span class="text-orange mr-2">✓</span> Paspor & Visa Umrah Aktif
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Paspor & Visa Paspor
+                                    <span class="text-orange mr-2">✓</span> Sertifikat Vaksinasi & Kesehatan
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Asuransi Perjalanan
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Kartu Vaksinasi (jika diperlukan)
+                                    <span class="text-orange mr-2">✓</span> Asuransi Perjalanan Syariah
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'dokumen']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Rincian</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
                         <!-- Tasuh Umrah - Checklist Perlengkapan -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="100">
-                            <div class="flex items-start justify-between mb-4">
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="100">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">02</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     📋
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">CHECKLIST</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Checklist Perlengkapan</h3>
-                            <p class="text-text/70 text-sm mb-6">Daftar lengkap barang-barang yang perlu dibawa untuk memastikan perjalanan ibadah Umrah Anda nyaman dan lancar.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Kebutuhan & Packing</h3>
+                            <p class="text-text/70 text-sm mb-6">Menyiapkan perlengkapan fisik agar Anda dapat fokus beribadah tanpa kendala teknis di lapangan.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Pakaian Ihram (Pria)
+                                    <span class="text-orange mr-2">✓</span> Pakaian Ihram & Sabuk (Pria)
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Mukena & Kerudung (Wanita)
+                                    <span class="text-orange mr-2">✓</span> Mukena & Pakaian Takwa (Wanita)
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Obat-obatan Pribadi
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Perlengkapan Ibadah
+                                    <span class="text-orange mr-2">✓</span> Obat Pribadi & Alat Kebersihan
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'checklist']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Checklist</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
                         <!-- Tasuh Umrah - Tata Cara -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="200">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    🕌
-                                </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">TATA CARA</span>
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="200">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">03</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tata Cara Umrah Lengkap</h3>
-                            <p class="text-text/70 text-sm mb-6">Panduan step-by-step melakukan ibadah Umrah mulai dari persiapan hingga kembali ke tanah air dengan sempurna.</p>
-                            <ul class="space-y-2 mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                    🕋
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Keberangkatan & Miqat</h3>
+                            <p class="text-text/70 text-sm mb-6">Memulai perjalanan spiritual dengan kesucian lahir batin dari titik Miqat yang telah ditentukan.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Niat & Ihram
+                                    <span class="text-orange mr-2">✓</span> Mandi Sunnah & Memakai Ihram
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tawaf & Sa'i
+                                    <span class="text-orange mr-2">✓</span> Mengucapkan Niat & Talbiah
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tahalul
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a & Ibadah Tambahan
+                                    <span class="text-orange mr-2">✓</span> Menjaga Larangan Selama Ihram
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'tata-cara']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Baca Panduan</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
                         <!-- Tasuh Umrah - FAQ Umrah -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="300">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    ❓
-                                </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">FAQ</span>
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="300">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">04</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">FAQ Umrah</h3>
-                            <p class="text-text/70 text-sm mb-6">Jawaban atas pertanyaan-pertanyaan umum yang sering diajukan calon jamaah Umrah tentang persiapan dan pelaksanaan ibadah.</p>
-                            <ul class="space-y-2 mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                    🕌
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Inti Pelaksanaan Umrah</h3>
+                            <p class="text-text/70 text-sm mb-6">Langkah-langkah inti ibadah Umrah di Masjidil Haram yang harus dilakukan secara tertib.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Berapa lama waktu Umrah?
+                                    <span class="text-orange mr-2">✓</span> Tawaf Mengelilingi Ka'bah 7x
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Apakah boleh Umrah saat haid?
+                                    <span class="text-orange mr-2">✓</span> Sa'i Antara Shafa & Marwah
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Persiapan apa saja yang diperlukan?
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Biaya berapa yang diperlukan?
+                                    <span class="text-orange mr-2">✓</span> Tahalul (Potong/Cukur Rambut)
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'faq']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat FAQ</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
                         <!-- Tasuh Umrah - Doa & Dzikir -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="400">
-                            <div class="flex items-start justify-between mb-4">
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="400">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">05</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     🤲
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">DO'A</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Do'a & Dzikir Umrah</h3>
-                            <p class="text-text/70 text-sm mb-6">Kumpulan do'a dan dzikir pilihan yang dibaca selama melakukan ibadah Umrah untuk memaksimalkan manfaat spiritual.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Ibadah Sunnah & Doa</h3>
+                            <p class="text-text/70 text-sm mb-6">Mengoptimalkan waktu di tanah suci dengan memperbanyak doa dan ibadah di tempat-tempat mustajab.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Ihram
+                                    <span class="text-orange mr-2">✓</span> Doa di Multazam & Maqam Ibrahim
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Talbiah
+                                    <span class="text-orange mr-2">✓</span> Shalat Arba'in di Madinah
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Tawaf
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Sa'i & Tahalul
+                                    <span class="text-orange mr-2">✓</span> Ziarah Raudhah & Makam Nabi
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'doa']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Do'a</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
                         <!-- Tasuh Umrah - Tips & Trik -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="500">
-                            <div class="flex items-start justify-between mb-4">
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="500">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">06</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     💡
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">TIPS</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tips & Trik Umrah</h3>
-                            <p class="text-text/70 text-sm mb-6">Kumpulan tips praktis dan trik-trik berguna dari pengalaman ribuan jamaah untuk membuat Umrah Anda lebih nyaman.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Ziarah & Kepulangan</h3>
+                            <p class="text-text/70 text-sm mb-6">Menutup perjalanan dengan ziarah sejarah dan persiapan fisik sebelum kembali ke keluarga.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Adaptasi Cuaca
+                                    <span class="text-orange mr-2">✓</span> Tawaf Wada' (Perpisahan)
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Menjaga Kesehatan
+                                    <span class="text-orange mr-2">✓</span> Packing & Check-out Hotel
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Manajemen Waktu
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Jika Terjadi Kendala
+                                    <span class="text-orange mr-2">✓</span> Persiapan Oleh-oleh & Kesehatan
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'umrah', 'guide' => 'tips']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Baca Tips</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -248,184 +215,205 @@
                 <!-- HAJI SECTION (Hidden by default) -->
                 <div id="category-haji" class="category-content hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Tasuh Haji - Dokumen Perjalanan -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="0">
-                            <div class="flex items-start justify-between mb-4">
+                        <!-- Step 01: Administrasi -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="0">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">01</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     ✈️
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">DOKUMEN</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Dokumen Perjalanan Haji</h3>
-                            <p class="text-text/70 text-sm mb-6">Berisi kelengkapan surat-surat resmi untuk pendaftaran dan keberangkatan Haji yang disyaratkan oleh pemerintah.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Pendaftaran & Administrasi</h3>
+                            <p class="text-text/70 text-sm mb-6">Memvalidasi porsi Haji, pelunasan BPIH, dan pengurusan Visa Haji resmi (Haji Reguler/Khusus).</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Kartu Peserta Haji
+                                    <span class="text-orange mr-2">✓</span> Validasi Nomor Porsi Haji
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Surat Pendaftaran
+                                    <span class="text-orange mr-2">✓</span> Paspor & Visa Haji Aktif
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Pemeriksaan Kesehatan
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Asuransi Haji
+                                    <span class="text-orange mr-2">✓</span> Pemeriksaan Kesehatan Istitha'ah
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'dokumen']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Rincian</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
-                        <!-- Tasuh Haji - Checklist Perlengkapan -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="100">
-                            <div class="flex items-start justify-between mb-4">
+                        <!-- Step 02: Persiapan -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="100">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">02</span>
+                            </div>
+                            <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
                                     📋
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">CHECKLIST</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Checklist Perlengkapan Haji</h3>
-                            <p class="text-text/70 text-sm mb-6">Daftar lengkap barang-barang yang perlu dibawa untuk perjalanan Haji yang lebih lama dan lebih intensif.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Bimbingan Manasik Haji</h3>
+                            <p class="text-text/70 text-sm mb-6">Mengikuti rangkaian bimbingan untuk memahami perbedaan Haji Tamattu, Ifrad, dan Qiran.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Pakaian Ihram (Pria)
+                                    <span class="text-orange mr-2">✓</span> Praktik Tawaf, Sa'i, & Wukuf
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Mukena & Kerudung (Wanita)
+                                    <span class="text-orange mr-2">✓</span> Pemantapan Doa-doa Haji
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Obat-obatan Lengkap
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Perlengkapan Haji
+                                    <span class="text-orange mr-2">✓</span> Persiapan Mental & Fisik (Stamina)
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'checklist']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Checklist</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
-                        <!-- Tasuh Haji - Tata Cara -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="200">
+                        <!-- Step 03: Tarwiyah -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="200">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">03</span>
+                            </div>
                             <div class="flex items-start justify-between mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    🕌
+                                    ⛺
                                 </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">TATA CARA</span>
+                                <div></div>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tata Cara Haji Lengkap</h3>
-                            <p class="text-text/70 text-sm mb-6">Panduan komprehensif melakukan ibadah Haji mulai dari persiapan, ihram, hingga kembali ke tanah air.</p>
-                            <ul class="space-y-2 mb-8">
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Ihram & Mina (8 Dzulhijjah)</h3>
+                            <p class="text-text/70 text-sm mb-6">Memakai Ihram dari Makkah dan menuju Mina untuk melakukan hari Tarwiyah (Mabit di Mina).</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Niat & Ihram di Miqat
+                                    <span class="text-orange mr-2">✓</span> Niat Haji & Pakai Ihram
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Wukuf & Arafah
+                                    <span class="text-orange mr-2">✓</span> Berangkat ke Mina (Pagi Hari)
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Muzdalifah & Lempar Jumrah
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tawaf & Tahalul
+                                    <span class="text-orange mr-2">✓</span> Shalat Qashar & Mabit di Mina
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'tata-cara']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Baca Panduan</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
-                        <!-- Tasuh Haji - FAQ Haji -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="300">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    ❓
-                                </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">FAQ</span>
+                        <!-- Step 04: Wukuf -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="300">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">04</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">FAQ Haji</h3>
-                            <p class="text-text/70 text-sm mb-6">Jawaban atas pertanyaan-pertanyaan mengenai proses pendaftaran, persiapan, dan pelaksanaan ibadah Haji.</p>
-                            <ul class="space-y-2 mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                    ☀️
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Wukuf Arafah (9 Dzulhijjah)</h3>
+                            <p class="text-text/70 text-sm mb-6">Puncak Ibadah Haji. Berdiam diri di Padang Arafah dari Dzuhur hingga terbenam matahari.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Bagaimana cara pendaftaran Haji?
+                                    <span class="text-orange mr-2">✓</span> Mendengar Khutbah Wukuf
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Berapa biaya Haji?
+                                    <span class="text-orange mr-2">✓</span> Perbanyak Doa & Istighfar
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Apa persyaratan kesehatan untuk Haji?
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Berapa lama perjalanan Haji?
+                                    <span class="text-orange mr-2">✓</span> Berangkat ke Muzdalifah (Maghrib)
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'faq']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat FAQ</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
-                        <!-- Tasuh Haji - Doa & Dzikir -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="400">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    🤲
-                                </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">DO'A</span>
+                        <!-- Step 05: Muzdalifah -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="400">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">05</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Do'a & Dzikir Haji</h3>
-                            <p class="text-text/70 text-sm mb-6">Kumpulan do'a dan dzikir pilihan yang dibaca sepanjang perjalanan Haji untuk memperkuat koneksi spiritual.</p>
-                            <ul class="space-y-2 mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                    🌑
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Muzdalifah & Jumrah Aqabah</h3>
+                            <p class="text-text/70 text-sm mb-6">Mabit sesaat di Muzdalifah untuk mengambil kerikil, lalu menuju Mina untuk Jumrah Aqabah.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Ihram
+                                    <span class="text-orange mr-2">✓</span> Ambil 7 Kerikil di Muzdalifah
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Talbiah & Takbir
+                                    <span class="text-orange mr-2">✓</span> Lempar Jumrah Aqabah (10 Dzulhijjah)
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Arafah
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Do'a Lempar Jumrah
+                                    <span class="text-orange mr-2">✓</span> Tahalul Awal (Potong Rambut)
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'doa']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Lihat Do'a</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
                         </div>
 
-                        <!-- Tasuh Haji - Tips & Trik -->
-                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate" data-animation="slide-up" data-delay="500">
-                            <div class="flex items-start justify-between mb-4">
-                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
-                                    💡
-                                </div>
-                                <span class="text-xs font-bold bg-orange/10 text-orange px-3 py-1 rounded-full">TIPS</span>
+                        <!-- Step 06: Tawaf Ifadhah -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="500">
+                            <div class="absolute top-0 right-0 p-4">
+                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">06</span>
                             </div>
-                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tips & Trik Haji</h3>
-                            <p class="text-text/70 text-sm mb-6">Tips dan trik berguna dari pengalaman ribuan jemaah untuk membuat perjalanan Haji Anda lebih nyaman dan bermakna.</p>
-                            <ul class="space-y-2 mb-8">
+                            <div class="flex items-start mb-4">
+                                <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                    🕋
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tawaf Ifadhah & Sa'i Haji</h3>
+                            <p class="text-text/70 text-sm mb-6">Melakukan Rukun Haji terakhir di Masjidil Haram untuk menyempurnakan ibadah Haji.</p>
+                            <ul class="space-y-2 mb-4">
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Adaptasi Cuaca Ekstrem
+                                    <span class="text-orange mr-2">✓</span> Tawaf Ifadhah & Shalat di Maqam Ibrahim
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Menjaga Stamina
+                                    <span class="text-orange mr-2">✓</span> Sa'i Haji Shafa-Marwah
                                 </li>
                                 <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Keamanan & Kenyamanan
-                                </li>
-                                <li class="flex items-center text-sm text-text/80">
-                                    <span class="text-orange mr-2">✓</span> Tips Hubungan dengan Jamaah Lain
+                                    <span class="text-orange mr-2">✓</span> Tahalul Tsani (Bebas Larangan Ihram)
                                 </li>
                             </ul>
-                            <a href="{{ route('panduan-tasuh.detail', ['category' => 'haji', 'guide' => 'tips']) }}" class="inline-flex items-center gap-2 text-orange font-bold hover:translate-x-2 transition-transform group/link">
-                                <span>Baca Tips</span>
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                            </a>
+                        </div>
+
+                        <!-- Step 07: Hari Tasyrik -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="600">
+                                <div class="absolute top-0 right-0 p-4">
+                                    <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">07</span>
+                                </div>
+                                <div class="flex items-start mb-4">
+                                    <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                        ⛺
+                                    </div>
+                                </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Mabit Mina & Lempar Jumrah</h3>
+                            <p class="text-text/70 text-sm mb-6">Menginap di Mina selama hari Tasyrik (11, 12, 13 Dzulhijjah) dan melempar 3 Jumrah.</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Mabit di Mina (Setiap Malam)
+                                </li>
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Lempar 3 Jumrah (Ula, Wustha, Aqabah)
+                                </li>
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Nafar Awwal atau Nafar Tsani
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Step 08: Wada -->
+                        <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="700">
+                                <div class="absolute top-0 right-0 p-4">
+                                    <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">08</span>
+                                </div>
+                                <div class="flex items-start mb-4">
+                                    <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
+                                        🏡
+                                    </div>
+                                </div>
+                            <h3 class="text-xl font-serif font-bold text-text mb-3">Tawaf Wada' & Homecoming</h3>
+                            <p class="text-text/70 text-sm mb-6">Penutup ibadah Haji dengan Tawaf Perpisahan sebelum meninggalkan kota suci Makkah.</p>
+                            <ul class="space-y-2 mb-4">
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Tawaf Wada' Tanpa Sa'i
+                                </li>
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Doa Mabrur & Persiapan Pulang
+                                </li>
+                                <li class="flex items-center text-sm text-text/80">
+                                    <span class="text-orange mr-2">✓</span> Penjemputan Air Zam-zam & Barang
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

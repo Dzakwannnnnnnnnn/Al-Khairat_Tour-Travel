@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Monitoring Tabungan Umroh')
+@section('breadcrumb', 'Manajemen Tabungan')
 @section('content')
 <div class="space-y-8">
     <!-- Header -->
@@ -76,7 +77,7 @@
                 </div>
             </div>
             <input type="text" name="search" id="dashboardSearch" value="{{ request('search') }}" 
-                class="w-full pl-20 pr-14 py-6 bg-slate-50/30 dark:bg-slate-900/30 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 focus:ring-[12px] focus:ring-orange/5 focus:outline-none transition-all duration-500 text-lg font-bold text-slate-700 dark:text-slate-200 placeholder:text-slate-400 placeholder:font-normal rounded-[2rem]" 
+                class="w-full pl-20 pr-14 py-6 bg-slate-50/30 dark:bg-slate-900/30 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 focus:ring-[12px] focus:ring-orange/5 focus:outline-none transition-all duration-500 text-lg font-bold text-slate-700 dark:text-slate-200 placeholder:text-slate-400 placeholder:font-normal rounded-[2.5rem]" 
                 placeholder="Cari Jemaah, Email, atau Paket Tabungan...">
             
             @if(request('search'))
@@ -91,14 +92,22 @@
 
     <!-- Table Section -->
     <div class="bg-white dark:bg-slate-800/40 rounded-[2.5rem] shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden backdrop-blur-sm">
-                
-                @if(request('search'))
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Filter:</span>
-                    <span class="px-3 py-1 bg-orange/10 text-orange text-xs font-bold rounded-lg border border-orange/20">{{ request('search') }}</span>
+        <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-slate-900/20">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                 </div>
-                @endif
+                <div>
+                    <h3 class="text-lg font-black text-slate-800 dark:text-slate-100 tracking-tight">Daftar Tabungan Jemaah</h3>
+                    <p class="text-xs text-slate-400 dark:text-slate-500 font-medium">Monitoring saldo dan progres tabungan.</p>
+                </div>
             </div>
+            @if(request('search'))
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Filter:</span>
+                <span class="px-3 py-1 bg-orange/10 text-orange text-xs font-bold rounded-lg border border-orange/20">{{ request('search') }}</span>
+            </div>
+            @endif
         </div>
         <div class="overflow-x-auto dashboard-scroll shadow-inner">
             <table class="w-full text-left border-collapse">
@@ -114,7 +123,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                     @forelse($plans as $plan)
-                    <tr class="group hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all {{ $plan->status == 'refund_requested' ? 'bg-red-50/40 dark:bg-red-900/10' : '' }}">
+                    <tr class="group hover:bg-orange/5 dark:hover:bg-orange/10 transition-all {{ $plan->status == 'refund_requested' ? 'bg-red-50/60 dark:bg-red-900/20' : 'bg-white dark:bg-slate-900/40' }}">
                         <!-- Member Info -->
                         <td class="px-6 py-8">
                             <div class="flex items-center gap-4">

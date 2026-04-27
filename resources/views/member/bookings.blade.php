@@ -1,5 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Riwayat Pesanan Saya')
+@section('breadcrumb', 'Riwayat Pesanan')
 @section('content')
 <div class="space-y-8 pb-10">
     <!-- Header Section -->
@@ -84,7 +85,7 @@
                     </thead>
                     <tbody class="divide-y divide-slate-50">
                         @foreach($group as $booking)
-                            <tr class="group hover:bg-slate-50/50 transition-colors">
+                            <tr class="hover:bg-orange/5 dark:hover:bg-orange/10 transition-all group">
                                 <td class="px-6 py-5">
                                     <div class="flex items-center gap-3">
                                         <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 font-bold text-xs">

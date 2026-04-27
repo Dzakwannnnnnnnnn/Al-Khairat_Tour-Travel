@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('title', 'Trash/Sampah Tabungan')
+@section('breadcrumb', 'Arsip Tabungan')
 
 @section('content')
 <div class="mb-10 p-8 bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row md:items-end justify-between gap-6">

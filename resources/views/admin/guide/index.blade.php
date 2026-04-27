@@ -1,20 +1,28 @@
 @extends('layouts.layout')
 
 @section('title', 'Kelola Panduan & Manasik')
+@section('breadcrumb', 'Manajemen Panduan')
 
 @section('content')
-<!-- Page Header -->
-<div class="mb-6 md:mb-8 pt-6 md:pt-0">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-1 md:mb-2">Kelola Panduan & Manasik</h1>
-            <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400">Kelola semua panduan dan manasik untuk umrah dan haji</p>
+<!-- Page Header Section -->
+<div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="flex items-center space-x-6">
+            <div class="p-4 bg-orange-500/10 text-orange-500 rounded-2xl hidden md:block">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">Kelola Panduan & Manasik</h1>
+                <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Kelola semua panduan dan manasik untuk umrah dan haji.</p>
+            </div>
         </div>
-        <a href="{{ route('guides.create') }}" class="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white font-bold rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 transition-all duration-200 uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
-            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        <a href="{{ route('guides.create') }}" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
             </svg>
-            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Tambah Panduan</span>
+            <span>Tambah Panduan</span>
         </a>
     </div>
 </div>
@@ -39,7 +47,7 @@
 @endif
 
 <!-- Guides Table Card -->
-<div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800">
+<div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800 overflow-hidden">
     <!-- Table -->
     <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
         <table class="w-full" style="min-width: 800px;">

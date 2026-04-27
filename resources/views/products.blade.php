@@ -1,22 +1,31 @@
 @extends('layouts.layout')
 
 @section('title', 'Paket Umroh - Al-Khairat')
-@section('breadcrumb', 'Paket Umroh')
+@section('breadcrumb', 'Manajemen Paket')
 
 @section('content')
     <div class="max-w-7xl mx-auto">
         <!-- Header Section -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4 pt-6 md:pt-0">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Paket Umroh</h1>
-                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua paket umroh Al-Khairat</p>
+        <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="flex items-center space-x-6">
+                    <div class="p-4 bg-emerald-500/10 text-emerald-500 rounded-2xl hidden md:block">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">Paket Umroh</h1>
+                        <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Kelola semua paket umroh Al-Khairat</p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+                    <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span>Tambah Paket</span>
+                </button>
             </div>
-            <button onclick="document.getElementById('addProductModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-600 dark:to-green-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-emerald-400/50 dark:border-emerald-500/50 hover:border-emerald-300 dark:hover:border-emerald-400">
-                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="group-hover:tracking-[0.2em] transition-all duration-200">Tambah Paket</span>
-            </button>
         </div>
 
         <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] shadow-sm p-3 md:p-6 mb-8 border border-slate-100 dark:border-slate-800">
@@ -40,7 +49,7 @@
 
 
         <!-- Products Table -->
-        <div class="bg-white dark:bg-slate-900 rounded-[1.5rem] md:rounded-[2rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800">
+        <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-lg shadow-slate-200/50 dark:shadow-slate-950/50 border border-slate-100 dark:border-slate-800 overflow-hidden">
             <div class="overflow-x-auto dashboard-scroll" style="overflow-x: auto !important; -webkit-overflow-scrolling: touch;">
                 <table class="w-full" style="min-width: 850px;">
                     <thead class="bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border-b-2 border-slate-200 dark:border-slate-700">

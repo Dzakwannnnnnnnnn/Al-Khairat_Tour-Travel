@@ -1,22 +1,29 @@
 @extends('layouts.layout')
 @section('title', 'Manajemen Pemesanan')
+@section('breadcrumb', 'Manajemen Pesanan')
 @section('content')
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-6 md:p-8 bg-white dark:bg-slate-900 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-800 mb-8 gap-4 backdrop-blur-md">
-        <div class="flex items-center space-x-4">
-            <div class="p-3 bg-orange/10 text-orange rounded-xl">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+    <!-- Header Section -->
+    <div class="bg-white dark:bg-slate-800/50 rounded-[2.5rem] p-8 shadow-sm border border-slate-100 dark:border-slate-700 backdrop-blur-md mb-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div class="flex items-center space-x-6">
+                <div class="p-4 bg-orange/10 text-orange rounded-2xl hidden md:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black text-slate-800 dark:text-slate-100 leading-tight tracking-tight">Manajemen Pemesanan</h1>
+                    <p class="text-sm md:text-base text-slate-400 dark:text-slate-500 font-medium mt-1">Kelola pendaftaran jamaah ke paket umrah.</p>
+                </div>
             </div>
-            <div>
-                <h2 class="text-lg md:text-2xl font-bold text-slate-800 dark:text-slate-100 leading-tight">Manajemen Pemesanan</h2>
-                <p class="text-[11px] md:text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola pendaftaran jamaah ke paket umrah.</p>
-            </div>
+            <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="group w-full md:w-auto bg-emerald-600 dark:bg-emerald-700 text-white px-8 py-4 rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 flex items-center justify-center space-x-3 font-black uppercase tracking-widest text-[10px] border-b-4 border-emerald-800 dark:border-emerald-900">
+                <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                </svg>
+                <span>Booking Baru</span>
+            </button>
         </div>
-        <button onclick="document.getElementById('addBookingModal').classList.remove('hidden')" class="group w-full md:w-auto bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white px-6 py-3.5 rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 flex items-center justify-center space-x-2 font-bold uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
-            <svg class="w-5 h-5 group-hover:rotate-90 transition-transform duration-300 pointer-events-none drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span class="group-hover:tracking-[0.2em] transition-all duration-200">Booking Baru</span>
-        </button>
     </div>
 
     <!-- Stats Bar -->
@@ -52,7 +59,7 @@
     @endif
     
     <!-- Table Section -->
-    <div class="bg-white dark:bg-slate-900 rounded-[2rem] shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-300 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-md border border-slate-100 dark:border-slate-800 overflow-hidden transition-all duration-300 backdrop-blur-sm">
         <!-- Dashboard Toolbar -->
         <div class="px-6 py-8 border-b border-slate-100 dark:border-slate-800 bg-gradient-to-r from-slate-50/50 to-white dark:from-slate-900/50 dark:to-slate-900/20">
             <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -110,7 +117,7 @@
             </div>
         </div>
 
-        <div class="overflow-x-auto dashboard-scroll shadow-inner">
+        <div class="overflow-x-auto dashboard-scroll shadow-inner bg-slate-50 dark:bg-slate-900/50">
             <table class="w-full">
                 <thead class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-700">
                     <tr>
@@ -124,7 +131,7 @@
                 </thead>
                 <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                     @forelse($bookings as $booking)
-                    <tr class="hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all row-group">
+                    <tr class="bg-white dark:bg-slate-900 hover:bg-orange/5 dark:hover:bg-orange/10 transition-all row-group">
                         <!-- Kode Booking -->
                         <td class="px-8 py-10 vertical-top">
                             <span class="font-mono text-base font-black text-orange-600 block transition-colors row-group-hover:text-orange-700">{{ $booking->booking_code }}</span>
@@ -299,8 +306,8 @@
             </div>
             
             <div class="flex gap-4 pt-6">
-                <button type="button" onclick="document.getElementById('addBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
-                <button type="submit" class="flex-[2] py-4 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">Buat Pemesanan</button>
+                <button type="button" onclick="document.getElementById('addBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-[2] py-4 bg-emerald-600 dark:bg-emerald-700 text-white rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 border-b-4 border-emerald-800 dark:border-emerald-900 font-black uppercase tracking-widest text-[10px] touch-manipulation">Buat Pemesanan</button>
             </div>
         </form>
     </div>
@@ -373,8 +380,8 @@
             </div>
             
             <div class="flex gap-4 pt-6">
-                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
-                <button type="submit" class="flex-[2] py-4 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-2xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">Simpan Perubahan</button>
+                <button type="button" onclick="document.getElementById('editBookingModal').classList.add('hidden')" class="flex-1 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
+                <button type="submit" class="flex-[2] py-4 bg-emerald-600 dark:bg-emerald-700 text-white rounded-2xl shadow-lg shadow-emerald-500/20 dark:shadow-emerald-900/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all duration-300 border-b-4 border-emerald-800 dark:border-emerald-900 font-black uppercase tracking-widest text-[10px] touch-manipulation">Simpan Perubahan</button>
             </div>
         </form>
     </div>

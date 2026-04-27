@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('title', 'Tambah Slideshow')
+@section('breadcrumb', 'Tambah Slideshow')
 
 @section('content')
 <!-- Page Header -->

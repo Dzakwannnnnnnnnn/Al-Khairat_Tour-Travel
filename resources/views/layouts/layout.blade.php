@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Al-Khairat')</title>
+    <meta name="description" content="Al-Khairat Tour & Travel - Penyelenggara perjalanan Umroh dan Haji resmi dengan pelayanan penuh kehangatan secerah mentari di Samarinda, Kalimantan Timur.">
+    <meta name="keywords" content="umroh samarinda, haji samarinda, alkhairat tour travel, travel umroh terpercaya, paket umroh murah samarinda">
+    <meta name="author" content="Al-Khairat Tour & Travel">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="Al-Khairat Tour & Travel - Perjalanan Penuh Kehangatan">
+    <meta property="og:description" content="Wujudkan impian spiritual Anda ke Baitullah bersama Al-Khairat. Layanan profesional, transparan, dan penuh keberkahan.">
+    <meta property="og:image" content="{{ asset('images/logo.jpg') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="Al-Khairat Tour & Travel - Perjalanan Penuh Kehangatan">
+    <meta property="twitter:description" content="Wujudkan impian spiritual Anda ke Baitullah bersama Al-Khairat. Layanan profesional, transparan, dan penuh keberkahan.">
+    <meta property="twitter:image" content="{{ asset('images/logo.jpg') }}">
+    
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/logo.jpg') }}">
 
     <!-- Dark Mode Init (must run before CSS to prevent flash) -->
     <script>
@@ -100,11 +119,6 @@
             <main class="flex-1 min-w-0 w-full">
                 <!-- Dashboard Header -->
                 @include('components.header')
-
-                <!-- Navigation Breadcrumb (Reduced spacing so content moves up closer) -->
-                <div class="px-4 mb-4 md:mb-6">
-                    @include('components.breadcrumb')
-                </div>
 
                 <!-- Content Area -->
                 <div class="px-4 pt-0 md:px-6 md:pt-2 lg:px-8 max-w-7xl mx-auto pb-32 md:pb-40">
