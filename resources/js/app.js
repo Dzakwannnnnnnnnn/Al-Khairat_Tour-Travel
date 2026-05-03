@@ -34,37 +34,35 @@ function initScrollAnimations() {
 
 // Loader Logic: Play cinematic entrance only once per session
 document.addEventListener('DOMContentLoaded', function() {
-    const loadingScreen = document.getElementById('loading-screen');
-
     // Initialize scroll animations
     initScrollAnimations();
     
-    if (!loadingScreen) return;
+    // Preloader Logic
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        if (sessionStorage.getItem('alKhairatPreloaderShown')) {
+            loadingScreen.style.display = 'none';
+        } else {
+            const minLoadTime = 3500; 
+            const startTime = Date.now();
 
-    if (sessionStorage.getItem('alKhairatPreloaderShown')) {
-        // Skip splash screen immediately on refresh/subs-sequent loads
-        loadingScreen.style.display = 'none';
-    } else {
-        // Enforce cinematic wait time on first load
-        const minLoadTime = 3500; 
-        const startTime = Date.now();
+            function hidePreloader() {
+                if (loadingScreen.classList.contains('preloader-done')) return;
+                loadingScreen.classList.add('preloader-done');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    sessionStorage.setItem('alKhairatPreloaderShown', 'true');
+                }, 2000); 
+            }
 
-        function hidePreloader() {
-            if (loadingScreen.classList.contains('preloader-done')) return;
-            loadingScreen.classList.add('preloader-done');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                sessionStorage.setItem('alKhairatPreloaderShown', 'true');
-            }, 2000); // Wait for CSS transition (2s)
+            window.addEventListener('load', function() {
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+                setTimeout(hidePreloader, remainingTime);
+            });
+
+            setTimeout(hidePreloader, 8000); 
         }
-
-        window.addEventListener('load', function() {
-            const elapsedTime = Date.now() - startTime;
-            const remainingTime = Math.max(0, minLoadTime - elapsedTime);
-            setTimeout(hidePreloader, remainingTime);
-        });
-
-        setTimeout(hidePreloader, 8000); 
     }
     
     // Mobile Menu Toggle
@@ -75,13 +73,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let slideInterval;
     
     function showSlide(index) {
+        if (heroSlides.length === 0) return;
+        
         // Remove active class from all slides and dots
         heroSlides.forEach(slide => slide.classList.remove('active'));
         heroDots.forEach(dot => dot.classList.remove('active'));
         
         // Add active class to current slide and dot
-        heroSlides[index].classList.add('active');
-        heroDots[index].classList.add('active');
+        if (heroSlides[index]) heroSlides[index].classList.add('active');
+        if (heroDots[index]) heroDots[index].classList.add('active');
         
         currentSlide = index;
     }
@@ -92,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function startAutoplay() {
-        slideInterval = setInterval(nextSlide, 5000);
+        if (heroSlides.length > 0) {
+            slideInterval = setInterval(nextSlide, 5000);
+        }
     }
     
     function resetAutoplay() {
@@ -120,70 +122,80 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Header Scroll Effect
     const mainHeader = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            mainHeader.classList.add('scrolled');
-        } else {
-            mainHeader.classList.remove('scrolled');
-        }
-    });
+    if (mainHeader) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                mainHeader.classList.add('scrolled');
+            } else {
+                mainHeader.classList.remove('scrolled');
+            }
+        });
+    }
 
     // Floating Dock Active State with Intersection Observer
     const dockItems = document.querySelectorAll('.dock-item[data-section]');
-    const sections = Array.from(dockItems).map(item => document.getElementById(item.dataset.section)).filter(Boolean);
+    if (dockItems.length > 0) {
+        const sections = Array.from(dockItems).map(item => document.getElementById(item.dataset.section)).filter(Boolean);
 
-    const dockObserverOptions = {
-        root: null,
-        rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of screen
-        threshold: 0
-    };
+        const dockObserverOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', 
+            threshold: 0
+        };
 
-    const dockObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const sectionId = entry.target.id;
-                dockItems.forEach(item => {
-                    if (item.dataset.section === sectionId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
-                    }
-                });
-            }
+        const dockObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    dockItems.forEach(item => {
+                        if (item.dataset.section === sectionId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        }, dockObserverOptions);
+
+        sections.forEach(section => dockObserver.observe(section));
+
+        // Manual click override for dock items
+        dockItems.forEach(item => {
+            item.addEventListener('click', function() {
+                dockItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
-    }, dockObserverOptions);
-
-    sections.forEach(section => dockObserver.observe(section));
-
-    // Manual click override for dock items
-    dockItems.forEach(item => {
-        item.addEventListener('click', function() {
-            dockItems.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+    }
     
     // FAQ Accordion Functionality
     const faqButtons = document.querySelectorAll('section#faq button');
     
-    faqButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const parent = this.closest('.group');
-            const content = parent.querySelector('div');
-            
-            // Close other open items
-            document.querySelectorAll('section#faq .group').forEach(item => {
-                if (item !== parent) {
-                    item.classList.remove('open');
-                    item.querySelector('div').classList.add('hidden');
-                }
+    if (faqButtons.length > 0) {
+        faqButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const parent = this.closest('.group');
+                if (!parent) return;
+                
+                const content = parent.querySelector('div');
+                if (!content) return;
+                
+                // Close other open items
+                document.querySelectorAll('section#faq .group').forEach(item => {
+                    if (item !== parent) {
+                        item.classList.remove('open');
+                        const itemContent = item.querySelector('div');
+                        if (itemContent) itemContent.classList.add('hidden');
+                    }
+                });
+                
+                // Toggle current item
+                parent.classList.toggle('open');
+                content.classList.toggle('hidden');
             });
-            
-            // Toggle current item
-            parent.classList.toggle('open');
-            content.classList.toggle('hidden');
         });
-    });
+    }
     
     // Smooth scroll behavior for all anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
