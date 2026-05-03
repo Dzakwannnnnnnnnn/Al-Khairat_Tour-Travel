@@ -14,6 +14,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SavingsController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\GalleryController;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Product;
@@ -31,7 +32,7 @@ Route::get('/', function () {
     return view('welcome', compact('testimonials', 'products', 'slideshows', 'whatsapp'));
 })->name('home');
 
-Route::view('/galeri-video', 'gallery')->name('gallery');
+Route::get('/galeri', [GalleryController::class, 'publicIndex'])->name('gallery');
 
 Route::get('/panduan-tasuh', function () {
     $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
@@ -129,6 +130,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('slideshow', SlideshowController::class)->except(['show']);
         Route::post('slideshow/{slideshow}/toggle-active', [SlideshowController::class, 'toggleActive'])->name('slideshow.toggle-active');
         Route::post('slideshow/update-order', [SlideshowController::class, 'updateOrder'])->name('slideshow.update-order');
+
+        // Gallery Management
+        Route::resource('gallery', GalleryController::class)->except(['show', 'create', 'edit']);
+        Route::post('gallery/{gallery}/toggle-active', [GalleryController::class, 'toggleActive'])->name('gallery.toggle-active');
+        Route::post('gallery/update-order', [GalleryController::class, 'updateOrder'])->name('gallery.update-order');
 
         // Systems
         Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);

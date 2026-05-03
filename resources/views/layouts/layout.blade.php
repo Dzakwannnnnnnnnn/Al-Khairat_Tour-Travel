@@ -140,6 +140,8 @@
     <!-- Global Custom Confirm Modal -->
     @include('components.global-confirm')
     
+    @stack('modals')
+    
     <!-- Vite JS -->
     @vite(['resources/js/app.js'])
     @stack('scripts')

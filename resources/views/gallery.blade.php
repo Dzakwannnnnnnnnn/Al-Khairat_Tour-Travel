@@ -8,29 +8,22 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    @stack('styles')
+
+    <!-- Theme Detection Script -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
 </head>
 <body class="font-sans antialiased bg-cream text-charcoal">
     
-    <!-- Navbar (Simplified for Gallery) -->
-    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md shadow-sm border-b border-orange/10 py-3">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}" class="flex items-center space-x-2">
-                        <img src="{{ asset('images/logo.jpg') }}" alt="Al-Khairat Logo" class="h-14 md:h-16 w-auto object-contain">
-                    </a>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="{{ route('home') }}" class="text-charcoal hover:text-orange font-medium transition text-sm">Kembali ke Beranda</a>
-                    <a href="{{ route('home') }}#testimoni" class="text-charcoal hover:text-orange font-medium transition text-sm">Ulasan Jemaah</a>
-                    <a href="https://wa.me/6281253088788" target="_blank" class="btn-primary text-sm px-6 py-2">Hubungi Kami</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <a href="{{ route('home') }}" class="text-orange text-sm font-bold">Kembali &larr;</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Logo Header -->
+    <x-logo-header />
 
     <!-- Page Header -->
     <div class="pt-32 pb-16 md:pt-40 md:pb-24 bg-gradient-to-br from-cream to-white border-b border-orange/10 relative overflow-hidden">
@@ -40,7 +33,7 @@
                 <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
                 <span>Dokumentasi VVIP</span>
             </div>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-charcoal mb-4 md:mb-6 animate__animated animate__fadeInUp">Galeri <span class="text-gradient-sunset">Video Kami</span></h1>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-charcoal mb-4 md:mb-6 animate__animated animate__fadeInUp">Galeri <span class="text-gradient-sunset">Kami</span></h1>
             <p class="text-base md:text-lg text-brown max-w-2xl mx-auto mb-8 animate__animated animate__fadeInUp animate__delay-1s">
                 Saksikan langsung dokumentasi perjalanan spiritual yang hangat, nyaman, dan khusyu bersama jemaah Al-Khairat di Tanah Suci.
             </p>
@@ -52,69 +45,49 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Video Item 1 -->
+                @forelse($galleries as $item)
                 <div class="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div class="relative w-full pb-[56.25%] rounded-xl overflow-hidden mb-4 group cursor-pointer bg-black">
-                        <!-- Placeholder Thumbnail (unsplash) -->
-                        <img src="https://images.unsplash.com/photo-1591462035985-30fa1ea11ccf?auto=format&fit=crop&q=80" alt="Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-orange/90 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(205,116,39,0.5)] transform group-hover:scale-110 transition duration-300">
-                                <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
+                        @if($item->type === 'video' && $item->video_url)
+                        <a href="{{ $item->video_url }}" target="_blank" class="block w-full h-full">
+                            <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="absolute top-0 left-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-16 h-16 bg-orange/90 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(205,116,39,0.5)] transform group-hover:scale-110 transition duration-300">
+                                    <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
+                                </div>
                             </div>
-                        </div>
+                        </a>
+                        @else
+                        <img src="{{ Storage::url($item->image_path) }}" alt="{{ $item->title }}" class="absolute top-0 left-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
+                        @endif
                     </div>
-                    <h3 class="text-lg font-bold text-charcoal mb-1">Kenyamanan Hotel Bintang 5</h3>
-                    <p class="text-sm text-brown mb-3">Review langsung dari rombongan VIP bulan lalu terkait fasilitas hotel yang berjarak hanya 50 meter dari pelataran Masjidil Haram.</p>
+                    <h3 class="text-lg font-bold text-charcoal mb-1">{{ $item->title }}</h3>
+                    @if($item->description)
+                    <p class="text-sm text-brown mb-3">{{ $item->description }}</p>
+                    @endif
                     <div class="flex items-center justify-between text-xs font-semibold text-gray-500">
-                        <span>Oleh: Bpk. H. Sudirman</span>
-                        <span>Desember 2023</span>
+                        <span>{{ $item->created_at->format('d M Y') }}</span>
+                        <span class="uppercase tracking-tighter">{{ $item->type }}</span>
                     </div>
                 </div>
-
-                <!-- Video Item 2 -->
-                <div class="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative w-full pb-[56.25%] rounded-xl overflow-hidden mb-4 group cursor-pointer bg-black">
-                        <img src="https://images.unsplash.com/photo-1565552645632-d725e8bfc19a?auto=format&fit=crop&q=80" alt="Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-orange/90 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(205,116,39,0.5)] transform group-hover:scale-110 transition duration-300">
-                                <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
-                            </div>
-                        </div>
+                @empty
+                <div class="col-span-full py-20 text-center">
+                    <div class="w-20 h-20 bg-orange/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-lg font-bold text-charcoal mb-1">Momen Penuh Haru di Raudhah</h3>
-                    <p class="text-sm text-brown mb-3">Cuplikan eksklusif bimbingan Muthawwif kami saat memandu jamaah berdoa di Raudhah, Masjid Nabawi.</p>
-                    <div class="flex items-center justify-between text-xs font-semibold text-gray-500">
-                        <span>Oleh: Tim Dokumentasi</span>
-                        <span>Oktober 2023</span>
-                    </div>
+                    <h3 class="text-xl font-bold text-charcoal">Belum ada dokumentasi</h3>
+                    <p class="text-brown">Kami sedang menyiapkan momen-momen indah untuk dibagikan.</p>
                 </div>
-
-                <!-- Video Item 3 -->
-                <div class="bg-white p-4 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative w-full pb-[56.25%] rounded-xl overflow-hidden mb-4 group cursor-pointer bg-black">
-                        <img src="https://images.unsplash.com/photo-1564769662543-b1d556ad33df?auto=format&fit=crop&q=80" alt="Thumbnail" class="absolute top-0 left-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500 transform group-hover:scale-105">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="w-16 h-16 bg-orange/90 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(205,116,39,0.5)] transform group-hover:scale-110 transition duration-300">
-                                <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 class="text-lg font-bold text-charcoal mb-1">Ulasan Kereta Cepat Haramain</h3>
-                    <p class="text-sm text-brown mb-3">Pengalaman jamaah Al-Khairat menggunakan kereta cepat peluru Haramain dari Madinah menuju Makkah (Lebih ringkas & tidak letih).</p>
-                    <div class="flex items-center justify-between text-xs font-semibold text-gray-500">
-                        <span>Oleh: Keluarga Ibu Aisyah</span>
-                        <span>Januari 2024</span>
-                    </div>
-                </div>
-
-                <!-- You can add more loops here from a Database if you build a Video model later -->
+                @endforelse
 
             </div>
             
             <div class="mt-16 text-center">
-                <a href="https://youtube.com" target="_blank" class="inline-flex items-center space-x-2 bg-red-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl hover:bg-red-700 transition transform hover:-translate-y-1">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
-                    <span>Kunjungi Channel YouTube Kami</span>
+                <a href="https://www.instagram.com/alkhairat_tour/" target="_blank" class="inline-flex items-center space-x-3 text-white px-10 py-4 rounded-full font-black shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 transform" style="background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span class="uppercase tracking-widest text-xs">Ikuti Instagram Kami</span>
                 </a>
             </div>
         </div>
@@ -188,8 +161,32 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+          </footer>
+    
+    <!-- Shared Navigation Dock -->
+    @include('components.dock-navigation')
 
+    @stack('scripts')
+    
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find both desktop and mobile gallery links
+            const galleryLinks = document.querySelectorAll('a[href="{{ route('gallery') }}"]');
+            galleryLinks.forEach(link => {
+                if (link.classList.contains('dock-item')) {
+                    link.classList.add('active');
+                }
+                // For mobile menu items
+                if (link.classList.contains('mobile-menu-item')) {
+                    link.classList.add('text-orange');
+                    const iconBox = link.querySelector('.menu-icon-box');
+                    if (iconBox) iconBox.classList.add('bg-orange/20', 'border-orange/30');
+                }
+            });
+        });
+    </script>
+    @endpush
 </body>
 </html>
+

@@ -48,7 +48,7 @@
 
         <!-- Galeri / Video -->
         <a href="{{ route('gallery') }}" class="dock-item group" data-section="gallery">
-            <span class="dock-label">Video</span>
+            <span class="dock-label">Galeri</span>
             <svg class="dock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
             </svg>
@@ -161,7 +161,7 @@
 
             <a href="{{ route('gallery') }}" class="mobile-menu-item group" onclick="window.toggleMobileMenu()">
                 <div class="menu-icon-box"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg></div>
-                <span class="text-sm font-bold">Video</span>
+                <span class="text-sm font-bold">Galeri</span>
             </a>
 
             <a href="{{ route('home') }}#about" class="mobile-menu-item group" onclick="window.toggleMobileMenu()">

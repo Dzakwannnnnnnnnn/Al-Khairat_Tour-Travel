@@ -34,7 +34,7 @@ class SlideshowController extends Controller
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'image_url' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'is_active' => 'boolean',
         ]);
 
@@ -73,7 +73,7 @@ class SlideshowController extends Controller
             'title' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'image_url' => 'nullable|url',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'is_active' => 'boolean',
         ]);
 
