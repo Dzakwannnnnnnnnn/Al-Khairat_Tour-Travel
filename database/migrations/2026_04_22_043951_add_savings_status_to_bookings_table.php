@@ -12,9 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        // Skip ENUM alteration for SQLite (testing) - SQLite uses TEXT for all string columns
+        if (DB::getDriverName() !== 'sqlite') {
             DB::statement("ALTER TABLE bookings MODIFY COLUMN status ENUM('pending', 'dp_paid', 'fully_paid', 'completed', 'cancelled', 'savings') NOT NULL DEFAULT 'pending'");
-        });
+        }
     }
 
     /**
@@ -22,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
+        if (DB::getDriverName() !== 'sqlite') {
             DB::statement("ALTER TABLE bookings MODIFY COLUMN status ENUM('pending', 'dp_paid', 'fully_paid', 'completed', 'cancelled') NOT NULL DEFAULT 'pending'");
-        });
+        }
     }
 };

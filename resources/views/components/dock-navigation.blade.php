@@ -198,19 +198,19 @@
         <div class="mt-8 pt-8 border-t border-white/10 grid grid-cols-3 gap-4">
             <!-- Tools Mini Grid -->
             <button onclick="window.toggleTheme()" class="mobile-tool-btn group">
-                <div class="tool-icon-box">
+                <div class="tool-icon-box" style="width:3rem;height:3rem;border-radius:9999px;background:rgba(224,120,86,0.12);border:1.5px solid rgba(224,120,86,0.3);display:flex;align-items:center;justify-content:center;">
                     <svg class="w-6 h-6 theme-icon-moon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </div>
                 <span class="text-[10px] font-bold uppercase tracking-widest mt-2">Tema</span>
             </button>
 
             <button onclick="window.openVoiceSearch(); window.toggleMobileMenu();" class="mobile-tool-btn group">
-                <div class="tool-icon-box"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg></div>
+                <div class="tool-icon-box" style="width:3rem;height:3rem;border-radius:9999px;background:rgba(224,120,86,0.12);border:1.5px solid rgba(224,120,86,0.3);display:flex;align-items:center;justify-content:center;"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg></div>
                 <span class="text-[10px] font-bold uppercase tracking-widest mt-2">Suara</span>
             </button>
 
             <button onclick="window.toggleSearch(); window.toggleMobileMenu();" class="mobile-tool-btn group">
-                <div class="tool-icon-box"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
+                <div class="tool-icon-box" style="width:3rem;height:3rem;border-radius:9999px;background:rgba(224,120,86,0.12);border:1.5px solid rgba(224,120,86,0.3);display:flex;align-items:center;justify-content:center;"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div>
                 <span class="text-[10px] font-bold uppercase tracking-widest mt-2">Cari</span>
             </button>
         </div>

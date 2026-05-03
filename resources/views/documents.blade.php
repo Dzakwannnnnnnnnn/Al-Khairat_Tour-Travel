@@ -208,7 +208,7 @@
             <div>
                 <label class="block text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-2 px-1">File (PDF/JPG/PNG) <span class="text-red-500">*</span></label>
                 <input type="file" name="file_path" required class="w-full px-5 py-3.5 bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl text-xs font-bold text-slate-400 file:hidden cursor-pointer hover:border-teal-500 dark:hover:border-teal-500 transition-all shadow-sm">
-                <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter px-1">* Maksimal 5MB</p>
+                <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-tighter px-1">* Maksimal 10MB</p>
             </div>
 
             <div>

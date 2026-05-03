@@ -52,7 +52,7 @@
 }
 
 /* Auto Dark Mode for Hardcoded Utilities */
-.dark .bg-white, .dark .bg-white\/80, .dark .bg-slate-50, .dark .bg-slate-50\/80, .dark .bg-slate-50\/50, .dark .bg-slate-50\/30, .dark .bg-gray-50, .dark .bg-gray-100, .dark .bg-slate-100 {
+.dark .bg-white, .dark .bg-white\/80, .dark .bg-white\/90, .dark .bg-slate-50, .dark .bg-slate-50\/80, .dark .bg-slate-50\/50, .dark .bg-slate-50\/30, .dark .bg-gray-50, .dark .bg-gray-100, .dark .bg-slate-100 {
     background-color: var(--color-surface) !important;
 }
 
@@ -578,7 +578,10 @@ body {
 }
 
 .tool-icon-box {
-    @apply w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:bg-orange/10 group-hover:border-orange/20;
+    @apply w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110;
+    background-color: rgba(224, 120, 86, 0.12);
+    border: 1.5px solid rgba(224, 120, 86, 0.25);
+    box-shadow: 0 2px 8px rgba(224, 120, 86, 0.08);
 }
 
 .dock-active-dot {

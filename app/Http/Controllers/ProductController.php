@@ -54,7 +54,7 @@ class ProductController extends Controller
             'features' => ['nullable', 'string'],
             'stock' => ['required', 'integer', 'min:0', 'max:1000000'],
             'status' => ['required', 'in:active,inactive'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'guide_phone' => ['nullable', 'string', 'max:20'],
         ]);
 
@@ -96,7 +96,7 @@ class ProductController extends Controller
             'features' => ['nullable', 'string'],
             'stock' => ['required', 'integer', 'min:0', 'max:1000000'],
             'status' => ['required', 'in:active,inactive'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'guide_phone' => ['nullable', 'string', 'max:20'],
         ]);
 

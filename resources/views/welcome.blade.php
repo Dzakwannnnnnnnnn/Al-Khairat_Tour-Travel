@@ -129,9 +129,9 @@
                         <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
                         <span>Tentang Perusahaan</span>
                     </div>
-                    <h2 class="text-heading mb-4 text-text">Siapa <span class="text-gradient-sunset">Al-Khairat?</span></h2>
+                    <h2 class="text-heading mb-4 text-text">Tentang <span class="text-gradient-sunset">Al-Khairat</span></h2>
                     <p class="text-text/80 mb-6 leading-relaxed">
-                        Sejak didirikan, Al-Khairat Tour & Travel berkomitmen untuk menjadi pendamping spiritual terbaik Anda menuju Baitullah. Kami tidak sekadar menawarkan perjalanan, melainkan membimbing pengalaman spiritual yang dilayani dengan ketulusan hati.
+                        Al-Khairat Tour & Travel hadir sebagai mitra perjalanan ibadah Umrah dan Haji yang terpercaya. Dengan pengalaman melayani ribuan jamaah, kami memastikan setiap perjalanan Anda menuju Baitullah berjalan aman, nyaman, dan penuh kekhusyukan.
                     </p>
                     <div class="space-y-4 mb-8">
                         <div class="flex items-center space-x-3 text-text font-semibold border-b border-border pb-3">
@@ -146,18 +146,25 @@
                     </div>
                     
                     <!-- Integrasi Izin Resmi PPIU -->
-                    <div class="bg-surface border-l-4 border-green-500 p-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">
-                        <div class="flex items-start justify-between flex-wrap gap-4">
-                            <div>
-                                <h4 class="font-bold text-text text-lg flex items-center space-x-2">
-                                    <span>Berizin Resmi Kemenag</span>
-                                    <svg class="text-green-500 w-5 h-5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                </h4>
-                                <p class="text-xs text-text/70 mb-3 mt-1">Kami terdaftar sebagai Penyelenggara Perjalanan Ibadah Umrah (PPIU) resmi untuk menjamin keamanan jamaah.</p>
-                                <a href="https://simpu.kemenag.go.id" target="_blank" class="inline-flex items-center space-x-2 text-sm text-green-600 dark:text-green-400 font-bold hover:text-green-800 dark:hover:text-green-300 transition group">
-                                    <span>Verifikasi via Siskohat Kemenag</span>
-                                    <svg class="w-4 h-4 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12H9m12 0l-3-3m3 3l-3 3M3 12a9 9 0 0118.001 0"></path></svg>
-                                </a>
+                    <div class="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 border border-green-200 dark:border-green-800/50 p-6 rounded-2xl shadow-lg hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 transform hover:-translate-y-1 mb-2 group">
+                        <!-- Subtle Background Element -->
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-green-500/10 rounded-full blur-2xl group-hover:bg-green-500/20 transition-all duration-500"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-800/50 flex items-center justify-center">
+                                    <svg class="text-green-600 dark:text-green-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </div>
+                                <h4 class="font-bold text-green-900 dark:text-green-100 text-lg">Berizin Resmi Kemenag</h4>
+                            </div>
+                            
+                            <p class="text-sm text-green-800/70 dark:text-green-200/70 mb-4 leading-relaxed">
+                                Kami terdaftar sebagai Penyelenggara Perjalanan Ibadah Umrah (PPIU) resmi untuk menjamin keamanan dan kenyamanan perjalanan ibadah Anda.
+                            </p>
+                            
+                            <div class="inline-flex items-center space-x-2 bg-green-100 dark:bg-green-800/40 px-3 py-1.5 rounded-lg text-xs font-bold text-green-700 dark:text-green-300 border border-green-200 dark:border-green-700/50">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                <span>Terverifikasi via Siskohat Kemenag</span>
                             </div>
                         </div>
                     </div>
@@ -597,51 +604,92 @@
                 </p>
             </div>
 
-            <div class="space-y-3 md:space-y-4">
+            <div class="space-y-3 md:space-y-4" id="faq-list">
                 <!-- FAQ 1 -->
-                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="0">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                <div class="faq-item bg-surface rounded-2xl border-2 border-border hover:border-orange/50 overflow-hidden transition scroll-animate" data-animation="slide-up" data-delay="0">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 md:p-6 text-left flex justify-between items-center hover:bg-bg transition cursor-pointer">
                         <span class="font-serif font-bold text-text text-sm md:text-lg">Berapa biaya yang diperlukan?</span>
-                        <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
+                        <span class="faq-icon text-xl md:text-2xl text-orange transition-transform duration-300 flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
-                        Biaya umroh tergantung pada paket yang Anda pilih. Hubungi kami untuk penawaran terbaik sesuai dengan budget Anda.
+                    <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease, padding 0.4s ease;padding:0 1.25rem;">
+                        <div class="pb-5 md:pb-6 pt-3 text-text/70 text-sm md:text-base border-t border-border leading-relaxed">
+                            Biaya umroh tergantung pada paket yang Anda pilih. Hubungi kami untuk penawaran terbaik sesuai dengan budget Anda.
+                        </div>
                     </div>
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="100">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                <div class="faq-item bg-surface rounded-2xl border-2 border-border hover:border-orange/50 overflow-hidden transition scroll-animate" data-animation="slide-up" data-delay="100">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 md:p-6 text-left flex justify-between items-center hover:bg-bg transition cursor-pointer">
                         <span class="font-serif font-bold text-text text-sm md:text-lg">Apakah visa sudah termasuk?</span>
-                        <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
+                        <span class="faq-icon text-xl md:text-2xl text-orange transition-transform duration-300 flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
-                        Ya, semua paket kami sudah termasuk biaya visa dan asuransi perjalanan.
+                    <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease, padding 0.4s ease;padding:0 1.25rem;">
+                        <div class="pb-5 md:pb-6 pt-3 text-text/70 text-sm md:text-base border-t border-border leading-relaxed">
+                            Ya, semua paket kami sudah termasuk biaya visa dan asuransi perjalanan.
+                        </div>
                     </div>
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="200">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                <div class="faq-item bg-surface rounded-2xl border-2 border-border hover:border-orange/50 overflow-hidden transition scroll-animate" data-animation="slide-up" data-delay="200">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 md:p-6 text-left flex justify-between items-center hover:bg-bg transition cursor-pointer">
                         <span class="font-serif font-bold text-text text-sm md:text-lg">Berapa orang minimal untuk keberangkatan?</span>
-                        <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
+                        <span class="faq-icon text-xl md:text-2xl text-orange transition-transform duration-300 flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
-                        Tidak ada minimal peserta. Kami berangkat setiap bulan dengan jadwal terjadwal.
+                    <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease, padding 0.4s ease;padding:0 1.25rem;">
+                        <div class="pb-5 md:pb-6 pt-3 text-text/70 text-sm md:text-base border-t border-border leading-relaxed">
+                            Tidak ada minimal peserta. Kami berangkat setiap bulan dengan jadwal terjadwal.
+                        </div>
                     </div>
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="bg-surface rounded-lg md:rounded-lg border-2 border-border hover:border-orange/50 overflow-hidden group transition scroll-animate" data-animation="slide-up" data-delay="300">
-                    <button class="w-full p-4 md:p-6 text-left flex justify-between items-center hover:bg-bg transition">
+                <div class="faq-item bg-surface rounded-2xl border-2 border-border hover:border-orange/50 overflow-hidden transition scroll-animate" data-animation="slide-up" data-delay="300">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 md:p-6 text-left flex justify-between items-center hover:bg-bg transition cursor-pointer">
                         <span class="font-serif font-bold text-text text-sm md:text-lg">Apakah ada asuransi kesehatan?</span>
-                        <span class="text-xl md:text-2xl text-orange group-open:rotate-180 transition flex-shrink-0 ml-3">+</span>
+                        <span class="faq-icon text-xl md:text-2xl text-orange transition-transform duration-300 flex-shrink-0 ml-3">+</span>
                     </button>
-                    <div class="hidden group-open:block px-4 md:px-6 pb-4 md:pb-6 text-text/70 text-xs md:text-base border-t border-border">
-                        Ya, semua peserta mendapatkan asuransi kesehatan perjalanan yang komprehensif.
+                    <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease, padding 0.4s ease;padding:0 1.25rem;">
+                        <div class="pb-5 md:pb-6 pt-3 text-text/70 text-sm md:text-base border-t border-border leading-relaxed">
+                            Ya, semua peserta mendapatkan asuransi kesehatan perjalanan yang komprehensif.
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <script>
+                function toggleFaq(btn) {
+                    const item = btn.closest('.faq-item');
+                    const answer = item.querySelector('.faq-answer');
+                    const icon = btn.querySelector('.faq-icon');
+                    const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+                    // Close all others
+                    document.querySelectorAll('.faq-item').forEach(other => {
+                        if (other !== item) {
+                            const otherAnswer = other.querySelector('.faq-answer');
+                            const otherIcon = other.querySelector('.faq-icon');
+                            otherAnswer.style.maxHeight = '0px';
+                            otherAnswer.style.padding = '0 1.25rem';
+                            otherIcon.style.transform = 'rotate(0deg)';
+                            otherIcon.textContent = '+';
+                        }
+                    });
+
+                    if (isOpen) {
+                        answer.style.maxHeight = '0px';
+                        answer.style.padding = '0 1.25rem';
+                        icon.style.transform = 'rotate(0deg)';
+                        icon.textContent = '+';
+                    } else {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        answer.style.padding = '0 1.25rem';
+                        icon.style.transform = 'rotate(45deg)';
+                        icon.textContent = '+';
+                    }
+                }
+            </script>
         </div>
     </section>
 

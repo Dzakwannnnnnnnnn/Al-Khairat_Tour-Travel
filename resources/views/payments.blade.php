@@ -264,7 +264,7 @@
                 <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Unggah Doc Penunjang / Bukti (Opsional)</label>
                 <div class="relative group">
                     <input type="file" name="proof_image" accept="image/*" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-bold text-slate-400 file:hidden cursor-pointer hover:border-orange transition-all">
-                    <p class="mt-2 text-[10px] text-slate-400 dark:text-slate-500 font-medium">Format: JPG, PNG (Max 2MB)</p>
+                    <p class="mt-2 text-[10px] text-slate-400 dark:text-slate-500 font-medium">Format: JPG, PNG (Max 10MB)</p>
                 </div>
             </div>
             

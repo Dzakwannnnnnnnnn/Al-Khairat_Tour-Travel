@@ -83,7 +83,7 @@ class PaymentController extends Controller
             'payment_method' => 'required|string|max:255',
             'payment_date' => 'required|date',
             'status' => 'required|in:pending,verified,rejected',
-            'proof_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'proof_image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
         $data = $request->except(['proof_image']);
@@ -113,7 +113,7 @@ class PaymentController extends Controller
             'payment_method' => 'required|string|max:255',
             'payment_date' => 'required|date',
             'status' => 'required|in:pending,verified,rejected',
-            'proof_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'proof_image' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
         ]);
 
         $data = $request->except(['proof_image']);

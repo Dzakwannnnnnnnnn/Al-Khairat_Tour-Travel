@@ -6,7 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 class AuthController extends Controller
 {
     /**
@@ -111,5 +112,47 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login')->with('success', 'Anda telah berhasil logout.');
+    }
+    /**
+     * Redirect to Google OAuth.
+     */
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Handle Google Callback.
+     */
+    public function handleGoogleCallback(Request $request)
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+            
+            $user = User::where('email', $googleUser->email)->first();
+
+            if ($user) {
+                Auth::login($user);
+            } else {
+                $user = User::create([
+                    'name' => $googleUser->name,
+                    'nickname' => explode(' ', $googleUser->name)[0] ?? $googleUser->name,
+                    'email' => $googleUser->email,
+                    'password' => Hash::make(Str::random(16)),
+                    'role' => 'user',
+                ]);
+                $user->markEmailAsVerified(); // Since it comes from Google, we can assume it's verified
+                Auth::login($user);
+            }
+
+            if (session()->has('intended_product')) {
+                $productId = session()->pull('intended_product');
+                return redirect()->route('home')->with(['success' => 'Login berhasil!', 'open_booking' => $productId]);
+            }
+
+            return redirect()->route('home')->with('success', 'Login berhasil!');
+        } catch (\Exception $e) {
+            return redirect()->route('login')->withErrors(['email' => 'Gagal login menggunakan Google. Silakan coba lagi.']);
+        }
     }
 }

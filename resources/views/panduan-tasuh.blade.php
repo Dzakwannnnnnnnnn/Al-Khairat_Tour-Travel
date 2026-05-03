@@ -63,7 +63,7 @@
                         <!-- Tasuh Umrah - Dokumen Perjalanan -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="0">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">01</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">01</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -88,7 +88,7 @@
                         <!-- Tasuh Umrah - Checklist Perlengkapan -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="100">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">02</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">02</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -113,7 +113,7 @@
                         <!-- Tasuh Umrah - Tata Cara -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="200">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">03</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">03</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -138,7 +138,7 @@
                         <!-- Tasuh Umrah - FAQ Umrah -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="300">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">04</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">04</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -163,7 +163,7 @@
                         <!-- Tasuh Umrah - Doa & Dzikir -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="400">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">05</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">05</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -188,7 +188,7 @@
                         <!-- Tasuh Umrah - Tips & Trik -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="500">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">06</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">06</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -218,7 +218,7 @@
                         <!-- Step 01: Administrasi -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="0">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">01</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">01</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -243,7 +243,7 @@
                         <!-- Step 02: Persiapan -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="100">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">02</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">02</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -268,7 +268,7 @@
                         <!-- Step 03: Tarwiyah -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="200">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">03</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">03</span>
                             </div>
                             <div class="flex items-start justify-between mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -294,7 +294,7 @@
                         <!-- Step 04: Wukuf -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="300">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">04</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">04</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -319,7 +319,7 @@
                         <!-- Step 05: Muzdalifah -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="400">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">05</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">05</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -344,7 +344,7 @@
                         <!-- Step 06: Tawaf Ifadhah -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="500">
                             <div class="absolute top-0 right-0 p-4">
-                                <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">06</span>
+                                <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">06</span>
                             </div>
                             <div class="flex items-start mb-4">
                                 <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -369,7 +369,7 @@
                         <!-- Step 07: Hari Tasyrik -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="600">
                                 <div class="absolute top-0 right-0 p-4">
-                                    <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">07</span>
+                                    <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">07</span>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">
@@ -394,7 +394,7 @@
                         <!-- Step 08: Wada -->
                         <div class="glass-dashboard rounded-2xl p-8 border border-orange/20 hover:border-orange hover:shadow-xl transition-all duration-300 group scroll-animate relative overflow-hidden" data-animation="slide-up" data-delay="700">
                                 <div class="absolute top-0 right-0 p-4">
-                                    <span class="text-[40px] font-black text-orange/5 select-none group-hover:text-orange/10 transition-colors">08</span>
+                                    <span class="text-[40px] font-black text-orange/15 select-none group-hover:text-orange/25 transition-colors">08</span>
                                 </div>
                                 <div class="flex items-start mb-4">
                                     <div class="w-14 h-14 rounded-xl bg-gradient-sunset text-white flex items-center justify-center text-2xl group-hover:scale-110 transition-transform filter-none brightness-110">

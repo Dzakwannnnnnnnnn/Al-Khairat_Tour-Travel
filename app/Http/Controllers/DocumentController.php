@@ -21,7 +21,7 @@ class DocumentController extends Controller
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
             'document_type' => 'required|string|max:255',
-            'file_path' => 'required|file|max:5120', // Max 5MB
+            'file_path' => 'required|file|max:10240', // Max 10MB
             'status' => 'required|in:pending,approved,rejected',
             'notes' => 'nullable|string',
         ]);
@@ -43,7 +43,7 @@ class DocumentController extends Controller
         $request->validate([
             'booking_id' => 'required|exists:bookings,id',
             'document_type' => 'required|string|max:255',
-            'file_path' => 'nullable|file|max:5120',
+            'file_path' => 'nullable|file|max:10240',
             'status' => 'required|in:pending,approved,rejected',
             'notes' => 'nullable|string',
         ]);

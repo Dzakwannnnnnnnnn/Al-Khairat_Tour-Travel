@@ -74,13 +74,19 @@
 
             <!-- Pilgrims List -->
             <div class="overflow-x-auto">
-                <table class="w-full text-left">
+                <table class="w-full text-left" style="table-layout:fixed;">
+                    <colgroup>
+                        <col style="width:35%;">
+                        <col style="width:20%;">
+                        <col style="width:25%;">
+                        <col style="width:20%;">
+                    </colgroup>
                     <thead>
                         <tr class="text-[10px] uppercase font-black text-slate-400 tracking-widest border-b border-slate-50">
                             <th class="px-6 py-4">Nama Jamaah</th>
                             <th class="px-6 py-4">Varian Kamar</th>
                             <th class="px-6 py-4">Harga</th>
-                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4 text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-50">
@@ -105,7 +111,7 @@
                                 <td class="px-6 py-5">
                                     <p class="text-sm font-bold text-slate-800">Rp {{ number_format($booking->total_price, 0, ',', '.') }}</p>
                                 </td>
-                                <td class="px-6 py-5">
+                                <td class="px-6 py-5 text-center">
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border {{ $statusColors[$booking->status] ?? 'bg-gray-100' }}">
                                         {{ $statusLabels[$booking->status] ?? $booking->status }}
                                     </span>

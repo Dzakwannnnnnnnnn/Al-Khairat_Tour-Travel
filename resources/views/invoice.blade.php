@@ -9,6 +9,36 @@
     @vite(['resources/css/app.css'])
     @stack('styles')
 
+    <style>
+        /* Force full dark on invoice page */
+        .dark .invoice-section {
+            background-image: none !important;
+            background-color: #121212 !important;
+        }
+        .dark .invoice-card-light {
+            background-color: #1E1E1E !important;
+            background-image: none !important;
+        }
+        /* Catch-all: any element inside main with white-ish or light bg */
+        html.dark main [class*="bg-white"],
+        html.dark main [class*="from-emerald-50"],
+        html.dark main [class*="from-emerald-50"] {
+            background-color: #1E1E1E !important;
+            background-image: none !important;
+        }
+        html.dark main [class*="bg-gradient-to-br"]:not(.bg-gradient-sunset) {
+            background-image: none !important;
+            background-color: #121212 !important;
+        }
+        html.dark main [class*="bg-amber-50"],
+        html.dark main [class*="bg-blue-50"],
+        html.dark main [class*="bg-yellow-50"],
+        html.dark main [class*="bg-red-50"],
+        html.dark main [class*="bg-emerald-50"] {
+            background-color: #1a1a1a !important;
+        }
+    </style>
+
     <!-- Theme Detection Script -->
     <script>
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -83,7 +113,7 @@
             </div>
 
             <!-- Invoice Card -->
-            <div class="bg-surface rounded-[2.5rem] border border-border shadow-2xl overflow-hidden mb-8 scroll-animate" data-animation="slide-up">
+            <div class="bg-surface dark:bg-[#0f0f0f] rounded-[2.5rem] border border-border shadow-2xl overflow-hidden mb-8 scroll-animate" data-animation="slide-up">
                 <!-- Header Gradient -->
                 <div class="bg-gradient-sunset p-8 text-white relative overflow-hidden">
                     <div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
@@ -147,7 +177,7 @@
                     </div>
 
                     @if($payment->status === 'verified')
-                    <div class="rounded-[2rem] border border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-orange-50 p-6 md:p-8">
+                    <div class="invoice-section rounded-[2rem] border border-emerald-200 dark:border-emerald-900/30 bg-gradient-to-br from-emerald-50 via-white to-orange-50 p-6 md:p-8">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
                             <div>
                                 <span class="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-4 py-1.5 text-[11px] font-black uppercase tracking-[0.2em] text-emerald-700">
@@ -157,7 +187,7 @@
                                 <h3 class="mt-4 text-2xl md:text-3xl font-serif font-bold text-text">Detail Paket Yang Anda Pesan</h3>
                                 <p class="mt-2 max-w-2xl text-sm md:text-base text-text/65">Ringkasan ini memudahkan Anda melihat apa saja yang termasuk di dalam paket setelah pembayaran berhasil diverifikasi.</p>
                             </div>
-                            <div class="rounded-3xl border border-emerald-200 bg-white/90 px-5 py-4 shadow-sm">
+                            <div class="invoice-card-light rounded-3xl border border-emerald-200 dark:border-emerald-900/30 bg-white/90 px-5 py-4 shadow-sm">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40">Pemesan</p>
                                 <p class="mt-2 text-lg font-bold text-text">{{ $displayOrdererName }}</p>
                                 <p class="text-sm text-text/60">{{ $primaryBooking->orderer_email ?? $primaryBooking->user->email }}</p>
@@ -166,31 +196,31 @@
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
-                            <div class="rounded-3xl bg-white/90 border border-border p-5">
+                            <div class="invoice-card-light rounded-3xl bg-white/90 border border-border p-5">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40">Nama Paket</p>
                                 <p class="mt-3 text-lg font-bold text-text uppercase">{{ $product->name }}</p>
                             </div>
-                            <div class="rounded-3xl bg-white/90 border border-border p-5">
+                            <div class="invoice-card-light rounded-3xl bg-white/90 border border-border p-5">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40">Kategori</p>
                                 <p class="mt-3 text-lg font-bold text-text">{{ $product->category }}</p>
                             </div>
-                            <div class="rounded-3xl bg-white/90 border border-border p-5">
+                            <div class="invoice-card-light rounded-3xl bg-white/90 border border-border p-5">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40">Durasi</p>
                                 <p class="mt-3 text-lg font-bold text-text">{{ $product->duration ?? '-' }}</p>
                             </div>
-                            <div class="rounded-3xl bg-white/90 border border-border p-5">
+                            <div class="invoice-card-light rounded-3xl bg-white/90 border border-border p-5">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40">Hotel / Akomodasi</p>
                                 <p class="mt-3 text-lg font-bold text-text">{{ $hotelFeature ?? 'Sesuai rincian paket & penempatan grup' }}</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
-                            <div class="rounded-[1.75rem] bg-white/90 border border-border p-6">
+                            <div class="invoice-card-light rounded-[1.75rem] bg-white/90 border border-border p-6">
                                 <h4 class="text-sm font-black uppercase tracking-[0.2em] text-text/45 mb-4">Fasilitas Yang Termasuk</h4>
                                 @if($packageFeatures->isNotEmpty())
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                         @foreach($packageFeatures as $feature)
-                                        <div class="flex items-start gap-3 rounded-2xl bg-emerald-50/70 px-4 py-3 border border-emerald-100">
+                                        <div class="flex items-start gap-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-900/20 px-4 py-3 border border-emerald-100 dark:border-emerald-800/50">
                                             <span class="mt-0.5 text-emerald-600 font-black">✓</span>
                                             <span class="text-sm font-medium text-text/80">{{ $feature }}</span>
                                         </div>
@@ -201,7 +231,7 @@
                                 @endif
                             </div>
 
-                            <div class="rounded-[1.75rem] bg-charcoal text-white p-6">
+                            <div class="rounded-[1.75rem] bg-[#2C2416] dark:bg-[#1a1a1a] text-white p-6">
                                 <h4 class="text-sm font-black uppercase tracking-[0.2em] text-white/60 mb-4">Info Lanjutan</h4>
                                 <div class="space-y-4 text-sm">
                                     <div>
@@ -237,7 +267,7 @@
 
                     {{-- Tour Guide Consultation Section (Verified Only) --}}
                     @if($payment->status === 'verified' && $guideContact)
-                    <div class="rounded-[2rem] border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 md:p-8 mt-2">
+                    <div class="invoice-section rounded-[2rem] border-2 border-emerald-200 dark:border-emerald-900/30 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 md:p-8 mt-2">
                         <div class="flex items-center gap-3 mb-5">
                             <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-2xl">👨‍🏫</div>
                             <div>
@@ -248,14 +278,7 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                             {{-- Guide Contact Card --}}
-                            <div class="rounded-2xl bg-white/90 border border-emerald-100 p-5">
-                                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40 mb-2">Kontak Pembimbing</p>
-                                <p class="text-lg font-bold text-emerald-700 font-mono">+{{ ltrim($guideContact, '+') }}</p>
-                                <p class="text-xs text-text/50 mt-1">WhatsApp resmi tour guide paket Anda</p>
-                            </div>
-
-                            {{-- Consultation Hours Card --}}
-                            <div class="rounded-2xl bg-white/90 border border-emerald-100 p-5">
+                            <div class="invoice-card-light rounded-2xl bg-white/90 border border-emerald-100 dark:border-emerald-900/30 p-5">
                                 <p class="text-[10px] font-black uppercase tracking-[0.2em] text-text/40 mb-2">Jam Konsultasi</p>
                                 <p class="text-lg font-bold text-text">09:00 – 17:00 WITA</p>
                                 <p class="text-xs text-text/50 mt-1">Senin – Sabtu (diluar jam makan)</p>
@@ -274,7 +297,7 @@
                         </a>
 
                         {{-- Etiquette Notice --}}
-                        <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
+                        <div class="invoice-card-light rounded-xl bg-amber-50 border border-amber-200 dark:border-amber-800/50 p-4">
                             <p class="text-xs font-bold text-amber-800 uppercase tracking-widest mb-2">📋 Etika Konsultasi</p>
                             <ul class="text-xs text-amber-900/80 space-y-1">
                                 <li>• Selalu cantumkan <strong>kode booking</strong> dan <strong>nama Anda</strong> saat menghubungi guide</li>
@@ -325,7 +348,7 @@
                         <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
 
                         @if($primaryBooking->status === 'dp_paid')
-                        <div class="mb-6 rounded-3xl border border-blue-200 bg-blue-50 px-5 py-4 text-blue-900 animate-[pulse_3s_infinite]">
+                        <div class="mb-6 rounded-3xl border border-blue-200 dark:border-blue-800/50 bg-blue-50 dark:bg-blue-900/10 px-5 py-4 text-blue-900 dark:text-blue-300 animate-[pulse_3s_infinite]">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 text-xl">💳</span>
                                 <div>
@@ -337,7 +360,7 @@
                             </div>
                         </div>
                         @elseif($payment->status === 'pending')
-                        <div class="mb-6 rounded-3xl border border-yellow-300/60 bg-yellow-50 px-5 py-4 text-yellow-900">
+                        <div class="mb-6 rounded-3xl border border-yellow-300/60 dark:border-yellow-700/50 bg-yellow-50 dark:bg-yellow-900/10 px-5 py-4 text-yellow-900 dark:text-yellow-300">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 inline-flex h-5 w-5 rounded-full border-2 border-yellow-300 border-t-orange animate-spin"></span>
                                 <div>
@@ -349,7 +372,7 @@
                             </div>
                         </div>
                         @elseif($payment->status === 'rejected')
-                        <div class="mb-6 rounded-3xl border border-red-300/60 bg-red-50 px-5 py-5 text-red-900">
+                        <div class="mb-6 rounded-3xl border border-red-300/60 dark:border-red-800/50 bg-red-50 dark:bg-red-900/10 px-5 py-5 text-red-900 dark:text-red-300">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">!</span>
                                 <div>
@@ -373,10 +396,10 @@
                                     <p class="text-2xl font-bold text-emerald-600">Pembayaran Anda telah lunas</p>
                                     <p class="text-sm text-text/60 mt-2 max-w-xl">Simpan invoice ini sebagai bukti pembayaran resmi. Tim Al-Khairat akan menghubungi Anda untuk langkah keberangkatan selanjutnya.</p>
                                 </div>
-                                <div class="rounded-3xl border border-emerald-200 bg-emerald-50 px-5 py-4 min-w-[220px]">
-                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700/70">Metode Pembayaran</p>
-                                    <p class="mt-2 text-lg font-bold text-emerald-800">{{ $payment->payment_method }}</p>
-                                    <p class="mt-1 text-sm text-emerald-700/80">Total: Rp {{ number_format($payment->amount, 0, ',', '.') }}</p>
+                                <div class="rounded-3xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-900/20 px-5 py-4 min-w-[220px]">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700/70 dark:text-emerald-400/70">Metode Pembayaran</p>
+                                    <p class="mt-2 text-lg font-bold text-emerald-800 dark:text-emerald-300">{{ $payment->payment_method }}</p>
+                                    <p class="mt-1 text-sm text-emerald-700/80 dark:text-emerald-400/80">Total: Rp {{ number_format($payment->amount, 0, ',', '.') }}</p>
                                 </div>
                             </div>
 
@@ -420,7 +443,7 @@
                             </div>
                         </div>
                         @else
-                        <div class="bg-surface rounded-3xl p-8 border border-border mt-6 relative overflow-hidden shadow-sm">
+                        <div class="bg-surface dark:bg-[#0f0f0f] rounded-3xl p-8 border border-border mt-6 relative overflow-hidden shadow-sm">
                             <!-- Background Accent -->
                             <div class="absolute -right-20 -top-20 w-64 h-64 bg-orange/5 rounded-full blur-3xl pointer-events-none"></div>
                             

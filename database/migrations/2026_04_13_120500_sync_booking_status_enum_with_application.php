@@ -10,11 +10,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("
-            ALTER TABLE bookings
-            MODIFY status ENUM('pending', 'dp_paid', 'fully_paid', 'completed', 'cancelled')
-            NOT NULL DEFAULT 'pending'
-        ");
+        // Skip ENUM alteration for SQLite (testing) - SQLite doesn't enforce column types
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("
+                ALTER TABLE bookings
+                MODIFY status ENUM('pending', 'dp_paid', 'fully_paid', 'completed', 'cancelled')
+                NOT NULL DEFAULT 'pending'
+            ");
+        }
 
         DB::table('bookings')
             ->where('status', 'paid')
@@ -38,10 +41,12 @@ return new class extends Migration
             ->where('status', 'cancelled')
             ->update(['status' => 'canceled']);
 
-        DB::statement("
-            ALTER TABLE bookings
-            MODIFY status ENUM('pending', 'paid', 'canceled')
-            NOT NULL DEFAULT 'pending'
-        ");
+        if (DB::getDriverName() !== 'sqlite') {
+            DB::statement("
+                ALTER TABLE bookings
+                MODIFY status ENUM('pending', 'paid', 'canceled')
+                NOT NULL DEFAULT 'pending'
+            ");
+        }
     }
 };

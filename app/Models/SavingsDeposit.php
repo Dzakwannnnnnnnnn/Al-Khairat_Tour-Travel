@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class SavingsDeposit extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'savings_plan_id',
         'amount',

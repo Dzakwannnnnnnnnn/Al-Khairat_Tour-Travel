@@ -103,7 +103,7 @@ class BookingController extends Controller
                 $user = User::create([
                     'name' => $request->full_name,
                     'email' => $request->orderer_email,
-                    'password' => \Hash::make('password123'), // Default temporary password
+                    'password' => \Hash::make(Str::random(16)), // Secure random password
                     'role' => 'user'
                 ]);
             }
@@ -318,7 +318,7 @@ class BookingController extends Controller
                 $user = User::create([
                     'name' => $request->full_name,
                     'email' => $request->orderer_email,
-                    'password' => \Hash::make('password123'),
+                    'password' => \Hash::make(Str::random(16)), // Secure random password
                     'role' => 'user'
                 ]);
             }
@@ -401,6 +401,9 @@ class BookingController extends Controller
         if ($booking->status !== 'cancelled') {
             $booking->product->increment('stock', $booking->booking_seat);
         }
+
+        // Clean up related payment records to prevent orphan data
+        Payment::where('booking_id', $booking->id)->delete();
         
         $booking->delete();
         return redirect()->route('bookings.index')->with('success', 'Data Pemesanan berhasil dihapus!');

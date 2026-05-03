@@ -93,12 +93,13 @@ class SavingsController extends Controller
     public function destroyPlan($id)
     {
         $plan = SavingsPlan::findOrFail($id);
+        $userName = $plan->user->name; // Save name before deleting
         
         // Delete associated deposits first (if not cascading in DB)
         $plan->deposits()->delete();
         $plan->delete();
 
-        return back()->with('success', 'Rencana tabungan jemaah ' . $plan->user->name . ' telah dihapus.');
+        return back()->with('success', 'Rencana tabungan jemaah ' . $userName . ' telah dihapus.');
     }
 
     /**
