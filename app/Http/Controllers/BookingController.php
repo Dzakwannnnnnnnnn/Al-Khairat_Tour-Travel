@@ -275,6 +275,15 @@ class BookingController extends Controller
         // Tetap bawa 1 payment record untuk info metode (ambil yang terakhir)
         $payment = Payment::whereIn('booking_id', $bookings->pluck('id'))->latest()->first();
         
+        // Pastikan $payment tidak null untuk menghindari error di view
+        if (!$payment) {
+            $payment = (object)[
+                'payment_method' => 'Belum Ditentukan',
+                'payment_date' => now(),
+                'status' => 'pending'
+            ];
+        }
+        
         $pdf = Pdf::loadView('pdf.invoice', compact('bookings', 'payment', 'groupCode', 'totalPaid', 'allPayments'));
 
         return $pdf->stream('Invoice-' . $groupCode . '.pdf');

@@ -274,8 +274,8 @@
             <tr>
                 <td style="border: none; padding: 0; width: 55%;">
                     <div class="label">Informasi Pembayaran</div>
-                    <div class="value" style="font-size: 11pt; color: {{ $theme['color'] }}; margin-bottom: 5px;">{{ $payment->payment_method }}</div>
-                    <div style="font-size: 8pt; color: #777;">Tercatat Tanggal: {{ \Carbon\Carbon::parse($payment->payment_date)->translatedFormat('d M Y') }}</div>
+                    <div class="value" style="font-size: 11pt; color: {{ $theme['color'] }}; margin-bottom: 5px;">{{ $payment->payment_method ?? 'Belum Ditentukan' }}</div>
+                    <div style="font-size: 8pt; color: #777;">Tercatat Tanggal: {{ isset($payment->payment_date) ? \Carbon\Carbon::parse($payment->payment_date)->translatedFormat('d M Y') : '-' }}</div>
                 </td>
                 <td style="border: none; padding: 0; text-align: right; vertical-align: top;">
                     <div class="label">Status Keuangan</div>
