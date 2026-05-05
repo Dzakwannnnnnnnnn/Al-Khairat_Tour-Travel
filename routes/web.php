@@ -22,6 +22,31 @@ use App\Models\Slideshow;
 use App\Models\Guide;
 
 // ========================================
+// TEMPORARY: Fix missing columns on server (HAPUS SETELAH DIPAKAI)
+// ========================================
+Route::get('/fix-db', function () {
+    $results = [];
+    
+    // Fix booking_id di savings_plans
+    if (!\Schema::hasColumn('savings_plans', 'booking_id')) {
+        \Schema::table('savings_plans', function ($table) {
+            $table->unsignedBigInteger('booking_id')->nullable()->after('product_id');
+        });
+        $results[] = '✅ Kolom booking_id berhasil ditambahkan ke savings_plans';
+    } else {
+        $results[] = '⚠️ Kolom booking_id sudah ada di savings_plans';
+    }
+    
+    // Fix galleries table
+    if (!\Schema::hasTable('galleries')) {
+        \Artisan::call('migrate', ['--force' => true]);
+        $results[] = '✅ Migrasi dijalankan ulang';
+    }
+    
+    return '<h2>Database Fix Results</h2><pre>' . implode("\n", $results) . '</pre>';
+});
+
+// ========================================
 // PUBLIC ROUTES
 // ========================================
 Route::get('/', function () {
