@@ -36,6 +36,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const header = document.getElementById('main-logo-header');
         
+        // Fallback: jika toggleMobileMenu belum didefinisikan oleh dock-navigation
+        if (typeof window.toggleMobileMenu !== 'function') {
+            window.toggleMobileMenu = function() {};
+        }
+        
         function handleScroll() {
             if (window.scrollY > 50) {
                 header.classList.add('header-scrolled');
