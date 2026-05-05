@@ -88,15 +88,7 @@
                             <span class="text-xs font-semibold group-hover:translate-x-0.5 transition-transform">Pengaturan Profil</span>
                         </a>
                         
-                        @if(auth()->check() && auth()->user()->isAdmin())
-                        <!-- Pengaturan Sistem -->
-                        <a href="{{ route('settings.index') }}" class="group flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 dark:text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md hover:shadow-indigo-500/20 dark:hover:shadow-indigo-700/20 hover:scale-[1.02] active:scale-95 transition-all duration-200 mt-1 border border-transparent hover:border-indigo-200 dark:hover:border-indigo-800/50">
-                            <div class="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center group-hover:bg-indigo-200 dark:group-hover:bg-indigo-800/50 group-hover:shadow-sm group-hover:shadow-indigo-400/30 transition-all ring-1 ring-indigo-300 dark:ring-indigo-700 group-hover:ring-indigo-400 dark:group-hover:ring-indigo-500">
-                                <svg class="w-4 h-4 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path></svg>
-                            </div>
-                            <span class="text-xs font-semibold group-hover:translate-x-0.5 transition-transform">Pengaturan Sistem</span>
-                        </a>
-                        @endif
+
                         
                         <!-- Separator -->
                         <div class="my-2 mx-3 border-t-2 border-purple-200 dark:border-slate-800"></div>

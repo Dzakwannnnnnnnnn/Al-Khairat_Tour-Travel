@@ -137,7 +137,7 @@ Route::middleware('auth')->group(function () {
         Route::post('gallery/update-order', [GalleryController::class, 'updateOrder'])->name('gallery.update-order');
 
         // Systems
-        Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);
+        // Route::resource('settings', SettingController::class)->except(['create', 'edit', 'show']);
 
         // Savings Management
         Route::get('admin/savings', [SavingsController::class, 'adminIndex'])->name('admin.savings.index');
