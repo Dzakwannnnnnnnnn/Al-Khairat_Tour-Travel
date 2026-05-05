@@ -49,7 +49,7 @@
             <!-- Loading text -->
             <div class="overflow-hidden">
                 <p class="text-gold/80 font-sans text-xs md:text-sm tracking-[0.3em] font-light uppercase animate-[slideUp_1s_ease-out_0.3s_both]">
-                    Perjalanan Penuh Kehangatan
+                    Perjalanan Penuh Keberkahan
                 </p>
             </div>
             
@@ -90,11 +90,11 @@
         <div class="absolute inset-0 flex items-center justify-center z-20">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-5xl font-serif font-bold mb-3 md:mb-6 leading-tight drop-shadow-lg px-2">
-                    Perjalanan Penuh <span class="text-gold">Kehangatan</span>
+                    Perjalanan Penuh <span class="text-gold">Keberkahan</span>
                 </h1>
-                <p class="text-base md:text-xl lg:text-2xl 2xl:text-xl font-medium mb-1 md:mb-4 drop-shadow-lg">Pelayanan Secerah Mentari</p>
+                <p class="text-base md:text-xl lg:text-2xl 2xl:text-xl font-medium mb-1 md:mb-4 drop-shadow-lg">Pelayanan Terbaik untuk Anda</p>
                 <p class="text-xs md:text-base lg:text-lg 2xl:text-base mb-6 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-4 opacity-90">
-                    Wujudkan impian spiritual Anda dengan layanan umroh terpercaya. Nikmati pengalaman tak terlupakan dengan penuh kehangatan dan profesionalisme.
+                    Wujudkan impian spiritual Anda dengan layanan umroh terpercaya. Nikmati pengalaman tak terlupakan dengan penuh keberkahan dan profesionalisme.
                 </p>
                 
                 <!-- CTA Buttons -->
@@ -125,7 +125,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="scroll-animate" data-animation="fade-right">
-                    <div class="inline-flex items-center space-x-2 bg-white/60 backdrop-blur border border-orange/10 px-3 py-1 rounded-full text-sm font-semibold text-orange mb-4">
+                    <div class="inline-flex items-center space-x-2 bg-white/60 dark:bg-orange/10 backdrop-blur border border-orange/10 dark:border-orange/20 px-3 py-1 rounded-full text-sm font-semibold text-orange mb-4">
                         <span class="w-2 h-2 rounded-full bg-orange animate-pulse"></span>
                         <span>Tentang Perusahaan</span>
                     </div>
@@ -501,16 +501,24 @@
 
             <!-- Form Submit Testimoni / Tulis Ulasan / Galeri Video -->
             <div class="text-center mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+                @auth
                 <button onclick="toggleTestimoniModal(true)" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto">
                     Tulis Ulasan Anda
                 </button>
+                @else
+                <a href="{{ route('login') }}" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    Login untuk Tulis Ulasan
+                </a>
+                @endauth
                 <a href="{{ route('gallery') }}" class="btn-secondary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     Lihat Galeri Makkah
                 </a>
             </div>
 
-            <!-- Modal Form Submit Testimoni -->
+            <!-- Modal Form Submit Testimoni (only for authenticated users) -->
+            @auth
             <div id="testimoniFormModal" class="fixed inset-0 z-[2000] bg-black/60 backdrop-blur-sm hidden flex-col items-center justify-center p-4">
                 <div class="bg-surface rounded-2xl p-6 md:p-8 shadow-2xl border border-border w-full max-w-3xl relative max-h-[90vh] overflow-y-auto animate-[slide-up_0.3s_ease-out]" onclick="event.stopPropagation()">
                     <!-- Close button -->
@@ -520,28 +528,34 @@
                         <h3 class="text-2xl font-serif font-bold text-charcoal mb-2">Bagikan Pengalaman Anda</h3>
                         <p class="text-brown text-sm">Masukan Anda sangat berarti bagi kami untuk terus meningkatkan pelayanan.</p>
                     </div>
+
+                    <!-- User Info Badge -->
+                    <div class="flex items-center gap-3 bg-orange/5 border border-orange/20 rounded-xl px-4 py-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-sunset flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                        </div>
+                        <div>
+                            <p class="font-bold text-charcoal text-sm">{{ auth()->user()->name }}</p>
+                            <p class="text-brown text-xs">{{ auth()->user()->email }}</p>
+                        </div>
+                        <div class="ml-auto">
+                            <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Terverifikasi
+                            </span>
+                        </div>
+                    </div>
                     
                     <form action="{{ route('testimonials.public') }}" method="POST" class="space-y-4">
                         @csrf
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-semibold text-text mb-1">Nama Lengkap <span class="text-red-500">*</span></label>
-                                <input type="text" name="name" required class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-text mb-1">Paket Umroh (Opsional)</label>
-                                <select name="product_id" class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
-                                    <option value="" class="bg-surface">-- Tidak Memilih --</option>
-                                    @foreach($products as $p)
-                                    <option value="{{ $p->id }}" class="bg-surface">{{ $p->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        
                         <div>
-                            <label class="block text-sm font-semibold text-text mb-1">Alamat Email <span class="text-red-500">*</span></label>
-                            <input type="email" name="email" required pattern="^.+@.+\..+$" title="Mohon masukkan email lengkap dengan domain (contoh: @gmail.com)" class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition" placeholder="Agar kami dapat membalas ulasan Anda">
+                            <label class="block text-sm font-semibold text-text mb-1">Paket Umroh (Opsional)</label>
+                            <select name="product_id" class="w-full px-4 py-2.5 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent bg-bg text-text transition">
+                                <option value="" class="bg-surface">-- Tidak Memilih --</option>
+                                @foreach($products as $p)
+                                <option value="{{ $p->id }}" class="bg-surface">{{ $p->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div>
@@ -587,6 +601,7 @@
                     }
                 });
             </script>
+            @endauth
         </div>
     </section>
 

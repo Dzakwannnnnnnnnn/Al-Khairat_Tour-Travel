@@ -46,17 +46,21 @@ class TestimonialController extends Controller
     public function publicStore(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => ['required', 'email', 'max:255', 'regex:/^.+@.+\..+$/i'],
             'product_id' => 'nullable|exists:products,id',
             'message' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
 
-        $data = $request->all();
-        $data['status'] = 'draft'; // Default draft untuk pengunjung publik
+        $user = auth()->user();
 
-        Testimonial::create($data);
+        Testimonial::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'product_id' => $request->product_id,
+            'message' => $request->message,
+            'rating' => $request->rating,
+            'status' => 'draft',
+        ]);
 
         return redirect()->route('home')->with('success', 'Terima kasih atas testimoni Anda! Ulasan Anda akan kami tinjau sebelum ditampilkan.');
     }

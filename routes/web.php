@@ -53,7 +53,7 @@ Route::get('/panduan-tasuh/{category}/{guide}', function ($category, $guide) {
   ->where('guide', 'dokumen|checklist|tata-cara|faq|doa|tips')
   ->name('panduan-tasuh.detail');
 
-Route::post('/testimoni-public', [TestimonialController::class, 'publicStore'])->name('testimonials.public');
+Route::post('/testimoni-public', [TestimonialController::class, 'publicStore'])->middleware('auth')->name('testimonials.public');
 Route::get('/testimoni-public', fn() => redirect()->route('home'));
 
 Route::post('/contact-send', [ContactController::class, 'send'])->name('contact.send');
@@ -77,9 +77,9 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Google Auth
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+// Google Auth (temporarily disabled)
+// Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+// Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SlideshowController;
