@@ -9,48 +9,48 @@
     @include('components.dock-navigation')
 </div>
 
-<div class="max-w-5xl mx-auto py-8">
+<div class="max-w-5xl mx-auto px-4 py-8">
     <!-- Header -->
-    <div class="mb-12 print-hide">
-        <div class="flex items-center justify-between mb-6">
+    <div class="mb-8 md:mb-12 print-hide">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
-                <h1 class="text-4xl font-bold text-charcoal">Rundown Kegiatan</h1>
-                <p class="text-slate-600 mt-2">{{ $product->name }}</p>
+                <h1 class="text-2xl md:text-4xl font-bold text-charcoal">Rundown Kegiatan</h1>
+                <p class="text-slate-600 mt-1 text-sm md:text-base">{{ $product->name }}</p>
             </div>
-            <div class="flex gap-3">
-                <button onclick="window.print()" class="group flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-xl shadow-md shadow-orange-500/20 dark:shadow-orange-700/30 hover:shadow-lg hover:shadow-orange-500/40 dark:hover:shadow-orange-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-orange-400/50 transition-all duration-200 font-semibold touch-manipulation border-2 border-orange-400/50 dark:border-orange-500/50 hover:border-orange-300 dark:hover:border-orange-400">
-                    <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex gap-2 sm:gap-3">
+                <button onclick="window.print()" class="group flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-gradient-to-r from-orange-400 to-pink-500 dark:from-orange-500 dark:to-pink-600 text-white rounded-xl shadow-md shadow-orange-500/20 hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 font-semibold touch-manipulation border-2 border-orange-400/50 text-sm">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                     </svg>
                     Cetak
                 </button>
-                <a href="javascript:history.back()" class="group flex items-center gap-2 px-6 py-3 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-xl shadow-sm border-2 border-red-200 dark:border-red-800 hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-semibold touch-manipulation">
-                    <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <a href="javascript:history.back()" class="group flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-xl shadow-sm border-2 border-red-200 dark:border-red-800 hover:bg-red-100 hover:shadow-md hover:scale-[1.02] active:scale-95 transition-all duration-200 font-semibold touch-manipulation text-sm">
+                    <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                     Kembali
                 </a>
             </div>
         </div>
 
         <!-- Product Info Card -->
-        <div class="glass-dashboard rounded-[2rem] p-8 border border-slate-100 shadow-xl mb-8 gradient-sunset print-hide">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div class="rounded-2xl md:rounded-[2rem] p-5 md:p-8 border border-slate-100 shadow-xl mb-8 gradient-sunset print-hide">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
                 <div class="text-white">
-                    <h2 class="text-2xl font-bold mb-2">{{ $product->name }}</h2>
-                    <div class="flex flex-wrap gap-4 text-sm font-medium">
-                        <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <h2 class="text-lg md:text-2xl font-bold mb-2">{{ $product->name }}</h2>
+                    <div class="flex flex-wrap gap-3 md:gap-4 text-xs md:text-sm font-medium">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"></path>
                             </svg>
                             Durasi: {{ $product->duration ?? 'Belum ditentukan' }}
                         </span>
-                        <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
                             </svg>
                             {{ \count($product->rundown ?? []) }} Hari
                         </span>
-                        <span class="flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M8.16 5.314l4.897-1.596A1 1 0 0114.791 4.71l1.447 4.43a1 1 0 01-.537 1.300L9.604 12.7a1 1 0 11-.648-1.892l4.221-1.378-.36-1.1H8.16a1 1 0 110-2z"></path>
                             </svg>
                             Rp {{ number_format($product->price, 0, ',', '.') }}
@@ -59,8 +59,8 @@
                 </div>
                 <div class="flex-shrink-0">
                     <a href="{{ route('booking.page', $product) }}"
-                        class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-orange font-bold rounded-[1.5rem] shadow-xl hover:shadow-2xl transition-all hover:scale-105">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        class="inline-flex items-center justify-center gap-2 px-5 md:px-8 py-3 md:py-4 bg-white text-orange font-bold rounded-xl md:rounded-[1.5rem] shadow-xl hover:shadow-2xl transition-all hover:scale-105 text-sm md:text-base w-full sm:w-auto">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
                         </svg>
                         Daftar Sekarang
@@ -118,18 +118,18 @@
         </div>
 
         <!-- Rundown Cards (Screen Only) -->
-        <div class="space-y-6 print-hide">
+        <div class="space-y-4 md:space-y-6 print-hide">
             @foreach($product->rundown as $index => $day)
-            <div class="glass-dashboard rounded-[1.75rem] p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div class="glass-dashboard rounded-2xl md:rounded-[1.75rem] p-5 md:p-8 border border-slate-100 shadow-lg hover:shadow-xl transition-all duration-300">
                 <!-- Day Header -->
-                <div class="flex items-start gap-4 mb-6 pb-6 border-b border-slate-100">
+                <div class="flex items-center gap-3 md:gap-4 mb-4 md:mb-6 pb-4 md:pb-6 border-b border-slate-100">
                     <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-sunset text-white font-bold text-lg shadow-lg">
+                        <div class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-sunset text-white font-bold text-base md:text-lg shadow-lg">
                             {{ $index + 1 }}
                         </div>
                     </div>
                     <div class="flex-1">
-                        <h3 class="text-2xl font-bold text-charcoal">{{ $day['day'] ?? "Hari " . ($index + 1) }}</h3>
+                        <h3 class="text-lg md:text-2xl font-bold text-charcoal">{{ $day['day'] ?? "Hari " . ($index + 1) }}</h3>
                     </div>
                 </div>
 
@@ -163,16 +163,16 @@
         </div>
 
         <!-- Call to Action -->
-        <div class="mt-12 bg-gradient-to-r from-orange-50 to-amber-50 rounded-[2rem] p-8 border border-orange/20 shadow-lg print-hide">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <div class="mt-8 md:mt-12 bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl md:rounded-[2rem] p-5 md:p-8 border border-orange/20 shadow-lg print-hide">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
                 <div>
-                    <h3 class="text-2xl font-bold text-charcoal mb-2">Tertarik dengan paket ini?</h3>
-                    <p class="text-slate-600">Daftar sekarang dan dapatkan pengalaman umroh yang tak terlupakan</p>
+                    <h3 class="text-lg md:text-2xl font-bold text-charcoal mb-1 md:mb-2">Tertarik dengan paket ini?</h3>
+                    <p class="text-slate-600 text-sm md:text-base">Daftar sekarang dan dapatkan pengalaman umroh yang tak terlupakan</p>
                 </div>
                 <a href="{{ route('booking.page', $product) }}"
-                    class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-sunset text-white font-bold rounded-[1.5rem] shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+                    class="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-sunset text-white font-bold rounded-xl md:rounded-[1.5rem] shadow-lg hover:shadow-xl hover:scale-105 transition-all text-sm md:text-base w-full sm:w-auto">
                     Daftar Sekarang
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>

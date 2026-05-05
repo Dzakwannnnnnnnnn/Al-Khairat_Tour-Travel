@@ -549,7 +549,7 @@
         const searchInput = document.getElementById('search-input');
         const searchForm = document.getElementById('search-form');
 
-        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        if (voiceSearchBtn && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             const recognition = new SpeechRecognition();
 
@@ -588,7 +588,7 @@
                     searchInput.placeholder = "Cari paket...";
                 }
             };
-        } else {
+        } else if (voiceSearchBtn) {
             // Hide button if not supported
             voiceSearchBtn.style.display = 'none';
         }
