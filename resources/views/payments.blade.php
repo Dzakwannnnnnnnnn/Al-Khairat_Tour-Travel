@@ -248,7 +248,17 @@
 
             <div>
                 <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Metode / Bank Tujuan <span class="text-red-500">*</span></label>
-                <input type="text" name="payment_method" placeholder="BSI / Cash / Mandiri" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
+                <select name="payment_method" required class="w-full px-5 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange focus:outline-none rounded-2xl transition-all text-sm font-bold text-slate-900 dark:text-slate-100">
+                    <option value="">-- Pilih Metode Bayar --</option>
+                    <option value="Transfer Bank (Manual)">Transfer Bank (Manual)</option>
+                    <option value="Cash / Tunai">Cash / Tunai</option>
+                    <option value="Bank Syariah Indonesia (BSI)">Bank Syariah Indonesia (BSI)</option>
+                    <option value="Bank BCA">Bank BCA</option>
+                    <option value="Bank Mandiri">Bank Mandiri</option>
+                    <option value="Bank BRI">Bank BRI</option>
+                    <option value="Bank BNI">Bank BNI</option>
+                    <option value="Midtrans (Otomatis)">Midtrans (Otomatis)</option>
+                </select>
             </div>
             
             <div>
@@ -316,7 +326,17 @@
 
             <div>
                 <label class="block text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-2">Metode / Bank Tujuan <span class="text-red-500">*</span></label>
-                <input type="text" name="payment_method" id="editPaymentMethod" required class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
+                <select name="payment_method" id="editPaymentMethod" required class="w-full px-5 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange focus:outline-none rounded-2xl transition-all text-sm font-bold text-slate-900 dark:text-slate-100">
+                    <option value="">-- Pilih Metode Bayar --</option>
+                    <option value="Transfer Bank (Manual)">Transfer Bank (Manual)</option>
+                    <option value="Cash / Tunai">Cash / Tunai</option>
+                    <option value="Bank Syariah Indonesia (BSI)">Bank Syariah Indonesia (BSI)</option>
+                    <option value="Bank BCA">Bank BCA</option>
+                    <option value="Bank Mandiri">Bank Mandiri</option>
+                    <option value="Bank BRI">Bank BRI</option>
+                    <option value="Bank BNI">Bank BNI</option>
+                    <option value="Midtrans (Otomatis)">Midtrans (Otomatis)</option>
+                </select>
             </div>
             
             <div>

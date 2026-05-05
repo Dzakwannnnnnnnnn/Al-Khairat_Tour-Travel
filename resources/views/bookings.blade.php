@@ -292,11 +292,16 @@
                         <option value="fully_paid">Lunas (Fully Paid)</option>
                         <option value="savings">Tabungan (Savings)</option>
                     </select>
-                    <select name="payment_method" class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
-                        <option value="">-- Metode Bayar --</option>
-                        <option value="Transfer Bank">Transfer Bank</option>
+                    <select name="payment_method" class="w-full px-6 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange rounded-2xl outline-none transition-all text-sm font-bold text-slate-900 dark:text-slate-100">
+                        <option value="" class="text-slate-400">-- Pilih Metode Bayar --</option>
+                        <option value="Transfer Bank (Manual)">Transfer Bank (Manual)</option>
                         <option value="Cash / Tunai">Cash / Tunai</option>
-                        <option value="BSI - 721XXXXXXX">BSI (Official)</option>
+                        <option value="Bank Syariah Indonesia (BSI)">Bank Syariah Indonesia (BSI)</option>
+                        <option value="Bank BCA">Bank BCA</option>
+                        <option value="Bank Mandiri">Bank Mandiri</option>
+                        <option value="Bank BRI">Bank BRI</option>
+                        <option value="Bank BNI">Bank BNI</option>
+                        <option value="Midtrans (Otomatis)">Midtrans (Otomatis)</option>
                     </select>
                 </div>
             </div>
@@ -348,7 +353,7 @@
             </div>
             <div>
                 <label class="block text-[10px] uppercase font-black text-slate-400 dark:text-slate-500 tracking-widest ml-1 mb-2">Pilih Paket <span class="text-red-500">*</span></label>
-                <select name="product_id" id="editBookingProduct" required class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
+                <select name="product_id" id="editBookingProduct" required class="w-full px-6 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange rounded-2xl outline-none transition-all text-sm font-bold text-slate-900 dark:text-slate-100">
                     @foreach($products as $prod)
                     <option value="{{ $prod->id }}">{{ $prod->name }}</option>
                     @endforeach
@@ -357,7 +362,7 @@
             <div>
                 <label class="block text-[10px] uppercase font-black text-slate-400 dark:text-slate-500 tracking-widest ml-1 mb-2">Update Status & Metode Bayar <span class="text-red-500">*</span></label>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <select name="status" id="editBookingStatus" required class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-black text-slate-700 dark:text-slate-200">
+                    <select name="status" id="editBookingStatus" required class="w-full px-6 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange rounded-2xl outline-none transition-all text-sm font-black text-slate-900 dark:text-slate-100">
                         <option value="pending">Pending</option>
                         <option value="dp_paid">DP Paid</option>
                         <option value="fully_paid">Fully Paid</option>
@@ -365,12 +370,16 @@
                         <option value="cancelled">Cancelled</option>
                         <option value="savings">Savings</option>
                     </select>
-                    <select name="payment_method" id="editBookingPaymentMethod" class="w-full px-6 py-4 bg-slate-50 dark:bg-slate-900 border-2 border-transparent focus:border-orange focus:bg-white dark:focus:bg-slate-800 rounded-2xl outline-none transition-all text-sm font-bold text-slate-700 dark:text-slate-200">
-                        <option value="">-- Metode Bayar --</option>
-                        <option value="Transfer Bank">Transfer Bank</option>
+                    <select name="payment_method" id="editBookingPaymentMethod" class="w-full px-6 py-4 bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-700 focus:border-orange rounded-2xl outline-none transition-all text-sm font-bold text-slate-900 dark:text-slate-100">
+                        <option value="" class="text-slate-400">-- Pilih Metode Bayar --</option>
+                        <option value="Transfer Bank (Manual)">Transfer Bank (Manual)</option>
                         <option value="Cash / Tunai">Cash / Tunai</option>
-                        <option value="BSI - 721XXXXXXX">BSI (Official)</option>
-                        <option value="Menunggu Pembayaran (Otomatis)">Midtrans</option>
+                        <option value="Bank Syariah Indonesia (BSI)">Bank Syariah Indonesia (BSI)</option>
+                        <option value="Bank BCA">Bank BCA</option>
+                        <option value="Bank Mandiri">Bank Mandiri</option>
+                        <option value="Bank BRI">Bank BRI</option>
+                        <option value="Bank BNI">Bank BNI</option>
+                        <option value="Midtrans (Otomatis)">Midtrans (Otomatis)</option>
                     </select>
                 </div>
             </div>

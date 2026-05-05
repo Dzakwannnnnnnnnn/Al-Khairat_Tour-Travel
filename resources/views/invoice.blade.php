@@ -65,7 +65,19 @@
 
             <!-- Success Message Header -->
             <div class="text-center mb-12 scroll-animate" data-animation="fade-up">
-                @if($payment->status === 'verified')
+                @if($primaryBooking->status === 'cancelled')
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-500/10 text-red-500 text-4xl mb-6">
+                        ❌
+                    </div>
+                @elseif($primaryBooking->status === 'completed')
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 text-4xl mb-6">
+                        🎖️
+                    </div>
+                @elseif($primaryBooking->status === 'savings')
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 text-blue-500 text-4xl mb-6">
+                        💰
+                    </div>
+                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 text-4xl mb-6">
                         ✅
                     </div>
@@ -88,7 +100,16 @@
                     </div>
                 @endif
 
-                @if($payment->status === 'verified')
+                @if($primaryBooking->status === 'cancelled')
+                    <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pesanan Dibatalkan</h1>
+                    <p class="text-text/60 max-w-lg mx-auto leading-relaxed">Pesanan Anda telah dibatalkan oleh admin. Jika ini adalah kesalahan, silakan hubungi admin untuk konfirmasi.</p>
+                @elseif($primaryBooking->status === 'completed')
+                    <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Perjalanan Selesai</h1>
+                    <p class="text-text/60 max-w-2xl mx-auto leading-relaxed">Terima kasih telah mempercayakan perjalanan ibadah Anda kepada Al-Khairat. Semoga menjadi Umroh yang Mabrur.</p>
+                @elseif($primaryBooking->status === 'savings')
+                    <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Program Tabungan Aktif</h1>
+                    <p class="text-text/60 max-w-lg mx-auto leading-relaxed">Anda sedang mengikuti program Tabungan Umroh. Silakan cek detail cicilan Anda di halaman Tabungan.</p>
+                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pembayaran Anda Telah Lunas</h1>
                     <p class="text-text/60 max-w-2xl mx-auto leading-relaxed">Admin telah mengonfirmasi pembayaran Anda. Di bawah ini adalah ringkasan pemesan dan detail paket perjalanan yang sudah aktif untuk rombongan Anda.</p>
                 @elseif($primaryBooking->status === 'dp_paid')
@@ -126,7 +147,16 @@
                         <div class="text-right">
                             <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">Status Pembayaran</span>
                             <div class="flex items-center justify-end gap-2 mt-1">
-                                @if($payment->status === 'verified')
+                                @if($primaryBooking->status === 'cancelled')
+                                    <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                                    <span class="font-bold uppercase text-sm tracking-widest">DIBATALKAN ADMIN</span>
+                                @elseif($primaryBooking->status === 'completed')
+                                    <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                                    <span class="font-bold uppercase text-sm tracking-widest">PESANAN SELESAI</span>
+                                @elseif($primaryBooking->status === 'savings')
+                                    <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                                    <span class="font-bold uppercase text-sm tracking-widest">PROGRAM TABUNGAN</span>
+                                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
                                     <span class="w-2 h-2 rounded-full bg-green-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">BERHASIL / TERVERIFIKASI</span>
                                 @elseif($primaryBooking->status === 'dp_paid')
@@ -346,9 +376,33 @@
 
                     <!-- Payment Method Section -->
                     <div class="pt-10 border-t border-border border-dashed">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' || $primaryBooking->status === 'fully_paid' || $primaryBooking->status === 'completed' || $primaryBooking->status === 'savings' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
 
-                        @if($primaryBooking->status === 'dp_paid')
+                        @if($primaryBooking->status === 'cancelled')
+                        <div class="mb-6 rounded-3xl border border-red-300/60 dark:border-red-800/50 bg-red-50 dark:bg-red-900/10 px-5 py-5 text-red-900 dark:text-red-300">
+                            <div class="flex items-start gap-3">
+                                <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">❌</span>
+                                <div>
+                                    <p class="font-bold uppercase tracking-wide text-sm">Pesanan Dibatalkan Admin</p>
+                                    <p class="text-sm text-red-800/90 mt-1">
+                                        Pesanan ini telah dibatalkan secara sistem oleh admin. Anda tidak perlu melanjutkan pembayaran untuk invoice ini. Silakan hubungi admin jika terdapat kesalahan.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @elseif($primaryBooking->status === 'completed')
+                        <div class="mb-6 rounded-3xl border border-emerald-200 dark:border-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/10 px-5 py-4 text-emerald-900 dark:text-emerald-300">
+                            <div class="flex items-start gap-3">
+                                <span class="mt-0.5 text-xl">🎖️</span>
+                                <div>
+                                    <p class="font-bold uppercase tracking-wide text-sm">Ibadah Selesai</p>
+                                    <p class="text-sm text-emerald-800/90 mt-1">
+                                        Alhamdulillah, rangkaian ibadah Anda telah selesai. Terima kasih telah mempercayakan perjalanan Anda kepada kami.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        @elseif($primaryBooking->status === 'dp_paid')
                         <div class="mb-6 rounded-3xl border border-blue-200 dark:border-blue-800/50 bg-blue-50 dark:bg-blue-900/10 px-5 py-4 text-blue-900 dark:text-blue-300 animate-[pulse_3s_infinite]">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 text-xl">💳</span>
@@ -389,7 +443,41 @@
 
 
                         <!-- Payment Instructions -->
-                        @if($payment->status === 'verified')
+                        @if($primaryBooking->status === 'cancelled')
+                        <div class="bg-bg rounded-3xl p-8 border border-red-200 animate-[scaleUp_0.4s_ease-out]">
+                            <div class="text-center">
+                                <h4 class="text-xl font-bold text-red-600">Pesanan Telah Dibatalkan</h4>
+                                <p class="text-sm text-text/60 mt-3 max-w-xl mx-auto">
+                                    Invoice ini dikunci karena pesanan Anda telah dibatalkan oleh admin. Tidak ada tindakan lanjutan yang diperlukan dari Anda.
+                                </p>
+                                <div class="mt-8">
+                                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-3 bg-gradient-sunset text-white font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:shadow-orange/20 hover:scale-[1.02] transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                        Kembali ke Beranda
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @elseif($primaryBooking->status === 'completed')
+                        <div class="bg-bg rounded-3xl p-8 border border-emerald-200 animate-[scaleUp_0.4s_ease-out]">
+                            <div class="text-center">
+                                <h4 class="text-xl font-bold text-emerald-600">Alhamdulillah, Ibadah Selesai</h4>
+                                <p class="text-sm text-text/60 mt-3 max-w-xl mx-auto">
+                                    Seluruh rangkaian perjalanan Anda telah selesai. Invoice ini tetap dapat Anda simpan sebagai arsip sejarah perjalanan ibadah Anda.
+                                </p>
+                                <div class="mt-8">
+                                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-3 bg-gradient-sunset text-white font-bold px-8 py-4 rounded-2xl hover:shadow-xl hover:shadow-orange/20 hover:scale-[1.02] transition-all duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                        </svg>
+                                        Kembali ke Beranda
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        @elseif($payment->status === 'verified')
                         <div class="bg-bg rounded-3xl p-8 border border-border animate-[scaleUp_0.4s_ease-out]">
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                                 <div>
@@ -522,7 +610,7 @@
                 </div>
             </div>
 
-            <div class="mt-12 flex justify-center scroll-animate {{ $payment->status === 'rejected' ? 'hidden' : '' }}" data-animation="fade-up">
+            <div class="mt-12 flex justify-center scroll-animate {{ $payment->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'hidden' : '' }}" data-animation="fade-up">
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-3 px-10 py-4 bg-surface border-2 border-border text-text font-bold rounded-2xl hover:border-orange hover:text-orange transition-all duration-300 shadow-sm group">
                     <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Kembali ke Beranda Utama
@@ -571,7 +659,7 @@
                         const data = await response.json();
 
                         if (data.status && data.status !== initialStatus) {
-                            if (data.status === 'verified' || data.status === 'rejected' || (initialStatus === 'Belum Memilih' && data.status === 'pending')) {
+                            if (data.status === 'verified' || data.status === 'rejected' || data.status === 'cancelled' || data.status === 'completed' || data.status === 'fully_paid' || (initialStatus === 'Belum Memilih' && data.status === 'pending')) {
                                 clearInterval(pollInterval);
                                 window.location.reload();
                             }

@@ -798,7 +798,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] md:text-xs font-bold text-charcoal uppercase tracking-widest mb-1.5 md:mb-2 text-left">No. HP / WhatsApp</label>
-                            <input type="tel" name="orderer_phone" required value="{{ Auth::user()->phone ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base font-medium" placeholder="0812xxxxxxxx">
+                            <input type="tel" name="orderer_phone" required pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="{{ Auth::user()->phone ?? '' }}" class="w-full px-4 md:px-5 py-3 md:py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all text-sm md:text-base font-medium" placeholder="0812xxxxxxxx">
                         </div>
                     </div>
 
@@ -813,7 +813,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">NIK KTP (16 Digit)</label>
-                            <input type="text" name="nik[]" required maxlength="16" value="{{ Auth::user()->nik ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="327xxxxxxxxxxxxx">
+                            <input type="text" name="nik[]" required maxlength="16" pattern="[0-9]{16}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="NIK harus berupa 16 digit angka" value="{{ Auth::user()->nik ?? '' }}" class="w-full px-5 py-4 bg-bg border-2 border-border/50 rounded-2xl focus:border-orange focus:outline-none transition-all" placeholder="327xxxxxxxxxxxxx">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-charcoal uppercase tracking-widest mb-2">Jumlah Kursi</label>

@@ -65,7 +65,7 @@
                                         <label class="block text-xs font-bold text-text/60 uppercase tracking-widest mb-2">Nomor Telephone Pemesan</label>
                                         <div class="relative group">
                                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-text/40 group-focus-within:text-orange transition-colors">📞</span>
-                                            <input type="tel" name="orderer_phone" required class="form-input pl-12" placeholder="Contoh: 0812xxxx">
+                                            <input type="tel" name="orderer_phone" required pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-input pl-12" placeholder="Contoh: 0812xxxx">
                                         </div>
                                     </div>
                                     <div>
@@ -133,7 +133,7 @@
                                             <label class="block text-xs font-bold text-text/60 uppercase tracking-widest mb-2">NIK KTP (16 Digit)</label>
                                             <div class="relative group">
                                                 <span class="absolute left-4 top-1/2 -translate-y-1/2 text-text/40 group-focus-within:text-orange transition-colors">🆔</span>
-                                                <input type="text" name="nik[]" required maxlength="16" class="form-input pl-12" placeholder="327xxxxxxxxxxxxx">
+                                                <input type="text" name="nik[]" required maxlength="16" pattern="[0-9]{16}" oninput="this.value = this.value.replace(/[^0-9]/g, '')" title="NIK harus berupa 16 digit angka" class="form-input pl-12" placeholder="327xxxxxxxxxxxxx">
                                             </div>
                                         </div>
                                         <div>
