@@ -49,7 +49,7 @@
     </script>
 </head>
 <body class="bg-bg font-sans text-text transition-colors duration-500">
-    <x-logo-header />
+    <x-logo-header />  
     <x-dock-navigation />
 
     <main class="section-py min-h-screen pt-36 md:pt-40 pb-24 px-4 sm:px-6 lg:px-8">

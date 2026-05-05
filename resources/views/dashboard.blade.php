@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Overview')
 
 @section('content')
-    <div class="space-y-12">
+    <div class="space-y-4 md:space-y-6">
         <!-- Welcome Hero Section -->
         <div class="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-8 gradient-sunset border border-orange/20 group shadow-2xl shadow-orange/20">
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-white/10 blur-[100px] rounded-full group-hover:bg-white/20 transition-all duration-700"></div>

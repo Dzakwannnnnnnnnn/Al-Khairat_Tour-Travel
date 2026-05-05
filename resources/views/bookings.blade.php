@@ -27,26 +27,26 @@
     </div>
 
     <!-- Stats Bar -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-        <div class="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Total Booking</p>
-            <h4 class="text-2xl font-black text-slate-800 dark:text-slate-100">{{ $stats['total'] }}</h4>
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4 mb-8">
+        <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm">
+            <p class="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">Total Booking</p>
+            <h4 class="text-xl md:text-2xl font-black text-slate-800 dark:text-slate-100">{{ $stats['total'] }}</h4>
         </div>
-        <div class="bg-yellow-50 dark:bg-amber-900/20 p-6 rounded-[2rem] border border-yellow-100 dark:border-amber-900/30 shadow-sm">
-            <p class="text-[10px] font-black text-yellow-600/60 dark:text-amber-500/60 uppercase tracking-widest mb-1">Menunggu</p>
-            <h4 class="text-2xl font-black text-yellow-600 dark:text-amber-500">{{ $stats['pending'] }}</h4>
+        <div class="bg-yellow-50 dark:bg-amber-900/20 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-yellow-100 dark:border-amber-900/30 shadow-sm">
+            <p class="text-[9px] md:text-[10px] font-black text-yellow-600/60 dark:text-amber-500/60 uppercase tracking-widest mb-1">Menunggu</p>
+            <h4 class="text-xl md:text-2xl font-black text-yellow-600 dark:text-amber-500">{{ $stats['pending'] }}</h4>
         </div>
-        <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-[2rem] border border-blue-100 dark:border-blue-900/30 shadow-sm">
-            <p class="text-[10px] font-black text-blue-600/60 dark:text-blue-400/60 uppercase tracking-widest mb-1">Sudah DP</p>
-            <h4 class="text-2xl font-black text-blue-600 dark:text-blue-400">{{ $stats['dp_paid'] }}</h4>
+        <div class="bg-blue-50 dark:bg-blue-900/20 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-blue-100 dark:border-blue-900/30 shadow-sm">
+            <p class="text-[9px] md:text-[10px] font-black text-blue-600/60 dark:text-blue-400/60 uppercase tracking-widest mb-1">Sudah DP</p>
+            <h4 class="text-xl md:text-2xl font-black text-blue-600 dark:text-blue-400">{{ $stats['dp_paid'] }}</h4>
         </div>
-        <div class="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-[2rem] border border-emerald-100 dark:border-emerald-900/30 shadow-sm">
-            <p class="text-[10px] font-black text-emerald-600/60 dark:text-emerald-400/60 uppercase tracking-widest mb-1">Lunas</p>
-            <h4 class="text-2xl font-black text-emerald-600 dark:text-emerald-400">{{ $stats['fully_paid'] }}</h4>
+        <div class="bg-emerald-50 dark:bg-emerald-900/20 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-emerald-100 dark:border-emerald-900/30 shadow-sm">
+            <p class="text-[9px] md:text-[10px] font-black text-emerald-600/60 dark:text-emerald-400/60 uppercase tracking-widest mb-1">Lunas</p>
+            <h4 class="text-xl md:text-2xl font-black text-emerald-600 dark:text-emerald-400">{{ $stats['fully_paid'] }}</h4>
         </div>
-        <div class="bg-orange/5 dark:bg-orange/10 p-6 rounded-[2rem] border border-orange/10 dark:border-orange/20 shadow-sm">
-            <p class="text-[10px] font-black text-orange/60 dark:text-orange/50 uppercase tracking-widest mb-1">Tabungan</p>
-            <h4 class="text-2xl font-black text-orange dark:text-orange-400">{{ $stats['savings'] }}</h4>
+        <div class="bg-orange/5 dark:bg-orange/10 p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-orange/10 dark:border-orange/20 shadow-sm col-span-2 lg:col-span-1">
+            <p class="text-[9px] md:text-[10px] font-black text-orange/60 dark:text-orange/50 uppercase tracking-widest mb-1">Tabungan</p>
+            <h4 class="text-xl md:text-2xl font-black text-orange dark:text-orange-400">{{ $stats['savings'] }}</h4>
         </div>
     </div>
 

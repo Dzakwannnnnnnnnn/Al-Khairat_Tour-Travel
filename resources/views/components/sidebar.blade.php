@@ -44,6 +44,27 @@
             </div>
         </div>
 
+        <!-- Settings (Mobile Only) -->
+        <div class="md:hidden">
+            <p class="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Pengaturan</p>
+            <div class="space-y-1">
+                <a href="{{ route('profile.edit') }}" class="sidebar-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                    <svg class="w-5 h-5 text-slate-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span class="font-medium text-sm">Data Profil</span>
+                </a>
+                <button onclick="toggleDashboardTheme()" class="w-full text-left sidebar-link group">
+                    <svg class="w-5 h-5 text-amber-500 flex-none block dark:hidden group-hover:rotate-90 transition-transform duration-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                    </svg>
+                    <svg class="w-5 h-5 text-indigo-400 flex-none hidden dark:block group-hover:-rotate-12 transition-transform duration-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                    </svg>
+                    <span class="font-medium text-sm block dark:hidden">Mode Gelap</span>
+                    <span class="font-medium text-sm hidden dark:block">Mode Terang</span>
+                </button>
+            </div>
+        </div>
+
         <!-- Master Data -->
         <div>
             <p class="px-5 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-3">Data Master</p>
@@ -113,6 +134,7 @@
             </div>
         </div>
 
+
         @else
         <!-- Regular User Navigation -->
         <div>
@@ -122,10 +144,22 @@
                     <svg class="w-5 h-5 text-orange flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     <span class="font-medium">Halaman Depan</span>
                 </a>
-                <a href="{{ route('profile.edit') }}" class="sidebar-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-                    <svg class="w-5 h-5 text-orange flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <span class="font-medium">Data Profil</span>
-                </a>
+                <div class="md:hidden space-y-1.5">
+                    <a href="{{ route('profile.edit') }}" class="sidebar-link {{ request()->routeIs('profile.*') ? 'active' : '' }}">
+                        <svg class="w-5 h-5 text-orange flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="font-medium">Data Profil</span>
+                    </a>
+                    <button onclick="toggleDashboardTheme()" class="w-full text-left sidebar-link group">
+                        <svg class="w-5 h-5 text-amber-500 flex-none block dark:hidden group-hover:rotate-90 transition-transform duration-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+                        </svg>
+                        <svg class="w-5 h-5 text-indigo-400 flex-none hidden dark:block group-hover:-rotate-12 transition-transform duration-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                        </svg>
+                        <span class="font-medium block dark:hidden">Mode Gelap</span>
+                        <span class="font-medium hidden dark:block">Mode Terang</span>
+                    </button>
+                </div>
                 <a href="{{ route('member.bookings') }}" class="sidebar-link {{ request()->routeIs('member.bookings') ? 'active' : '' }}">
                     <svg class="w-5 h-5 text-emerald-500 flex-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     <span class="font-medium">Riwayat Pesanan</span>

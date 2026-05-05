@@ -19,51 +19,51 @@
     </div>
 
     <!-- Stats Summary Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         <!-- Active Savers -->
-        <div class="bg-white dark:bg-slate-800/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
-            <div class="w-14 h-14 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-orange/10 group-hover:text-orange transition-colors duration-500">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <div class="bg-white dark:bg-slate-800/50 p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
+            <div class="w-10 h-10 md:w-14 md:h-14 bg-slate-50 dark:bg-slate-900 rounded-xl md:rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-orange/10 group-hover:text-orange transition-colors duration-500 shrink-0">
+                <svg class="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             </div>
             <div>
-                <p class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Penabung Aktif</p>
-                <h4 class="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{{ $plans->where('status', 'active')->count() }} <span class="text-sm font-bold text-slate-300 dark:text-slate-600">Jemaah</span></h4>
+                <p class="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest md:tracking-[0.2em] mb-1">Penabung Aktif</p>
+                <h4 class="text-xl md:text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{{ $plans->where('status', 'active')->count() }} <span class="text-[9px] md:text-sm font-bold text-slate-300 dark:text-slate-600 hidden sm:inline">Jemaah</span></h4>
             </div>
         </div>
 
         <!-- Total Collected -->
-        <div class="bg-white dark:bg-slate-800/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
-            <div class="w-14 h-14 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-orange/10 group-hover:text-orange transition-colors duration-500">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599"/></svg>
+        <div class="bg-white dark:bg-slate-800/50 p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
+            <div class="w-10 h-10 md:w-14 md:h-14 bg-slate-50 dark:bg-slate-900 rounded-xl md:rounded-2xl flex items-center justify-center text-slate-400 dark:text-slate-500 group-hover:bg-orange/10 group-hover:text-orange transition-colors duration-500 shrink-0">
+                <svg class="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m.599-1c.51-.598.599-1.454.599-2.401 0-1.045-.09-1.903-.599-2.401M11.401 9c-.51.598-.599 1.454-.599 2.401 0 1.11.402 2.08 1 2.599"/></svg>
             </div>
             <div>
-                <p class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Dana Terkumpul</p>
-                <h4 class="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">Rp {{ number_format($totalSavings, 0, ',', '.') }}</h4>
+                <p class="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest md:tracking-[0.2em] mb-1">Terkumpul</p>
+                <h4 class="text-xl md:text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight text-nowrap">Rp {{ number_format($totalSavings, 0, ',', '.') }}</h4>
             </div>
         </div>
 
         <!-- Refund Cases -->
-        <div class="bg-white dark:bg-slate-800/50 p-8 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
-            <div class="w-14 h-14 bg-red-50 dark:bg-red-900/20 text-red-400 rounded-2xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-500">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <div class="bg-white dark:bg-slate-800/50 p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 group hover:shadow-xl hover:shadow-slate-200/50 transition-all duration-500">
+            <div class="w-10 h-10 md:w-14 md:h-14 bg-red-50 dark:bg-red-900/20 text-red-400 rounded-xl md:rounded-2xl flex items-center justify-center group-hover:bg-red-100 transition-colors duration-500 shrink-0">
+                <svg class="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
             </div>
             <div>
-                <p class="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-1">Kasus Refund</p>
-                <h4 class="text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{{ $plans->where('status', 'refund_requested')->count() }} <span class="text-sm font-bold text-slate-300 dark:text-slate-600">Orang</span></h4>
+                <p class="text-[9px] md:text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest md:tracking-[0.2em] mb-1">Kasus Refund</p>
+                <h4 class="text-xl md:text-3xl font-black text-slate-800 dark:text-slate-100 tracking-tight">{{ $plans->where('status', 'refund_requested')->count() }} <span class="text-[9px] md:text-sm font-bold text-slate-300 dark:text-slate-600 hidden sm:inline">Orang</span></h4>
             </div>
         </div>
 
         <!-- Total Refund Amount (RED CARD) -->
-        <div class="bg-red-600 p-8 rounded-[2.5rem] shadow-xl shadow-red-200 flex items-center gap-6 group hover:scale-[1.02] transition-all duration-500 overflow-hidden relative">
-            <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:rotate-12 transition-transform duration-700">
+        <div class="bg-red-600 p-4 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl shadow-red-200 flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6 group hover:scale-[1.02] transition-all duration-500 overflow-hidden relative">
+            <div class="absolute -right-4 -bottom-4 opacity-10 group-hover:rotate-12 transition-transform duration-700 hidden sm:block">
                 <svg class="w-40 h-40 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
-            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white relative z-10">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <div class="w-10 h-10 md:w-14 md:h-14 bg-white/20 backdrop-blur-md rounded-xl md:rounded-2xl flex items-center justify-center text-white relative z-10 shrink-0">
+                <svg class="w-5 h-5 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             </div>
             <div class="relative z-10">
-                <p class="text-[10px] font-black text-white/70 uppercase tracking-[0.2em] mb-1">Total Refund (RP)</p>
-                <h4 class="text-3xl font-black text-white tracking-tight">Rp {{ number_format($totalPendingRefunds ?? 0, 0, ',', '.') }}</h4>
+                <p class="text-[9px] md:text-[10px] font-black text-white/70 uppercase tracking-widest md:tracking-[0.2em] mb-1">Total Refund</p>
+                <h4 class="text-xl md:text-3xl font-black text-white tracking-tight text-nowrap">Rp {{ number_format($totalPendingRefunds ?? 0, 0, ',', '.') }}</h4>
             </div>
         </div>
     </div>
