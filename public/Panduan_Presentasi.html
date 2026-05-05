@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Panduan Presentasi Al-Khairat Tour & Travel</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:#1e293b;line-height:1.7;padding:40px 60px;max-width:900px;margin:0 auto;font-size:13px}
+@media print{body{padding:20px 40px;font-size:11px}h1{font-size:22px!important}.no-break{page-break-inside:avoid}.page-break{page-break-before:always}}
+h1{font-size:28px;text-align:center;margin-bottom:4px;color:#ea580c}
+.subtitle{text-align:center;color:#64748b;font-size:14px;margin-bottom:30px;font-weight:600}
+h2{font-size:18px;color:#ea580c;border-bottom:3px solid #fed7aa;padding-bottom:6px;margin:30px 0 14px}
+h3{font-size:14px;color:#334155;margin:16px 0 8px}
+.meta{display:flex;justify-content:center;gap:30px;margin-bottom:30px;flex-wrap:wrap}
+.meta span{background:#fff7ed;color:#ea580c;padding:6px 16px;border-radius:8px;font-weight:700;font-size:12px;border:1px solid #fed7aa}
+table{width:100%;border-collapse:collapse;margin:10px 0 16px;font-size:12px}
+th{background:#1e293b;color:white;padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:8px 12px;border-bottom:1px solid #e2e8f0;vertical-align:top}
+tr:nth-child(even){background:#f8fafc}
+.presenter-box{background:linear-gradient(135deg,#fff7ed,#fef3c7);border:2px solid #fed7aa;border-radius:16px;padding:20px 24px;margin:20px 0}
+.presenter-box h3{color:#ea580c;margin:0 0 4px;font-size:16px}
+.presenter-box .role{color:#92400e;font-size:12px;font-weight:600}
+.script{background:#f1f5f9;border-left:4px solid #ea580c;padding:10px 16px;margin:10px 0;border-radius:0 8px 8px 0;font-style:italic;color:#475569;font-size:12px}
+.transition{background:#ecfdf5;border-left:4px solid #10b981;padding:8px 16px;margin:12px 0;border-radius:0 8px 8px 0;font-size:12px;color:#065f46}
+.checklist{columns:2;column-gap:20px;list-style:none;padding:0}
+.checklist li{padding:4px 0;font-size:12px;break-inside:avoid}
+.checklist li::before{content:"☐ ";font-size:14px}
+.diagram{background:#1e293b;color:white;padding:20px 30px;border-radius:16px;font-family:monospace;font-size:13px;line-height:2.2;margin:16px 0;text-align:center}
+.diagram .arrow{color:#ea580c;font-weight:900}
+.diagram .name{color:#fbbf24;font-weight:700}
+.tips{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:16px 20px;margin:16px 0}
+.tips li{margin:4px 0;font-size:12px}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:800;margin-right:4px}
+.badge-green{background:#dcfce7;color:#166534}
+.badge-red{background:#fee2e2;color:#991b1b}
+.badge-blue{background:#dbeafe;color:#1e40af}
+.badge-yellow{background:#fef9c3;color:#854d0e}
+.footer{text-align:center;margin-top:40px;padding-top:20px;border-top:2px solid #e2e8f0;color:#94a3b8;font-size:11px}
+</style>
+</head>
+<body>
+
+<h1>🎤 Panduan Presentasi Demo Web</h1>
+<p class="subtitle">Al-Khairat Tour & Travel — Sistem Manajemen Umroh Digital</p>
+
+<div class="meta">
+<span>⏱️ Durasi: 15 Menit</span>
+<span>👥 5 Presenter, 6 Segmen</span>
+<span>🖥️ Format: Demo Web Live</span>
+</div>
+
+<h2>📋 Pembagian Waktu & Urutan Tampil</h2>
+<table>
+<tr><th>Urutan</th><th>Presenter</th><th>Bagian</th><th>Durasi</th></tr>
+<tr><td>1</td><td><strong>Farrel</strong></td><td>Pembukaan + Kenapa Al-Khairat + Landing Page</td><td>~3 menit</td></tr>
+<tr><td>2</td><td><strong>Rakha</strong></td><td>Register → Booking → Pesanan Berhasil + Invoice</td><td>~2,5 menit</td></tr>
+<tr><td>3</td><td><strong>Farrel</strong></td><td>Fitur Tabungan Umroh (User)</td><td>~2 menit</td></tr>
+<tr><td>4</td><td><strong>Tiara</strong></td><td>Ulasan Jamaah + Profil + Pesan Kembali</td><td>~2 menit</td></tr>
+<tr><td>5</td><td><strong>Flint</strong></td><td>Dashboard Admin + Manajemen Pendaftaran</td><td>~2,5 menit</td></tr>
+<tr><td>6</td><td><strong>Dzakwan</strong></td><td>Keuangan + Invoice Sync + Cetak PDF + Penutup</td><td>~3 menit</td></tr>
+</table>
+
+<!-- SEGMEN 1 -->
+<div class="page-break"></div>
+<div class="no-break">
+<div class="presenter-box">
+<h3>1️⃣ FARREL — Pembukaan & Landing Page</h3>
+<p class="role">Durasi: ~3 Menit | Urutan: Pertama</p>
+</div>
+
+<h3>Skrip Pembuka</h3>
+<div class="script">"Assalamualaikum Warahmatullahi Wabarakatuh. Perkenalkan, kami dari kelompok [nama]. Hari ini kami akan mempresentasikan website yang kami buat untuk Al-Khairat Tour & Travel, perusahaan travel Umroh resmi di Samarinda, Kalimantan Timur."</div>
+
+<h3>Kenapa Al-Khairat?</h3>
+<div class="script">"Kami memilih Al-Khairat karena merupakan travel Umroh yang sudah terdaftar resmi di Kemenag melalui sistem Siskohat. Kami ingin membantu mereka memiliki platform digital yang profesional."</div>
+
+<h3>Langkah Demo Landing Page</h3>
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Buka localhost:8000</td><td>"Ini halaman utama. Ada loading screen animasi dengan logo."</td></tr>
+<tr><td>2</td><td>Tunjukkan Hero Slideshow</td><td>"Banner slideshow otomatis. Ada tombol Daftar dan Lihat Paket."</td></tr>
+<tr><td>3</td><td>Scroll ke Tentang Perusahaan</td><td>"Section tentang perusahaan, ada video dan badge izin PPIU Kemenag."</td></tr>
+<tr><td>4</td><td>Scroll ke Keunggulan</td><td>"Keunggulan Al-Khairat: angka keberangkatan tinggi, pembimbing bersertifikat."</td></tr>
+<tr><td>5</td><td>Scroll ke Paket Umroh</td><td>"Daftar paket tersedia. Harga per varian kamar dan tombol booking."</td></tr>
+<tr><td>6</td><td>Scroll ke Tabungan (sekilas)</td><td>"Ada fitur Tabungan Umroh, akan saya jelaskan lebih detail nanti."</td></tr>
+<tr><td>7</td><td>Scroll ke Panduan Digital</td><td>"Panduan bimbingan ibadah yang bisa diakses online."</td></tr>
+<tr><td>8</td><td>Scroll ke Testimoni + FAQ</td><td>"Ada ulasan jamaah dan FAQ accordion."</td></tr>
+<tr><td>9</td><td>Scroll ke Kontak</td><td>"Form kontak untuk menghubungi admin."</td></tr>
+<tr><td>10</td><td>Klik toggle Dark Mode</td><td>"Website mendukung Mode Gelap untuk kenyamanan."</td></tr>
+</table>
+
+<div class="transition">🔄 Transisi: "Itu tadi overview landing page. Sekarang saya serahkan ke Rakha untuk alur pemesanan."</div>
+</div>
+
+<!-- SEGMEN 2 -->
+<div class="page-break"></div>
+<div class="no-break">
+<div class="presenter-box">
+<h3>2️⃣ RAKHA — Alur Pemesanan / Booking</h3>
+<p class="role">Durasi: ~2,5 Menit | Urutan: Kedua</p>
+</div>
+
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Klik "Daftar Sekarang" di Hero</td><td>"Untuk memesan, jamaah harus punya akun dulu."</td></tr>
+<tr><td>2</td><td>Tunjukkan Halaman Register</td><td>"Isi nama, email, nomor WA, password. Nomor WA hanya bisa angka — ini validasi keamanan."</td></tr>
+<tr><td>3</td><td>Isi form → klik Daftar</td><td>"Setelah daftar, langsung login otomatis."</td></tr>
+<tr><td>4</td><td>Scroll ke Paket, klik "Daftar Sekarang"</td><td>"Pilih paket dan masuk ke halaman booking khusus."</td></tr>
+<tr><td>5</td><td>Tunjukkan form Data Pemesan</td><td>"Nama dan email otomatis terisi dari akun."</td></tr>
+<tr><td>6</td><td>Isi Data Jamaah (Nama + NIK)</td><td>"Kolom NIK hanya menerima 16 digit angka. Coba ketik huruf — tidak bisa!"</td></tr>
+<tr><td>7</td><td>Pilih Varian Kamar</td><td>"Harga dihitung otomatis berdasarkan varian."</td></tr>
+<tr><td>8</td><td>Klik Kirim Pesanan</td><td>"Pesanan berhasil dibuat!"</td></tr>
+<tr><td>9</td><td>Tunjukkan Invoice (Pending)</td><td>"Invoice muncul dengan status Pending. Ada animasi loading menunggu konfirmasi admin."</td></tr>
+</table>
+
+<div class="transition">🔄 Transisi: "Pesanan berhasil. Saya serahkan kembali ke Farrel untuk fitur Tabungan."</div>
+</div>
+
+<!-- SEGMEN 3 -->
+<div class="no-break">
+<div class="presenter-box">
+<h3>3️⃣ FARREL — Fitur Tabungan Umroh</h3>
+<p class="role">Durasi: ~2 Menit | Urutan: Ketiga</p>
+</div>
+
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Klik menu Tabungan di navigasi</td><td>"Selain booking langsung, jamaah bisa ikut program Tabungan Umroh."</td></tr>
+<tr><td>2</td><td>Klik "Buka Tabungan Baru"</td><td>"Muncul modal estimasi tabungan."</td></tr>
+<tr><td>3</td><td>Pilih paket dari daftar</td><td>"Langkah 1: pilih paket yang dituju."</td></tr>
+<tr><td>4</td><td>Isi jumlah tiket + cicilan/bulan</td><td>"Langkah 2-3: isi jumlah tiket dan target cicilan per bulan."</td></tr>
+<tr><td>5</td><td>Tunjukkan kotak estimasi hitam</td><td>"Otomatis muncul estimasi: total target dan berapa bulan harus menabung."</td></tr>
+<tr><td>6</td><td>Klik "Konfirmasi & Mulai Menabung"</td><td>"Tabungan aktif!"</td></tr>
+<tr><td>7</td><td>Tunjukkan dashboard tabungan</td><td>"Ada progress bar, target bulanan, estimasi sisa waktu, dan riwayat setoran."</td></tr>
+<tr><td>8</td><td>Tunjukkan info rekening bank</td><td>"Di samping ada rekening resmi Al-Khairat yang bisa disalin."</td></tr>
+<tr><td>9</td><td>Tunjukkan tombol Batalkan & Refund</td><td>"Kalau berubah pikiran, bisa ajukan refund dari sini."</td></tr>
+</table>
+
+<div class="transition">🔄 Transisi: "Itu fitur Tabungan. Sekarang Tiara akan menjelaskan fitur ulasan."</div>
+</div>
+
+<!-- SEGMEN 4 -->
+<div class="page-break"></div>
+<div class="no-break">
+<div class="presenter-box">
+<h3>4️⃣ TIARA — Ulasan Jamaah & Pesan Kembali</h3>
+<p class="role">Durasi: ~2 Menit | Urutan: Keempat</p>
+</div>
+
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Scroll ke section Testimoni</td><td>"Di halaman utama ada section ulasan jamaah yang tampil publik."</td></tr>
+<tr><td>2</td><td>Tunjukkan form ulasan</td><td>"Jamaah yang sudah login bisa kirim ulasan. Nama dan email otomatis terisi."</td></tr>
+<tr><td>3</td><td>Pilih rating bintang + komentar → Kirim</td><td>"Pilih bintang, tulis komentar, kirim."</td></tr>
+<tr><td>4</td><td>Klik "Profil Saya"</td><td>"Jamaah bisa lihat profil dan mengubah data diri."</td></tr>
+<tr><td>5</td><td>Tunjukkan Riwayat Pesanan</td><td>"Di bawah ada semua riwayat booking beserta statusnya."</td></tr>
+<tr><td>6</td><td>Klik "Lihat Invoice" dari riwayat</td><td>"Invoice lama bisa dibuka kapan saja."</td></tr>
+<tr><td>7</td><td>Tunjukkan bisa pesan paket lain</td><td>"Jamaah juga bisa memesan paket berbeda."</td></tr>
+</table>
+
+<div class="transition">🔄 Transisi: "Itu dari sisi jamaah. Flint akan menunjukkan sisi admin."</div>
+</div>
+
+<!-- SEGMEN 5 -->
+<div class="no-break">
+<div class="presenter-box">
+<h3>5️⃣ FLINT — Dashboard Admin & Manajemen Data</h3>
+<p class="role">Durasi: ~2,5 Menit | Urutan: Kelima</p>
+</div>
+
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Logout user → Login Admin</td><td>"Sekarang masuk sebagai Admin dengan dashboard khusus."</td></tr>
+<tr><td>2</td><td>Tunjukkan Dashboard Utama</td><td>"Statistik: total pendaftaran, pending, lunas, tabungan."</td></tr>
+<tr><td>3</td><td>Buka Manajemen Produk</td><td>"Admin bisa kelola semua paket Umroh."</td></tr>
+<tr><td>4</td><td>Demo Edit Produk</td><td>"Bisa ubah nama, harga, foto, tanggal keberangkatan, dan rundown."</td></tr>
+<tr><td>5</td><td>Buka Data Pendaftaran (Bookings)</td><td>"Semua pendaftaran jamaah masuk di sini."</td></tr>
+<tr><td>6</td><td>Tunjukkan filter + search</td><td>"Bisa filter status dan cari jamaah berdasarkan nama atau kode."</td></tr>
+<tr><td>7</td><td>Klik Edit pesanan tadi</td><td>"Buka pesanan yang baru dibuat Rakha."</td></tr>
+<tr><td>8</td><td>Ubah ke Fully Paid + pilih BSI</td><td>"Set lunas via BSI. Menu bank sudah lengkap: BSI, BCA, Mandiri, BRI, BNI."</td></tr>
+<tr><td>9</td><td>Klik Simpan</td><td>"Disimpan. Status jamaah otomatis berubah."</td></tr>
+</table>
+
+<div class="transition">🔄 Transisi: "Status sudah diubah. Dzakwan akan tunjukkan efeknya di keuangan dan sisi jamaah."</div>
+</div>
+
+<!-- SEGMEN 6 -->
+<div class="page-break"></div>
+<div class="no-break">
+<div class="presenter-box">
+<h3>6️⃣ DZAKWAN — Keuangan, Invoice & Penutup</h3>
+<p class="role">Durasi: ~3 Menit | Urutan: Terakhir</p>
+</div>
+
+<table>
+<tr><th>#</th><th>Aksi di Layar</th><th>Yang Dikatakan</th></tr>
+<tr><td>1</td><td>Buka menu Keuangan (Payments)</td><td>"Halaman keuangan dengan semua data finansial."</td></tr>
+<tr><td>2</td><td>Tunjukkan statistik atas</td><td>"Ringkasan: total pendaftaran, pending, DP, lunas."</td></tr>
+<tr><td>3</td><td>Klik Input Kas Manual</td><td>"Admin bisa catat pembayaran tunai di kantor."</td></tr>
+<tr><td>4</td><td>Buka tab baru → login User</td><td>"Sekarang lihat efeknya dari sisi jamaah."</td></tr>
+<tr><td>5</td><td>Tunjukkan Invoice → sudah LUNAS ✅</td><td>"Invoice otomatis berubah jadi Lunas! Jamaah tidak perlu refresh. Ini fitur polling real-time."</td></tr>
+<tr><td>6</td><td>Klik "Simpan Bukti PDF"</td><td>"Jamaah bisa cetak invoice PDF resmi."</td></tr>
+<tr><td>7</td><td>Tunjukkan file PDF</td><td>"Ini invoice resmi yang profesional."</td></tr>
+<tr><td>8</td><td>Admin → ubah ke Cancelled</td><td>"Kalau admin batalkan pesanan..."</td></tr>
+<tr><td>9</td><td>Tab User → Invoice berubah ❌</td><td>"Invoice langsung berubah DIBATALKAN, akses terkunci."</td></tr>
+</table>
+
+<h3>Skrip Penutup</h3>
+<div class="script">
+"Itulah keseluruhan alur sistem Al-Khairat Tour & Travel. Sebagai kesimpulan:<br><br>
+1. Alur terintegrasi penuh — dari pendaftaran, booking, tabungan, pembayaran, hingga cetak invoice PDF.<br>
+2. Keamanan data — validasi NIK dan nomor HP yang ketat.<br>
+3. Status real-time — jamaah langsung tahu saat pesanan dikonfirmasi atau dibatalkan.<br>
+4. Desain profesional — tampilan modern dengan Dark Mode.<br><br>
+Kami berharap website ini membantu Al-Khairat mengelola jamaah dengan lebih efisien. Terima kasih. Wassalamualaikum Warahmatullahi Wabarakatuh."
+</div>
+</div>
+
+<!-- ALUR DIAGRAM -->
+<h2>🔄 Diagram Alur Presentasi</h2>
+<div class="diagram">
+<span class="name">FARREL</span> (Pembukaan + Landing Page)<br>
+<span class="arrow">▼</span><br>
+<span class="name">RAKHA</span> (Register → Booking → Invoice)<br>
+<span class="arrow">▼</span><br>
+<span class="name">FARREL</span> (Fitur Tabungan Umroh)<br>
+<span class="arrow">▼</span><br>
+<span class="name">TIARA</span> (Ulasan + Profil + Riwayat)<br>
+<span class="arrow">▼</span><br>
+<span class="name">FLINT</span> (Admin → Dashboard → Edit Status)<br>
+<span class="arrow">▼</span><br>
+<span class="name">DZAKWAN</span> (Keuangan → Invoice Sync → PDF → Penutup)
+</div>
+
+<!-- CHECKLIST -->
+<h2>📝 Checklist Persiapan</h2>
+<ul class="checklist">
+<li><code>php artisan serve</code> sudah running</li>
+<li>Siapkan 2 akun: 1 Admin + 1 User</li>
+<li>Ada minimal 1 paket Umroh aktif</li>
+<li>Buka 2 tab browser: Admin + User</li>
+<li>Data NIK dummy: 6472012345678901</li>
+<li>Tes Dark Mode toggle</li>
+<li>Tes cetak PDF invoice (DomPDF)</li>
+<li>Halaman Tabungan bisa diakses user</li>
+</ul>
+
+<!-- TIPS -->
+<h2>💡 Tips Penting</h2>
+<div class="tips">
+<ol>
+<li><strong>Jangan kebanyakan bicara</strong> — biarkan demo yang berbicara. Klik dan jelaskan singkat.</li>
+<li><strong>Perpindahan cepat</strong> — setiap ganti presenter, langsung berdiri tanpa jeda.</li>
+<li><strong>Siapkan backup</strong> — screenshot invoice PDF kalau DomPDF error di komputer presentasi.</li>
+<li><strong>Latihan 2-3 kali</strong> — agar transisi antar orang mulus dan tidak melebihi 15 menit.</li>
+<li><strong>Satu orang pegang laptop</strong> — presenter lain berdiri di samping dan menjelaskan.</li>
+</ol>
+</div>
+
+<div class="footer">
+<p>📄 Dokumen ini dibuat untuk keperluan presentasi demo web Al-Khairat Tour & Travel</p>
+<p>Untuk mencetak: <strong>Ctrl+P → Save as PDF</strong></p>
+</div>
+
+</body>
+</html>

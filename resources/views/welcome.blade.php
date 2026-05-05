@@ -470,6 +470,47 @@
                 </p>
             </div>
 
+            @if($totalReviews > 0)
+            <!-- Rating Summary Card -->
+            <div class="max-w-md mx-auto mb-10 md:mb-14 scroll-animate" data-animation="fade-up">
+                <div class="bg-surface rounded-2xl border border-border p-5 shadow-sm">
+                    <div class="flex items-center gap-6">
+                        <!-- Left: Average Rating -->
+                        <div class="text-center flex-shrink-0">
+                            <p class="text-3xl font-black text-text leading-none">{{ $avgRating }}</p>
+                            <div class="flex items-center justify-center mt-1 space-x-0.5">
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= floor($avgRating))
+                                        <span class="text-xs">⭐</span>
+                                    @elseif($i - $avgRating < 1 && $i - $avgRating > 0)
+                                        <span class="text-xs opacity-50">⭐</span>
+                                    @else
+                                        <span class="text-xs opacity-20">⭐</span>
+                                    @endif
+                                @endfor
+                            </div>
+                            <p class="text-[9px] font-bold text-text/40 uppercase tracking-widest mt-1">{{ $totalReviews }} Penilaian</p>
+                        </div>
+
+                        <!-- Right: Rating Breakdown Bars -->
+                        <div class="flex-1 space-y-1.5">
+                            @for($i = 5; $i >= 1; $i--)
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] font-bold text-text/50 w-3 text-right">{{ $i }}</span>
+                                <span class="text-[10px]">⭐</span>
+                                <div class="flex-1 h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-orange to-gold rounded-full transition-all duration-1000"
+                                         style="width: {{ $totalReviews > 0 ? round(($ratingBreakdown[$i] / $totalReviews) * 100) : 0 }}%"></div>
+                                </div>
+                                <span class="text-[10px] font-bold text-text/40 w-4 text-right">{{ $ratingBreakdown[$i] }}</span>
+                            </div>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
                 @forelse($testimonials as $index => $t)
                 <!-- Dynamic Testimonial -->

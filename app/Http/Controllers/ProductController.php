@@ -56,9 +56,12 @@ class ProductController extends Controller
             'status' => ['required', 'in:active,inactive'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'guide_phone' => ['nullable', 'string', 'max:20'],
+            'rundown' => ['nullable', 'array'],
+            'rundown.*.day' => ['required_with:rundown', 'string', 'max:100'],
+            'rundown.*.activities' => ['required_with:rundown', 'string'],
         ]);
 
-        $data = $request->except(['image']);
+        $data = $request->except(['image', 'rundown']);
 
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -71,7 +74,16 @@ class ProductController extends Controller
             $data['features'] = [];
         }
 
-        $data['rundown'] = null; // Initialize rundown as null, will be edited separately
+        // Process rundown if provided
+        if ($request->has('rundown') && is_array($request->rundown)) {
+            $data['rundown'] = collect($request->rundown)
+                ->filter(fn($item) => !empty($item['day']) && !empty($item['activities']))
+                ->values()
+                ->map(fn($item) => ['day' => $item['day'], 'activities' => $item['activities']])
+                ->toArray();
+        } else {
+            $data['rundown'] = null;
+        }
 
         Product::create($data);
 

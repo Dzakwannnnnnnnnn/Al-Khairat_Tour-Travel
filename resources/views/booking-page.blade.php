@@ -215,14 +215,6 @@
 
                         <!-- Extra Sections -->
                         <div class="space-y-4">
-                            <!-- Voucher -->
-                            <div class="bg-surface rounded-2xl border border-border p-5 scroll-animate" data-animation="fade-up">
-                                <h3 class="text-sm font-bold text-text/60 uppercase tracking-widest mb-3">Kode Voucher (Opsional)</h3>
-                                <div class="relative group">
-                                    <input type="text" name="voucher_code" class="form-input" placeholder="Masukkan kode voucher di sini...">
-                                    <button type="button" class="absolute right-2 top-1/2 -translate-y-1/2 text-orange font-bold text-sm px-4 py-2 hover:bg-orange/10 rounded-lg transition">Cek</button>
-                                </div>
-                            </div>
 
                             <!-- Notes -->
                             <div class="bg-surface rounded-2xl border border-border p-5 scroll-animate" data-animation="fade-up">

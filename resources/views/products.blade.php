@@ -244,6 +244,19 @@
                     <input type="text" name="guide_phone" class="w-full px-5 py-4 bg-slate-50 dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-2xl focus:border-orange focus:outline-none focus:ring-8 focus:ring-orange/5 transition-all text-sm font-bold text-slate-700 dark:text-slate-200" placeholder="Contoh: 628123456789">
                     <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">* Tanpa tanda +</p>
                 </div>
+                <div>
+                    <label class="block text-[10px] font-black text-violet-500 dark:text-violet-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                        Rundown Perjalanan (Opsional)
+                    </label>
+                    <div id="rundownContainer" class="space-y-3">
+                        <!-- Dynamic rundown rows will be added here -->
+                    </div>
+                    <button type="button" onclick="addRundownRow()" class="mt-3 w-full py-3 border-2 border-dashed border-violet-200 dark:border-violet-700 text-violet-500 dark:text-violet-400 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-violet-50 dark:hover:bg-violet-900/20 hover:border-violet-400 transition-all flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        Tambah Hari
+                    </button>
+                </div>
                 <div class="flex space-x-3 pt-6 border-t border-slate-50 dark:border-slate-800">
                     <button type="button" onclick="document.getElementById('addProductModal').classList.add('hidden')" class="flex-1 px-4 py-4 bg-red-50 dark:bg-red-900/30 text-red-500 dark:text-red-400 border-2 border-red-200 dark:border-red-800 rounded-2xl shadow-sm hover:bg-red-100 dark:hover:bg-red-900/50 hover:shadow-md hover:shadow-red-500/10 dark:hover:shadow-red-900/30 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-red-400/20 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation">Batal</button>
                     <button type="submit" class="flex-1 px-4 py-4 bg-gradient-to-r from-emerald-500 to-green-500 dark:from-emerald-600 dark:to-green-600 text-white rounded-2xl shadow-md shadow-emerald-500/20 dark:shadow-emerald-700/30 hover:shadow-lg hover:shadow-emerald-500/40 dark:hover:shadow-emerald-600/50 hover:scale-[1.02] active:scale-95 active:shadow-sm active:shadow-emerald-400/50 transition-all duration-200 font-black uppercase tracking-widest text-[10px] touch-manipulation border-2 border-emerald-400/50 dark:border-emerald-500/50 hover:border-emerald-300 dark:hover:border-emerald-400">Simpan</button>
@@ -424,6 +437,33 @@
     </div>
 
     <script>
+        let rundownIndex = 0;
+        function addRundownRow() {
+            const container = document.getElementById('rundownContainer');
+            const row = document.createElement('div');
+            row.className = 'bg-slate-50 dark:bg-slate-800 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 relative';
+            row.id = 'rundown-row-' + rundownIndex;
+            row.innerHTML = `
+                <button type="button" onclick="removeRundownRow(${rundownIndex})" class="absolute top-2 right-2 w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 text-red-500 flex items-center justify-center hover:bg-red-200 transition-colors text-xs font-black">&times;</button>
+                <div class="grid grid-cols-3 gap-3">
+                    <div>
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Hari</label>
+                        <input type="text" name="rundown[${rundownIndex}][day]" placeholder="Hari 1" class="w-full px-3 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 focus:border-violet-400 focus:outline-none transition-all">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Kegiatan</label>
+                        <textarea name="rundown[${rundownIndex}][activities]" rows="2" placeholder="Tiba di Jeddah, Check-in Hotel..." class="w-full px-3 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-600 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 focus:border-violet-400 focus:outline-none transition-all resize-none"></textarea>
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+            rundownIndex++;
+        }
+        function removeRundownRow(index) {
+            const row = document.getElementById('rundown-row-' + index);
+            if (row) row.remove();
+        }
+
         function openDetailProduct(id, name, category, price, duration, description, features, stock, status, guide_phone, image_url, departure_date, price_quad, price_triple, price_double) {
             document.getElementById('viewProductName').innerText = name;
             document.getElementById('viewProductCategory').innerText = category;

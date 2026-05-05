@@ -29,7 +29,17 @@ Route::get('/', function () {
     $products = Product::where('status', 'active')->get();
     $slideshows = Slideshow::where('is_active', true)->orderBy('order')->get();
     $whatsapp = Setting::where('key', 'whatsapp_number')->first()->value ?? '6281253088788';
-    return view('welcome', compact('testimonials', 'products', 'slideshows', 'whatsapp'));
+
+    // Rating statistics
+    $allPublished = Testimonial::where('status', 'published');
+    $totalReviews = $allPublished->count();
+    $avgRating = $totalReviews > 0 ? round($allPublished->avg('rating'), 1) : 0;
+    $ratingBreakdown = [];
+    for ($i = 5; $i >= 1; $i--) {
+        $ratingBreakdown[$i] = Testimonial::where('status', 'published')->where('rating', $i)->count();
+    }
+
+    return view('welcome', compact('testimonials', 'products', 'slideshows', 'whatsapp', 'totalReviews', 'avgRating', 'ratingBreakdown'));
 })->name('home');
 
 Route::get('/galeri', [GalleryController::class, 'publicIndex'])->name('gallery');
