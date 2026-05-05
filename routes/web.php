@@ -152,3 +152,13 @@ Route::middleware('auth')->group(function () {
     // Member Refund Request
     Route::post('/my-savings/{id}/request-refund', [SavingsController::class, 'requestRefund'])->name('member.savings.request_refund');
 });
+
+// Route sementara untuk migrasi database di server
+Route::get('/jalankan-migrasi-sekarang', function() {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return "✅ Migrasi Berhasil! Database sudah terupdate.";
+    } catch (\Exception $e) {
+        return "❌ Gagal: " . $e->getMessage();
+    }
+});
