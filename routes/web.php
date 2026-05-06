@@ -128,7 +128,7 @@ Route::middleware('auth')->group(function () {
         // Content Management
         Route::resource('testimonials', TestimonialController::class)->except(['create', 'edit']);
         Route::post('testimonials/{testimonial}/reply', [TestimonialController::class, 'replyEmail'])->name('testimonials.reply');
-        Route::resource('guides', GuideController::class)->except(['create', 'edit']);
+        Route::get('guides', [GuideController::class, 'index'])->name('guides.index');
         Route::get('guides-admin', [GuideController::class, 'adminIndex'])->name('guides.admin-index');
         Route::get('guides-admin/create', [GuideController::class, 'create'])->name('guides.create');
         Route::post('guides-admin', [GuideController::class, 'store'])->name('guides.store');
