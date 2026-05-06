@@ -77,7 +77,7 @@
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 text-blue-500 text-4xl mb-6">
                         💰
                     </div>
-                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
+                @elseif(optional($payment)->status === 'verified' || $primaryBooking->status === 'fully_paid')
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 text-4xl mb-6">
                         ✅
                     </div>
@@ -85,12 +85,12 @@
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-blue-500/10 text-blue-500 text-4xl mb-6">
                         💳
                     </div>
-                @elseif($payment->status === 'pending')
+                @elseif(optional($payment)->status === 'pending')
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-yellow-500/10 mb-6 relative">
                         <span class="absolute inset-0 rounded-full border-4 border-yellow-300/40 border-t-orange animate-spin"></span>
                         <span class="text-yellow-600 text-xl font-black tracking-[0.3em] pl-1">...</span>
                     </div>
-                @elseif($payment->status === 'rejected')
+                @elseif(optional($payment)->status === 'rejected')
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-red-500/10 text-red-500 text-4xl mb-6">
                         !
                     </div>
@@ -109,7 +109,7 @@
                 @elseif($primaryBooking->status === 'savings')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Program Tabungan Aktif</h1>
                     <p class="text-text/60 max-w-lg mx-auto leading-relaxed">Anda sedang mengikuti program Tabungan Umroh. Silakan cek detail cicilan Anda di halaman Tabungan.</p>
-                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
+                @elseif(optional($payment)->status === 'verified' || $primaryBooking->status === 'fully_paid')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pembayaran Anda Telah Lunas</h1>
                     <p class="text-text/60 max-w-2xl mx-auto leading-relaxed">Admin telah mengonfirmasi pembayaran Anda. Di bawah ini adalah ringkasan pemesan dan detail paket perjalanan yang sudah aktif untuk rombongan Anda.</p>
                 @elseif($primaryBooking->status === 'dp_paid')
@@ -118,10 +118,10 @@
                     </div>
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Menunggu Pelunasan</h1>
                     <p class="text-text/60 max-w-lg mx-auto leading-relaxed">DP Anda telah kami terima dan verifikasi. Silakan lakukan pelunasan sesuai jadwal untuk mendapatkan akses penuh ke invoice resmi (PDF) dan keberangkatan.</p>
-                @elseif($payment->status === 'rejected')
+                @elseif(optional($payment)->status === 'rejected')
                     <h1 class="text-3xl md:text-4xl font-serif font-bold text-text mb-2">Pembayaran Ditolak</h1>
                     <p class="text-text/60 max-w-lg mx-auto leading-relaxed">Pembayaran ini belum dapat diverifikasi. Silakan cek kembali detail transfer Anda atau hubungi admin.</p>
-                @elseif($payment->status === 'pending')
+                @elseif(optional($payment)->status === 'pending')
                     <div class="flex items-center justify-center gap-3 mb-2 text-yellow-600">
                         <span class="inline-flex h-5 w-5 rounded-full border-2 border-yellow-300/60 border-t-orange animate-spin"></span>
                         <span class="text-xs font-black uppercase tracking-[0.25em]">Pending</span>
@@ -156,16 +156,16 @@
                                 @elseif($primaryBooking->status === 'savings')
                                     <span class="w-2 h-2 rounded-full bg-blue-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">PROGRAM TABUNGAN</span>
-                                @elseif($payment->status === 'verified' || $primaryBooking->status === 'fully_paid')
+                                @elseif(optional($payment)->status === 'verified' || $primaryBooking->status === 'fully_paid')
                                     <span class="w-2 h-2 rounded-full bg-green-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">BERHASIL / TERVERIFIKASI</span>
                                 @elseif($primaryBooking->status === 'dp_paid')
                                     <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">SUDAH DP (MENCICIL)</span>
-                                @elseif($payment->status === 'rejected')
+                                @elseif(optional($payment)->status === 'rejected')
                                     <span class="w-2 h-2 rounded-full bg-red-400"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">DITOLAK / GAGAL</span>
-                                @elseif($payment->status === 'pending')
+                                @elseif(optional($payment)->status === 'pending')
                                     <span class="inline-flex h-4 w-4 rounded-full border-2 border-white/30 border-t-yellow-300 animate-spin"></span>
                                     <span class="font-bold uppercase text-sm tracking-widest">PENDING / MENUNGGU KONFIRMASI ADMIN</span>
                                 @else
@@ -366,7 +366,7 @@
                                     <tr>
                                         <td colspan="2" class="py-6 px-4 text-right font-bold text-text/40 uppercase text-xs tracking-widest">Total Pembayaran</td>
                                         <td class="py-6 px-4 text-right">
-                                            <span class="text-2xl md:text-3xl font-bold text-orange tracking-tighter">Rp {{ number_format($payment->amount, 0, ',', '.') }}</span>
+                                            <span class="text-2xl md:text-3xl font-bold text-orange tracking-tighter">Rp {{ number_format(optional($payment)->amount ?? $bookings->sum('total_price'), 0, ',', '.') }}</span>
                                         </td>
                                     </tr>
                                 </tfoot>
@@ -376,7 +376,7 @@
 
                     <!-- Payment Method Section -->
                     <div class="pt-10 border-t border-border border-dashed">
-                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ $payment->status === 'verified' || $primaryBooking->status === 'fully_paid' || $primaryBooking->status === 'completed' || $primaryBooking->status === 'savings' ? 'Bukti & Arsip Pembayaran' : ($payment->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
+                        <h3 class="text-xl md:text-2xl font-serif font-bold text-text mb-6">{{ optional($payment)->status === 'verified' || $primaryBooking->status === 'fully_paid' || $primaryBooking->status === 'completed' || $primaryBooking->status === 'savings' ? 'Bukti & Arsip Pembayaran' : (optional($payment)->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'Status Pembayaran' : 'Instruksi Pembayaran') }}</h3>
 
                         @if($primaryBooking->status === 'cancelled')
                         <div class="mb-6 rounded-3xl border border-red-300/60 dark:border-red-800/50 bg-red-50 dark:bg-red-900/10 px-5 py-5 text-red-900 dark:text-red-300">
@@ -414,7 +414,7 @@
                                 </div>
                             </div>
                         </div>
-                        @elseif($payment->status === 'pending')
+                        @elseif(optional($payment)->status === 'pending')
                         <div class="mb-6 rounded-3xl border border-yellow-300/60 dark:border-yellow-700/50 bg-yellow-50 dark:bg-yellow-900/10 px-5 py-4 text-yellow-900 dark:text-yellow-300">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 inline-flex h-5 w-5 rounded-full border-2 border-yellow-300 border-t-orange animate-spin"></span>
@@ -426,7 +426,7 @@
                                 </div>
                             </div>
                         </div>
-                        @elseif($payment->status === 'rejected')
+                        @elseif(optional($payment)->status === 'rejected')
                         <div class="mb-6 rounded-3xl border border-red-300/60 dark:border-red-800/50 bg-red-50 dark:bg-red-900/10 px-5 py-5 text-red-900 dark:text-red-300">
                             <div class="flex items-start gap-3">
                                 <span class="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white text-xs font-bold">!</span>
@@ -477,7 +477,7 @@
                                 </div>
                             </div>
                         </div>
-                        @elseif($payment->status === 'verified')
+                        @elseif(optional($payment)->status === 'verified')
                         <div class="bg-bg rounded-3xl p-8 border border-border animate-[scaleUp_0.4s_ease-out]">
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                                 <div>
@@ -487,8 +487,8 @@
                                 </div>
                                 <div class="rounded-3xl border border-emerald-200 dark:border-emerald-800/50 bg-emerald-50 dark:bg-emerald-900/20 px-5 py-4 min-w-[220px]">
                                     <p class="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-700/70 dark:text-emerald-400/70">Metode Pembayaran</p>
-                                    <p class="mt-2 text-lg font-bold text-emerald-800 dark:text-emerald-300">{{ $payment->payment_method }}</p>
-                                    <p class="mt-1 text-sm text-emerald-700/80 dark:text-emerald-400/80">Total: Rp {{ number_format($payment->amount, 0, ',', '.') }}</p>
+                                    <p class="mt-2 text-lg font-bold text-emerald-800 dark:text-emerald-300">{{ optional($payment)->payment_method }}</p>
+                                    <p class="mt-1 text-sm text-emerald-700/80 dark:text-emerald-400/80">Total: Rp {{ number_format(optional($payment)->amount ?? 0, 0, ',', '.') }}</p>
                                 </div>
                             </div>
 
@@ -514,7 +514,7 @@
                                 </div>
                             </div>
                         </div>
-                        @elseif($payment->status === 'rejected')
+                        @elseif(optional($payment)->status === 'rejected')
                         <div class="bg-bg rounded-3xl p-8 border border-red-200 animate-[scaleUp_0.4s_ease-out]">
                             <div class="text-center">
                                 <h4 class="text-xl font-bold text-red-600">Transaksi Tidak Dapat Dilanjutkan</h4>
