@@ -87,9 +87,9 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Google Auth
-Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
-Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+// Google Auth (temporarily disabled)
+// Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+// Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SlideshowController;
