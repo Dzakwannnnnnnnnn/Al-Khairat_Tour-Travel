@@ -207,7 +207,7 @@
                         </div>
                     </div>
 
-                    @if($payment->status === 'verified')
+                    @if(optional($payment)->status === 'verified')
                     <div class="invoice-section rounded-[2rem] border border-emerald-200 dark:border-emerald-900/30 bg-gradient-to-br from-emerald-50 via-white to-orange-50 p-6 md:p-8">
                         <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
                             <div>
@@ -297,7 +297,7 @@
                     </div>
 
                     {{-- Tour Guide Consultation Section (Verified Only) --}}
-                    @if($payment->status === 'verified' && $guideContact)
+                    @if(optional($payment)->status === 'verified' && $guideContact)
                     <div class="invoice-section rounded-[2rem] border-2 border-emerald-200 dark:border-emerald-900/30 bg-gradient-to-br from-emerald-50 via-white to-teal-50 p-6 md:p-8 mt-2">
                         <div class="flex items-center gap-3 mb-5">
                             <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-2xl">👨‍🏫</div>
@@ -610,7 +610,7 @@
                 </div>
             </div>
 
-            <div class="mt-12 flex justify-center scroll-animate {{ $payment->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'hidden' : '' }}" data-animation="fade-up">
+            <div class="mt-12 flex justify-center scroll-animate {{ optional($payment)->status === 'rejected' || $primaryBooking->status === 'cancelled' ? 'hidden' : '' }}" data-animation="fade-up">
                 <a href="{{ route('home') }}" class="inline-flex items-center gap-3 px-10 py-4 bg-surface border-2 border-border text-text font-bold rounded-2xl hover:border-orange hover:text-orange transition-all duration-300 shadow-sm group">
                     <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Kembali ke Beranda Utama
@@ -649,7 +649,7 @@
             document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
 
             // Polling for Payment Status
-            const initialStatus = "{{ $payment->status }}";
+            const initialStatus = "{{ optional($payment)->status }}";
             const groupCode = "{{ $groupCode }}";
 
             if (initialStatus !== 'verified' && initialStatus !== 'rejected') {
