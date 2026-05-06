@@ -45,13 +45,17 @@ class TestimonialController extends Controller
      */
     public function publicStore(Request $request)
     {
+        $user = auth()->user();
+
+        if (!$user->isAdmin() && !$user->bookings()->where('status', 'completed')->exists()) {
+            return redirect()->back()->with('error', 'Anda harus menyelesaikan perjalanan ibadah (paket) terlebih dahulu untuk dapat menulis ulasan.');
+        }
+
         $request->validate([
             'product_id' => 'nullable|exists:products,id',
             'message' => 'required|string',
             'rating' => 'required|integer|min:1|max:5',
         ]);
-
-        $user = auth()->user();
 
         Testimonial::create([
             'name' => $user->name,

@@ -543,9 +543,16 @@
             <!-- Form Submit Testimoni / Tulis Ulasan / Galeri Video -->
             <div class="text-center mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
                 @auth
-                <button onclick="toggleTestimoniModal(true)" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto">
-                    Tulis Ulasan Anda
-                </button>
+                    @if(auth()->user()->bookings()->where('status', 'completed')->exists() || auth()->user()->isAdmin())
+                    <button onclick="toggleTestimoniModal(true)" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto">
+                        Tulis Ulasan Anda
+                    </button>
+                    @else
+                    <button onclick="alert('Maaf, Anda hanya dapat menulis ulasan setelah menyelesaikan perjalanan ibadah (paket status Selesai).')" class="btn-primary opacity-60 text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        Belum Bisa Mengulas
+                    </button>
+                    @endif
                 @else
                 <a href="{{ route('login') }}" class="btn-primary text-sm md:text-base px-6 md:px-10 py-3 w-full sm:w-auto inline-flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
